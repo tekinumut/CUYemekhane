@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Çukurova Üniversitesi Yemekhane</string>
+
+    <!-- Navigation Drawer Values -->
+    <string name="daily_list">Günlük Liste</string>
+    <string name="monthly_list">Aylık Liste</string>
 </resources>

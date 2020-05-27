@@ -1,44 +1,49 @@
 package com.tekinumut.cuyemekhane
 
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import com.tekinumut.cuyemekhane.library.ConstantsGeneral
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
-    private val mainViewModel: MainViewModel by viewModels()
+    private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        tvEkleDaily.setOnClickListener {
-            mainViewModel.getFoodData(ConstantsGeneral.dbNameDaily).observe(this, Observer {
-                Log.e("new daily value", "value added")
-            })
-        }
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
-        tvEkleMonthly.setOnClickListener {
-            mainViewModel.getFoodData(ConstantsGeneral.dbNameMonthly).observe(this, Observer {
-                Log.e("new monthly value", "value added")
-            })
-        }
+        navController = findNavController(R.id.nav_host_fragment)
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_daily_list, R.id.nav_monthly_list), drawer_layout)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        nav_view.setupWithNavController(navController)
 
-        tvGoruntule.setOnClickListener {
-            mainViewModel.getDailyList.observe(this, Observer {
-                if (it != null) {
-                    Log.e("daily list changed", "new date : ${it.foodDate.name}")
-                } else {
-                    Log.e("daily list opened", "list is null")
-                }
+    }
 
-            })
-            mainViewModel.getMonthlyList.observe(this, Observer {
-                Log.e("monthly list changed", "food size : ${it.size}")
-            })
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
         }
     }
 }
