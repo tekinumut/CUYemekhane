@@ -12,6 +12,9 @@ import androidx.room.PrimaryKey
         onDelete = ForeignKey.CASCADE
     )]
 )
+/**
+ * Yemek modeli
+ */
 data class Food(
     @PrimaryKey val food_id: Int,
     // Yemeğin kategorisi

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_daily_img_height">125dp</dimen>
+    <dimen name="card_daily_food_title">22sp</dimen>
+    <dimen name="card_daily_category_title">12sp</dimen>
+    <dimen name="card_daily_calorie_title">16sp</dimen>
+</resources>

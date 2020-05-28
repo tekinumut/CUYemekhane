@@ -3,7 +3,7 @@ package com.tekinumut.cuyemekhane.library
 class ConstantsOfWebSite {
     companion object {
         // Kaynak URL
-        const val URL = "https://yemekhane.cu.edu.tr/default.asp?ymk=3"
+        const val URL = "https://yemekhane.cu.edu.tr/default.asp"
 
         // DUYURU BAŞLIĞI
         const val duyuruTitle = "section#duyurular .testimonial-item p"

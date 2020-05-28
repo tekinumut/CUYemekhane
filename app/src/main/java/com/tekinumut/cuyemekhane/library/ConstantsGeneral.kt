@@ -8,5 +8,8 @@ class ConstantsGeneral {
 
         // Günlük yemek listesini tutan room Database
         const val dbNameDaily = "daily_db"
+
+        // Uygul
+        const val prefCheckDailyListUpdated = "dailyListUpdated"
     }
 }

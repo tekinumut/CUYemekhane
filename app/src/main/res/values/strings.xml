@@ -4,4 +4,7 @@
     <!-- Navigation Drawer Values -->
     <string name="daily_list">Günlük Liste</string>
     <string name="monthly_list">Aylık Liste</string>
+    <string name="_m_please_wait">Lütfen Bekleyiniz</string>
+    <string name="data_loaded">Veriler başarıyla yüklendi</string>
+    <string name="error_loading_data">Veriler yüklenemedi.</string>
 </resources>
