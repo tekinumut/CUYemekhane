@@ -7,4 +7,26 @@
     <string name="_m_please_wait">Lütfen Bekleyiniz</string>
     <string name="data_loaded">Veriler başarıyla yüklendi</string>
     <string name="error_loading_data">Veriler yüklenemedi.</string>
+    <string name="error_cause">\Hata Sebebi: %s</string>
+    <string name="watch_ad_title">Video Reklam</string>
+    <string name="watch_ad_content">Aylık yemek listesini görebilmek için bir adet reklam izlemeniz gerekmektedir. Daha sonra indirdiğiniz son listeye reklam izlemeden ulaşabilirsiniz.</string>
+    <string name="iptal_et">İptal Et</string>
+    <string name="remove">Sil</string>
+    <string name="kabul_et">Kabul Et</string>
+    <string name="btn_update_monthly_list">Aylık listeyi güncelle</string>
+    <string name="date_not_selected">Tarih seçilmedi!</string>
+    <string name="food_removed_of_date">%s tarihli menü silindi</string>
+    <string name="monthly_list_title">Aylık Liste Boş</string>
+    <string name="monthly_list_content">Liste verisi bir çok resim barındırmasından dolayı indirilen veri boyutu 10mb\'a kadar ulaşabilir ve verilerin yüklenmesi internet hızınıza bağlı olarak uzun sürebilir.</string>
+    <string name="no_component_found">Yemek içeriği bulunamadı</string>
+    <string name="no_food_holiday">Tatil günlerinde Üniversite Merkezi Kafeterya\'sı hizmet vermemektedir.</string>
+    <string name="open_web_site">Web Sitesine Git</string>
+
+    <string name="empty_title">Veriler alınırken bir hata meydana geldi</string>
+    <string name="empty_reason_content">Verilerin alındığı <u>yemekhane.cu.edu.tr</u> adresine bağlanılamadı</string>
+    <string name="empty_solution_title"><u>Çözüm önerileri:</u></string>
+    <string name="empty_solution_content">
+        • Ekranı yukarıdan aşağıya çekerek listeyi güncelleyebilirsiniz.\n
+        • Aşağıda bulunan \'Web sitesine git\' butonuna tıklayarak listelerin yer aldığı web sitesini ziyaret edebilirsiniz.\n
+        • Listeler web sitesinde de gözükmüyorsa, yayınlanana kadar beklemeniz gerekmektedir.</string>
 </resources>

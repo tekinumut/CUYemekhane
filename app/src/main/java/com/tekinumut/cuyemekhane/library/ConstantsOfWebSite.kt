@@ -3,7 +3,7 @@ package com.tekinumut.cuyemekhane.library
 class ConstantsOfWebSite {
     companion object {
         // Kaynak URL
-        const val URL = "https://yemekhane.cu.edu.tr/default.asp"
+        const val URL = "https://yemekhane.cu.edu.tr/default.asp?ymk=3"
 
         // DUYURU BAŞLIĞI
         const val duyuruTitle = "section#duyurular .testimonial-item p"
@@ -22,7 +22,7 @@ class ConstantsOfWebSite {
         const val dailyFoodGeneral = "#gunluk_yemek .post-entry"
 
         // Günün yemek tarihi
-        const val dailyDate = "#gunluk_yemek div:not([class])"
+        const val dailyDate = "#gunluk_yemek div:not([class]):eq(1)"
 
         // Günün yemek kategorisi
         const val dailyCategories = "#gunluk_yemek .post-entry-meta-category"

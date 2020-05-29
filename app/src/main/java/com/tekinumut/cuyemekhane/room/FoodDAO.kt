@@ -12,6 +12,13 @@ interface FoodDAO {
     fun getMonthlyList(): LiveData<List<DateWithFoodDetailComp>>
 
     @Transaction
+    @Query("Select *from FoodDate where name = :name")
+    fun getSelectedDay(name: String): LiveData<DateWithFoodDetailComp>
+
+    @Query("Delete from FoodDate where name = :name")
+    fun removeDayOfMonth(name: String)
+
+    @Transaction
     @Query("Select *from FoodDate LIMIT 1")
     fun getDailyList(): LiveData<DateWithFoodDetailComp>
 

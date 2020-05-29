@@ -9,12 +9,31 @@
         android:id="@+id/nav_daily_list"
         android:name="com.tekinumut.cuyemekhane.ui.DailyListFragment"
         android:label="@string/daily_list"
-        tools:layout="@layout/fragment_daily_list" />
+        tools:layout="@layout/fragment_daily_list">
+        <action
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            android:id="@+id/action_nav_daily_list_to_componentFragment"
+            app:destination="@id/componentFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_monthly_list"
-        android:name="com.tekinumut.cuyemekhane.ui.MonthlyListFragment"
+        android:name="com.tekinumut.cuyemekhane.ui.MonthlyListViewPagerFragment"
         android:label="@string/monthly_list"
-        tools:layout="@layout/fragment_monthly_list" />
+        tools:layout="@layout/fragment_monthly_list">
+        <action
+            android:id="@+id/action_nav_monthly_list_to_componentFragment"
+            app:destination="@id/componentFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/componentFragment"
+        android:name="com.tekinumut.cuyemekhane.ui.ComponentFragment"
+        android:label="Yemek İçeriği"
+        tools:layout="@layout/fragment_dm_component"/>
+
 
 </navigation>

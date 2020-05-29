@@ -1,10 +1,7 @@
-package com.tekinumut.cuyemekhane
+package com.tekinumut.cuyemekhane.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
 import com.tekinumut.cuyemekhane.library.ConstantsGeneral
 import com.tekinumut.cuyemekhane.library.ConstantsOfWebSite
 import com.tekinumut.cuyemekhane.library.DataUtility
@@ -15,6 +12,7 @@ import com.tekinumut.cuyemekhane.room.DailyDatabase
 import com.tekinumut.cuyemekhane.room.FoodDAO
 import com.tekinumut.cuyemekhane.room.MonthlyDatabase
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.jsoup.Jsoup
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
@@ -28,10 +26,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     /**
      * @param type ConstantsGeneral.dbNameDaily || ConstantsGeneral.dbNameMonthly değerlerinden birini alır
      * Alınan değere göre ilgili veritabanına verileri yazar
-     * @return aylık veya günlük listeyi dönderir.
+     * @return listenin dizi sayısını dönderir
      *
      */
-    fun getFoodData(type: String): LiveData<Resource<ListOfAll>> = liveData(Dispatchers.IO) {
+    fun getFoodData(type: String): LiveData<Resource<Int>> = liveData(Dispatchers.IO) {
         emit(Resource.InProgress)
         try {
             val selectedDAO = if (type == ConstantsGeneral.dbNameDaily) dailyFoodDao else monthlyFoodDao
@@ -45,8 +43,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             }
             // Alınan verileri veritabanına yaz
             listOfAll.run { selectedDAO.addAllValues(foodDate, food, foodDetail, foodComponent) }
-            // Alınan veriyi döndür.
-            emit(Resource.Success(listOfAll))
+            // Şu aşamada kullanılmıyor.
+            emit(Resource.Success(listOfAll.foodDate.size))
         } catch (e: Exception) {
             emit(Resource.Error(e))
         }
@@ -57,6 +55,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      * Aylık liste değişimlerini takip eder
      */
     val getMonthlyList: LiveData<List<DateWithFoodDetailComp>> = monthlyFoodDao.getMonthlyList()
+
+    /**
+     * Aylık listeden seçilen tarihe ait yemek listesini getirir
+     */
+    fun getSelectedDay(date: String): LiveData<DateWithFoodDetailComp> = monthlyFoodDao.getSelectedDay(date)
+
+    /**
+     * Aylık listeden seçilen tarihe ait yemek listesini siler
+     */
+    fun removeSelectedDay(date: String) = viewModelScope.launch(Dispatchers.IO) {
+        monthlyFoodDao.removeDayOfMonth(date)
+    }
 
     /**
      * Günlük liste değişimlerini takip eder.

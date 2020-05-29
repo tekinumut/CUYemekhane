@@ -1,0 +1,184 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "c374fcd5bc457b61cba194a114398b2c",
+    "entities": [
+      {
+        "tableName": "FoodDate",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`date_id` INTEGER NOT NULL, `name` TEXT NOT NULL, PRIMARY KEY(`date_id`))",
+        "fields": [
+          {
+            "fieldPath": "date_id",
+            "columnName": "date_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "date_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Food",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`food_id` INTEGER NOT NULL, `category` TEXT, `name` TEXT NOT NULL, `calorie` TEXT, `detailURL` TEXT, `dateCreatorId` INTEGER NOT NULL, PRIMARY KEY(`food_id`), FOREIGN KEY(`dateCreatorId`) REFERENCES `FoodDate`(`date_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "food_id",
+            "columnName": "food_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "category",
+            "columnName": "category",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "calorie",
+            "columnName": "calorie",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "detailURL",
+            "columnName": "detailURL",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dateCreatorId",
+            "columnName": "dateCreatorId",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "food_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "FoodDate",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "dateCreatorId"
+            ],
+            "referencedColumns": [
+              "date_id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "FoodDetail",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`detail_id` INTEGER NOT NULL, `picBase64` TEXT NOT NULL, PRIMARY KEY(`detail_id`), FOREIGN KEY(`detail_id`) REFERENCES `Food`(`food_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "detail_id",
+            "columnName": "detail_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "picBase64",
+            "columnName": "picBase64",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "detail_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "Food",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "detail_id"
+            ],
+            "referencedColumns": [
+              "food_id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "FoodComponent",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`comp_id` INTEGER, `name` TEXT NOT NULL, `detailCreatorId` INTEGER NOT NULL, PRIMARY KEY(`comp_id`), FOREIGN KEY(`detailCreatorId`) REFERENCES `FoodDetail`(`detail_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "comp_id",
+            "columnName": "comp_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "detailCreatorId",
+            "columnName": "detailCreatorId",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "comp_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "FoodDetail",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "detailCreatorId"
+            ],
+            "referencedColumns": [
+              "detail_id"
+            ]
+          }
+        ]
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c374fcd5bc457b61cba194a114398b2c')"
+    ]
+  }
+}
