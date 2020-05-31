@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primaryAccent">#00421c</color>
+    <color name="accentPrimary">#00421c</color>
+    <color name="primaryAccent">#005f1e</color>
     <color name="primary_text">#ffffff</color>
     <color name="def_bg">#121212</color>
     <color name="toolbar_bg">#272727</color>

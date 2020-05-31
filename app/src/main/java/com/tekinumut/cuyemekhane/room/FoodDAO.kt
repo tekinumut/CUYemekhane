@@ -7,19 +7,22 @@ import com.tekinumut.cuyemekhane.models.*
 @Dao
 interface FoodDAO {
 
-    @Transaction
-    @Query("Select *from FoodDate")
-    fun getMonthlyList(): LiveData<List<DateWithFoodDetailComp>>
+    @Query("Select * from FoodDate")
+    fun getDaysOfMonth(): LiveData<List<FoodDate>>
+
+//    @Transaction
+//    @Query("Select * from FoodDate where name LIKE '%' || :datePart || '%' or name = :datePart LIMIT 1")
+//    fun getSearchedDay(datePart: String): LiveData<DateWithFoodDetailComp>
 
     @Transaction
-    @Query("Select *from FoodDate where name = :name")
-    fun getSelectedDay(name: String): LiveData<DateWithFoodDetailComp>
+    @Query("Select *from FoodDate where selectedDay = 1 LIMIT 1")
+    fun getSelectedDayOfMonth(): LiveData<DateWithFoodDetailComp>
 
-    @Query("Delete from FoodDate where name = :name")
-    fun removeDayOfMonth(name: String)
+    @Query("Delete from FoodDate where selectedDay = 1")
+    fun removeSelectedDayOfMonth()
 
     @Transaction
-    @Query("Select *from FoodDate LIMIT 1")
+    @Query("Select * from FoodDate LIMIT 1")
     fun getDailyList(): LiveData<DateWithFoodDetailComp>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -33,6 +36,18 @@ interface FoodDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addComponent(foodComponents: List<FoodComponent>)
+
+    @Query("Update FoodDate set selectedDay = 0")
+    fun resetSelectedDayOfMonth()
+
+    @Query("Update FoodDate set selectedDay = 1 where name LIKE '%' || :datePart || '%' or name = :datePart")
+    fun setSelectedDayOfMonth(datePart: String)
+
+    @Transaction
+    fun updateSelectedDayOfMonth(datePart: String) {
+        resetSelectedDayOfMonth()
+        setSelectedDayOfMonth(datePart)
+    }
 
     /**
      * Tüm veritabanı temizlendikten sonra

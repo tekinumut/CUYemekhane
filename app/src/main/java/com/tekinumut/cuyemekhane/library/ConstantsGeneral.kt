@@ -1,5 +1,8 @@
 package com.tekinumut.cuyemekhane.library
 
+import java.text.SimpleDateFormat
+import java.util.*
+
 class ConstantsGeneral {
     companion object {
 
@@ -17,8 +20,18 @@ class ConstantsGeneral {
         const val monthlyFragmentKey = 1
 
         // Component Adapter bundle key değerleri
-        const val bundleFoodName="foodName"
-        const val bundleImgKey="imgBase64"
+        const val bundleFoodName = "foodName"
+        const val bundleImgKey = "imgBase64"
         const val bundleComponentListKey = "componentList"
+
+        // Varsayılan zaman formatı
+        val defaultSDF: SimpleDateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH)
+
+        // Aylık listenin varsayılan resim kalitesi, yüzde cinsinden
+        const val defMonthlyImgQuality: Int = 50
+
+        // Aylık listenin varsayılan resim kalitesi, yüzde cinsinden
+        const val defDailyImgQuality: Int = 100
+
     }
 }

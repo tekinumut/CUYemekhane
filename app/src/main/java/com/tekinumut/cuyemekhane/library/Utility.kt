@@ -1,6 +1,7 @@
 package com.tekinumut.cuyemekhane.library
 
 import android.app.Activity
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -11,6 +12,8 @@ import androidx.core.content.ContextCompat
 import com.tekinumut.cuyemekhane.R
 import java.io.ByteArrayOutputStream
 import java.net.URL
+import java.util.*
+import kotlin.collections.ArrayList
 
 class Utility {
     companion object {
@@ -26,7 +29,7 @@ class Utility {
 
         fun getRemoveDayDialog(activity: Activity): AlertDialog = AlertDialog.Builder(activity)
             .setTitle("Seçili menüyü sil")
-            .setMessage("Seçili güne ait menüyü silinecek. Listeyi güncellediğinizde seçili güne ait liste mevcutsa tekrar yüklenir.")
+            .setMessage("Seçili güne ait menü silinecek. Listeyi güncellediğinizde seçili güne ait menü mevcutsa tekrar yüklenir.")
             .setNegativeButton(R.string.iptal_et) { dialog, _ -> dialog.dismiss() }
             .create()
 
@@ -34,11 +37,12 @@ class Utility {
         /**
          * Aldığı URL'yi base64 formatına çevirir.
          */
-        fun imgURLToBase64(foodImg: String): String {
+        fun imgURLToBase64(foodImg: String, imgQuality: Int): String {
             val input = URL(foodImg).openStream()
             val bitmap = BitmapFactory.decodeStream(input)
             val baos = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
+            // CompressFormat PNG olursa quality'i dikkate almaz.
+            bitmap.compress(Bitmap.CompressFormat.WEBP, imgQuality, baos)
             val b = baos.toByteArray()
             return Base64.encodeToString(b, Base64.DEFAULT)
         }
@@ -54,15 +58,48 @@ class Utility {
         /**
          * Listelerin alındığı web sayfasını açar
          */
-        fun openListWebSite(activity: Activity) {
+        fun openListWebSite(context: Context) {
             val builder: CustomTabsIntent.Builder = CustomTabsIntent.Builder()
-            builder.setToolbarColor(ContextCompat.getColor(activity, R.color.colorPrimary))
-            builder.setStartAnimations(activity, R.anim.slide_in_right, R.anim.slide_out_left)
-            builder.setExitAnimations(activity, R.anim.slide_in_left, R.anim.slide_out_right)
+            builder.setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary))
+            builder.setStartAnimations(context, R.anim.slide_in_right, R.anim.slide_out_left)
+            builder.setExitAnimations(context, R.anim.slide_in_left, R.anim.slide_out_right)
 
             val tabIntent = builder.build()
-            tabIntent.launchUrl(activity, Uri.parse(ConstantsOfWebSite.URL))
+            tabIntent.launchUrl(context, Uri.parse(ConstantsOfWebSite.URL))
+        }
 
+        /**
+         * Calendar değerini belirlenmiş zaman formatında dönderir
+         * @return Ex: 11.05.2020 biçiminde zaman değişkeni
+         */
+        fun getCalendarSDF(dayOfMonth: Int, monthOfYear: Int, year: Int): String {
+            val sdf = ConstantsGeneral.defaultSDF
+            val calendar = Calendar.getInstance()
+            calendar.set(year, monthOfYear, dayOfMonth)
+            sdf.calendar = calendar
+            return sdf.format(calendar.time)
+        }
+
+        /**
+         * Aldığı defaultSDF'e uygun date verisini calendar biçiminde arraylist'e ekler
+         * @param dateList başlangıcı dd.MM.yyyy biçiminde tarih bilgisi içeren list
+         * @return calendar nesnesi içeren array
+         */
+        fun getCalendarArray(dateList: List<String>): Array<Calendar> {
+            val calendar = Calendar.getInstance()
+            val calendarList = ArrayList<Calendar>()
+            dateList.forEach { datePart ->
+                try {
+                    val cloned = calendar.clone() as Calendar
+                    val dayMonthYear = datePart.substring(0, 10).split(".").map { it.toInt() }
+                    // 11.01.2020 tarihini gün ay yıl (11, 01, 2020) olarak 3 parçaya böler
+                    cloned.set(dayMonthYear[2], dayMonthYear[1] - 1, dayMonthYear[0])
+                    calendarList.add(cloned)
+                } catch (e: Exception) {
+                    // Firebase bilgilendir.
+                }
+            }
+            return calendarList.toTypedArray()
         }
     }
 

@@ -16,5 +16,5 @@ data class FoodDetail(
     // Değerini yemek modelinden alır. Aralarında 1-1 ilişki vardır
     @PrimaryKey val detail_id: Int,
     // Yemeğin fotoğrafı
-    val picBase64: String
+    val picBase64: String? = null
 )

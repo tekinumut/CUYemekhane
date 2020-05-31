@@ -5,20 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.adapter.ComponentListAdapter
 import com.tekinumut.cuyemekhane.library.ConstantsGeneral
 import com.tekinumut.cuyemekhane.library.Utility
+import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_dm_component.*
 
 class ComponentFragment : Fragment() {
 
-    private lateinit var mainViewModel: MainViewModel
+    private val mainViewModel: MainViewModel by activityViewModels()
     private lateinit var recyclerComponent: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -44,7 +45,6 @@ class ComponentFragment : Fragment() {
     }
 
     private fun init(view: View) {
-        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         recyclerComponent = view.findViewById(R.id.recyclerComponent)
         recyclerComponent.layoutManager = LinearLayoutManager(context)
         recyclerComponent.setHasFixedSize(true)

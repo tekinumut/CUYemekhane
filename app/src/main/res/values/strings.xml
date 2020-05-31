@@ -8,25 +8,58 @@
     <string name="data_loaded">Veriler başarıyla yüklendi</string>
     <string name="error_loading_data">Veriler yüklenemedi.</string>
     <string name="error_cause">\Hata Sebebi: %s</string>
-    <string name="watch_ad_title">Video Reklam</string>
-    <string name="watch_ad_content">Aylık yemek listesini görebilmek için bir adet reklam izlemeniz gerekmektedir. Daha sonra indirdiğiniz son listeye reklam izlemeden ulaşabilirsiniz.</string>
     <string name="iptal_et">İptal Et</string>
     <string name="remove">Sil</string>
     <string name="kabul_et">Kabul Et</string>
     <string name="btn_update_monthly_list">Aylık listeyi güncelle</string>
     <string name="date_not_selected">Tarih seçilmedi!</string>
     <string name="food_removed_of_date">%s tarihli menü silindi</string>
-    <string name="monthly_list_title">Aylık Liste Boş</string>
-    <string name="monthly_list_content">Liste verisi bir çok resim barındırmasından dolayı indirilen veri boyutu 10mb\'a kadar ulaşabilir ve verilerin yüklenmesi internet hızınıza bağlı olarak uzun sürebilir.</string>
     <string name="no_component_found">Yemek içeriği bulunamadı</string>
     <string name="no_food_holiday">Tatil günlerinde Üniversite Merkezi Kafeterya\'sı hizmet vermemektedir.</string>
     <string name="open_web_site">Web Sitesine Git</string>
 
+    <string name="monthly_list_title">Aylık Liste Boş</string>
+    <string name="monthly_list_content">
+        • Aylık liste şuan boş gözüküyor. Aylık listeyi görebilmek için lütfen aşağıdaki butonu kullanın.
+        \n• Liste başarılı bir şekilde güncellendikten sonra yine bu sayfayı görüyorsanız henüz bir liste yayınlanmamıştır. Lütfen daha sonra tekrar deneyiniz.
+        \n• Aylık liste bir çok resim(100\'den fazla olabilir) barındırmasından dolayı indirilen veri boyutu 30mb\'a kadar ulaşabilir ve
+        verilerin yüklenmesi internet hızınıza bağlı olarak 1 dakikayı aşabilir.
+        \n• Butona tıkladıktan sonra açılacak olan pencerede gerekli ayarlamaları yaparak bu boyutu minimize edebilirsiniz.</string>
+
+    <!--    Yemek listesinin bulunamadığı durumda kullanıcıyı bilgilendirecek metin verileri-->
     <string name="empty_title">Veriler alınırken bir hata meydana geldi</string>
     <string name="empty_reason_content">Verilerin alındığı <u>yemekhane.cu.edu.tr</u> adresine bağlanılamadı</string>
     <string name="empty_solution_title"><u>Çözüm önerileri:</u></string>
     <string name="empty_solution_content">
-        • Ekranı yukarıdan aşağıya çekerek listeyi güncelleyebilirsiniz.\n
-        • Aşağıda bulunan \'Web sitesine git\' butonuna tıklayarak listelerin yer aldığı web sitesini ziyaret edebilirsiniz.\n
-        • Listeler web sitesinde de gözükmüyorsa, yayınlanana kadar beklemeniz gerekmektedir.</string>
+        • Ekranı yukarıdan aşağıya çekerek listeyi güncelleyebilirsiniz.
+        \n• Aşağıda bulunan \'Web sitesine git\' butonuna tıklayarak listelerin yer aldığı web sitesini ziyaret edebilirsiniz.
+        \n• Listeler web sitesinde de gözükmüyorsa, yayınlanana kadar beklemeniz gerekmektedir.</string>
+
+    <!--    Kullanıcı henüz yemek seçimi yapmadığıysa onu bilgilendirecek metin verileri-->
+    <string name="pick_solution_title"><u>Seçili Menü Bulunamadı</u></string>
+    <string name="pick_solution_content">
+        • Sol alt köşede bulunan buton ile görmek istediğiniz tarihe ait menüyü seçebilirsiniz.
+        \n• Sağ alt köşede bulunan butona tıklayarak seçili menüyü silebilir veya aylık listeyi yenileyebilirsiniz.
+        \n• Bu sayfayı tekrar ziyaret ettiğinizde seçtiğiniz son menü size gösterilecektir.</string>
+
+    <!--    Kullanıcı aylık listeyi indirirken karşılaşacağı diyalog penceresinin metin verileri-->
+    <string name="watch_ad_title">Aylık Liste İndirme Penceresi</string>
+    <string name="watch_ad_content">Aylık yemek listesini indirebilmek için bir adet video reklam izlemeniz gerekmektedir.
+        Daha sonra indirdiğiniz son listeye reklam izlemeden ulaşabilirsiniz.</string>
+    <string name="dont_load_img">Resimleri yükleme</string>
+    <string name="dont_load_img_info">
+        • Çubuğu 0 değerine getirerek resim indirmeyi iptal edebilirsiniz.
+        \n• Yemeklere ait resimleri yüklemeyerek 30 mb\'a kadar ulaşabilen indirme boyutunu 50 KB boyutuna düşürebilirsiniz.</string>
+    <string name="sb_img_quality">Resim Kalitesi: %%%d</string> <!-- %%->% yazar %d-> verilen int değerini Exp: %50-->
+    <string name="sb_img_quality_zero">Resimler indirilmeyecek</string> <!-- %%->% yazar %d-> verilen int değerini Exp: %50-->
+
+
+    <string name="pick_food">Yemek Seç</string>
+    <string name="food_component_title">Yemek İçeriği</string>
+    <string name="pick_date">Tarih Seç</string>
+    <string name="no_monthly_list_pls_refresh">Gösterilebilecek tarih bulunamadı. Listeyi yenilemeyi deneyin</string>
+    <string name="no_data_for_selected_day">Seçilen güne ait veri bulunamadı</string>
+    <string name="already_no_data">Geçerli tarih zaten bir veri içermiyor</string>
+
+
 </resources>

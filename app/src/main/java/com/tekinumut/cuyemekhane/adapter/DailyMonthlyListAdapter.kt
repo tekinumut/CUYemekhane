@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.tekinumut.cuyemekhane.R
@@ -15,10 +16,10 @@ import com.tekinumut.cuyemekhane.library.ConstantsGeneral
 import com.tekinumut.cuyemekhane.library.Utility
 import com.tekinumut.cuyemekhane.models.FoodWithDetailComp
 
-class DailyListAdapter(
+class DailyMonthlyListAdapter(
     private val recyclerList: List<FoodWithDetailComp>,
     private val hostFragmentKey: Int
-) : RecyclerView.Adapter<DailyListAdapter.DailyListViewHolder>() {
+) : RecyclerView.Adapter<DailyMonthlyListAdapter.DailyListViewHolder>() {
 
     private var currentToast: Toast? = null
 
@@ -30,7 +31,10 @@ class DailyListAdapter(
 
     override fun onBindViewHolder(holder: DailyListViewHolder, position: Int) {
         val model = recyclerList[position]
-        model.foodDetailAndComp?.let { holder.image.setImageBitmap(Utility.base64toBitmap(it.foodDetail.picBase64)) }
+        model.foodDetailAndComp?.foodDetail?.picBase64?.let {
+            holder.image.setImageBitmap(Utility.base64toBitmap(it))
+        } ?: run { holder.image.setImageDrawable(ContextCompat.getDrawable(holder.itemView.context, R.drawable.no_image)) }
+
         holder.title.text = model.yemek.name
 
         model.yemek.category?.let {
@@ -48,7 +52,7 @@ class DailyListAdapter(
                 val navController = Navigation.findNavController(holder.itemView)
                 val bundle = Bundle()
                 val componentList: ArrayList<String> = listToArrayList(detailWithComp.foodComponent.map { it.name })
-                bundle.putString(ConstantsGeneral.bundleFoodName,model.yemek.name)
+                bundle.putString(ConstantsGeneral.bundleFoodName, model.yemek.name)
                 bundle.putString(ConstantsGeneral.bundleImgKey, model.foodDetailAndComp.foodDetail.picBase64)
                 bundle.putStringArrayList(ConstantsGeneral.bundleComponentListKey, componentList)
                 navController.navigate(getActionKey(), bundle)

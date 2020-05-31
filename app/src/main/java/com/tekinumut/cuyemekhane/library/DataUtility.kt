@@ -10,7 +10,7 @@ import java.net.URL
 class DataUtility {
 
     companion object {
-        fun getMonthlyList(doc: Document): ListOfAll {
+        fun getMonthlyList(doc: Document, imgQuality: Int): ListOfAll {
             // Tarih listesi -- Bir index örneği : 11.05.2020 Pazartesi
             val dates: Elements = doc.select(ConstantsOfWebSite.monthlyDates)
 
@@ -19,7 +19,7 @@ class DataUtility {
             // Yemkleri liste biçiminde tutar
             val foodList: List<Food> = getMonthlyFoodListOfDate(doc, foodDateList)
 
-            val detailAndComponentPair = getDetailAndCompOfFood(foodList)
+            val detailAndComponentPair = getDetailAndCompOfFood(foodList, imgQuality)
             // Her yemeğe ait detay bilgi
             val foodDetail: List<FoodDetail> = detailAndComponentPair.first
             // Yemeği oluşturan bileşenleri tutar.
@@ -28,14 +28,14 @@ class DataUtility {
             return ListOfAll(foodDateList, foodList, foodDetail, foodComponent)
         }
 
-        fun getDailyList(doc: Document): ListOfAll {
+        fun getDailyList(doc: Document, imgQuality: Int): ListOfAll {
             // Tarih listesi -- Bir index örneği : 11.05.2020 Pazartesi
             // Liste her zaman 1 boyutlu olacak
             val todayDate = doc.select(ConstantsOfWebSite.dailyDate).map { FoodDate(1, it.text()) }
             // Yemekleri liste biçiminde tut
             val todayFoodList: List<Food> = getDailyFoodListOfDate(doc)
 
-            val detailAndComponentPair = getDetailAndCompOfFood(todayFoodList)
+            val detailAndComponentPair = getDetailAndCompOfFood(todayFoodList, imgQuality)
             // Her yemeğe ait detay bilgi
             val foodDetail: List<FoodDetail> = detailAndComponentPair.first
             // Yemeği oluşturan bileşenleri tutar.
@@ -100,7 +100,7 @@ class DataUtility {
         /**
          * Yemek listesinden yemek detaylarını ve bileşenlerini dönderir
          */
-        private fun getDetailAndCompOfFood(foodList: List<Food>): Pair<List<FoodDetail>, List<FoodComponent>> {
+        private fun getDetailAndCompOfFood(foodList: List<Food>, imgQuality: Int): Pair<List<FoodDetail>, List<FoodComponent>> {
             val detailList = ArrayList<FoodDetail>()
             val componentList = ArrayList<FoodComponent>()
             foodList.forEach { yModel ->
@@ -111,7 +111,12 @@ class DataUtility {
                     val foodImgURL: String = docDetail.select("[src]").attr("abs:src")
                     val details: List<String> = docDetail.select("td").map { it.text().toString() }
                     details.forEach { componentList.add(FoodComponent(null, it, yModel.food_id)) }
-                    detailList.add(FoodDetail(yModel.food_id, Utility.imgURLToBase64(foodImgURL)))
+                    // Eğer aylık listeden gelip resim kalitesini belirlediysem
+                    detailList.add(
+                        FoodDetail(
+                            yModel.food_id, //Eğer imgQuality 0 ise resimleri indirme
+                            if (imgQuality == 0) null else Utility.imgURLToBase64(foodImgURL, imgQuality))
+                    )
                 }
             }
             return Pair(detailList, componentList)

@@ -7,6 +7,7 @@ import com.tekinumut.cuyemekhane.library.ConstantsOfWebSite
 import com.tekinumut.cuyemekhane.library.DataUtility
 import com.tekinumut.cuyemekhane.library.Resource
 import com.tekinumut.cuyemekhane.models.DateWithFoodDetailComp
+import com.tekinumut.cuyemekhane.models.FoodDate
 import com.tekinumut.cuyemekhane.models.ListOfAll
 import com.tekinumut.cuyemekhane.room.DailyDatabase
 import com.tekinumut.cuyemekhane.room.FoodDAO
@@ -29,17 +30,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      * @return listenin dizi sayısını dönderir
      *
      */
-    fun getFoodData(type: String): LiveData<Resource<Int>> = liveData(Dispatchers.IO) {
+    fun getFoodData(type: String, imgQuality: Int): LiveData<Resource<Int>> = liveData(Dispatchers.IO) {
         emit(Resource.InProgress)
         try {
             val selectedDAO = if (type == ConstantsGeneral.dbNameDaily) dailyFoodDao else monthlyFoodDao
             // Web sitesinden html verilerini alıp doc'a yaz.
-            val doc = Jsoup.connect(ConstantsOfWebSite.URL).timeout(20000).get()
+            val doc = Jsoup.connect(ConstantsOfWebSite.URL)
+                .timeout(if (type == ConstantsGeneral.dbNameDaily) 10000 else 30000).get()
             // Type'a göre günlük veya aylık liste verilerini init et
             val listOfAll: ListOfAll = if (type == ConstantsGeneral.dbNameDaily) {
-                DataUtility.getDailyList(doc)
+                DataUtility.getDailyList(doc,imgQuality)
             } else {
-                DataUtility.getMonthlyList(doc)
+                DataUtility.getMonthlyList(doc, imgQuality)
             }
             // Alınan verileri veritabanına yaz
             listOfAll.run { selectedDAO.addAllValues(foodDate, food, foodDetail, foodComponent) }
@@ -54,18 +56,22 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     /**
      * Aylık liste değişimlerini takip eder
      */
-    val getMonthlyList: LiveData<List<DateWithFoodDetailComp>> = monthlyFoodDao.getMonthlyList()
+    val getDaysOfMonth: LiveData<List<FoodDate>> = monthlyFoodDao.getDaysOfMonth()
 
     /**
-     * Aylık listeden seçilen tarihe ait yemek listesini getirir
+     * Aylık listeden seçilmiş olan güne ait verileri getirir.
      */
-    fun getSelectedDay(date: String): LiveData<DateWithFoodDetailComp> = monthlyFoodDao.getSelectedDay(date)
+    fun getSelectedDayOfMonth(): LiveData<DateWithFoodDetailComp> = monthlyFoodDao.getSelectedDayOfMonth()
 
     /**
      * Aylık listeden seçilen tarihe ait yemek listesini siler
      */
-    fun removeSelectedDay(date: String) = viewModelScope.launch(Dispatchers.IO) {
-        monthlyFoodDao.removeDayOfMonth(date)
+    fun removeSelectedDay() = viewModelScope.launch(Dispatchers.IO) {
+        monthlyFoodDao.removeSelectedDayOfMonth()
+    }
+
+    fun updateSelectedDay(datePart: String) = viewModelScope.launch(Dispatchers.IO) {
+        monthlyFoodDao.updateSelectedDayOfMonth(datePart)
     }
 
     /**

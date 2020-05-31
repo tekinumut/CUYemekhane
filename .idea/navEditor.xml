@@ -20,6 +20,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="foodPickFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="139" />
+                            <option name="y" value="-380" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="nav_daily_list">
                     <value>
                       <LayoutPositions>
@@ -31,7 +43,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="viewFoodDetails">
+                            <entry key="action_nav_daily_list_to_componentFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -52,7 +64,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="viewFoodDetails">
+                            <entry key="action_nav_monthly_list_to_componentFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

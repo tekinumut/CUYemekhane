@@ -1,141 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/daily_list_bg"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!--     List Layout-->
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="monthlyVM"
+            type="com.tekinumut.cuyemekhane.viewmodel.MonthlyListViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clMonthlyList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:background="@color/daily_list_bg"
+        android:orientation="vertical">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout_monthly"
-            android:layout_width="0dp"
+        <!--     List Layout-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clMonthlyList"
+            style="@style/allToParents0dp"
+            android:visibility="@{monthlyVM.isInfo ? View.GONE : View.VISIBLE}"
+            tools:ignore="MissingConstraints"
+            tools:visibility="gone">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerMonthly"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias=".0" />
+
+
+            <LinearLayout
+                android:id="@+id/llPickInfo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical"
+                android:visibility="@{monthlyVM.isListEmpty ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias=".3"
+                tools:visibility="visible">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/pick_solution_title"
+                    android:textColor="@color/primaryAccent"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:lineSpacingMultiplier="1.2"
+                    android:text="@string/pick_solution_content"
+                    android:textColor="@color/primary_text"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/ic_date"
+                app:backgroundTint="@color/colorAccent"
+                app:fabSize="mini"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/ic_add_white_24dp"
+                app:backgroundTint="@color/colorAccent"
+                app:fabSize="mini"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabRefresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/ic_refresh_white_24dp"
+                android:visibility="invisible"
+                app:backgroundTint="@color/colorAccent"
+                app:fabSize="mini"
+                app:layout_constraintBottom_toTopOf="@+id/fabMain"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabRemove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/ic_delete_forever_white_24dp"
+                android:visibility="invisible"
+                app:backgroundTint="@color/colorAccent"
+                app:fabSize="mini"
+                app:layout_constraintBottom_toTopOf="@+id/fabRefresh"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--    Info Layout-->
+        <ScrollView
+            android:id="@+id/svMonthlyInfo"
+            style="@style/allToParents0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tabGravity="fill"
-            app:tabMaxWidth="0dp"
-            app:tabMode="scrollable"
-            app:tabPaddingBottom="10dp"
-            app:tabPaddingTop="10dp"
-            app:tabSelectedTextColor="@color/active_tab_color"
-            app:tabTextColor="@color/passive_tab_color" />
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:visibility="@{monthlyVM.isInfo ? View.VISIBLE : View.GONE}"
+            app:layout_constraintVertical_bias=".25"
+            tools:ignore="MissingConstraints"
+            tools:visibility="visible">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager2Monthly"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tab_layout_monthly" />
+            <LinearLayout
+                android:id="@+id/clMonthlyInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabMain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:src="@drawable/ic_add_white_24dp"
-            app:backgroundTint="@color/colorAccent"
-            app:fabSize="mini"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+                <TextView
+                    android:id="@+id/monthlyInfoTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:text="@string/monthly_list_title"
+                    android:textColor="@color/primary_text"
+                    android:textSize="22sp" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabRefresh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:src="@drawable/ic_refresh_white_24dp"
-            android:visibility="invisible"
-            app:backgroundTint="@color/colorAccent"
-            app:fabSize="mini"
-            app:layout_constraintBottom_toTopOf="@+id/fabMain"
-            app:layout_constraintEnd_toEndOf="parent" />
+                <TextView
+                    android:id="@+id/monthlyInfoContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:lineSpacingMultiplier="1.2"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="@string/monthly_list_content"
+                    android:textColor="@color/primary_text"
+                    android:textSize="16sp" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabRemove"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:src="@drawable/ic_delete_forever_white_24dp"
-            android:visibility="invisible"
-            app:backgroundTint="@color/colorAccent"
-            app:fabSize="mini"
-            app:layout_constraintBottom_toTopOf="@+id/fabRefresh"
-            app:layout_constraintEnd_toEndOf="parent" />
+                <Button
+                    android:id="@+id/btn_update_monthly_list"
+                    android:layout_width="250dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/rounded_monthly"
+                    android:padding="10dp"
+                    android:text="@string/btn_update_monthly_list"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </ScrollView>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!--    Info Layout-->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clMonthlyInfo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:visibility="gone">
-
-        <TextView
-            android:id="@+id/monthlyInfoTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:gravity="center"
-            android:text="@string/monthly_list_title"
-            android:textColor="@color/primary_text"
-            android:textSize="22sp"
-            app:layout_constraintBottom_toTopOf="@id/monthlyInfoContent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <TextView
-            android:id="@+id/monthlyInfoContent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-            android:lineSpacingExtra="1.2dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:text="@string/monthly_list_content"
-            android:textColor="@color/primary_text"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@id/btn_update_monthly_list"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/monthlyInfoTitle" />
-
-        <Button
-            android:id="@+id/btn_update_monthly_list"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="75dp"
-            android:background="@drawable/rounded_monthly"
-            android:padding="10dp"
-            android:text="@string/btn_update_monthly_list"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/monthlyInfoContent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-</LinearLayout>
+</layout>

@@ -10,5 +10,5 @@ data class DateWithFoodDetailComp(
         parentColumn = "date_id",
         entityColumn = "dateCreatorId"
     )
-    val yemekWithComponentComp: List<FoodWithDetailComp>
+    val yemekWithComponentComp: List<FoodWithDetailComp>?
 )

@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/refreshDailyList"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="10dp">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/daily_list_bg"
+        android:gravity="center"
         android:orientation="vertical">
 
         <ScrollView
             android:id="@+id/svDailyInfo"
-            android:layout_width="match_parent"
+            style="@style/allToParents0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="20dp"
-            android:visibility="gone">
+            android:visibility="gone"
+            app:layout_constraintVertical_bias=".3"
+            tools:ignore="MissingConstraints"
+            tools:visibility="visible">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -48,7 +55,7 @@
                 <TextView
                     style="@style/empty_texts"
                     android:layout_marginTop="8dp"
-                    android:lineSpacingExtra="3dp"
+                    android:lineSpacingMultiplier="1.2"
                     android:text="@string/empty_solution_content"
                     android:textSize="16sp" />
 
@@ -57,7 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:background="@color/primaryAccent"
+                    android:background="@color/accentPrimary"
                     android:text="@string/open_web_site"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
@@ -70,10 +77,16 @@
             android:id="@+id/recyclerDailyList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:clipToPadding="false"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias=".0" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
