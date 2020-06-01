@@ -7,11 +7,15 @@
         <item
             android:id="@+id/nav_daily_list"
             android:icon="@drawable/ic_daily_food_list"
-            android:title="@string/daily_list" />
+            android:title="@string/daily_action_title" />
         <item
             android:id="@+id/nav_monthly_list"
             android:icon="@drawable/ic_monthly_list"
-            android:title="@string/monthly_list" />
+            android:title="@string/monthly_action_title" />
+        <item
+            android:id="@+id/nav_duyurular"
+            android:icon="@drawable/ic_megaphone"
+            android:title="@string/duyurular_action_title" />
 
     </group>
 </menu>

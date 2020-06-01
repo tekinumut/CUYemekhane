@@ -1,5 +1,6 @@
 package com.tekinumut.cuyemekhane.models
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
@@ -27,5 +28,6 @@ data class Food(
     // Yemeğin detaylarının olduğu link
     val detailURL: String? = null,
     // Yemeğin ait olduğu tarih
+    @ColumnInfo(index = true)
     val dateCreatorId: Int
 )

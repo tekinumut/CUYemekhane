@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,7 +30,7 @@ class ComponentFragment : Fragment() {
         init(view)
 
         arguments?.getString(ConstantsGeneral.bundleImgKey)?.let {
-            iv_component.setImageBitmap(Utility.base64toBitmap(it))
+            iv_component.setImageBitmap(Utility.base64ToString(it))
         }
 
         arguments?.getStringArrayList(ConstantsGeneral.bundleComponentListKey)?.let {

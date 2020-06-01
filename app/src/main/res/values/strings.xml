@@ -2,8 +2,8 @@
     <string name="app_name">Çukurova Üniversitesi Yemekhane</string>
 
     <!-- Navigation Drawer Values -->
-    <string name="daily_list">Günlük Liste</string>
-    <string name="monthly_list">Aylık Liste</string>
+    <string name="daily_action_title">Günlük Liste</string>
+    <string name="monthly_action_title">Aylık Liste</string>
     <string name="_m_please_wait">Lütfen Bekleyiniz</string>
     <string name="data_loaded">Veriler başarıyla yüklendi</string>
     <string name="error_loading_data">Veriler yüklenemedi.</string>
@@ -12,7 +12,6 @@
     <string name="remove">Sil</string>
     <string name="kabul_et">Kabul Et</string>
     <string name="btn_update_monthly_list">Aylık listeyi güncelle</string>
-    <string name="date_not_selected">Tarih seçilmedi!</string>
     <string name="food_removed_of_date">%s tarihli menü silindi</string>
     <string name="no_component_found">Yemek içeriği bulunamadı</string>
     <string name="no_food_holiday">Tatil günlerinde Üniversite Merkezi Kafeterya\'sı hizmet vermemektedir.</string>
@@ -46,20 +45,21 @@
     <string name="watch_ad_title">Aylık Liste İndirme Penceresi</string>
     <string name="watch_ad_content">Aylık yemek listesini indirebilmek için bir adet video reklam izlemeniz gerekmektedir.
         Daha sonra indirdiğiniz son listeye reklam izlemeden ulaşabilirsiniz.</string>
-    <string name="dont_load_img">Resimleri yükleme</string>
     <string name="dont_load_img_info">
         • Çubuğu 0 değerine getirerek resim indirmeyi iptal edebilirsiniz.
         \n• Yemeklere ait resimleri yüklemeyerek 30 mb\'a kadar ulaşabilen indirme boyutunu 50 KB boyutuna düşürebilirsiniz.</string>
     <string name="sb_img_quality">Resim Kalitesi: %%%d</string> <!-- %%->% yazar %d-> verilen int değerini Exp: %50-->
     <string name="sb_img_quality_zero">Resimler indirilmeyecek</string> <!-- %%->% yazar %d-> verilen int değerini Exp: %50-->
 
+    <!-- Duyurular -->
+    <string name="empty_duyuru_title">Duyuru yok</string>
+    <string name="empty_duyuru_content">Duyuruları yenilemek için sayfayı yukarıdan aşağı çekerek yenileyebilirsiniz.</string>
 
-    <string name="pick_food">Yemek Seç</string>
+
     <string name="food_component_title">Yemek İçeriği</string>
-    <string name="pick_date">Tarih Seç</string>
+    <string name="duyurular_action_title">Duyurular</string>
     <string name="no_monthly_list_pls_refresh">Gösterilebilecek tarih bulunamadı. Listeyi yenilemeyi deneyin</string>
-    <string name="no_data_for_selected_day">Seçilen güne ait veri bulunamadı</string>
     <string name="already_no_data">Geçerli tarih zaten bir veri içermiyor</string>
-
+    <string name="duyurular_loaded">Duyurular başarıyla yenilendi</string>
 
 </resources>

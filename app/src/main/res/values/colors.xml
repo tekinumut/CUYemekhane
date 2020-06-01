@@ -4,21 +4,18 @@
     <color name="colorPrimaryDark">#062d12</color>
     <color name="colorAccent">#005f1e</color>
     <color name="white">#ffffff</color>
-    <color name="black">#000000</color>
     <color name="primary_text">#000000</color>
 
-    <color name="active_tab_color">#00421c</color>
-    <color name="passive_tab_color">#a5b1c2</color>
     <color name="toolbar_bg">#00421c</color>
-    <color name="def_bg">#ffffff</color>
     <color name="button_blue">#1581ff</color>
     <color name="alert_dialog_btn">#00a8ff</color>
     <color name="accentPrimary">#005f1e</color>
     <color name="primaryAccent">#00421c</color>
-    <color name="daily_list_bg">#f2f2f2</color>
+    <color name="default_bg">#f2f2f2</color>
     <color name="card_daily_bg">#ffffff</color>
     <color name="card_daily_title">#565656</color>
     <color name="card_daily_category_bg">#ff0000</color>
     <color name="card_daily_category_title">#f2f2f2</color>
     <color name="card_calorie_title">#ff0000</color>
+    <color name="duyurular_title">#ff0000</color>
 </resources>

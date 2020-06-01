@@ -13,20 +13,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="180" />
-                            <option name="y" value="-54" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="foodPickFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="139" />
-                            <option name="y" value="-380" />
+                            <option name="x" value="21" />
+                            <option name="y" value="-310" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -37,8 +25,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-187" />
-                            <option name="y" value="117" />
+                            <option name="x" value="-247" />
+                            <option name="y" value="-399" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -53,13 +41,25 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="nav_duyurular">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-245" />
+                            <option name="y" value="194" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="nav_monthly_list">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-190" />
-                            <option name="y" value="-210" />
+                            <option name="x" value="-249" />
+                            <option name="y" value="-93" />
                           </Point>
                         </option>
                         <option name="myPositions">

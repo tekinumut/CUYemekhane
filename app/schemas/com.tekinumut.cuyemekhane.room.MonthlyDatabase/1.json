@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c7b5f7f8a57caafe2199c4f817d7cf3c",
+    "identityHash": "b5cd7c49db4a98f0ff89ddceb19a2f9c",
     "entities": [
       {
         "tableName": "FoodDate",
@@ -33,7 +33,16 @@
           ],
           "autoGenerate": false
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_FoodDate_date_id",
+            "unique": false,
+            "columnNames": [
+              "date_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_FoodDate_date_id` ON `${TABLE_NAME}` (`date_id`)"
+          }
+        ],
         "foreignKeys": []
       },
       {
@@ -83,7 +92,16 @@
           ],
           "autoGenerate": false
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_Food_dateCreatorId",
+            "unique": false,
+            "columnNames": [
+              "dateCreatorId"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_Food_dateCreatorId` ON `${TABLE_NAME}` (`dateCreatorId`)"
+          }
+        ],
         "foreignKeys": [
           {
             "table": "FoodDate",
@@ -165,7 +183,16 @@
           ],
           "autoGenerate": false
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_FoodComponent_detailCreatorId",
+            "unique": false,
+            "columnNames": [
+              "detailCreatorId"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_FoodComponent_detailCreatorId` ON `${TABLE_NAME}` (`detailCreatorId`)"
+          }
+        ],
         "foreignKeys": [
           {
             "table": "FoodDetail",
@@ -184,7 +211,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c7b5f7f8a57caafe2199c4f817d7cf3c')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b5cd7c49db4a98f0ff89ddceb19a2f9c')"
     ]
   }
 }

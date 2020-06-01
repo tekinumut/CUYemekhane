@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c374fcd5bc457b61cba194a114398b2c",
+    "identityHash": "447eaff5e2a31a718c7fa7606cbffaf4",
     "entities": [
       {
         "tableName": "FoodDate",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`date_id` INTEGER NOT NULL, `name` TEXT NOT NULL, PRIMARY KEY(`date_id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`date_id` INTEGER NOT NULL, `name` TEXT NOT NULL, `selectedDay` INTEGER, PRIMARY KEY(`date_id`))",
         "fields": [
           {
             "fieldPath": "date_id",
@@ -19,6 +19,12 @@
             "columnName": "name",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "selectedDay",
+            "columnName": "selectedDay",
+            "affinity": "INTEGER",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -27,7 +33,16 @@
           ],
           "autoGenerate": false
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_FoodDate_date_id",
+            "unique": false,
+            "columnNames": [
+              "date_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_FoodDate_date_id` ON `${TABLE_NAME}` (`date_id`)"
+          }
+        ],
         "foreignKeys": []
       },
       {
@@ -77,7 +92,16 @@
           ],
           "autoGenerate": false
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_Food_dateCreatorId",
+            "unique": false,
+            "columnNames": [
+              "dateCreatorId"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_Food_dateCreatorId` ON `${TABLE_NAME}` (`dateCreatorId`)"
+          }
+        ],
         "foreignKeys": [
           {
             "table": "FoodDate",
@@ -94,7 +118,7 @@
       },
       {
         "tableName": "FoodDetail",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`detail_id` INTEGER NOT NULL, `picBase64` TEXT NOT NULL, PRIMARY KEY(`detail_id`), FOREIGN KEY(`detail_id`) REFERENCES `Food`(`food_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`detail_id` INTEGER NOT NULL, `picBase64` TEXT, PRIMARY KEY(`detail_id`), FOREIGN KEY(`detail_id`) REFERENCES `Food`(`food_id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "detail_id",
@@ -106,7 +130,7 @@
             "fieldPath": "picBase64",
             "columnName": "picBase64",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -159,7 +183,16 @@
           ],
           "autoGenerate": false
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_FoodComponent_detailCreatorId",
+            "unique": false,
+            "columnNames": [
+              "detailCreatorId"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_FoodComponent_detailCreatorId` ON `${TABLE_NAME}` (`detailCreatorId`)"
+          }
+        ],
         "foreignKeys": [
           {
             "table": "FoodDetail",
@@ -173,12 +206,50 @@
             ]
           }
         ]
+      },
+      {
+        "tableName": "Duyurular",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`duyuru_id` INTEGER, `title` TEXT NOT NULL, `content` TEXT NOT NULL, `picBase64` TEXT, PRIMARY KEY(`duyuru_id`))",
+        "fields": [
+          {
+            "fieldPath": "duyuru_id",
+            "columnName": "duyuru_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "content",
+            "columnName": "content",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "picBase64",
+            "columnName": "picBase64",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "duyuru_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c374fcd5bc457b61cba194a114398b2c')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '447eaff5e2a31a718c7fa7606cbffaf4')"
     ]
   }
 }

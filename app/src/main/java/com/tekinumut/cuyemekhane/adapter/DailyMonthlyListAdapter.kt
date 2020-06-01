@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.tekinumut.cuyemekhane.R
@@ -31,12 +30,12 @@ class DailyMonthlyListAdapter(
 
     override fun onBindViewHolder(holder: DailyListViewHolder, position: Int) {
         val model = recyclerList[position]
-        model.foodDetailAndComp?.foodDetail?.picBase64?.let {
-            holder.image.setImageBitmap(Utility.base64toBitmap(it))
-        } ?: run { holder.image.setImageDrawable(ContextCompat.getDrawable(holder.itemView.context, R.drawable.no_image)) }
+        // imageView nesnesini tanımla
+        Utility.setImageViewWithBase64(holder.image, model.foodDetailAndComp?.foodDetail?.picBase64)
 
         holder.title.text = model.yemek.name
 
+        // Eğer kategori değeri boş veya null ise arka plan rengini de yok et
         model.yemek.category?.let {
             if (it.isEmpty()) return@let null
             else holder.category.text = it
@@ -88,7 +87,7 @@ class DailyMonthlyListAdapter(
         var calorie: TextView = itemView.findViewById(R.id.tv_calorie)
 
     }
-
+}
 //    private fun createOnClickListener(videoId: String): View.OnClickListener {
 //        return View.OnClickListener {
 //            val directions = DailyListFragment.viewVideoDetails(videoId)
@@ -99,4 +98,3 @@ class DailyMonthlyListAdapter(
 //            it.findNavController().navigate(directions, extras)
 //        }
 //    }
-}

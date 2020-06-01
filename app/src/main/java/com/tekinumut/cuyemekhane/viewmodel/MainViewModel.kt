@@ -2,25 +2,25 @@ package com.tekinumut.cuyemekhane.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.tekinumut.cuyemekhane.library.ConstantsGeneral
-import com.tekinumut.cuyemekhane.library.ConstantsOfWebSite
-import com.tekinumut.cuyemekhane.library.DataUtility
-import com.tekinumut.cuyemekhane.library.Resource
+import com.tekinumut.cuyemekhane.library.*
 import com.tekinumut.cuyemekhane.models.DateWithFoodDetailComp
+import com.tekinumut.cuyemekhane.models.Duyurular
 import com.tekinumut.cuyemekhane.models.FoodDate
 import com.tekinumut.cuyemekhane.models.ListOfAll
+import com.tekinumut.cuyemekhane.room.DailyDAO
 import com.tekinumut.cuyemekhane.room.DailyDatabase
-import com.tekinumut.cuyemekhane.room.FoodDAO
+import com.tekinumut.cuyemekhane.room.MonthlyDAO
 import com.tekinumut.cuyemekhane.room.MonthlyDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.jsoup.Jsoup
+import org.jsoup.select.Elements
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     // ROOM veritabanı üzerinde işlem yapmamızı sağlayan SQL sorgularına erişir
-    private val monthlyFoodDao: FoodDAO = MonthlyDatabase.getInstance(application).yemekDao()
-    private val dailyFoodDao: FoodDAO = DailyDatabase.getInstance(application).yemekDao()
+    private val monthlyFoodDao: MonthlyDAO = MonthlyDatabase.getInstance(application).yemekDao()
+    private val dailyFoodDao: DailyDAO = DailyDatabase.getInstance(application).yemekDao()
     private val _actionBarTitle = MutableLiveData<String>()
     val actionBarTitle: LiveData<String> = _actionBarTitle
 
@@ -33,18 +33,20 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun getFoodData(type: String, imgQuality: Int): LiveData<Resource<Int>> = liveData(Dispatchers.IO) {
         emit(Resource.InProgress)
         try {
-            val selectedDAO = if (type == ConstantsGeneral.dbNameDaily) dailyFoodDao else monthlyFoodDao
             // Web sitesinden html verilerini alıp doc'a yaz.
             val doc = Jsoup.connect(ConstantsOfWebSite.URL)
                 .timeout(if (type == ConstantsGeneral.dbNameDaily) 10000 else 30000).get()
             // Type'a göre günlük veya aylık liste verilerini init et
             val listOfAll: ListOfAll = if (type == ConstantsGeneral.dbNameDaily) {
-                DataUtility.getDailyList(doc,imgQuality)
+                DataUtility.getDailyList(doc, imgQuality)
             } else {
                 DataUtility.getMonthlyList(doc, imgQuality)
             }
             // Alınan verileri veritabanına yaz
-            listOfAll.run { selectedDAO.addAllValues(foodDate, food, foodDetail, foodComponent) }
+            when (type) {
+                ConstantsGeneral.dbNameDaily -> dailyFoodDao.addAllValues(listOfAll)
+                ConstantsGeneral.dbNameMonthly -> monthlyFoodDao.addAllValues(listOfAll)
+            }
             // Şu aşamada kullanılmıyor.
             emit(Resource.Success(listOfAll.foodDate.size))
         } catch (e: Exception) {
@@ -78,6 +80,36 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      * Günlük liste değişimlerini takip eder.
      */
     val getDailyList: LiveData<DateWithFoodDetailComp> = dailyFoodDao.getDailyList()
+
+    /**
+     * Duyurular verisini çeker
+     */
+    fun getDuyurularData(): LiveData<Resource<Int>> = liveData(Dispatchers.IO) {
+        emit(Resource.InProgress)
+        try {
+            val duyurulist = ArrayList<Duyurular>()
+            val doc = Jsoup.connect(ConstantsOfWebSite.URL).timeout(10000).get()
+            val duyuruClass = doc.select(ConstantsOfWebSite.duyuruClass)
+            val title: Elements = doc.select(ConstantsOfWebSite.duyuruTitle)
+            val content: Elements = doc.select(ConstantsOfWebSite.duyuruContent)
+
+            duyuruClass.forEachIndexed { i, element ->
+                val foodImgURL: String? = element.select("[src]").attr("abs:src")
+                duyurulist.add(Duyurular(i + 1, title[i].text(), content[i].text(),
+                    if (foodImgURL.isNullOrEmpty()) null else Utility.imgURLToBase64(foodImgURL, ConstantsGeneral.defDailyImgQuality)))
+            }
+            dailyFoodDao.insertDuyurular(duyurulist)
+            emit(Resource.Success(0))
+        } catch (e: Exception) {
+            emit(Resource.Error(e))
+        }
+    }
+
+    /**
+     * Duyurular tablosunu izler
+     */
+    val getDuyurular: LiveData<List<Duyurular>> = dailyFoodDao.getDuyurular()
+
 
     /**
      * ActionBar metnini günceller

@@ -108,14 +108,16 @@ class DataUtility {
                     val docDetail = Jsoup.parse(URL(url).openStream(), "windows-1254", url)
                     // Türkçe karakter sorununu giderir
                     docDetail.outputSettings().charset("windows-1254")
-                    val foodImgURL: String = docDetail.select("[src]").attr("abs:src")
+                    val foodImgURL: String? = docDetail.select("[src]").attr("abs:src")
                     val details: List<String> = docDetail.select("td").map { it.text().toString() }
                     details.forEach { componentList.add(FoodComponent(null, it, yModel.food_id)) }
                     // Eğer aylık listeden gelip resim kalitesini belirlediysem
                     detailList.add(
                         FoodDetail(
                             yModel.food_id, //Eğer imgQuality 0 ise resimleri indirme
-                            if (imgQuality == 0) null else Utility.imgURLToBase64(foodImgURL, imgQuality))
+                            if (imgQuality == 0 || foodImgURL.isNullOrEmpty()) null
+                            else Utility.imgURLToBase64(foodImgURL, imgQuality)
+                        )
                     )
                 }
             }

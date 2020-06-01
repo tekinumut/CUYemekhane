@@ -139,7 +139,7 @@ class MonthlyListFragment : Fragment() {
                 selectedDay = allList.foodDate.name
             } ?: run {
                 recyclerMonthlyList.adapter = null
-                mainViewModel.updateActionTitle(getString(R.string.monthly_list))
+                mainViewModel.updateActionTitle(getString(R.string.monthly_action_title))
                 monthlyListViewModel.updateIsListEmpty(true)
                 selectedDay = null
             }

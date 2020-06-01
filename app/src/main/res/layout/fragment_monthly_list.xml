@@ -16,7 +16,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/daily_list_bg"
         android:orientation="vertical">
 
         <!--     List Layout-->
@@ -25,7 +24,7 @@
             style="@style/allToParents0dp"
             android:visibility="@{monthlyVM.isInfo ? View.GONE : View.VISIBLE}"
             tools:ignore="MissingConstraints"
-            tools:visibility="gone">
+            tools:visibility="visible">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerMonthly"
@@ -136,7 +135,7 @@
             android:visibility="@{monthlyVM.isInfo ? View.VISIBLE : View.GONE}"
             app:layout_constraintVertical_bias=".25"
             tools:ignore="MissingConstraints"
-            tools:visibility="visible">
+            tools:visibility="gone">
 
             <LinearLayout
                 android:id="@+id/clMonthlyInfo"

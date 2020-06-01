@@ -5,6 +5,8 @@ class ConstantsOfWebSite {
         // Kaynak URL
         const val URL = "https://yemekhane.cu.edu.tr/default.asp"
 
+        // DUYURU SINIFI
+        const val duyuruClass = "section#duyurular .testimonial-item"
         // DUYURU BAŞLIĞI
         const val duyuruTitle = "section#duyurular .testimonial-item p"
 

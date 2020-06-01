@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.util.Base64
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
@@ -48,9 +49,23 @@ class Utility {
         }
 
         /**
+         * Base64'ü bitmap nesnesine çevirip imageView nesnesine yükler
+         * Değer null ise varsayılan resmi yükler
+         */
+        fun setImageViewWithBase64(imageView: ImageView, base64Str: String? = null) {
+            base64Str?.let {
+                val decodedString: ByteArray = Base64.decode(base64Str, Base64.DEFAULT)
+                val bitmap: Bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+                imageView.setImageBitmap(bitmap)
+            } ?: run {
+                imageView.setImageDrawable(ContextCompat.getDrawable(imageView.context, R.drawable.no_image))
+            }
+        }
+
+        /**
          * Base64'ü bitmap nesnesine çevirir
          */
-        fun base64toBitmap(base64Str: String): Bitmap {
+        fun base64ToString(base64Str: String): Bitmap {
             val decodedString: ByteArray = Base64.decode(base64Str, Base64.DEFAULT)
             return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
         }

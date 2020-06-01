@@ -33,7 +33,12 @@ class MainActivity : AppCompatActivity() {
         navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_daily_list, R.id.nav_monthly_list), drawer_layout)
+        appBarConfiguration = AppBarConfiguration(
+            setOf
+                (R.id.nav_daily_list,
+                R.id.nav_monthly_list,
+                R.id.nav_duyurular
+            ), drawer_layout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         nav_view.setupWithNavController(navController)
         // Update Action Bar Title

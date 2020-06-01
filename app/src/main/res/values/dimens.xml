@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="duyuru_img_height">50dp</dimen>
+    <dimen name="duyuru_title_size">22sp</dimen>
+    <dimen name="duyuru_content_size">16sp</dimen>
     <dimen name="card_daily_img_height">125dp</dimen>
     <dimen name="card_daily_food_title">22sp</dimen>
     <dimen name="card_daily_category_title">12sp</dimen>

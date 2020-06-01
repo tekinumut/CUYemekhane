@@ -1,7 +1,6 @@
 package com.tekinumut.cuyemekhane.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +21,6 @@ import com.tekinumut.cuyemekhane.models.Food
 import com.tekinumut.cuyemekhane.models.FoodWithDetailComp
 import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_daily_list.*
-import kotlinx.coroutines.*
 
 class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
@@ -108,7 +106,7 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     private fun getFoodData() {
-        mainViewModel.getFoodData(ConstantsGeneral.dbNameDaily,ConstantsGeneral.defDailyImgQuality).observe(viewLifecycleOwner, Observer {
+        mainViewModel.getFoodData(ConstantsGeneral.dbNameDaily, ConstantsGeneral.defDailyImgQuality).observe(viewLifecycleOwner, Observer {
             when (it) {
                 Resource.InProgress -> loadingDialog.show()
                 is Resource.Success -> {
@@ -133,7 +131,6 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onDestroy() {
         super.onDestroy()
-
         loadingDialog.dismiss()
     }
 

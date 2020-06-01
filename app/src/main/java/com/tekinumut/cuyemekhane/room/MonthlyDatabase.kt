@@ -13,7 +13,7 @@ import com.tekinumut.cuyemekhane.models.FoodDetail
 @Database(entities = [FoodDate::class, Food::class, FoodDetail::class, FoodComponent::class], version = 1)
 abstract class MonthlyDatabase : RoomDatabase() {
 
-    abstract fun yemekDao(): FoodDAO
+    abstract fun yemekDao(): MonthlyDAO
 
     companion object {
         @Volatile
