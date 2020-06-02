@@ -40,11 +40,30 @@
         tools:layout="@layout/fragment_duyurular" />
 
     <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.tekinumut.cuyemekhane.ui.SettingsFragment"
+        android:label="@string/settings_action_title"
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_nav_settings_to_autoUpdateDialog"
+            app:destination="@id/autoUpdateDialog" />
+    </fragment>
+
+    <fragment
         android:id="@+id/componentFragment"
         android:name="com.tekinumut.cuyemekhane.ui.ComponentFragment"
         android:label="@string/food_component_title"
         tools:layout="@layout/fragment_dm_component" />
 
+    <dialog
+        android:id="@+id/autoUpdateDialog"
+        android:name="com.tekinumut.cuyemekhane.ui.AutoUpdateDialogFragment"
+        android:label="@string/autoUpdateTitle"
+        tools:layout="@layout/auto_update_dialog_fragment">
+        <action
+            android:id="@+id/action_autoUpdateDialog_to_nav_settings"
+            app:destination="@id/nav_settings" />
+    </dialog>
 
 
 </navigation>

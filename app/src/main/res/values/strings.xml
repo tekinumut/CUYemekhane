@@ -16,6 +16,9 @@
     <string name="no_component_found">Yemek içeriği bulunamadı</string>
     <string name="no_food_holiday">Tatil günlerinde Üniversite Merkezi Kafeterya\'sı hizmet vermemektedir.</string>
     <string name="open_web_site">Web Sitesine Git</string>
+    <string name="system_default">Cihaz temasını kullan</string>
+    <string name="light">Açık</string>
+    <string name="dark">Koyu</string>
 
     <string name="monthly_list_title">Aylık Liste Boş</string>
     <string name="monthly_list_content">
@@ -52,14 +55,37 @@
     <string name="sb_img_quality_zero">Resimler indirilmeyecek</string> <!-- %%->% yazar %d-> verilen int değerini Exp: %50-->
 
     <!-- Duyurular -->
-    <string name="empty_duyuru_title">Duyuru yok</string>
+    <string name="empty_duyuru_title">Duyuru Bulunamadı</string>
     <string name="empty_duyuru_content">Duyuruları yenilemek için sayfayı yukarıdan aşağı çekerek yenileyebilirsiniz.</string>
+
+    <!-- Settings Keys -->
+
+    <string name="defPageListKey">defPageListKey</string>
+    <string name="defPageTitle">Başlangıç Sayfası</string>
+    <string name="defPageSummary">Başlangıçta açılacak olan sayfayı belirtin</string>
+
+    <string name="nightModeListKey">nightModeListKey</string>
+    <string name="nightModeTitle">Görünüm</string>
+    <string name="nightModeSummary">Açık/Koyu tema tercihinizi belirtin </string>
+
+    <string name="adKey">adKey</string>
+    <string name="adActivityTitle">Reklam Görünümü</string>
+    <string name="adSummaryActive">Reklamlar etkin</string>
+    <string name="adSummaryPassive">Reklamlar %s tarihinden sonra tekrar aktif olur.</string>
+
+    <string name="autoUpdatePrefKey">autoUpdatePrefKey</string>
+    <string name="autoUpdateTitle">Otomatik Güncellenecek Sayfalar</string>
+    <string name="autoUpdateSummary">Açtığınızda verilerin otomatik olarak güncellenmesini istediğiniz sayfaları belirtin</string>
+    <string name="auto_update_multi_list_dialog_message">
+      • Aşağıdaki seçili sayfaların verileri, sayfalar açıldığında otomatik olarak güncellenecek.
+      \n• Sayfa bir kez güncellendikten sonra uygulamayı kapatana kadar otomatik güncellenmez.
+      \n• Sayfayı yukarıdan aşağı çekerek kendiniz ayrıca güncelleştirebilirsiniz.</string>
 
 
     <string name="food_component_title">Yemek İçeriği</string>
     <string name="duyurular_action_title">Duyurular</string>
+    <string name="settings_action_title">Ayarlar</string>
     <string name="no_monthly_list_pls_refresh">Gösterilebilecek tarih bulunamadı. Listeyi yenilemeyi deneyin</string>
     <string name="already_no_data">Geçerli tarih zaten bir veri içermiyor</string>
     <string name="duyurular_loaded">Duyurular başarıyla yenilendi</string>
-
 </resources>

@@ -12,8 +12,13 @@ class ConstantsGeneral {
         // Günlük yemek listesini tutan room Database
         const val dbNameDaily = "daily_db"
 
-        // Günlük listenin her açılışta en fazla 1 kez çalışmasını sağlar
-        const val prefCheckDailyListUpdated = "dailyListUpdated"
+        // Metodun uygulama açıkken daha önce çalıştığını kontrol eden pref keyleri
+        const val prefCheckDailyListWorkedBefore = "dailyListWorkedBefore"
+        const val prefCheckDuyurularWorkedBefore = "duyurularWorkedBefore"
+
+        // Ayarlar'da bulunan otomatik güncelleme pref keyleri
+        const val prefDailyAutoUpdateKey = "dailyAutoUpdateKey"
+        const val prefDuyurularAutoUpdateKey = "duyurularAutoUpdateKey"
 
         // Navigation'un hangi listeden çalışacağı bilgisini alır.
         const val dailyFragmentKey = 0
@@ -32,6 +37,10 @@ class ConstantsGeneral {
 
         // Aylık listenin varsayılan resim kalitesi, yüzde cinsinden
         const val defDailyImgQuality: Int = 100
+
+        // Günlük listenin sharedPref'teki otomatik güncelleme varsayılanı
+        const val defValDailyAutoUpdate = true
+        const val defValDuyurularAutoUpdate = true
 
     }
 }

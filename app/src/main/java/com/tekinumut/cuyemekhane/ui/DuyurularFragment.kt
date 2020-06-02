@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.adapter.DuyurularAdapter
+import com.tekinumut.cuyemekhane.library.ConstantsGeneral
+import com.tekinumut.cuyemekhane.library.MainPref
 import com.tekinumut.cuyemekhane.library.Resource
 import com.tekinumut.cuyemekhane.library.Utility
 import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
@@ -34,6 +36,8 @@ class DuyurularFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         super.onViewCreated(view, savedInstanceState)
         init(view)
         observeDuyurularDB()
+        // Sunucudan güncel duyuruları çek
+        getDuyurularData(false)
     }
 
     private fun init(view: View) {
@@ -70,22 +74,49 @@ class DuyurularFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     /**
      * Duyuruları web sitesinen al
+     * @param isSwipeRefresh Kullanıcı kendisi mi yenilemek istiyor.
      */
-    private fun getDuyurularData() {
-        mainViewModel.getDuyurularData().observe(viewLifecycleOwner, Observer {
-            when (it) {
-                Resource.InProgress -> loadingDialog.show()
-                is Resource.Success -> {
-                    Toast.makeText(context, getString(R.string.duyurular_loaded), Toast.LENGTH_SHORT).show()
-                    onSuccessAndError()
+    private fun getDuyurularData(isSwipeRefresh: Boolean) {
+        val mainPref = MainPref.getInstance(requireContext())
+        if (shouldAutoRefreshData(isSwipeRefresh, mainPref)) {
+            mainViewModel.getDuyurularData().observe(viewLifecycleOwner, Observer {
+                when (it) {
+                    Resource.InProgress -> loadingDialog.show()
+                    is Resource.Success -> {
+                        Toast.makeText(context, getString(R.string.duyurular_loaded), Toast.LENGTH_SHORT).show()
+                        // Uygulama bir kez güncellendi. Otomatik güncellemeyi kapat.
+                        mainPref.save(ConstantsGeneral.prefCheckDuyurularWorkedBefore, true)
+                        onSuccessAndError()
+                    }
+                    is Resource.Error -> {
+                        val message = "${getString(R.string.error_loading_data)} \nHata sebebi: ${it.exception.message}"
+                        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+                        onSuccessAndError()
+                    }
                 }
-                is Resource.Error -> {
-                    val message = "${getString(R.string.error_loading_data)} \nHata sebebi: ${it.exception.message}"
-                    Toast.makeText(context, message, Toast.LENGTH_LONG).show()
-                    onSuccessAndError()
-                }
-            }
-        })
+            })
+        }
+    }
+
+    /**
+     * "İlgili sayfa otomatik güncellenecek mi?" sorusunun cevabı
+     * @return otomatik güncelleme durumu
+     * Algoritma adımları :
+     * 1 -> Kullanıcı kendi isteği ile yenilemek istiyorsa 6. adıma git. İşlem otomatik gerçekleşiyorsa 2. adıma git
+     * 2 -> Ayarlar menüsünden otomatik güncelleme kapatılmış mı diye bak.
+     * 3 -> Eğer kapatılmış ise false dön ve bitir. Kapatılmamış ise 4. adıma git
+     * 4 -> Kullanıcı daha önce uygulama açıkken güncelleme yapmış mı bak.
+     * 5 -> Eğer yapmış ise false dön ve bitir. Yapmamışsa 6. adıma git
+     * 6 -> True dön ve bitir.
+     */
+    private fun shouldAutoRefreshData(isSwipeRefresh: Boolean, mainPref: MainPref): Boolean {
+        val autoUpdateVal = mainPref.getBoolean(ConstantsGeneral.prefDuyurularAutoUpdateKey, ConstantsGeneral.defValDuyurularAutoUpdate)
+        val isWorkedBefore = mainPref.getBoolean(ConstantsGeneral.prefCheckDuyurularWorkedBefore, false)
+        // Otomatik güncelleme olduğu durumda oluşacak sonucu değere ata
+        var autoUpdateResult = if (autoUpdateVal) !isWorkedBefore else false
+        // Eğer kullanıcı kendi yenilemek istediyse direk true yap
+        if (isSwipeRefresh) autoUpdateResult = true
+        return autoUpdateResult
     }
 
     private fun onSuccessAndError() {
@@ -94,6 +125,6 @@ class DuyurularFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     override fun onRefresh() {
-        refreshDuyurular.post { getDuyurularData() }
+        refreshDuyurular.post { getDuyurularData(true) }
     }
 }

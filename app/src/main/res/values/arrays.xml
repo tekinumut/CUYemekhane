@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Başlangıç sayfası Tanımları -->
+    <string-array name="defPage_values">
+        <item>0</item>  <!-- günlük liste -->
+        <item>1</item>   <!-- aylık liste -->
+        <item>2</item>   <!-- duyurular -->
+    </string-array>
+
+    <string-array name="defPage_entries">
+        <item>@string/daily_action_title</item>
+        <item>@string/monthly_action_title</item>
+        <item>@string/duyurular_action_title</item>
+    </string-array>
+    <!-- Başlangıç sayfası Bitiş -->
+
+    <!-- Gece Modu sayfası Tanımları -->
+    <string-array name="nightMode_values">
+        <item>-1</item>  <!-- otomatik -->
+        <item>0</item>   <!-- gündüz -->
+        <item>1</item>   <!-- gece -->
+    </string-array>
+
+    <string-array name="nightModel_entries">
+        <item>@string/system_default</item>
+        <item>@string/light</item>
+        <item>@string/dark</item>
+    </string-array>
+    <!-- Gece Modu sayfası Tanımları -->
+
+</resources>

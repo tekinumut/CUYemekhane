@@ -98,35 +98,61 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     private fun initFoodData() {
         // Daha önce çağrılmamışsa çağır
-        val isWorkedBefore = mainPref.getBoolean(ConstantsGeneral.prefCheckDailyListUpdated, false)
+        val isWorkedBefore = mainPref.getBoolean(ConstantsGeneral.prefCheckDailyListWorkedBefore, false)
+        // val isWorkOnStart = mainPref.getBoolean(getString(R.string.autoUpdateBeginKey),true)
 
         if (!isWorkedBefore) {
-            getFoodData()
+            getFoodData(false)
         }
     }
 
-    private fun getFoodData() {
-        mainViewModel.getFoodData(ConstantsGeneral.dbNameDaily, ConstantsGeneral.defDailyImgQuality).observe(viewLifecycleOwner, Observer {
-            when (it) {
-                Resource.InProgress -> loadingDialog.show()
-                is Resource.Success -> {
-                    Toast.makeText(context, getString(R.string.data_loaded), Toast.LENGTH_SHORT).show()
-                    onSuccessAndError()
-                }
-                is Resource.Error -> {
-                    val message = "${getString(R.string.error_loading_data)} \nHata sebebi: ${it.exception.message}"
-                    Toast.makeText(context, message, Toast.LENGTH_LONG).show()
-                    onSuccessAndError()
-                }
-            }
-        })
+    private fun getFoodData(isSwipeRefresh: Boolean) {
+        if (shouldAutoRefreshData(isSwipeRefresh)) {
+            mainViewModel.getFoodData(ConstantsGeneral.dbNameDaily, ConstantsGeneral.defDailyImgQuality)
+                .observe(viewLifecycleOwner, Observer {
+                    when (it) {
+                        Resource.InProgress -> loadingDialog.show()
+                        is Resource.Success -> {
+                            Toast.makeText(context, getString(R.string.data_loaded), Toast.LENGTH_SHORT).show()
+                            onSuccessAndError()
+                        }
+                        is Resource.Error -> {
+                            val message = "${getString(R.string.error_loading_data)} \nHata sebebi: ${it.exception.message}"
+                            Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+                            onSuccessAndError()
+                        }
+                    }
+                })
+        }
 
     }
 
     private fun onSuccessAndError() {
-        mainPref.save(ConstantsGeneral.prefCheckDailyListUpdated, true)
+        mainPref.save(ConstantsGeneral.prefCheckDailyListWorkedBefore, true)
         loadingDialog.dismiss()
         refreshDaily.isRefreshing = false
+    }
+
+
+    /**
+     * "İlgili sayfa otomatik güncellenecek mi?" sorusunun cevabı
+     * @return otomatik güncelleme durumu
+     * Algoritma adımları :
+     * 1 -> Kullanıcı kendi isteği ile yenilemek istiyorsa 6. adıma git. İşlem otomatik gerçekleşiyorsa 2. adıma git
+     * 2 -> Ayarlar menüsünden otomatik güncelleme kapatılmış mı diye bak.
+     * 3 -> Eğer kapatılmış ise false dön ve bitir. Kapatılmamış ise 4. adıma git
+     * 4 -> Kullanıcı daha önce uygulama açıkken güncelleme yapmış mı bak.
+     * 5 -> Eğer yapmış ise false dön ve bitir. Yapmamışsa 6. adıma git
+     * 6 -> True dön ve bitir.
+     */
+    private fun shouldAutoRefreshData(isSwipeRefresh: Boolean): Boolean {
+        val autoUpdateVal = mainPref.getBoolean(ConstantsGeneral.prefDailyAutoUpdateKey, ConstantsGeneral.defValDailyAutoUpdate)
+        val isWorkedBefore = mainPref.getBoolean(ConstantsGeneral.prefCheckDailyListWorkedBefore, false)
+        // Otomatik güncelleme olduğu durumda oluşacak sonucu değere ata
+        var autoUpdateResult = if (autoUpdateVal) !isWorkedBefore else false
+        // Eğer kullanıcı kendi yenilemek istediyse direk true yap
+        if (isSwipeRefresh) autoUpdateResult = true
+        return autoUpdateResult
     }
 
     override fun onDestroy() {
@@ -135,7 +161,7 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     override fun onRefresh() {
-        refreshDaily.post { getFoodData() }
+        refreshDaily.post { getFoodData(true) }
     }
 
 }

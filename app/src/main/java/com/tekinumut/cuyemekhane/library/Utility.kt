@@ -8,6 +8,7 @@ import android.net.Uri
 import android.util.Base64
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import com.tekinumut.cuyemekhane.R
@@ -116,6 +117,22 @@ class Utility {
             }
             return calendarList.toTypedArray()
         }
+
+        /**
+         * Gece ve gündüz modu seçimini yapar
+         * @param type -1 -> Cihaz seçimini kullanır
+         *              0 -> Gündüz modu
+         *              1 -> Gece modu
+         */
+        fun setTheme(type: Int) {
+            when (type) {
+                -1 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                0 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                1 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+        }
+
+
     }
 
 }
