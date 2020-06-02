@@ -1,4 +1,4 @@
-package com.tekinumut.cuyemekhane.ui
+package com.tekinumut.cuyemekhane.ui.draweritems
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -83,9 +83,9 @@ class DuyurularFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                 when (it) {
                     Resource.InProgress -> loadingDialog.show()
                     is Resource.Success -> {
-                        Toast.makeText(context, getString(R.string.duyurular_loaded), Toast.LENGTH_SHORT).show()
                         // Uygulama bir kez güncellendi. Otomatik güncellemeyi kapat.
                         mainPref.save(ConstantsGeneral.prefCheckDuyurularWorkedBefore, true)
+                        Toast.makeText(context, getString(R.string.duyurular_loaded), Toast.LENGTH_SHORT).show()
                         onSuccessAndError()
                     }
                     is Resource.Error -> {
@@ -99,15 +99,7 @@ class DuyurularFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     /**
-     * "İlgili sayfa otomatik güncellenecek mi?" sorusunun cevabı
-     * @return otomatik güncelleme durumu
-     * Algoritma adımları :
-     * 1 -> Kullanıcı kendi isteği ile yenilemek istiyorsa 6. adıma git. İşlem otomatik gerçekleşiyorsa 2. adıma git
-     * 2 -> Ayarlar menüsünden otomatik güncelleme kapatılmış mı diye bak.
-     * 3 -> Eğer kapatılmış ise false dön ve bitir. Kapatılmamış ise 4. adıma git
-     * 4 -> Kullanıcı daha önce uygulama açıkken güncelleme yapmış mı bak.
-     * 5 -> Eğer yapmış ise false dön ve bitir. Yapmamışsa 6. adıma git
-     * 6 -> True dön ve bitir.
+     * Metodun çalışma biçimi DailyListFragment sınıfındaki eş metotta açıklanmaktadır.
      */
     private fun shouldAutoRefreshData(isSwipeRefresh: Boolean, mainPref: MainPref): Boolean {
         val autoUpdateVal = mainPref.getBoolean(ConstantsGeneral.prefDuyurularAutoUpdateKey, ConstantsGeneral.defValDuyurularAutoUpdate)

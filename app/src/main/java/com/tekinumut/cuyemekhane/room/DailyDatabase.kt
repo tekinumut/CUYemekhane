@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.tekinumut.cuyemekhane.library.ConstantsGeneral
 import com.tekinumut.cuyemekhane.models.*
 
-@Database(entities = [FoodDate::class, Food::class, FoodDetail::class, FoodComponent::class, Duyurular::class], version = 1)
+@Database(entities = [FoodDate::class, Food::class, FoodDetail::class, FoodComponent::class, Duyurular::class, Pricing::class], version = 1)
 abstract class DailyDatabase : RoomDatabase() {
 
     abstract fun yemekDao(): DailyDAO

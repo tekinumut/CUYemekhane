@@ -3,6 +3,8 @@
     <color name="colorPrimary">#00421c</color>
     <color name="colorPrimaryDark">#062d12</color>
     <color name="colorAccent">#005f1e</color>
+    <color name="default_bg">#f2f2f2</color>
+    <color name="default_bg_opposite">#121212</color>
     <color name="white">#ffffff</color>
     <color name="primary_text">#000000</color>
 
@@ -11,7 +13,6 @@
     <color name="alert_dialog_btn">#00a8ff</color>
     <color name="accentPrimary">#005f1e</color>
     <color name="primaryAccent">#00421c</color>
-    <color name="default_bg">#f2f2f2</color>
     <color name="card_daily_bg">#ffffff</color>
     <color name="card_daily_title">#565656</color>
     <color name="card_daily_category_bg">#ff0000</color>

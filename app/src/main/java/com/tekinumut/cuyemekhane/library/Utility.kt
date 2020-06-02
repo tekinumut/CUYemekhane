@@ -81,7 +81,7 @@ class Utility {
             builder.setExitAnimations(context, R.anim.slide_in_left, R.anim.slide_out_right)
 
             val tabIntent = builder.build()
-            tabIntent.launchUrl(context, Uri.parse(ConstantsOfWebSite.URL))
+            tabIntent.launchUrl(context, Uri.parse(ConstantsOfWebSite.MainPageURL))
         }
 
         /**
@@ -121,17 +121,16 @@ class Utility {
         /**
          * Gece ve gündüz modu seçimini yapar
          * @param type -1 -> Cihaz seçimini kullanır
-         *              0 -> Gündüz modu
-         *              1 -> Gece modu
+         *              1 -> Gündüz modu
+         *              2 -> Gece modu
          */
         fun setTheme(type: Int) {
             when (type) {
                 -1 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-                0 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                1 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                1 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                2 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
         }
-
 
     }
 

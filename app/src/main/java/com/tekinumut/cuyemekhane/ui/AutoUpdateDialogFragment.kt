@@ -54,10 +54,12 @@ class AutoUpdateDialogFragment : DialogFragment(), AutoUpdateCheckBoxInterface {
         mainPref = MainPref.getInstance(mView.context)
         val dailyLastVal = mainPref.getBoolean(ConstantsGeneral.prefDailyAutoUpdateKey, ConstantsGeneral.defValDailyAutoUpdate)
         val duyurularLastVal = mainPref.getBoolean(ConstantsGeneral.prefDuyurularAutoUpdateKey, ConstantsGeneral.defValDuyurularAutoUpdate)
+        val pricingLastVal = mainPref.getBoolean(ConstantsGeneral.prefPricingAutoUpdateKey, ConstantsGeneral.defValPricingAutoUpdate)
 
         return listOf(
             AutoUpdateChecked(getString(R.string.daily_action_title), dailyLastVal),
-            AutoUpdateChecked(getString(R.string.duyurular_action_title), duyurularLastVal)
+            AutoUpdateChecked(getString(R.string.duyurular_action_title), duyurularLastVal),
+            AutoUpdateChecked(getString(R.string.pricing_action_title), pricingLastVal)
         )
     }
 
@@ -70,6 +72,7 @@ class AutoUpdateDialogFragment : DialogFragment(), AutoUpdateCheckBoxInterface {
         val prefKey = when (autoUpdateChecked.title) {
             getString(R.string.daily_action_title) -> ConstantsGeneral.prefDailyAutoUpdateKey
             getString(R.string.duyurular_action_title) -> ConstantsGeneral.prefDuyurularAutoUpdateKey
+            getString(R.string.pricing_action_title) -> ConstantsGeneral.prefPricingAutoUpdateKey
             else -> return
         }
         mainPref.save(prefKey, autoUpdateChecked.isChecked)

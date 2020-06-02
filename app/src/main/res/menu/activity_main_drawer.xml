@@ -17,5 +17,14 @@
             android:icon="@drawable/ic_megaphone"
             android:title="@string/duyurular_action_title" />
 
+        <item
+            android:id="@+id/nav_pricing"
+            android:icon="@drawable/ic_pricing"
+            android:title="@string/pricing_action_title" />
+
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/settings_action_title" />
     </group>
 </menu>

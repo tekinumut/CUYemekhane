@@ -15,10 +15,12 @@ class ConstantsGeneral {
         // Metodun uygulama açıkken daha önce çalıştığını kontrol eden pref keyleri
         const val prefCheckDailyListWorkedBefore = "dailyListWorkedBefore"
         const val prefCheckDuyurularWorkedBefore = "duyurularWorkedBefore"
+        const val prefCheckPricingWorkedBefore = "pricingWorkedBefore"
 
         // Ayarlar'da bulunan otomatik güncelleme pref keyleri
         const val prefDailyAutoUpdateKey = "dailyAutoUpdateKey"
         const val prefDuyurularAutoUpdateKey = "duyurularAutoUpdateKey"
+        const val prefPricingAutoUpdateKey = "pricingAutoUpdateKey"
 
         // Navigation'un hangi listeden çalışacağı bilgisini alır.
         const val dailyFragmentKey = 0
@@ -41,6 +43,7 @@ class ConstantsGeneral {
         // Günlük listenin sharedPref'teki otomatik güncelleme varsayılanı
         const val defValDailyAutoUpdate = true
         const val defValDuyurularAutoUpdate = true
+        const val defValPricingAutoUpdate = false
 
     }
 }

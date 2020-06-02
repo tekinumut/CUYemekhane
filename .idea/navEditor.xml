@@ -13,9 +13,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-243" />
-                            <option name="y" value="428" />
+                            <option name="x" value="-392" />
+                            <option name="y" value="-1011" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_autoUpdateDialog_to_nav_settings">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -25,8 +34,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-270" />
-                            <option name="y" value="-421" />
+                            <option name="x" value="-419" />
+                            <option name="y" value="-1726" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -37,8 +46,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-496" />
-                            <option name="y" value="-458" />
+                            <option name="x" value="-797" />
+                            <option name="y" value="-1771" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -58,8 +67,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-240" />
-                            <option name="y" value="38" />
+                            <option name="x" value="-772" />
+                            <option name="y" value="-839" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -70,8 +79,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-489" />
-                            <option name="y" value="-157" />
+                            <option name="x" value="-789" />
+                            <option name="y" value="-1466" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -86,14 +95,35 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="nav_pricing">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-766" />
+                            <option name="y" value="-489" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="nav_settings">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-486" />
-                            <option name="y" value="159" />
+                            <option name="x" value="-775" />
+                            <option name="y" value="-1137" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_nav_settings_to_autoUpdateDialog">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

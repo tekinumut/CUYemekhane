@@ -1,12 +1,10 @@
 package com.tekinumut.cuyemekhane.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.tekinumut.cuyemekhane.library.*
-import com.tekinumut.cuyemekhane.models.DateWithFoodDetailComp
-import com.tekinumut.cuyemekhane.models.Duyurular
-import com.tekinumut.cuyemekhane.models.FoodDate
-import com.tekinumut.cuyemekhane.models.ListOfAll
+import com.tekinumut.cuyemekhane.models.*
 import com.tekinumut.cuyemekhane.room.DailyDAO
 import com.tekinumut.cuyemekhane.room.DailyDatabase
 import com.tekinumut.cuyemekhane.room.MonthlyDAO
@@ -34,7 +32,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         emit(Resource.InProgress)
         try {
             // Web sitesinden html verilerini alıp doc'a yaz.
-            val doc = Jsoup.connect(ConstantsOfWebSite.URL)
+            val doc = Jsoup.connect(ConstantsOfWebSite.MainPageURL)
                 .timeout(if (type == ConstantsGeneral.dbNameDaily) 10000 else 30000).get()
             // Type'a göre günlük veya aylık liste verilerini init et
             val listOfAll: ListOfAll = if (type == ConstantsGeneral.dbNameDaily) {
@@ -88,7 +86,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         emit(Resource.InProgress)
         try {
             val duyurulist = ArrayList<Duyurular>()
-            val doc = Jsoup.connect(ConstantsOfWebSite.URL).timeout(10000).get()
+            val doc = Jsoup.connect(ConstantsOfWebSite.MainPageURL).timeout(10000).get()
             val duyuruClass = doc.select(ConstantsOfWebSite.duyuruClass)
             val title: Elements = doc.select(ConstantsOfWebSite.duyuruTitle)
             val content: Elements = doc.select(ConstantsOfWebSite.duyuruContent)
@@ -109,6 +107,28 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      * Duyurular tablosunu izler
      */
     val getDuyurular: LiveData<List<Duyurular>> = dailyFoodDao.getDuyurular()
+
+    /**
+     * Ücretlendirme verilerini indirir
+     */
+    fun getPricingData(): LiveData<Resource<String>> = liveData(Dispatchers.IO) {
+        emit(Resource.InProgress)
+        try {
+            val doc = Jsoup.connect(ConstantsOfWebSite.PricingURL).timeout(10000).get()
+            val pricingSectionPart = doc.select("section#section4").outerHtml()
+
+            dailyFoodDao.addPricing(Pricing(1, pricingSectionPart))
+            emit(Resource.Success(pricingSectionPart))
+        } catch (e: Exception) {
+            emit(Resource.Error(e))
+        }
+    }
+
+
+    /**
+     * Ücretlendirme tablosunu izler
+     */
+    val getPricing: LiveData<String> = dailyFoodDao.getPricingHtml()
 
 
     /**

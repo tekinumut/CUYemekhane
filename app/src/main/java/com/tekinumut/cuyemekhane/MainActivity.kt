@@ -32,7 +32,10 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         navController = findNavController(R.id.nav_host_fragment)
-        navController.setNavStartDestionation()
+        // Tema değişimi gibi durumlarda çalışma
+        if (savedInstanceState == null) {
+            navController.setNavStartDestionation()
+        }
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(navList(), drawer_layout)
@@ -68,7 +71,8 @@ class MainActivity : AppCompatActivity() {
         return setOf(R.id.nav_daily_list,
             R.id.nav_monthly_list,
             R.id.nav_duyurular,
-            R.id.nav_settings
+            R.id.nav_settings,
+            R.id.nav_pricing
         )
     }
 

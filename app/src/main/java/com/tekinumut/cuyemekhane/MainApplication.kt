@@ -23,6 +23,7 @@ class MainApplication : Application() {
     private fun clearIsAppOpenedBeforePref(mainPref: MainPref) {
         mainPref.save(ConstantsGeneral.prefCheckDailyListWorkedBefore, false)
         mainPref.save(ConstantsGeneral.prefCheckDuyurularWorkedBefore, false)
+        mainPref.save(ConstantsGeneral.prefPricingAutoUpdateKey, false)
     }
 
     /**

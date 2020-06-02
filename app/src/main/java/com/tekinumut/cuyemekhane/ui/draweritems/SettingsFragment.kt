@@ -1,4 +1,4 @@
-package com.tekinumut.cuyemekhane.ui
+package com.tekinumut.cuyemekhane.ui.draweritems
 
 import android.os.Bundle
 import androidx.navigation.NavController
@@ -27,7 +27,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
             val navConroller = Navigation.findNavController(requireView())
             navConroller.navigate(R.id.action_nav_settings_to_autoUpdateDialog)
         }
-
 
     }
 

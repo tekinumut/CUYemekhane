@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "447eaff5e2a31a718c7fa7606cbffaf4",
+    "identityHash": "f3d6350cd38cf26f0f4dee985249237c",
     "entities": [
       {
         "tableName": "FoodDate",
@@ -244,12 +244,38 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "Pricing",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pricing_id` INTEGER NOT NULL, `html` TEXT, PRIMARY KEY(`pricing_id`))",
+        "fields": [
+          {
+            "fieldPath": "pricing_id",
+            "columnName": "pricing_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "html",
+            "columnName": "html",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "pricing_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '447eaff5e2a31a718c7fa7606cbffaf4')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f3d6350cd38cf26f0f4dee985249237c')"
     ]
   }
 }

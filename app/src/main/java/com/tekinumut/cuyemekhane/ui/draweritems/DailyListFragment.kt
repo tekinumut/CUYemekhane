@@ -1,4 +1,4 @@
-package com.tekinumut.cuyemekhane.ui
+package com.tekinumut.cuyemekhane.ui.draweritems
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -37,9 +37,9 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         init(requireView())
-        initFoodData()
 
         observeDailyList()
+        getFoodData(false)
 
         btn_open_web_page.setOnClickListener {
             Utility.openListWebSite(requireContext())
@@ -94,16 +94,6 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         val foodModel = Food(food_id = -1, name = foodName, dateCreatorId = -1)
         val foodWithDetail = FoodWithDetailComp(foodModel, null)
         return listOf(foodWithDetail)
-    }
-
-    private fun initFoodData() {
-        // Daha önce çağrılmamışsa çağır
-        val isWorkedBefore = mainPref.getBoolean(ConstantsGeneral.prefCheckDailyListWorkedBefore, false)
-        // val isWorkOnStart = mainPref.getBoolean(getString(R.string.autoUpdateBeginKey),true)
-
-        if (!isWorkedBefore) {
-            getFoodData(false)
-        }
     }
 
     private fun getFoodData(isSwipeRefresh: Boolean) {

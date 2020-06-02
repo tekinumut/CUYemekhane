@@ -11,20 +11,32 @@ interface DailyDAO {
     @Query("Select * from FoodDate LIMIT 1")
     fun getDailyList(): LiveData<DateWithFoodDetailComp>
 
+    // ÜCRETLENDİRME
+
+    @Query("Select html from Pricing")
+    fun getPricingHtml(): LiveData<String>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addPricing(pricing: Pricing)
+
+    // END ÜCRETLENDİRME
+
+    // DUYURULAR
     @Query("Select * from Duyurular")
     fun getDuyurular(): LiveData<List<Duyurular>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addDuyurular(duyuruList: List<Duyurular>)
 
     @Query("Delete from Duyurular")
     suspend fun removeDuyurular()
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun setDuyurular(duyuruList: List<Duyurular>)
-
     @Transaction
     suspend fun insertDuyurular(duyuruList: List<Duyurular>) {
         removeDuyurular()
-        setDuyurular(duyuruList)
+        addDuyurular(duyuruList)
     }
+    // END DUYURULAR
 
     // İki Veritabanının Ortak Kısımlar
     @Insert(onConflict = OnConflictStrategy.REPLACE)

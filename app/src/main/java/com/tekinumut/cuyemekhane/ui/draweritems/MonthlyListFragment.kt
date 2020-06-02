@@ -1,4 +1,4 @@
-package com.tekinumut.cuyemekhane.ui
+package com.tekinumut.cuyemekhane.ui.draweritems
 
 import android.app.Dialog
 import android.content.DialogInterface

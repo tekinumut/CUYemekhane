@@ -2,8 +2,6 @@
     <string name="app_name">Çukurova Üniversitesi Yemekhane</string>
 
     <!-- Navigation Drawer Values -->
-    <string name="daily_action_title">Günlük Liste</string>
-    <string name="monthly_action_title">Aylık Liste</string>
     <string name="_m_please_wait">Lütfen Bekleyiniz</string>
     <string name="data_loaded">Veriler başarıyla yüklendi</string>
     <string name="error_loading_data">Veriler yüklenemedi.</string>
@@ -19,6 +17,13 @@
     <string name="system_default">Cihaz temasını kullan</string>
     <string name="light">Açık</string>
     <string name="dark">Koyu</string>
+
+    <!-- Action Bar Başlık metinleri -->
+    <string name="daily_action_title">Günlük Liste</string>
+    <string name="monthly_action_title">Aylık Liste</string>
+    <string name="duyurular_action_title">Duyurular</string>
+    <string name="settings_action_title">Ayarlar</string>
+    <string name="pricing_action_title">Ücretlendirme</string>
 
     <string name="monthly_list_title">Aylık Liste Boş</string>
     <string name="monthly_list_content">
@@ -56,7 +61,14 @@
 
     <!-- Duyurular -->
     <string name="empty_duyuru_title">Duyuru Bulunamadı</string>
-    <string name="empty_duyuru_content">Duyuruları yenilemek için sayfayı yukarıdan aşağı çekerek yenileyebilirsiniz.</string>
+    <string name="empty_duyuru_content">Sayfayı yukarıdan aşağı çekerek duyuruları yenileyebilirsiniz.</string>
+
+    <!-- Pricing -->
+    <string name="empty_pricing_title">Ücretlendirme Verisi Bulunamadı</string>
+    <string name="empty_pricing_content">
+        \n• Ücretlendirme tablosu otomatik olarak güncellenecek şekilde ayarlanmadı.
+        \n\n• Sayfayı yukarıdan aşağı çekerek ücretlendirme tablosunu yenileyebilirsiniz.
+    \n\n• Sayfanın her açılışında verilerini yenilemesini istiyorsanız bunu Ayarlar bölümünden yapabilirsiniz.</string>
 
     <!-- Settings Keys -->
 
@@ -83,9 +95,8 @@
 
 
     <string name="food_component_title">Yemek İçeriği</string>
-    <string name="duyurular_action_title">Duyurular</string>
-    <string name="settings_action_title">Ayarlar</string>
     <string name="no_monthly_list_pls_refresh">Gösterilebilecek tarih bulunamadı. Listeyi yenilemeyi deneyin</string>
     <string name="already_no_data">Geçerli tarih zaten bir veri içermiyor</string>
     <string name="duyurular_loaded">Duyurular başarıyla yenilendi</string>
+    <string name="pricing_loaded">Ücretlendirme verisi başarıyla yenilendi</string>
 </resources>
