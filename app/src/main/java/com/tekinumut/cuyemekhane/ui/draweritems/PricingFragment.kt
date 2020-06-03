@@ -1,5 +1,6 @@
 package com.tekinumut.cuyemekhane.ui.draweritems
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Base64
 import android.view.LayoutInflater
@@ -32,7 +33,10 @@ class PricingFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
         refreshPricing.setOnRefreshListener(this)
 
+        disableRefreshIfWebScrollOnBottom()
+
         observePricingTable()
+
         getPricingData(false)
 
     }
@@ -98,6 +102,20 @@ class PricingFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         // Eğer kullanıcı kendi yenilemek istediyse direk true yap
         if (isSwipeRefresh) autoUpdateResult = true
         return autoUpdateResult
+    }
+
+    /**
+     * Eğer webView Scroll'u aşağıda ise kullanıcı ekranı yukarı kaydırırken
+     * SwipeRefresh ile çakışmaması için SwipeRefreshi iptal et
+     */
+    private fun disableRefreshIfWebScrollOnBottom() {
+        // Eğer scroll en üstte değilse refresh yapmayı engelle
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            webViewPricing.setOnScrollChangeListener { _, _, scrollY, _, _ ->
+                refreshPricing.isEnabled = scrollY == 0
+            }
+        }
+
     }
 
     override fun onRefresh() {

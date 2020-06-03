@@ -3,28 +3,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+    <!-- Yemek Listeleri -->
+
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_daily_list"
-            android:icon="@drawable/ic_daily_food_list"
-            android:title="@string/daily_action_title" />
-        <item
-            android:id="@+id/nav_monthly_list"
-            android:icon="@drawable/ic_monthly_list"
-            android:title="@string/monthly_action_title" />
-        <item
-            android:id="@+id/nav_duyurular"
-            android:icon="@drawable/ic_megaphone"
-            android:title="@string/duyurular_action_title" />
+        <item android:title="@string/drawer_item_title_food_list">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/nav_daily_list"
+                        android:icon="@drawable/ic_daily_food_list"
+                        android:title="@string/daily_action_title" />
+                    <item
+                        android:id="@+id/nav_monthly_list"
+                        android:icon="@drawable/ic_monthly_list"
+                        android:title="@string/monthly_action_title" />
 
-        <item
-            android:id="@+id/nav_pricing"
-            android:icon="@drawable/ic_pricing"
-            android:title="@string/pricing_action_title" />
+                </group>
+            </menu>
+        </item>
 
-        <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_settings"
-            android:title="@string/settings_action_title" />
+        <!-- Bilgilendirme -->
+
+        <item android:title="@string/drawer_item_title_info">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/nav_duyurular"
+                        android:icon="@drawable/ic_megaphone"
+                        android:title="@string/duyurular_action_title" />
+
+                    <item
+                        android:id="@+id/nav_pricing"
+                        android:icon="@drawable/ic_pricing"
+                        android:title="@string/pricing_action_title" />
+
+                    <item
+                        android:id="@+id/nav_contact"
+                        android:icon="@drawable/ic_call"
+                        android:title="@string/contact_action_title" />
+
+                </group>
+            </menu>
+        </item>
+
+        <!-- Uygulamaya Özel -->
+
+        <item android:title="@string/drawer_item_title_special_app">
+            <menu>
+                <group android:checkableBehavior="single">
+
+                    <item
+                        android:id="@+id/nav_settings"
+                        android:icon="@drawable/ic_settings"
+                        android:title="@string/settings_action_title" />
+
+                    <item
+                        android:id="@+id/nav_about"
+                        android:icon="@drawable/ic_outline_info_24"
+                        android:title="@string/about_action_title" />
+
+                </group>
+            </menu>
+        </item>
+
     </group>
 </menu>

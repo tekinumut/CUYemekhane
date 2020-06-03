@@ -47,9 +47,7 @@
         <action
             android:id="@+id/action_nav_settings_to_autoUpdateDialog"
             app:destination="@id/autoUpdateDialog" />
-        <action
-            android:id="@+id/action_itself"
-            app:destination="@id/nav_settings" />
+
     </fragment>
 
     <fragment
@@ -57,6 +55,18 @@
         android:name="com.tekinumut.cuyemekhane.ui.draweritems.PricingFragment"
         android:label="@string/pricing_action_title"
         tools:layout="@layout/fragment_pricing" />
+
+    <fragment
+        android:id="@+id/nav_contact"
+        android:name="com.tekinumut.cuyemekhane.ui.draweritems.ContactFragment"
+        android:label="@string/contact_action_title"
+        tools:layout="@layout/fragment_contact" />
+
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="com.tekinumut.cuyemekhane.ui.draweritems.AboutFragment"
+        android:label="@string/about_action_title"
+        tools:layout="@layout/fragment_about" />
 
     <fragment
         android:id="@+id/componentFragment"

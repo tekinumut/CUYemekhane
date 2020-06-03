@@ -23,7 +23,7 @@ class DailyMonthlyListAdapter(
     private var currentToast: Toast? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyListViewHolder {
-        return DailyListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.rec_in_daily_list, parent, false))
+        return DailyListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.rec_in_daily_monthly_list, parent, false))
     }
 
     override fun getItemCount(): Int = recyclerList.size

@@ -54,6 +54,7 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         refreshDaily.setOnRefreshListener(this)
         recyclerDaily.layoutManager = LinearLayoutManager(context)
         recyclerDaily.setHasFixedSize(true)
+
     }
 
     /**

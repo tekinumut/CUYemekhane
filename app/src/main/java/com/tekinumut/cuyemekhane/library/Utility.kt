@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.util.Base64
 import android.widget.ImageView
@@ -23,11 +25,14 @@ class Utility {
         /**
          * Yükleniyor dialog penceresini dönderir.
          */
-        fun getLoadingDialog(activity: Activity): AlertDialog = AlertDialog.Builder(activity)
-            .setCancelable(false)
-            .setView(R.layout.dialog_loading)
-            .create()
-
+        fun getLoadingDialog(activity: Activity): AlertDialog {
+            val dialog = AlertDialog.Builder(activity)
+                .setCancelable(false)
+                .setView(R.layout.dialog_loading)
+                .create()
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            return dialog
+        }
 
         fun getRemoveDayDialog(activity: Activity): AlertDialog = AlertDialog.Builder(activity)
             .setTitle("Seçili menüyü sil")
@@ -131,7 +136,7 @@ class Utility {
                 2 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
         }
-
     }
 
 }
+

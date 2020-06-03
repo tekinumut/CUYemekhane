@@ -2,13 +2,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/rounded_def_dialog"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="10dp">
 
     <ProgressBar
         android:id="@+id/nonProgresBar"
-        style="?android:attr/progressBarStyleLarge"
+        style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminateTint="@color/colorAccent"

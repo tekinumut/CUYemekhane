@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Çukurova Üniversitesi Yemekhane</string>
 
     <!-- Navigation Drawer Values -->
@@ -24,6 +24,8 @@
     <string name="duyurular_action_title">Duyurular</string>
     <string name="settings_action_title">Ayarlar</string>
     <string name="pricing_action_title">Ücretlendirme</string>
+    <string name="contact_action_title">İletişim</string>
+    <string name="about_action_title">Hakkında</string>
 
     <string name="monthly_list_title">Aylık Liste Boş</string>
     <string name="monthly_list_content">
@@ -50,18 +52,25 @@
         \n• Bu sayfayı tekrar ziyaret ettiğinizde seçtiğiniz son menü size gösterilecektir.</string>
 
     <!--    Kullanıcı aylık listeyi indirirken karşılaşacağı diyalog penceresinin metin verileri-->
-    <string name="watch_ad_title">Aylık Liste İndirme Penceresi</string>
+    <string name="watch_ad_title">Aylık Listeyi Güncelle</string>
     <string name="watch_ad_content">Aylık yemek listesini indirebilmek için bir adet video reklam izlemeniz gerekmektedir.
         Daha sonra indirdiğiniz son listeye reklam izlemeden ulaşabilirsiniz.</string>
     <string name="dont_load_img_info">
         • Çubuğu 0 değerine getirerek resim indirmeyi iptal edebilirsiniz.
-        \n• Yemeklere ait resimleri yüklemeyerek 30 mb\'a kadar ulaşabilen indirme boyutunu 50 KB boyutuna düşürebilirsiniz.</string>
+        \n• Yemeklere ait resimleri yüklemeyerek 30 mb\'a kadar ulaşabilen indirme boyutunu 100 KB boyutuna düşürebilirsiniz.</string>
     <string name="sb_img_quality">Resim Kalitesi: %%%d</string> <!-- %%->% yazar %d-> verilen int değerini Exp: %50-->
     <string name="sb_img_quality_zero">Resimler indirilmeyecek</string> <!-- %%->% yazar %d-> verilen int değerini Exp: %50-->
+
+    <string name="contact_title">İletişim</string>
+    <string name="contact_address">Çukurova Üniversitesi Sarıçam \nAdana, pk01250</string>
+    <string name="contact_phone">0 322 338 64 14 / 0 322 338 61 29</string>
+    <string name="contact_phone_dahili">Dahili / 2384</string>
+    <string name="contact_work_date_1">Pazartesi – Cuma: 08:00 – 17:00\nCumartesi, Pazar: Kapalı</string>
 
     <!-- Duyurular -->
     <string name="empty_duyuru_title">Duyuru Bulunamadı</string>
     <string name="empty_duyuru_content">Sayfayı yukarıdan aşağı çekerek duyuruları yenileyebilirsiniz.</string>
+    <string name="duyurular_loaded">Duyurular başarıyla yenilendi</string>
 
     <!-- Pricing -->
     <string name="empty_pricing_title">Ücretlendirme Verisi Bulunamadı</string>
@@ -69,6 +78,7 @@
         \n• Ücretlendirme tablosu otomatik olarak güncellenecek şekilde ayarlanmadı.
         \n\n• Sayfayı yukarıdan aşağı çekerek ücretlendirme tablosunu yenileyebilirsiniz.
     \n\n• Sayfanın her açılışında verilerini yenilemesini istiyorsanız bunu Ayarlar bölümünden yapabilirsiniz.</string>
+    <string name="pricing_loaded">Ücretlendirme verisi başarıyla yenilendi</string>
 
     <!-- Settings Keys -->
 
@@ -93,10 +103,36 @@
       \n• Sayfa bir kez güncellendikten sonra uygulamayı kapatana kadar otomatik güncellenmez.
       \n• Sayfayı yukarıdan aşağı çekerek kendiniz ayrıca güncelleştirebilirsiniz.</string>
 
+    <string name="prog_kullanimi">Program Özellikleri</string>
+    <string name="kullanim_kilavuzu" tools:ignore="Typos">
+       • Uygulamadan daha fazla verim alabilmek için lütfen <u>Program Özellikleri</u> kısmını okuyunuz.
+        \n• Bu uygulama ile Çukurova Üniversitesi Merkezi Kafeteryası\'nın günlük ve aylık listelerine erişebilirsiniz.
+        \n• Ayarlar menüsünden uygulama açılışında görmek istediğiniz sayfayı, uygulama temasını, reklam gösterimini değiştirebilirsiniz.
+        \n• Siz listeleri güncelledikçe bu listeler telefona kayıt edilir ve internetiniz olmadan güncellediğiniz son listeleri görüntüleyebilirsiniz.
+        \n• Listeler belirli sebeplerden dolayı boş olabilir. Bu sebepleri size açıklayan bir açıklama ekran gösterilir.
+        \n• Listeleri görüntülerken ekranı yukarıdan aşağı çekerek listeleri yenileyebilirsiniz.
+        \n• Bazı sayfaların açılışta verilerini otomatik olarak güncellediğini göreceksiniz. Ayarlar menüsünden bu özelliği istediğiniz sayfaya açıp kapatabilirsiniz.
+        \n• Uygulama tamamen açık kaynaktır. Güncel proje kodlarına aşağıdaki Github linkinden erişebilirsiniz.
+        \n• Uygulamada yaşadığınız hataları, düzeltilmesini istediğiniz yerleri mağaza sayfasında yorum yazarak veya bana geri bildirim sağlayarak bildirebilirsiniz.
+        \n• Uygulamayı kullandığınız için teşekkürler.
+    </string>
+
+    <string name="send_mail">Mail Gönder</string>
+    <string name="rate_app">Uygulamayı Değerlendir</string>
+    <string name="send_feedback">Geri Bildirim Gönder</string>
+    <string name="github_source_code">Uygulama Kaynak Kodları</string>
+    <string name="expand_more">Genişletmek için tıkla</string>
+    <string name="expand_less">Daraltmak için tıkla</string>
+    <string name="github_address">https://github.com/tekinumut/CUYemekhane</string>
+    <string name="myGmailAddress">bm.umuttekin@gmail.com</string>
+
 
     <string name="food_component_title">Yemek İçeriği</string>
     <string name="no_monthly_list_pls_refresh">Gösterilebilecek tarih bulunamadı. Listeyi yenilemeyi deneyin</string>
     <string name="already_no_data">Geçerli tarih zaten bir veri içermiyor</string>
-    <string name="duyurular_loaded">Duyurular başarıyla yenilendi</string>
-    <string name="pricing_loaded">Ücretlendirme verisi başarıyla yenilendi</string>
+    <string name="drawer_item_title_food_list">Yemek Listeleri</string>
+    <string name="drawer_item_title_info">Bilgilendirme</string>
+    <string name="drawer_item_title_special_app">Uygulamaya Özel</string>
+    <string name="show_google_maps">Google Maps\'te Göster</string>
+    <string name="cant_open_google_maps">Google Maps Açılamadı</string>
 </resources>

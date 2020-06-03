@@ -71,8 +71,10 @@ class MainActivity : AppCompatActivity() {
         return setOf(R.id.nav_daily_list,
             R.id.nav_monthly_list,
             R.id.nav_duyurular,
+            R.id.nav_pricing,
+            R.id.nav_contact,
             R.id.nav_settings,
-            R.id.nav_pricing
+            R.id.nav_about
         )
     }
 

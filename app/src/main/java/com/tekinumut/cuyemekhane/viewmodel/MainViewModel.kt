@@ -1,7 +1,6 @@
 package com.tekinumut.cuyemekhane.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
 import com.tekinumut.cuyemekhane.library.*
 import com.tekinumut.cuyemekhane.models.*
@@ -93,8 +92,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
             duyuruClass.forEachIndexed { i, element ->
                 val foodImgURL: String? = element.select("[src]").attr("abs:src")
-                duyurulist.add(Duyurular(i + 1, title[i].text(), content[i].text(),
-                    if (foodImgURL.isNullOrEmpty()) null else Utility.imgURLToBase64(foodImgURL, ConstantsGeneral.defDailyImgQuality)))
+                val imgBase64 = if (foodImgURL.isNullOrEmpty()) null
+                else Utility.imgURLToBase64(foodImgURL, ConstantsGeneral.defDailyImgQuality)
+                duyurulist.add(Duyurular(i + 1, title[i].text(), content[i].text(), imgBase64))
             }
             dailyFoodDao.insertDuyurular(duyurulist)
             emit(Resource.Success(0))
