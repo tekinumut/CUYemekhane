@@ -1,4 +1,4 @@
-package com.tekinumut.cuyemekhane.ui.dialogfragments
+package com.tekinumut.cuyemekhane.ui.dialogfragments.removebanner
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -22,15 +22,14 @@ import com.google.android.gms.ads.rewarded.RewardedAdCallback
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.databinding.DialogRemoveBannerAdBinding
-import com.tekinumut.cuyemekhane.library.ConstantsGeneral
 import com.tekinumut.cuyemekhane.library.MainPref
-import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
-import com.tekinumut.cuyemekhane.viewmodel.RewardAdDialogViewModel
+import com.tekinumut.cuyemekhane.library.Utility
+import com.tekinumut.cuyemekhane.ui.draweritems.settings.SettingsViewModel
 
 class RemoveBannerAdDialogFragment : DialogFragment() {
 
-    private val rewardVM: RewardAdDialogViewModel by viewModels()
-    private val mainViewModel: MainViewModel by activityViewModels()
+    private val removeBannerVM: RemoveBanneradViewModel by viewModels()
+    private val settingsViewModel: SettingsViewModel by activityViewModels()
 
     //private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var binding: DialogRemoveBannerAdBinding
@@ -64,8 +63,8 @@ class RemoveBannerAdDialogFragment : DialogFragment() {
 
     private fun init(it: FragmentActivity) {
         @SuppressLint("InflateParams")
-        binding = DataBindingUtil.inflate(LayoutInflater.from(it.applicationContext), R.layout.dialog_remove_banner_ad, null, false)
-        binding.viewmodel = rewardVM
+        binding = DataBindingUtil.inflate(LayoutInflater.from(it), R.layout.dialog_remove_banner_ad, null, false)
+        binding.viewmodel = removeBannerVM
         binding.lifecycleOwner = it
         mainPref = MainPref.getInstance(it)
         btnAccept = binding.root.findViewById(R.id.btnAcceptRemoveBanner)
@@ -77,17 +76,17 @@ class RemoveBannerAdDialogFragment : DialogFragment() {
      * Ödüllü reklamı init ediyoruz.
      */
     private fun createAndLoadRewardedAd() {
-        rewardVM.updateAdStatus(0)
+        removeBannerVM.updateAdStatus(0)
         rewardedAd = RewardedAd(binding.root.context, getString(R.string.watch_ad_remove_banner_unit_id))
         rewardedAd.loadAd(AdRequest.Builder().build(), object : RewardedAdLoadCallback() {
             override fun onRewardedAdLoaded() {
                 super.onRewardedAdLoaded()
-                rewardVM.updateAdStatus(1)
+                removeBannerVM.updateAdStatus(1)
             }
 
             override fun onRewardedAdFailedToLoad(p0: Int) {
                 super.onRewardedAdFailedToLoad(p0)
-                rewardVM.updateAdStatus(2)
+                removeBannerVM.updateAdStatus(2)
             }
         })
     }
@@ -107,8 +106,9 @@ class RemoveBannerAdDialogFragment : DialogFragment() {
                 override fun onRewardedAdClosed() {
                     // Ad closed.
                     if (isEarned) {
-                        mainPref.save(getString(R.string.isBannerExpire), ConstantsGeneral.nextTwoWeekTimeStamp())
-                        mainViewModel.updateIsRemoveBannerRewardEearned(true)
+                        val timeToAdd: Long = Utility.addExtraTimeToCurrent(Utility.DelayTime.RemoveBanner)
+                        mainPref.save(getString(R.string.isBannerExpire), timeToAdd)
+                        settingsViewModel.updateIsRemoveBannerRewardEearned(true)
                         showCurrentToast(getString(R.string.banner_ad_removed), Toast.LENGTH_LONG)
                         dismiss()
                     } else {

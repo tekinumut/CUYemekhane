@@ -1,4 +1,4 @@
-package com.tekinumut.cuyemekhane.ui.draweritems
+package com.tekinumut.cuyemekhane.ui.draweritems.dailylist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.adapter.DailyMonthlyListAdapter
@@ -22,9 +22,8 @@ import kotlinx.android.synthetic.main.fragment_daily_list.*
 class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     private val mainViewModel: MainViewModel by activityViewModels()
+    private val dailyListViewModel: DailyListViewModel by viewModels()
     private lateinit var mainPref: MainPref
-    private lateinit var recyclerDaily: RecyclerView
-    private lateinit var refreshDaily: SwipeRefreshLayout
     private val loadingDialog by lazy { Utility.getLoadingDialog(requireActivity()) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -33,7 +32,7 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        init(requireView())
+        init()
 
         observeDailyList()
         getFoodData(false)
@@ -44,30 +43,27 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     }
 
-    private fun init(view: View) {
+    private fun init() {
         mainPref = MainPref.getInstance(requireContext())
-        recyclerDaily = view.findViewById(R.id.recyclerDailyList)
-        refreshDaily = view.findViewById(R.id.refreshDailyList)
-        refreshDaily.setOnRefreshListener(this)
-        recyclerDaily.layoutManager = LinearLayoutManager(context)
-        recyclerDaily.setHasFixedSize(true)
-
+        refreshDailyList.setOnRefreshListener(this)
+        recyclerDailyList.layoutManager = LinearLayoutManager(context)
+        recyclerDailyList.setHasFixedSize(true)
     }
 
     /**
      *
      */
     private fun observeDailyList() {
-        mainViewModel.getDailyList.observe(viewLifecycleOwner, Observer { dateWithAll ->
+        dailyListViewModel.getDailyList.observe(viewLifecycleOwner, Observer { dateWithAll ->
             dateWithAll?.let {
                 mainViewModel.updateActionTitle(it.foodDate.name)
                 if (it.yemekWithComponentComp.isNullOrEmpty()) {
                     // Eğer günün menüsü boş ise yemekhane tatil uyarısı yap
                     val model = manuelFoodDetailModel(getString(R.string.no_food_holiday))
-                    recyclerDaily.adapter = DailyMonthlyListAdapter(model, ConstantsGeneral.dailyFragmentKey)
+                    recyclerDailyList.adapter = DailyMonthlyListAdapter(model, ConstantsGeneral.dailyFragmentKey)
                 } else {
                     // Sorun yoksa
-                    recyclerDaily.adapter = DailyMonthlyListAdapter(it.yemekWithComponentComp, ConstantsGeneral.dailyFragmentKey)
+                    recyclerDailyList.adapter = DailyMonthlyListAdapter(it.yemekWithComponentComp, ConstantsGeneral.dailyFragmentKey)
                 }
                 switchView(true)
             } ?: run {
@@ -80,10 +76,10 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     private fun switchView(isDaily: Boolean) {
         if (isDaily) {
-            recyclerDaily.visibility = View.VISIBLE
+            recyclerDailyList.visibility = View.VISIBLE
             svDailyInfo.visibility = View.GONE
         } else {
-            recyclerDaily.visibility = View.GONE
+            recyclerDailyList.visibility = View.GONE
             svDailyInfo.visibility = View.VISIBLE
         }
     }
@@ -94,31 +90,35 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         return listOf(foodWithDetail)
     }
 
+    /**
+     * Web sitesinden günlük verileri al
+     */
     private fun getFoodData(isSwipeRefresh: Boolean) {
         if (shouldAutoRefreshData(isSwipeRefresh)) {
-            mainViewModel.getFoodData(ConstantsGeneral.dbNameDaily, ConstantsGeneral.defDailyImgQuality)
-                .observe(viewLifecycleOwner, Observer {
-                    when (it) {
-                        Resource.InProgress -> loadingDialog.show()
-                        is Resource.Success -> {
-                            Toast.makeText(context, getString(R.string.data_loaded), Toast.LENGTH_SHORT).show()
-                            onSuccessAndError()
-                        }
-                        is Resource.Error -> {
-                            val message = "${getString(R.string.error_loading_data)} \nHata sebebi: ${it.exception.message}"
-                            Toast.makeText(context, message, Toast.LENGTH_LONG).show()
-                            onSuccessAndError()
-                        }
+            dailyListViewModel.getDailyListData(ConstantsGeneral.defMonthlyImgQuality).observe(viewLifecycleOwner, Observer {
+                when (it) {
+                    Resource.InProgress -> if (!isSwipeRefresh) loadingDialog.show()
+                    is Resource.Success -> {
+                        mainPref.save(ConstantsGeneral.prefCheckDailyListWorkedBefore, true)
+                        onSuccessAndError(getString(R.string.data_loaded))
                     }
-                })
+                    is Resource.Error -> {
+                        val message = "${getString(R.string.error_loading_data)} \nHata sebebi: ${it.exception.message}"
+                        onSuccessAndError(message)
+                    }
+                }
+            })
         }
 
     }
 
-    private fun onSuccessAndError() {
-        mainPref.save(ConstantsGeneral.prefCheckDailyListWorkedBefore, true)
+    /**
+     * Bağlantı sonuçlanınca
+     */
+    private fun onSuccessAndError(message: String) {
         loadingDialog.dismiss()
-        refreshDaily.isRefreshing = false
+        refreshDailyList.isRefreshing = false
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
 
@@ -149,7 +149,7 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     override fun onRefresh() {
-        refreshDaily.post { getFoodData(true) }
+        refreshDailyList.post { getFoodData(true) }
     }
 
 }

@@ -1,4 +1,4 @@
-package com.tekinumut.cuyemekhane.ui.draweritems
+package com.tekinumut.cuyemekhane.ui.draweritems.contact
 
 import android.content.Intent
 import android.net.Uri
@@ -14,6 +14,16 @@ import kotlinx.android.synthetic.main.fragment_contact.*
 
 class ContactFragment : Fragment() {
 
+    // Haritaya hangi ölçekte zoom yapılacak
+    private val zoomLevel = 16.0f
+
+    // Harita açılınca hangi terim aransın
+    private val searchingAddress = "Çukurova+Üniversitesi+Merkezi+Kafeterya"
+
+    // Google Maps'te gidilecek konumun enlem ve boylam bilgileri
+    private val latitude: Double = 37.059232
+    private val longitude: Double = 35.354404
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_contact, container, false)
     }
@@ -22,12 +32,7 @@ class ContactFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         btn_to_google_maps.setOnClickListener {
 
-            // Haritaya hangi ölçekte zoom yapılacak
-            val zoomLevel = 16.0f
-            // Harita açılınca hangi terim aransın
-            val searchingAddress = "Çukurova+Üniversitesi+Merkezi+Kafeterya"
-
-            val gmmIntentUri = Uri.parse("geo:37.059232,35.354404?z=$zoomLevel&q=$searchingAddress")
+            val gmmIntentUri = Uri.parse("geo:$latitude,$longitude?z=$zoomLevel&q=$searchingAddress")
             val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
             mapIntent.setPackage("com.google.android.apps.maps")
 

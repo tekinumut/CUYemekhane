@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/nav_daily_list"
-        android:name="com.tekinumut.cuyemekhane.ui.draweritems.DailyListFragment"
+        android:name="com.tekinumut.cuyemekhane.ui.draweritems.dailylist.DailyListFragment"
         android:label="@string/daily_action_title"
         tools:layout="@layout/fragment_daily_list">
         <action
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/nav_monthly_list"
-        android:name="com.tekinumut.cuyemekhane.ui.draweritems.MonthlyListFragment"
+        android:name="com.tekinumut.cuyemekhane.ui.draweritems.monthlylist.MonthlyListFragment"
         android:label="@string/monthly_action_title"
         tools:layout="@layout/fragment_monthly_list">
         <action
@@ -38,13 +38,13 @@
 
     <fragment
         android:id="@+id/nav_duyurular"
-        android:name="com.tekinumut.cuyemekhane.ui.draweritems.DuyurularFragment"
+        android:name="com.tekinumut.cuyemekhane.ui.draweritems.duyurular.DuyurularFragment"
         android:label="@string/duyurular_action_title"
         tools:layout="@layout/fragment_duyurular" />
 
     <fragment
         android:id="@+id/nav_settings"
-        android:name="com.tekinumut.cuyemekhane.ui.draweritems.SettingsFragment"
+        android:name="com.tekinumut.cuyemekhane.ui.draweritems.settings.SettingsFragment"
         android:label="@string/settings_action_title"
         tools:layout="@layout/fragment_settings">
         <action
@@ -58,19 +58,19 @@
 
     <fragment
         android:id="@+id/nav_pricing"
-        android:name="com.tekinumut.cuyemekhane.ui.draweritems.PricingFragment"
+        android:name="com.tekinumut.cuyemekhane.ui.draweritems.pricing.PricingFragment"
         android:label="@string/pricing_action_title"
         tools:layout="@layout/fragment_pricing" />
 
     <fragment
         android:id="@+id/nav_contact"
-        android:name="com.tekinumut.cuyemekhane.ui.draweritems.ContactFragment"
+        android:name="com.tekinumut.cuyemekhane.ui.draweritems.contact.ContactFragment"
         android:label="@string/contact_action_title"
         tools:layout="@layout/fragment_contact" />
 
     <fragment
         android:id="@+id/nav_about"
-        android:name="com.tekinumut.cuyemekhane.ui.draweritems.AboutFragment"
+        android:name="com.tekinumut.cuyemekhane.ui.draweritems.about.AboutFragment"
         android:label="@string/about_action_title"
         tools:layout="@layout/fragment_about" />
 
@@ -82,19 +82,19 @@
 
     <dialog
         android:id="@+id/autoUpdateDialog"
-        android:name="com.tekinumut.cuyemekhane.ui.dialogfragments.AutoUpdateDialogFragment"
+        android:name="com.tekinumut.cuyemekhane.ui.dialogfragments.autoupdatepage.AutoUpdateDialogFragment"
         android:label="@string/autoUpdateTitle"
-        tools:layout="@layout/auto_update_dialog_fragment" />
+        tools:layout="@layout/dialog_auto_update_pages" />
 
     <dialog
         android:id="@+id/removeBannerAdDialog"
-        android:name="com.tekinumut.cuyemekhane.ui.dialogfragments.RemoveBannerAdDialogFragment"
+        android:name="com.tekinumut.cuyemekhane.ui.dialogfragments.removebanner.RemoveBannerAdDialogFragment"
         android:label="@string/disable_banner_title"
         tools:layout="@layout/dialog_remove_banner_ad" />
 
     <dialog
         android:id="@+id/updateMonthlyListDialog"
-        android:name="com.tekinumut.cuyemekhane.ui.dialogfragments.UpdateMonthlyListDialogFragment"
+        android:name="com.tekinumut.cuyemekhane.ui.dialogfragments.updatemonthlylist.UpdateMonthlyListDialogFragment"
         android:label="@string/watch_ad_title"
         tools:layout="@layout/dialog_update_monthly_list">
 

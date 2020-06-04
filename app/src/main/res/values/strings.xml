@@ -7,6 +7,7 @@
     <string name="error_loading_data">Veriler yüklenemedi.</string>
     <string name="error_cause">\Hata Sebebi: %s</string>
     <string name="iptal_et">İptal Et</string>
+    <string name="close">Pencereyi Kapat</string>
     <string name="remove">Sil</string>
     <string name="kabul_et">Kabul Et</string>
     <string name="btn_update_monthly_list">Aylık listeyi güncelle</string>
@@ -36,11 +37,13 @@
         \n• Butona tıkladıktan sonra açılacak olan pencerede gerekli ayarlamaları yaparak bu boyutu minimize edebilirsiniz.</string>
 
     <!--    Yemek listesinin bulunamadığı durumda kullanıcıyı bilgilendirecek metin verileri-->
-    <string name="empty_title">Veriler alınırken bir hata meydana geldi</string>
-    <string name="empty_reason_content">Verilerin alındığı <u>yemekhane.cu.edu.tr</u> adresine bağlanılamadı</string>
+    <string name="empty_title">Veriler yüklenemedi</string>
+    <string name="empty_reason_content">Verilerin alındığı <u>yemekhane.cu.edu.tr</u> adresine bağlanılamadı.
+        Lütfen aşağıdaki çözüm önerilerini uygulamayı deneyin.</string>
     <string name="empty_solution_title"><u>Çözüm önerileri:</u></string>
     <string name="empty_solution_content">
-        • Ekranı yukarıdan aşağıya çekerek listeyi güncelleyebilirsiniz.
+        • Lütfen internet bağlantınızı kontrol edin.
+        \n• Ekranı yukarıdan aşağıya çekerek listeyi güncelleyebilirsiniz.
         \n• Aşağıda bulunan \'Web sitesine git\' butonuna tıklayarak listelerin yer aldığı web sitesini ziyaret edebilirsiniz.
         \n• Listeler web sitesinde de gözükmüyorsa, yayınlanana kadar beklemeniz gerekmektedir.</string>
 
@@ -55,6 +58,7 @@
     <string name="watch_ad_title">Aylık Listeyi Güncelle</string>
     <string name="watch_ad_content">Aylık yemek listesini indirebilmek için bir adet video reklam izlemeniz gerekmektedir.
         Daha sonra indirdiğiniz son listeye reklam izlemeden ulaşabilirsiniz.</string>
+    <string name="watch_ad_content_running">Listeyi yenilerken bir hata ile karşılaşma olasılığından dolayı 1 saat boyunca aylık listeyi istediğiniz kadar yenileyebilirsiniz.</string>
     <string name="dont_load_img_info">
         • Çubuğu 0 değerine getirerek resim indirmeyi iptal edebilirsiniz.
         \n• Yemeklere ait resimleri yüklemeyerek 30 mb\'a kadar ulaşabilen indirme boyutunu 100 KB boyutuna düşürebilirsiniz.</string>

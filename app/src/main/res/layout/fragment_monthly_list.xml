@@ -10,7 +10,7 @@
 
         <variable
             name="monthlyVM"
-            type="com.tekinumut.cuyemekhane.viewmodel.MonthlyListViewModel" />
+            type="com.tekinumut.cuyemekhane.ui.draweritems.monthlylist.MonthlyListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

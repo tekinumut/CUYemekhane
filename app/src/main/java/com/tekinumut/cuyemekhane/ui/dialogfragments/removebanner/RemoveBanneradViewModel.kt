@@ -1,10 +1,10 @@
-package com.tekinumut.cuyemekhane.viewmodel
+package com.tekinumut.cuyemekhane.ui.dialogfragments.removebanner
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class RewardAdDialogViewModel : ViewModel() {
+class RemoveBanneradViewModel : ViewModel() {
 
     /**
      * Reklamın yükleme durumunu takip eder

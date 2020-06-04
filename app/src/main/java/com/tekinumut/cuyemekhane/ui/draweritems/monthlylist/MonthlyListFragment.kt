@@ -1,4 +1,4 @@
-package com.tekinumut.cuyemekhane.ui.draweritems
+package com.tekinumut.cuyemekhane.ui.draweritems.monthlylist
 
 import android.content.DialogInterface
 import android.os.Bundle
@@ -11,12 +11,10 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.adapter.DailyMonthlyListAdapter
 import com.tekinumut.cuyemekhane.databinding.FragmentMonthlyListBinding
@@ -25,17 +23,15 @@ import com.tekinumut.cuyemekhane.library.Resource
 import com.tekinumut.cuyemekhane.library.Utility
 import com.tekinumut.cuyemekhane.models.specificmodels.MonthlyDialogCallBackModel
 import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
-import com.tekinumut.cuyemekhane.viewmodel.MonthlyListViewModel
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import kotlinx.android.synthetic.main.fragment_monthly_list.*
 
 class MonthlyListFragment : Fragment() {
 
     private val mainViewModel: MainViewModel by activityViewModels()
-    private val monthlyListViewModel: MonthlyListViewModel by viewModels()
+    private val monthlyListViewModel: MonthlyListViewModel by activityViewModels()
     private val loadingDialog by lazy { Utility.getLoadingDialog(requireActivity()) }
     private lateinit var binding: FragmentMonthlyListBinding
-    private lateinit var recyclerMonthlyList: RecyclerView
     private var datePickerDialog: DatePickerDialog? = null
     private var currentToast: Toast? = null
 
@@ -59,21 +55,20 @@ class MonthlyListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init(view)
+        init()
 
-        mainViewModel.isMonthlyListRewardEarned.observe(viewLifecycleOwner, Observer {
+        monthlyListViewModel.isMonthlyListRewardEarned.observe(requireActivity(), Observer {
             if (it.isSuccess) {
                 getMonthlyListData(it.isRefresh, it.imgQuality)
-                mainViewModel.updateIsMonthlyListRewardEearned(MonthlyDialogCallBackModel(false))
+                monthlyListViewModel.updateIsMonthlyListRewardEearned(MonthlyDialogCallBackModel(false))
             }
         })
     }
 
 
-    private fun init(view: View) {
-        recyclerMonthlyList = view.findViewById(R.id.recyclerMonthly)
-        recyclerMonthlyList.layoutManager = LinearLayoutManager(context)
-        recyclerMonthlyList.setHasFixedSize(true)
+    private fun init() {
+        recyclerMonthly.layoutManager = LinearLayoutManager(context)
+        recyclerMonthly.setHasFixedSize(true)
 
         fabOpen = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_open)
         fabClose = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_close)
@@ -96,7 +91,7 @@ class MonthlyListFragment : Fragment() {
      * Takvimi tanımla ve aylık listede var olan değişimleri takip et
      */
     private fun initCalendarAndObserveMonthlyList() {
-        mainViewModel.getDaysOfMonth.observe(viewLifecycleOwner, Observer { foodList ->
+        monthlyListViewModel.getDaysOfMonth.observe(viewLifecycleOwner, Observer { foodList ->
             // Takvimde gösterilecek günler
             val avaibleDates = Utility.getCalendarArray(foodList.map { it.name })
             // Güncel olarak seçilen gün
@@ -110,7 +105,7 @@ class MonthlyListFragment : Fragment() {
                     { _, year, monthOfYear, dayOfMonth ->
                         // Ex: 11.06.2020
                         val formattedDate = Utility.getCalendarSDF(dayOfMonth, monthOfYear, year)
-                        mainViewModel.updateSelectedDay(formattedDate)
+                        monthlyListViewModel.updateSelectedDay(formattedDate)
                     }, selectedCalendar) // Takvimde seçili olan günü belirle
                 // Takvimde gösterilecek günleri ayarla
                 datePickerDialog?.selectableDays = avaibleDates
@@ -130,18 +125,18 @@ class MonthlyListFragment : Fragment() {
      * RecyclerView verisi burada güncellenir
      */
     private fun getSelectedDayOfMonth() {
-        mainViewModel.getSelectedDayOfMonth().observe(viewLifecycleOwner, Observer { allList ->
+        monthlyListViewModel.getSelectedDayOfMonth().observe(viewLifecycleOwner, Observer { allList ->
             // Seçilen gün verisini actionBar'a yükle
             // Başlangıçta hiçbir gün seçili olmayabilir
             allList?.foodDate?.name?.let { mainViewModel.updateActionTitle(it) }
 
             // Eğer seçilen güne ait yemek bilgisi var ise
             allList?.yemekWithComponentComp?.let {
-                recyclerMonthlyList.adapter = DailyMonthlyListAdapter(it, ConstantsGeneral.monthlyFragmentKey)
+                recyclerMonthly.adapter = DailyMonthlyListAdapter(it, ConstantsGeneral.monthlyFragmentKey)
                 monthlyListViewModel.updateIsListEmpty(false)
                 selectedDay = allList.foodDate.name
             } ?: run {
-                recyclerMonthlyList.adapter = null
+                recyclerMonthly.adapter = null
                 mainViewModel.updateActionTitle(getString(R.string.monthly_action_title))
                 monthlyListViewModel.updateIsListEmpty(true)
                 selectedDay = null
@@ -167,7 +162,7 @@ class MonthlyListFragment : Fragment() {
                     removeDialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.remove)) { dialog, _ ->
                         closeFab()
                         dialog.dismiss()
-                        mainViewModel.removeSelectedDay()
+                        monthlyListViewModel.removeSelectedDay()
                         showCurrentToast(getString(R.string.food_removed_of_date, selectedDay), true)
                     }
                     // Diyaloğu göster
@@ -197,7 +192,7 @@ class MonthlyListFragment : Fragment() {
      * @param imgQuality SeekBar ile seçilen resim kalitesi
      */
     private fun getMonthlyListData(isRefresh: Boolean, imgQuality: Int) {
-        mainViewModel.getFoodData(ConstantsGeneral.dbNameMonthly, imgQuality).observe(requireActivity(), Observer {
+        monthlyListViewModel.getMonthlyFoodData(imgQuality).observe(requireActivity(), Observer {
             when (it) {
                 Resource.InProgress -> loadingDialog.show()
                 is Resource.Success -> onDateResult(getString(R.string.data_loaded), isRefresh)

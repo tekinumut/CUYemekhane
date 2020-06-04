@@ -1,4 +1,4 @@
-package com.tekinumut.cuyemekhane.viewmodel
+package com.tekinumut.cuyemekhane.ui.draweritems.about
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

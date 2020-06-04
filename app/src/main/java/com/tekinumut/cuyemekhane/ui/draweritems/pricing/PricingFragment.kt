@@ -1,4 +1,4 @@
-package com.tekinumut.cuyemekhane.ui.draweritems
+package com.tekinumut.cuyemekhane.ui.draweritems.pricing
 
 import android.os.Build
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.tekinumut.cuyemekhane.R
@@ -16,12 +16,11 @@ import com.tekinumut.cuyemekhane.library.ConstantsGeneral
 import com.tekinumut.cuyemekhane.library.MainPref
 import com.tekinumut.cuyemekhane.library.Resource
 import com.tekinumut.cuyemekhane.library.Utility
-import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_pricing.*
 
 class PricingFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
-    private val mainViewModel: MainViewModel by activityViewModels()
+    private val pricingViewModel: PricingViewModel by viewModels()
     private val loadingDialog by lazy { Utility.getLoadingDialog(requireActivity()) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -42,7 +41,7 @@ class PricingFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     private fun observePricingTable() {
-        mainViewModel.getPricing.observe(viewLifecycleOwner, Observer {
+        pricingViewModel.getPricing.observe(viewLifecycleOwner, Observer {
             if (it.isNullOrEmpty()) {
                 activeLayout(true)
             } else {
@@ -56,9 +55,9 @@ class PricingFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private fun getPricingData(isSwipeRefresh: Boolean) {
         val mainPref = MainPref.getInstance(requireContext())
         if (shouldAutoRefreshData(isSwipeRefresh, mainPref)) {
-            mainViewModel.getPricingData().observe(viewLifecycleOwner, Observer {
+            pricingViewModel.getPricingData().observe(viewLifecycleOwner, Observer {
                 when (it) {
-                    Resource.InProgress -> loadingDialog.show()
+                    Resource.InProgress -> if (!isSwipeRefresh) loadingDialog.show()
                     is Resource.Success -> {
                         mainPref.save(ConstantsGeneral.prefCheckDailyListWorkedBefore, true)
                         onSuccessAndError(getString(R.string.pricing_loaded))

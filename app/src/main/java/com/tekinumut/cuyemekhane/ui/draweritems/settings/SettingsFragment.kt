@@ -1,4 +1,4 @@
-package com.tekinumut.cuyemekhane.ui.draweritems
+package com.tekinumut.cuyemekhane.ui.draweritems.settings
 
 import android.os.Bundle
 import android.util.Log
@@ -13,14 +13,13 @@ import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.library.ConstantsGeneral
 import com.tekinumut.cuyemekhane.library.SafePreferenceClickListener
 import com.tekinumut.cuyemekhane.library.Utility
-import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
     private val nightModeList by lazy { findPreference<ListPreference>(getString(R.string.nightModeListKey))!! }
     private val bannerAdSwitch by lazy { findPreference<SwitchPreference>(getString(R.string.bannerAdKey))!! }
     private val autoUpdatePref by lazy { findPreference<Preference>(getString(R.string.autoUpdatePrefKey))!! }
-    private val mainVM: MainViewModel by activityViewModels()
+    private val settingsViewModel: SettingsViewModel by activityViewModels()
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
@@ -29,6 +28,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
             Utility.setTheme(newValue.toString().toInt())
             true
         }
+
+        settingsViewModel.isRemoveBannerRewardEarned.observe(requireActivity(), Observer {
+            Log.e("settingsFragment", "isRemoveBanner: $it")
+        })
 
         autoUpdatePref.setOnSafePreferenceClickListener {
             val navConroller = Navigation.findNavController(requireView())
@@ -67,8 +70,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun onRewardDialogOpen() {
-        mainVM.isRemoveBannerRewardEarned.observe(requireActivity(), Observer {
-            Log.e("ittt", ":::: $it")
+        settingsViewModel.isRemoveBannerRewardEarned.observe(requireActivity(), Observer {
             if (it) bannerAdSwitch.isChecked = false
         })
         val navConroller = Navigation.findNavController(requireView())

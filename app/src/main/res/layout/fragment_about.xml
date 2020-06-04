@@ -10,7 +10,7 @@
 
         <variable
             name="aboutVm"
-            type="com.tekinumut.cuyemekhane.viewmodel.AboutViewModel" />
+            type="com.tekinumut.cuyemekhane.ui.draweritems.about.AboutViewModel" />
     </data>
 
     <ScrollView

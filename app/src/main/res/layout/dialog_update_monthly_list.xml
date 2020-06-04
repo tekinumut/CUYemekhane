@@ -6,11 +6,13 @@
 
     <data>
 
+        <import type="android.view.Gravity" />
+
         <import type="android.view.View" />
 
         <variable
-            name="monthlyVM"
-            type="com.tekinumut.cuyemekhane.viewmodel.MonthlyListViewModel" />
+            name="viewmodel"
+            type="com.tekinumut.cuyemekhane.ui.dialogfragments.updatemonthlylist.UpdateMonthlyListViewModel" />
     </data>
 
     <ScrollView
@@ -43,15 +45,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:gravity="@{viewmodel.isTimeRunning ? Gravity.CENTER : Gravity.START}"
                 android:lineSpacingMultiplier="1.1"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:text="@string/watch_ad_content"
-                android:textColor="@color/primary_text"
+                android:text="@{viewmodel.isTimeRunning ? @string/watch_ad_content_running : @string/watch_ad_content}"
+                android:textColor="@color/seconday_text"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvWatchAdTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/tvWatchAdTitle"
+                tools:text="@string/watch_ad_content" />
 
             <TextView
                 android:id="@+id/tvImgQuality"
@@ -59,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:textColor="@color/default_bg_opposite"
+                android:textColor="@color/primary_text"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -80,6 +84,8 @@
                 android:id="@+id/tv_checkBox_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:text="@string/dont_load_img_info"
                 android:textColor="@color/seconday_text"
                 app:layout_constraintEnd_toEndOf="@id/tvWatchAdContent"
@@ -106,9 +112,9 @@
                 android:id="@+id/btnAcceptUpdateMonthly"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:alpha="@{monthlyVM.adStatus == 1 ? 1.0f : 0.5f}"
+                android:alpha="@{viewmodel.adStatus == 1  ? 1.0f : 0.5f}"
                 android:background="@drawable/rounded_btn_green"
-                android:enabled="@{monthlyVM.adStatus == 1 ? true : false}"
+                android:enabled="@{viewmodel.adStatus == 1  ? true : false}"
                 android:fontFamily="@font/roboto_medium"
                 android:text="@string/kabul_et"
                 android:textAllCaps="false"
@@ -123,9 +129,10 @@
                 android:id="@+id/llMonthlyListAdLoading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
                 android:orientation="horizontal"
-                android:visibility="@{monthlyVM.adStatus == 0 ? View.VISIBLE : View.GONE}"
+                android:visibility="@{viewmodel.adStatus == 0 || viewmodel.isTimeRunning ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="@+id/btnAcceptUpdateMonthly"
                 app:layout_constraintStart_toStartOf="@+id/btnRejectUpdateMonthly"
                 app:layout_constraintTop_toBottomOf="@+id/btnRejectUpdateMonthly"
@@ -139,11 +146,12 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="24dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:gravity="center"
-                    android:text="@string/reward_ad_loading"
-                    android:textColor="@color/default_bg_opposite" />
+                    android:text="@{viewmodel.isTimeRunning ? viewmodel.remainingTimeText : @string/reward_ad_loading}"
+                    android:textColor="@color/primary_text"
+                    tools:text="@string/reward_ad_loading" />
             </LinearLayout>
 
             <LinearLayout
@@ -152,7 +160,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal"
-                android:visibility="@{monthlyVM.adStatus == 2 ? View.VISIBLE : View.GONE}"
+                android:visibility="@{viewmodel.adStatus == 2 ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="@+id/btnAcceptUpdateMonthly"
                 app:layout_constraintStart_toStartOf="@+id/btnRejectUpdateMonthly"
                 app:layout_constraintTop_toBottomOf="@+id/btnRejectUpdateMonthly"

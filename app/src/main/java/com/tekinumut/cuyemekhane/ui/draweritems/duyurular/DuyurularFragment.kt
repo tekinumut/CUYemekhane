@@ -1,4 +1,4 @@
-package com.tekinumut.cuyemekhane.ui.draweritems
+package com.tekinumut.cuyemekhane.ui.draweritems.duyurular
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.adapter.DuyurularAdapter
@@ -17,16 +16,13 @@ import com.tekinumut.cuyemekhane.library.ConstantsGeneral
 import com.tekinumut.cuyemekhane.library.MainPref
 import com.tekinumut.cuyemekhane.library.Resource
 import com.tekinumut.cuyemekhane.library.Utility
-import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_duyurular.*
 
 
 class DuyurularFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
-    private val mainViewModel: MainViewModel by activityViewModels()
+    private val duyurularViewModel: DuyurularViewModel by viewModels()
     private val loadingDialog by lazy { Utility.getLoadingDialog(requireActivity()) }
-    private lateinit var recyclerDuyurular: RecyclerView
-    private lateinit var refreshDuyurular: SwipeRefreshLayout
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_duyurular, container, false)
@@ -34,22 +30,23 @@ class DuyurularFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init(view)
+        init()
         observeDuyurularDB()
         // Sunucudan güncel duyuruları çek
         getDuyurularData(false)
     }
 
-    private fun init(view: View) {
-        recyclerDuyurular = view.findViewById(R.id.recyclerDuyurular)
-        refreshDuyurular = view.findViewById(R.id.srlDuyurular)
+    private fun init() {
         refreshDuyurular.setOnRefreshListener(this)
         recyclerDuyurular.layoutManager = LinearLayoutManager(context)
         recyclerDuyurular.setHasFixedSize(true)
     }
 
+    /**
+     * Duyurular veritabanını izle
+     */
     private fun observeDuyurularDB() {
-        mainViewModel.getDuyurular.observe(viewLifecycleOwner, Observer {
+        duyurularViewModel.getDuyurular.observe(viewLifecycleOwner, Observer {
             if (!it.isNullOrEmpty()) {
                 recyclerDuyurular.adapter = DuyurularAdapter(it)
                 activeLayout(false)
@@ -79,23 +76,27 @@ class DuyurularFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private fun getDuyurularData(isSwipeRefresh: Boolean) {
         val mainPref = MainPref.getInstance(requireContext())
         if (shouldAutoRefreshData(isSwipeRefresh, mainPref)) {
-            mainViewModel.getDuyurularData().observe(viewLifecycleOwner, Observer {
+            duyurularViewModel.getDuyurularData().observe(viewLifecycleOwner, Observer {
                 when (it) {
-                    Resource.InProgress -> loadingDialog.show()
+                    Resource.InProgress -> if (!isSwipeRefresh) loadingDialog.show()
                     is Resource.Success -> {
                         // Uygulama bir kez güncellendi. Otomatik güncellemeyi kapat.
                         mainPref.save(ConstantsGeneral.prefCheckDuyurularWorkedBefore, true)
-                        Toast.makeText(context, getString(R.string.duyurular_loaded), Toast.LENGTH_SHORT).show()
-                        onSuccessAndError()
+                        onSuccessAndError(getString(R.string.duyurular_loaded))
                     }
                     is Resource.Error -> {
                         val message = "${getString(R.string.error_loading_data)} \nHata sebebi: ${it.exception.message}"
-                        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
-                        onSuccessAndError()
+                        onSuccessAndError(message)
                     }
                 }
             })
         }
+    }
+
+    private fun onSuccessAndError(message: String) {
+        loadingDialog.dismiss()
+        refreshDuyurular.isRefreshing = false
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
     /**
@@ -109,11 +110,6 @@ class DuyurularFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         // Eğer kullanıcı kendi yenilemek istediyse direk true yap
         if (isSwipeRefresh) autoUpdateResult = true
         return autoUpdateResult
-    }
-
-    private fun onSuccessAndError() {
-        loadingDialog.dismiss()
-        refreshDuyurular.isRefreshing = false
     }
 
     override fun onRefresh() {

@@ -9,7 +9,7 @@
 
         <variable
             name="viewmodel"
-            type="com.tekinumut.cuyemekhane.viewmodel.RewardAdDialogViewModel" />
+            type="com.tekinumut.cuyemekhane.ui.dialogfragments.removebanner.RemoveBanneradViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,7 +41,7 @@
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:text="@string/disable_banner_content"
-            android:textColor="@color/primary_text"
+            android:textColor="@color/seconday_text"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

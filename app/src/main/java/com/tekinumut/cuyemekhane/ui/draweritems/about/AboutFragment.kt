@@ -1,4 +1,4 @@
-package com.tekinumut.cuyemekhane.ui.draweritems
+package com.tekinumut.cuyemekhane.ui.draweritems.about
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -13,7 +13,6 @@ import androidx.fragment.app.viewModels
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.databinding.FragmentAboutBinding
 import com.tekinumut.cuyemekhane.library.Utility
-import com.tekinumut.cuyemekhane.viewmodel.AboutViewModel
 import kotlinx.android.synthetic.main.fragment_about.*
 
 class AboutFragment : Fragment() {
@@ -27,7 +26,6 @@ class AboutFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_about, container, false)
         binding.aboutVm = aboutViewModel
         binding.lifecycleOwner = viewLifecycleOwner
-
         return binding.root
     }
 

@@ -23,6 +23,9 @@ class ConstantsGeneral {
         const val prefDuyurularAutoUpdateKey = "duyurularAutoUpdateKey"
         const val prefPricingAutoUpdateKey = "pricingAutoUpdateKey"
 
+        // CountDownTimer kalan süre pref key
+        const val prefMonthlyCountDown = "prefMonthlyCountDown"
+
         // Navigation'un hangi listeden çalışacağı bilgisini alır.
         const val dailyFragmentKey = 0
         const val monthlyFragmentKey = 1
@@ -55,7 +58,8 @@ class ConstantsGeneral {
                 R.id.nav_monthly_list,
                 R.id.nav_duyurular,
                 R.id.nav_pricing,
-                R.id.nav_contact
+                R.id.nav_contact,
+                R.id.updateMonthlyListDialog
             )
         }
 
@@ -70,11 +74,12 @@ class ConstantsGeneral {
         // TimeStamp'i uygun formatta zaman metnine çevirir
         fun timeStampToDateString(timeStamp: Long): String = expireTimeSdf.format(Date(timeStamp))
 
-        // 2 hafta sonraya ötelenmiş zamanı getirir
-        fun nextTwoWeekTimeStamp(): Long {
-            val oneMonth: Long = 60 * 60 * 24 * 14
-            return currentTimeStamp() + oneMonth * 1000
-        }
+        // Varsayılan aylık listeyi sınırsız yenileme süresi saniye cinsinden
+        const val defUpdateMonthlyListDelayTime: Long = 60 * 60
+
+        // Varsayılan RemoveBanner reklam silme süresi
+        const val defRemoveBannerDelaytime: Long = 60 * 60 * 24 * 14
 
     }
+
 }

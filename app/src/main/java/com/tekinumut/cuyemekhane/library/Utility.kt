@@ -14,8 +14,10 @@ import androidx.core.content.ContextCompat
 import com.tekinumut.cuyemekhane.R
 import java.io.ByteArrayOutputStream
 import java.net.URL
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+
 
 class Utility {
     companion object {
@@ -135,7 +137,6 @@ class Utility {
             }
         }
 
-
         /**
          * Banner'in gizlenme tarihinin bitme durumu
          */
@@ -144,6 +145,38 @@ class Utility {
             val expireTimeStamp = mainPref.getLong(context.getString(R.string.isBannerExpire), ConstantsGeneral.defRewardExpireDate.time)
             return expireTimeStamp <= ConstantsGeneral.currentTimeStamp()
         }
+
+        /**
+         * Milisaniye cinsinden long değer uygun formata çevirir
+         * Örneğin 59:00 dakika kaldı gibi.
+         */
+        fun timeMillisToHourFormat(remainingTime: Long): String {
+            val diffSeconds: Long = remainingTime / 1000 % 60
+            val diffMinutes: Long = remainingTime / (60 * 1000) % 60
+            val sdf = SimpleDateFormat("mm:ss", Locale.ENGLISH)
+            val calendar = Calendar.getInstance()
+            calendar.set(Calendar.MINUTE, diffMinutes.toInt())
+            calendar.set(Calendar.SECOND, diffSeconds.toInt())
+            val formattedText = sdf.format(calendar.time)
+            val type: String = if (diffMinutes == 0L) "saniye" else "dakika"
+            return " Reklam $formattedText $type sonra açılacak"
+        }
+
+        /**
+         * Güncel zaman verilen değeri ekleyerek ileri bir tarih değeri elde eder.
+         */
+        fun addExtraTimeToCurrent(delayTime: DelayTime): Long {
+            val extraTime = when (delayTime) {
+                DelayTime.RemoveBanner -> ConstantsGeneral.defRemoveBannerDelaytime
+                DelayTime.UpdateMonthylList -> ConstantsGeneral.defUpdateMonthlyListDelayTime
+            }
+            return ConstantsGeneral.currentTimeStamp() + extraTime * 1000
+        }
+    }
+
+    enum class DelayTime {
+        RemoveBanner,
+        UpdateMonthylList
     }
 
 }
