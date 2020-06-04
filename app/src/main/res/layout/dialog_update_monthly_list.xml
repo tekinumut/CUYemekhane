@@ -1,109 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="monthlyVM"
+            type="com.tekinumut.cuyemekhane.viewmodel.MonthlyListViewModel" />
+    </data>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/rounded_reward_dialog"
-        android:paddingBottom="20dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tvWatchAdTitle"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_medium"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="@string/watch_ad_title"
-            android:textColor="@color/primary_text"
-            android:textSize="22sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:paddingBottom="20dp">
 
-        <TextView
-            android:id="@+id/tvWatchAdContent"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:lineSpacingMultiplier="1.1"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:text="@string/watch_ad_content"
-            android:textColor="@color/primary_text"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvWatchAdTitle" />
+            <TextView
+                android:id="@+id/tvWatchAdTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/watch_ad_title"
+                android:textColor="@color/primary_text"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tvImgQuality"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvWatchAdContent"
-            tools:text="Resim kalitesi: %50" />
+            <TextView
+                android:id="@+id/tvWatchAdContent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:lineSpacingMultiplier="1.1"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="@string/watch_ad_content"
+                android:textColor="@color/primary_text"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvWatchAdTitle" />
 
-        <SeekBar
-            android:id="@+id/sbImgQuality"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:max="100"
-            android:progress="50"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvImgQuality" />
+            <TextView
+                android:id="@+id/tvImgQuality"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:textColor="@color/default_bg_opposite"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvWatchAdContent"
+                tools:text="Resim kalitesi: %50" />
 
-        <TextView
-            android:id="@+id/tv_checkBox_info"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/dont_load_img_info"
-            app:layout_constraintEnd_toEndOf="@id/tvWatchAdContent"
-            app:layout_constraintStart_toStartOf="@+id/sbImgQuality"
-            app:layout_constraintTop_toBottomOf="@+id/sbImgQuality" />
+            <SeekBar
+                android:id="@+id/sbImgQuality"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:progress="50"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvImgQuality" />
 
-        <Button
-            android:id="@+id/btnReject"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/rounded_btn_red"
-            android:fontFamily="@font/roboto_medium"
-            android:text="@string/iptal_et"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/btnAccept"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="@+id/tvWatchAdContent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_checkBox_info" />
+            <TextView
+                android:id="@+id/tv_checkBox_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/dont_load_img_info"
+                android:textColor="@color/seconday_text"
+                app:layout_constraintEnd_toEndOf="@id/tvWatchAdContent"
+                app:layout_constraintStart_toStartOf="@+id/sbImgQuality"
+                app:layout_constraintTop_toBottomOf="@+id/sbImgQuality" />
 
-        <Button
-            android:id="@+id/btnAccept"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_btn_green"
-            android:fontFamily="@font/roboto_medium"
-            android:text="@string/kabul_et"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/btnReject"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btnReject"
-            app:layout_constraintTop_toTopOf="@+id/btnReject" />
+            <Button
+                android:id="@+id/btnRejectUpdateMonthly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/rounded_btn_red"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/iptal_et"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/btnAcceptUpdateMonthly"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="@+id/tvWatchAdContent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_checkBox_info" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+            <Button
+                android:id="@+id/btnAcceptUpdateMonthly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="@{monthlyVM.adStatus == 1 ? 1.0f : 0.5f}"
+                android:background="@drawable/rounded_btn_green"
+                android:enabled="@{monthlyVM.adStatus == 1 ? true : false}"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/kabul_et"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/btnRejectUpdateMonthly"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btnRejectUpdateMonthly"
+                app:layout_constraintTop_toTopOf="@+id/btnRejectUpdateMonthly" />
+
+            <LinearLayout
+                android:id="@+id/llMonthlyListAdLoading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:visibility="@{monthlyVM.adStatus == 0 ? View.VISIBLE : View.GONE}"
+                app:layout_constraintEnd_toEndOf="@+id/btnAcceptUpdateMonthly"
+                app:layout_constraintStart_toStartOf="@+id/btnRejectUpdateMonthly"
+                app:layout_constraintTop_toBottomOf="@+id/btnRejectUpdateMonthly"
+                tools:visibility="visible">
+
+                <ProgressBar
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:indeterminateTint="@color/button_blue"
+                    tools:ignore="UnusedAttribute" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="5dp"
+                    android:gravity="center"
+                    android:text="@string/reward_ad_loading"
+                    android:textColor="@color/default_bg_opposite" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llAdErrorRefreshMonthlyList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:visibility="@{monthlyVM.adStatus == 2 ? View.VISIBLE : View.GONE}"
+                app:layout_constraintEnd_toEndOf="@+id/btnAcceptUpdateMonthly"
+                app:layout_constraintStart_toStartOf="@+id/btnRejectUpdateMonthly"
+                app:layout_constraintTop_toBottomOf="@+id/btnRejectUpdateMonthly"
+                tools:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/ad_load_fail_try_again"
+                    android:textColor="@color/red" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

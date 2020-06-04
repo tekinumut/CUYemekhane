@@ -1,10 +1,11 @@
-package com.tekinumut.cuyemekhane.ui
+package com.tekinumut.cuyemekhane.ui.dialogfragments
 
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -26,12 +27,10 @@ import com.tekinumut.cuyemekhane.library.MainPref
 import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
 import com.tekinumut.cuyemekhane.viewmodel.RewardAdDialogViewModel
 
-class RemoveMonthlyAdDialogFragment : DialogFragment() {
+class RemoveBannerAdDialogFragment : DialogFragment() {
 
     private val rewardVM: RewardAdDialogViewModel by viewModels()
     private val mainViewModel: MainViewModel by activityViewModels()
-
-    private lateinit var mView: View
 
     //private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var binding: DialogRemoveBannerAdBinding
@@ -41,9 +40,14 @@ class RemoveMonthlyAdDialogFragment : DialogFragment() {
     private lateinit var llAdErrorRefresh: LinearLayout
     private var currentToast: Toast? = null
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.dialog_remove_banner_ad, container, false)
+        dialog?.window?.setBackgroundDrawableResource(R.drawable.rounded_def_dialog)
+        return view
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
-            mView = requireActivity().layoutInflater.inflate(R.layout.dialog_remove_banner_ad, null)
             init(it)
             binding.root.findViewById<Button>(R.id.btnRejectRemoveBanner).setOnClickListener { dismiss() }
             btnAccept.setOnClickListener { startRewardAd() }
@@ -74,7 +78,7 @@ class RemoveMonthlyAdDialogFragment : DialogFragment() {
      */
     private fun createAndLoadRewardedAd() {
         rewardVM.updateAdStatus(0)
-        rewardedAd = RewardedAd(binding.root.context, getString(R.string.reward_ad_unit_id))
+        rewardedAd = RewardedAd(binding.root.context, getString(R.string.watch_ad_remove_banner_unit_id))
         rewardedAd.loadAd(AdRequest.Builder().build(), object : RewardedAdLoadCallback() {
             override fun onRewardedAdLoaded() {
                 super.onRewardedAdLoaded()
@@ -104,8 +108,8 @@ class RemoveMonthlyAdDialogFragment : DialogFragment() {
                     // Ad closed.
                     if (isEarned) {
                         mainPref.save(getString(R.string.isBannerExpire), ConstantsGeneral.nextTwoWeekTimeStamp())
-                        mainViewModel.updateIsRewardEearned(true)
-                        showCurrentToast(getString(R.string.ad_rewarded), Toast.LENGTH_LONG)
+                        mainViewModel.updateIsRemoveBannerRewardEearned(true)
+                        showCurrentToast(getString(R.string.banner_ad_removed), Toast.LENGTH_LONG)
                         dismiss()
                     } else {
                         createAndLoadRewardedAd()
@@ -123,7 +127,7 @@ class RemoveMonthlyAdDialogFragment : DialogFragment() {
                 override fun onRewardedAdFailedToShow(errorCode: Int) {
                     val errorCause = when (errorCode) {
                         ERROR_CODE_INTERNAL_ERROR -> "Teknik bir hata meydana geldi. Lütfen tekrar deneyiniz."
-                        ERROR_CODE_AD_REUSED -> "Reklam zaten bir kere gösterildi."
+                        ERROR_CODE_AD_REUSED -> "Reklam zaten gösterimde."
                         ERROR_CODE_NOT_READY -> getString(R.string.ad_failed_load)
                         ERROR_CODE_APP_NOT_FOREGROUND -> "Reklam uygulama ön planda değilken oynatılamaz."
                         else -> "Teknik bir hata meydana geldi. Lütfen tekrar deneyiniz."
@@ -137,7 +141,7 @@ class RemoveMonthlyAdDialogFragment : DialogFragment() {
 
     private fun showCurrentToast(text: String, length: Int) {
         currentToast?.cancel()
-        currentToast = Toast.makeText(requireActivity(), text, length)
+        currentToast = Toast.makeText(binding.root.context, text, length)
         currentToast?.show()
     }
 

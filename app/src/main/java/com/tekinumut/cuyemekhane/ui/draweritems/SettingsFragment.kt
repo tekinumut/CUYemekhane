@@ -67,7 +67,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun onRewardDialogOpen() {
-        mainVM.isRewardEarned.observe(requireActivity(), Observer {
+        mainVM.isRemoveBannerRewardEarned.observe(requireActivity(), Observer {
             Log.e("ittt", ":::: $it")
             if (it) bannerAdSwitch.isChecked = false
         })

@@ -1,26 +1,20 @@
 package com.tekinumut.cuyemekhane.ui.draweritems
 
-import android.app.Dialog
 import android.content.DialogInterface
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Button
-import android.widget.SeekBar
-import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tekinumut.cuyemekhane.R
@@ -29,6 +23,7 @@ import com.tekinumut.cuyemekhane.databinding.FragmentMonthlyListBinding
 import com.tekinumut.cuyemekhane.library.ConstantsGeneral
 import com.tekinumut.cuyemekhane.library.Resource
 import com.tekinumut.cuyemekhane.library.Utility
+import com.tekinumut.cuyemekhane.models.specificmodels.MonthlyDialogCallBackModel
 import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
 import com.tekinumut.cuyemekhane.viewmodel.MonthlyListViewModel
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
@@ -65,6 +60,13 @@ class MonthlyListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init(view)
+
+        mainViewModel.isMonthlyListRewardEarned.observe(viewLifecycleOwner, Observer {
+            if (it.isSuccess) {
+                getMonthlyListData(it.isRefresh, it.imgQuality)
+                mainViewModel.updateIsMonthlyListRewardEearned(MonthlyDialogCallBackModel(false))
+            }
+        })
     }
 
 
@@ -88,6 +90,7 @@ class MonthlyListFragment : Fragment() {
 
         initCalendarAndObserveMonthlyList()
     }
+
 
     /**
      * Takvimi tanımla ve aylık listede var olan değişimleri takip et
@@ -152,7 +155,7 @@ class MonthlyListFragment : Fragment() {
      */
     private val listener = View.OnClickListener { view: View ->
         when (view) {
-            btn_update_monthly_list -> loadAndShowDialog(false)
+            btn_update_monthly_list -> loadAndShowListUpdateDialog(false)
             fabMain -> animateFab()
             fabRemove -> {
                 // Eğer seçili bir liste yoksa
@@ -172,7 +175,7 @@ class MonthlyListFragment : Fragment() {
                 }
 
             }
-            fabRefresh -> loadAndShowDialog(true)
+            fabRefresh -> loadAndShowListUpdateDialog(true)
             fabDate -> {
                 if (datePickerDialog != null) {
                     datePickerDialog?.show(parentFragmentManager, "def tag")
@@ -194,7 +197,7 @@ class MonthlyListFragment : Fragment() {
      * @param imgQuality SeekBar ile seçilen resim kalitesi
      */
     private fun getMonthlyListData(isRefresh: Boolean, imgQuality: Int) {
-        mainViewModel.getFoodData(ConstantsGeneral.dbNameMonthly,imgQuality).observe(requireActivity(), Observer {
+        mainViewModel.getFoodData(ConstantsGeneral.dbNameMonthly, imgQuality).observe(requireActivity(), Observer {
             when (it) {
                 Resource.InProgress -> loadingDialog.show()
                 is Resource.Success -> onDateResult(getString(R.string.data_loaded), isRefresh)
@@ -219,41 +222,11 @@ class MonthlyListFragment : Fragment() {
     }
 
 
-    private fun loadAndShowDialog(isRefresh: Boolean) {
-        Dialog(requireActivity()).apply {
-            requestWindowFeature(Window.FEATURE_NO_TITLE)
-            setContentView(R.layout.dialog_update_monthly_list)
-            window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            val tvImgQuality = findViewById<TextView>(R.id.tvImgQuality)
-            val btnAccept = findViewById<Button>(R.id.btnAccept)
-            val btnReject = findViewById<Button>(R.id.btnReject)
-            val sbImgQuality = findViewById<SeekBar>(R.id.sbImgQuality)
-
-            var currentImgQuality = ConstantsGeneral.defMonthlyImgQuality
-            tvImgQuality.text = getString(R.string.sb_img_quality, currentImgQuality)
-            sbImgQuality.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                    if (progress > 0) {
-                        tvImgQuality.text = getString(R.string.sb_img_quality, progress)
-                    } else {
-                        tvImgQuality.text = getString(R.string.sb_img_quality_zero)
-                    }
-                    currentImgQuality = progress
-                }
-
-                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-                override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-            })
-
-            btnReject.setOnClickListener { dismiss() }
-            btnAccept.setOnClickListener {
-                dismiss()
-                Log.e("hello","$currentImgQuality")
-                getMonthlyListData(isRefresh, currentImgQuality)
-            }
-            show()
-        }
+    private fun loadAndShowListUpdateDialog(isRefresh: Boolean) {
+        val navController: NavController = Navigation.findNavController(requireView())
+        val bundle = Bundle()
+        bundle.putBoolean("isRefresh", isRefresh)
+        navController.navigate(R.id.action_nav_monthly_list_to_updateMonthlyListDialog, bundle)
     }
 
     /**

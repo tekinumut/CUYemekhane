@@ -1,9 +1,11 @@
-package com.tekinumut.cuyemekhane.ui
+package com.tekinumut.cuyemekhane.ui.dialogfragments
 
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -22,6 +24,12 @@ class AutoUpdateDialogFragment : DialogFragment(), AutoUpdateCheckBoxInterface {
     private lateinit var mView: View
     private lateinit var mainPref: MainPref
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.auto_update_dialog_fragment, container, false)
+        dialog?.window?.setBackgroundDrawableResource(R.drawable.rounded_def_dialog)
+        return view
+    }
+
     @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
@@ -31,6 +39,7 @@ class AutoUpdateDialogFragment : DialogFragment(), AutoUpdateCheckBoxInterface {
 
             AlertDialog.Builder(it)
                 .setNegativeButton(R.string.iptal_et) { dialog, _ -> dialog.dismiss() }
+                .setPositiveButton(R.string.kabul_et) { dialog, _ -> dialog.dismiss() }
                 .setView(mView)
                 .setTitle(resources.getString(R.string.autoUpdateTitle))
                 .setMessage(getString(R.string.auto_update_multi_list_dialog_message))

@@ -9,7 +9,9 @@ class MonthlyListViewModel : ViewModel() {
     // Gösterilecek ekran layoutunu belirler
     private val _isInfo = MutableLiveData(false)
     private val _isListEmpty = MutableLiveData(false)
+    private val _adStatus = MutableLiveData(0)
 
+    val adStatus: LiveData<Int> = _adStatus
     val isInfo: LiveData<Boolean> = _isInfo
     val isListEmpty: LiveData<Boolean> = _isListEmpty
 
@@ -21,7 +23,21 @@ class MonthlyListViewModel : ViewModel() {
         _isInfo.value = isInfo
     }
 
+    /**
+     * Seçili güne ait menünün boş olma duruma
+     */
     fun updateIsListEmpty(isListEmpty: Boolean) {
         _isListEmpty.value = isListEmpty
     }
+
+    /**
+     * Reklamın yükleme durumunu takip eder
+     * 0 -> Yükleniyor
+     * 1 -> Başarılı
+     * 2 -> Başarısız
+     */
+    fun updateAdStatus(status: Int) {
+        _adStatus.value = status
+    }
+
 }

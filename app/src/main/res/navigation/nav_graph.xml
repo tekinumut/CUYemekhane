@@ -30,6 +30,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_nav_monthly_list_to_updateMonthlyListDialog"
+            app:destination="@id/updateMonthlyListDialog" />
 
     </fragment>
 
@@ -79,15 +82,21 @@
 
     <dialog
         android:id="@+id/autoUpdateDialog"
-        android:name="com.tekinumut.cuyemekhane.ui.AutoUpdateDialogFragment"
+        android:name="com.tekinumut.cuyemekhane.ui.dialogfragments.AutoUpdateDialogFragment"
         android:label="@string/autoUpdateTitle"
         tools:layout="@layout/auto_update_dialog_fragment" />
 
     <dialog
         android:id="@+id/removeBannerAdDialog"
-        android:name="com.tekinumut.cuyemekhane.ui.RemoveMonthlyAdDialogFragment"
+        android:name="com.tekinumut.cuyemekhane.ui.dialogfragments.RemoveBannerAdDialogFragment"
         android:label="@string/disable_banner_title"
-        tools:layout="@layout/dialog_remove_banner_ad">
+        tools:layout="@layout/dialog_remove_banner_ad" />
+
+    <dialog
+        android:id="@+id/updateMonthlyListDialog"
+        android:name="com.tekinumut.cuyemekhane.ui.dialogfragments.UpdateMonthlyListDialogFragment"
+        android:label="@string/watch_ad_title"
+        tools:layout="@layout/dialog_update_monthly_list">
 
     </dialog>
 

@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.library.*
 import com.tekinumut.cuyemekhane.models.*
+import com.tekinumut.cuyemekhane.models.specificmodels.MonthlyDialogCallBackModel
 import com.tekinumut.cuyemekhane.room.DailyDAO
 import com.tekinumut.cuyemekhane.room.DailyDatabase
 import com.tekinumut.cuyemekhane.room.MonthlyDAO
@@ -21,9 +22,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val dailyFoodDao: DailyDAO = DailyDatabase.getInstance(application).yemekDao()
     private val _actionBarTitle = MutableLiveData<String>()
     private val _currentDestinationID = MutableLiveData<Int>()
-    private val _isRewardEarned = MutableLiveData(false)
+    private val _isRemoveBannerRewardEarned = MutableLiveData(false)
+    private val _isMonthlyListRewardEarned = MutableLiveData<MonthlyDialogCallBackModel>()
     val actionBarTitle: LiveData<String> = _actionBarTitle
-    val isRewardEarned: LiveData<Boolean> = _isRewardEarned
+    val isRemoveBannerRewardEarned: LiveData<Boolean> = _isRemoveBannerRewardEarned
+    val isMonthlyListRewardEarned: LiveData<MonthlyDialogCallBackModel> = _isMonthlyListRewardEarned
 
     /**
      * @param type ConstantsGeneral.dbNameDaily || ConstantsGeneral.dbNameMonthly değerlerinden birini alır
@@ -166,8 +169,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
      * Banner reklamı kaldıran diyalog penceresini izler
      * Eğer reklam başarıyla izlendiyse true döner.
      */
-    fun updateIsRewardEearned(isEarned: Boolean) {
-        _isRewardEarned.value = isEarned
+    fun updateIsRemoveBannerRewardEearned(isEarned: Boolean) {
+        _isRemoveBannerRewardEarned.value = isEarned
+    }
+
+    /**
+     * Aylık listeyi yüklemek için izlenmesi gereken reklamın izlenme durumu
+     */
+    fun updateIsMonthlyListRewardEearned(model: MonthlyDialogCallBackModel) {
+        _isMonthlyListRewardEarned.value = model
     }
 
 

@@ -17,15 +17,6 @@
                             <option name="y" value="290" />
                           </Point>
                         </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_autoUpdateDialog_to_nav_settings">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>
@@ -103,8 +94,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="208" />
-                            <option name="y" value="697" />
+                            <option name="x" value="192" />
+                            <option name="y" value="618" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -147,6 +138,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_nav_settings_to_removeBannerAdDialog">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -159,6 +155,18 @@
                           <Point>
                             <option name="x" value="-134" />
                             <option name="y" value="573" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="updateMonthlyListDialog">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="402" />
+                            <option name="y" value="925" />
                           </Point>
                         </option>
                       </LayoutPositions>
