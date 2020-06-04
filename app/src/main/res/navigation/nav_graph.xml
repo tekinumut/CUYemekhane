@@ -47,6 +47,9 @@
         <action
             android:id="@+id/action_nav_settings_to_autoUpdateDialog"
             app:destination="@id/autoUpdateDialog" />
+        <action
+            android:id="@+id/action_nav_settings_to_removeBannerAdDialog"
+            app:destination="@id/removeBannerAdDialog" />
 
     </fragment>
 
@@ -78,10 +81,14 @@
         android:id="@+id/autoUpdateDialog"
         android:name="com.tekinumut.cuyemekhane.ui.AutoUpdateDialogFragment"
         android:label="@string/autoUpdateTitle"
-        tools:layout="@layout/auto_update_dialog_fragment">
-        <action
-            android:id="@+id/action_autoUpdateDialog_to_nav_settings"
-            app:destination="@id/nav_settings" />
+        tools:layout="@layout/auto_update_dialog_fragment" />
+
+    <dialog
+        android:id="@+id/removeBannerAdDialog"
+        android:name="com.tekinumut.cuyemekhane.ui.RemoveMonthlyAdDialogFragment"
+        android:label="@string/disable_banner_title"
+        tools:layout="@layout/dialog_remove_banner_ad">
+
     </dialog>
 
 

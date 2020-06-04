@@ -3,27 +3,38 @@ package com.tekinumut.cuyemekhane
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
-import androidx.multidex.MultiDexApplication
 import com.tekinumut.cuyemekhane.library.ConstantsGeneral
 import com.tekinumut.cuyemekhane.library.MainPref
 import com.tekinumut.cuyemekhane.library.Utility
 
 @Suppress("unused")
 class MainApplication : Application() {
+    private lateinit var mainPref: MainPref
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
         MultiDex.install(base)
-        val mainPref = MainPref.getInstance(baseContext)
+        mainPref = MainPref.getInstance(baseContext)
 
-        clearIsAppOpenedBeforePref(mainPref)
+        clearIsAppOpenedBeforePref()
+        setNightModeTheme()
+        checkIsBannerExpire(base)
+    }
 
-        setNightModeTheme(mainPref)
+    /**
+     * Banner reklam gizleme süresi dolmuş mu diye bak
+     */
+    private fun checkIsBannerExpire(context: Context?) {
+        context?.let {
+            if (Utility.isBannerTimeExpired(context)) {
+                mainPref.save(context.getString(R.string.bannerAdKey), true)
+            }
+        }
     }
 
     /**
      * Uygulamanın ilk kez açıldığını talep eden preflere bildiriyoruz
      */
-    private fun clearIsAppOpenedBeforePref(mainPref: MainPref) {
+    private fun clearIsAppOpenedBeforePref() {
         mainPref.save(ConstantsGeneral.prefCheckDailyListWorkedBefore, false)
         mainPref.save(ConstantsGeneral.prefCheckDuyurularWorkedBefore, false)
         mainPref.save(ConstantsGeneral.prefPricingAutoUpdateKey, false)
@@ -34,7 +45,7 @@ class MainApplication : Application() {
      * Kullanıcı daha önce bir seçim yaptıysa o seçim başta uygulanır
      * yapmadıysa '-1' değeri ile varsayılan cihaz teması uygulanır
      */
-    private fun setNightModeTheme(mainPref: MainPref) {
+    private fun setNightModeTheme() {
         val typeOfNightMode = mainPref.getString(getString(R.string.nightModeListKey), "-1")!!.toInt()
         Utility.setTheme(typeOfNightMode)
     }

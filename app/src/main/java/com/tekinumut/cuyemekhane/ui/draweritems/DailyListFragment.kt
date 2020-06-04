@@ -13,10 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.adapter.DailyMonthlyListAdapter
-import com.tekinumut.cuyemekhane.library.ConstantsGeneral
-import com.tekinumut.cuyemekhane.library.MainPref
-import com.tekinumut.cuyemekhane.library.Resource
-import com.tekinumut.cuyemekhane.library.Utility
+import com.tekinumut.cuyemekhane.library.*
 import com.tekinumut.cuyemekhane.models.Food
 import com.tekinumut.cuyemekhane.models.FoodWithDetailComp
 import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
@@ -42,7 +39,7 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         getFoodData(false)
 
         btn_open_web_page.setOnClickListener {
-            Utility.openListWebSite(requireContext())
+            Utility.openWebSite(requireContext(), ConstantsOfWebSite.MainPageURL)
         }
 
     }

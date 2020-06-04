@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.databinding.FragmentAboutBinding
+import com.tekinumut.cuyemekhane.library.Utility
 import com.tekinumut.cuyemekhane.viewmodel.AboutViewModel
 import kotlinx.android.synthetic.main.fragment_about.*
 
@@ -58,6 +59,6 @@ class AboutFragment : Fragment() {
     }
 
     private fun openGithubPage() {
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.github_address))))
+        Utility.openWebSite(requireContext(), getString(R.string.github_address))
     }
 }

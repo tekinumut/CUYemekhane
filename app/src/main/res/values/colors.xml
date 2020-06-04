@@ -6,6 +6,7 @@
     <color name="default_bg">#f2f2f2</color>
     <color name="default_bg_opposite">#121212</color>
     <color name="white">#ffffff</color>
+    <color name="red">#ff0000</color>
     <color name="primary_text">#000000</color>
 
     <color name="toolbar_bg">#00421c</color>
@@ -19,4 +20,6 @@
     <color name="card_daily_category_title">#f2f2f2</color>
     <color name="card_calorie_title">#ff0000</color>
     <color name="duyurular_title">#ff0000</color>
+
+    <color name="dialog_btn_accept">#27ae60</color>
 </resources>

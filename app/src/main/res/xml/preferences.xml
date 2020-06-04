@@ -19,7 +19,7 @@
 
     <SwitchPreference
         android:defaultValue="true"
-        android:key="@string/adKey"
+        android:key="@string/bannerAdKey"
         android:summary="@string/adSummaryActive"
         android:title="@string/adActivityTitle" />
 

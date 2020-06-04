@@ -90,10 +90,11 @@
     <string name="nightModeTitle">Görünüm</string>
     <string name="nightModeSummary">Açık/Koyu tema tercihinizi belirtin </string>
 
-    <string name="adKey">adKey</string>
+    <string name="bannerAdKey">bannerAdKey</string>
     <string name="adActivityTitle">Reklam Görünümü</string>
-    <string name="adSummaryActive">Reklamlar etkin</string>
-    <string name="adSummaryPassive">Reklamlar %s tarihinden sonra tekrar aktif olur.</string>
+    <string name="adSummaryActive">Banner reklam etkin</string>
+    <string name="adSummaryPassive">Banner reklam %s tarihinden sonra tekrar aktif olacak.</string>
+    <string name="isBannerExpire">isBannerExpire</string>
 
     <string name="autoUpdatePrefKey">autoUpdatePrefKey</string>
     <string name="autoUpdateTitle">Otomatik Güncellenecek Sayfalar</string>
@@ -135,4 +136,12 @@
     <string name="drawer_item_title_special_app">Uygulamaya Özel</string>
     <string name="show_google_maps">Google Maps\'te Göster</string>
     <string name="cant_open_google_maps">Google Maps Açılamadı</string>
+    <string name="disable_banner_title">Banner Reklamı Sil</string>
+    <string name="disable_banner_content">Ekranın alt tarafında çıkan banner reklamı 2 haftalığına kaldırmak için bir adet video reklam izlemeniz gerekmektedir.</string>
+    <string name="ad_closed">Video reklam kapatıldı!</string>
+    <string name="ad_rewarded">Reklamlar 1 ay boyunca kaldırıldı.</string>
+    <string name="ad_failed_load">Reklam yüklenemedi! Lütfen tekrar deneyiniz.</string>
+    <string name="reward_ad_loading">Reklam Yükleniyor</string>
+    <string name="ad_load_fail_try_again">Reklam yenilemedi.\nTekrar yüklemek için tıkla!</string>
+
 </resources>

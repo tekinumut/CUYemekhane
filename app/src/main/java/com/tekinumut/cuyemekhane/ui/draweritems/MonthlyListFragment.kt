@@ -222,7 +222,7 @@ class MonthlyListFragment : Fragment() {
     private fun loadAndShowDialog(isRefresh: Boolean) {
         Dialog(requireActivity()).apply {
             requestWindowFeature(Window.FEATURE_NO_TITLE)
-            setContentView(R.layout.dialog_watch_reward_ad)
+            setContentView(R.layout.dialog_update_monthly_list)
             window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             val tvImgQuality = findViewById<TextView>(R.id.tvImgQuality)

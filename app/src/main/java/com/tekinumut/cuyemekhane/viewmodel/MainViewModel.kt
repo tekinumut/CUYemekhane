@@ -2,6 +2,7 @@ package com.tekinumut.cuyemekhane.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.library.*
 import com.tekinumut.cuyemekhane.models.*
 import com.tekinumut.cuyemekhane.room.DailyDAO
@@ -19,7 +20,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val monthlyFoodDao: MonthlyDAO = MonthlyDatabase.getInstance(application).yemekDao()
     private val dailyFoodDao: DailyDAO = DailyDatabase.getInstance(application).yemekDao()
     private val _actionBarTitle = MutableLiveData<String>()
+    private val _currentDestinationID = MutableLiveData<Int>()
+    private val _isRewardEarned = MutableLiveData(false)
     val actionBarTitle: LiveData<String> = _actionBarTitle
+    val isRewardEarned: LiveData<Boolean> = _isRewardEarned
 
     /**
      * @param type ConstantsGeneral.dbNameDaily || ConstantsGeneral.dbNameMonthly değerlerinden birini alır
@@ -124,7 +128,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-
     /**
      * Ücretlendirme tablosunu izler
      */
@@ -137,5 +140,35 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun updateActionTitle(text: String) {
         _actionBarTitle.value = text
     }
+
+    /**
+     * DrawerLayout'ta seçili güncel item id'sini günceller
+     */
+    fun updateCurrentDestination(destinationID: Int) {
+        _currentDestinationID.value = destinationID
+    }
+
+    /**
+     * Banner reklamının görünüm durumu
+     */
+    val adBannerVisibility: LiveData<Boolean> = Transformations.map(_currentDestinationID) {
+        val mainPref = MainPref.getInstance(application)
+        val isBannerSwitchOpen = mainPref.getBoolean(application.getString(R.string.bannerAdKey), true)
+        if (isBannerSwitchOpen) {
+            it?.let { ConstantsGeneral.adActiveNavList().contains(it) } ?: true
+        } else {
+            false
+        }
+
+    }
+
+    /**
+     * Banner reklamı kaldıran diyalog penceresini izler
+     * Eğer reklam başarıyla izlendiyse true döner.
+     */
+    fun updateIsRewardEearned(isEarned: Boolean) {
+        _isRewardEarned.value = isEarned
+    }
+
 
 }

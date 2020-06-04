@@ -4,8 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.util.Base64
 import android.widget.ImageView
@@ -30,7 +28,7 @@ class Utility {
                 .setCancelable(false)
                 .setView(R.layout.dialog_loading)
                 .create()
-            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.window?.setBackgroundDrawableResource(R.drawable.rounded_def_dialog)
             return dialog
         }
 
@@ -79,14 +77,14 @@ class Utility {
         /**
          * Listelerin alındığı web sayfasını açar
          */
-        fun openListWebSite(context: Context) {
+        fun openWebSite(context: Context, url: String) {
             val builder: CustomTabsIntent.Builder = CustomTabsIntent.Builder()
             builder.setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary))
             builder.setStartAnimations(context, R.anim.slide_in_right, R.anim.slide_out_left)
             builder.setExitAnimations(context, R.anim.slide_in_left, R.anim.slide_out_right)
 
             val tabIntent = builder.build()
-            tabIntent.launchUrl(context, Uri.parse(ConstantsOfWebSite.MainPageURL))
+            tabIntent.launchUrl(context, Uri.parse(url))
         }
 
         /**
@@ -135,6 +133,16 @@ class Utility {
                 1 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 2 -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
+        }
+
+
+        /**
+         * Banner'in gizlenme tarihinin bitme durumu
+         */
+        fun isBannerTimeExpired(context: Context): Boolean {
+            val mainPref = MainPref.getInstance(context)
+            val expireTimeStamp = mainPref.getLong(context.getString(R.string.isBannerExpire), ConstantsGeneral.defRewardExpireDate.time)
+            return expireTimeStamp <= ConstantsGeneral.currentTimeStamp()
         }
     }
 
