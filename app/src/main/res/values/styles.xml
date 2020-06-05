@@ -11,6 +11,7 @@
 
     <style name="AlertDialogTheme" parent="Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="textAllCaps">false</item>
+        <item name="android:background">@color/default_bg</item>
         <item name="colorAccent">@color/alert_dialog_btn</item>
     </style>
 

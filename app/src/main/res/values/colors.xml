@@ -10,6 +10,7 @@
     <color name="primary_text">#000000</color>
     <color name="seconday_text">#8A000000</color>
 
+    <color name="dialog_fr_title">#196F34</color>
     <color name="toolbar_bg">#00421c</color>
     <color name="button_blue">#1581ff</color>
     <color name="alert_dialog_btn">#00a8ff</color>

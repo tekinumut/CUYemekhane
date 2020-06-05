@@ -9,7 +9,7 @@
 
         <variable
             name="mainVM"
-            type="com.tekinumut.cuyemekhane.viewmodel.MainViewModel" />
+            type="com.tekinumut.cuyemekhane.MainViewModel" />
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout

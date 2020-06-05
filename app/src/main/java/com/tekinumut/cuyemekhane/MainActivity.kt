@@ -17,7 +17,6 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.tekinumut.cuyemekhane.databinding.ActivityMainBinding
 import com.tekinumut.cuyemekhane.library.MainPref
-import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 

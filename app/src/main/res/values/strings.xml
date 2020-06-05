@@ -110,7 +110,7 @@
 
     <string name="prog_kullanimi">Program Özellikleri</string>
     <string name="kullanim_kilavuzu" tools:ignore="Typos">
-       • Uygulamadan daha fazla verim alabilmek için lütfen <u>Program Özellikleri</u> kısmını okuyunuz.
+        • Uygulamadan daha fazla verim alabilmek için lütfen <u>Program Özellikleri</u> kısmını okuyunuz.
         \n• Bu uygulama ile Çukurova Üniversitesi Merkezi Kafeteryası\'nın günlük ve aylık listelerine erişebilirsiniz.
         \n• Ayarlar menüsünden uygulama açılışında görmek istediğiniz sayfayı, uygulama temasını, reklam gösterimini değiştirebilirsiniz.
         \n• Siz listeleri güncelledikçe bu listeler telefona kayıt edilir ve internetiniz olmadan güncellediğiniz son listeleri görüntüleyebilirsiniz.
@@ -141,7 +141,7 @@
     <string name="show_google_maps">Google Maps\'te Göster</string>
     <string name="cant_open_google_maps">Google Maps Açılamadı</string>
     <string name="disable_banner_title">Banner Reklamı Sil</string>
-    <string name="disable_banner_content">Ekranın alt tarafında çıkan banner reklamı 2 haftalığına kaldırmak için bir adet video reklam izlemeniz gerekmektedir.</string>
+    <string name="disable_banner_content">Ekranın alt tarafında çıkan banner reklamı 2 hafta boyunca gizlemek için bir adet video reklam izlemeniz gerekmektedir.</string>
     <string name="ad_closed">Video reklam kapatıldı!</string>
     <string name="banner_ad_removed">Reklamlar 1 ay boyunca kaldırıldı.</string>
     <string name="ad_failed_load">Reklam yüklenemedi! Lütfen tekrar deneyiniz.</string>

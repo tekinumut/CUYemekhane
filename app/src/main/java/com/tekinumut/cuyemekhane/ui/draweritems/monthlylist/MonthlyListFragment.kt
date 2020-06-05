@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tekinumut.cuyemekhane.MainViewModel
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.adapter.DailyMonthlyListAdapter
 import com.tekinumut.cuyemekhane.databinding.FragmentMonthlyListBinding
@@ -22,7 +23,6 @@ import com.tekinumut.cuyemekhane.library.ConstantsGeneral
 import com.tekinumut.cuyemekhane.library.Resource
 import com.tekinumut.cuyemekhane.library.Utility
 import com.tekinumut.cuyemekhane.models.specificmodels.MonthlyDialogCallBackModel
-import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import kotlinx.android.synthetic.main.fragment_monthly_list.*
 

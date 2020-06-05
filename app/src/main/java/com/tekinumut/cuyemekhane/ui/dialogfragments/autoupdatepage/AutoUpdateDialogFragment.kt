@@ -40,8 +40,6 @@ class AutoUpdateDialogFragment : DialogFragment(), AutoUpdateCheckBoxInterface {
             AlertDialog.Builder(it)
                 .setNegativeButton(R.string.close) { dialog, _ -> dialog.dismiss() }
                 .setView(mView)
-                .setTitle(resources.getString(R.string.autoUpdateTitle))
-                .setMessage(getString(R.string.auto_update_multi_list_dialog_message))
                 .create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }

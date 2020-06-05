@@ -15,7 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="20dp">
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/tvWatchAdTitle"
@@ -25,8 +25,8 @@
             android:gravity="center"
             android:padding="8dp"
             android:text="@string/disable_banner_title"
-            android:textColor="@color/colorAccent"
-            android:textSize="24sp"
+            android:textColor="@color/dialog_fr_title"
+            android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -35,14 +35,14 @@
             android:id="@+id/tvWatchAdContent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:lineSpacingMultiplier="1.1"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:text="@string/disable_banner_content"
             android:textColor="@color/seconday_text"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvWatchAdTitle" />

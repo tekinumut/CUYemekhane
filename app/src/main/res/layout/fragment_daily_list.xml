@@ -71,6 +71,7 @@
                     android:background="@color/accentPrimary"
                     android:text="@string/open_web_site"
                     android:textAllCaps="false"
+                    android:layout_marginBottom="10dp"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
             </LinearLayout>
