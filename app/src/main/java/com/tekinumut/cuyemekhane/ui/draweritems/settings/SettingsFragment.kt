@@ -1,41 +1,40 @@
 package com.tekinumut.cuyemekhane.ui.draweritems.settings
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.tekinumut.cuyemekhane.R
+import com.tekinumut.cuyemekhane.interfaces.RemoveBannerAdCallBack
 import com.tekinumut.cuyemekhane.library.ConstantsGeneral
 import com.tekinumut.cuyemekhane.library.SafePreferenceClickListener
 import com.tekinumut.cuyemekhane.library.Utility
+import com.tekinumut.cuyemekhane.ui.dialogfragments.removebanner.RemoveBannerAdDialogFragment
+import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
 
-class SettingsFragment : PreferenceFragmentCompat() {
+class SettingsFragment : PreferenceFragmentCompat(), RemoveBannerAdCallBack {
 
     private val nightModeList by lazy { findPreference<ListPreference>(getString(R.string.nightModeListKey))!! }
     private val bannerAdSwitch by lazy { findPreference<SwitchPreference>(getString(R.string.bannerAdKey))!! }
     private val autoUpdatePref by lazy { findPreference<Preference>(getString(R.string.autoUpdatePrefKey))!! }
-    private val settingsViewModel: SettingsViewModel by activityViewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
 
         nightModeList.setOnPreferenceChangeListener { _, newValue ->
             Utility.setTheme(newValue.toString().toInt())
+            mainViewModel.updateActionTitle(getString(R.string.settings_action_title))
             true
         }
 
-        settingsViewModel.isRemoveBannerRewardEarned.observe(requireActivity(), Observer {
-            Log.e("settingsFragment", "isRemoveBanner: $it")
-        })
-
         autoUpdatePref.setOnSafePreferenceClickListener {
-            val navConroller = Navigation.findNavController(requireView())
-            navConroller.navigate(R.id.action_nav_settings_to_autoUpdateDialog)
+            val navController = Navigation.findNavController(requireView())
+            if (navController.currentDestination?.id == R.id.nav_settings)
+                navController.navigate(R.id.action_nav_settings_to_autoUpdateDialog)
         }
 
         bannerAdSwitch.summaryProvider = Preference.SummaryProvider<SwitchPreference> {
@@ -54,7 +53,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             if (!status) {
                 // Eğer reklamları kapatabilecek şart sağlanmıyorsa.
                 if (Utility.isBannerTimeExpired(requireContext())) {
-                    onRewardDialogOpen()
+                    RemoveBannerAdDialogFragment().show(childFragmentManager, "no tag")
                 } else { // Sağlanıyorsa reklamları kapat.
                     bannerAdSwitch.isChecked = false
                 }
@@ -63,18 +62,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
             else {
                 bannerAdSwitch.isChecked = true
             }
-
             false
         }
 
-    }
-
-    private fun onRewardDialogOpen() {
-        settingsViewModel.isRemoveBannerRewardEarned.observe(requireActivity(), Observer {
-            if (it) bannerAdSwitch.isChecked = false
-        })
-        val navConroller = Navigation.findNavController(requireView())
-        navConroller.navigate(R.id.action_nav_settings_to_removeBannerAdDialog)
     }
 
     private fun Preference.setOnSafePreferenceClickListener(onSafeClick: (Preference) -> Unit) {
@@ -82,5 +72,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         onPreferenceClickListener = safeClickListener
     }
 
+    override fun onAdWatched(isWatched: Boolean) {
+        if (isWatched) bannerAdSwitch.isChecked = false
+    }
 
 }

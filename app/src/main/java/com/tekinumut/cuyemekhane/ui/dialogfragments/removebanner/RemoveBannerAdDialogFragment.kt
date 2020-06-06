@@ -2,6 +2,7 @@ package com.tekinumut.cuyemekhane.ui.dialogfragments.removebanner
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.rewarded.RewardItem
@@ -22,14 +22,14 @@ import com.google.android.gms.ads.rewarded.RewardedAdCallback
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.databinding.DialogRemoveBannerAdBinding
+import com.tekinumut.cuyemekhane.interfaces.RemoveBannerAdCallBack
 import com.tekinumut.cuyemekhane.library.MainPref
 import com.tekinumut.cuyemekhane.library.Utility
-import com.tekinumut.cuyemekhane.ui.draweritems.settings.SettingsViewModel
 
 class RemoveBannerAdDialogFragment : DialogFragment() {
 
     private val removeBannerVM: RemoveBanneradViewModel by viewModels()
-    private val settingsViewModel: SettingsViewModel by activityViewModels()
+    private lateinit var listener: RemoveBannerAdCallBack
 
     //private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var binding: DialogRemoveBannerAdBinding
@@ -108,7 +108,7 @@ class RemoveBannerAdDialogFragment : DialogFragment() {
                     if (isEarned) {
                         val timeToAdd: Long = Utility.addExtraTimeToCurrent(Utility.DelayTime.RemoveBanner)
                         mainPref.save(getString(R.string.isBannerExpire), timeToAdd)
-                        settingsViewModel.updateIsRemoveBannerRewardEearned(true)
+                        listener.onAdWatched(true)
                         showCurrentToast(getString(R.string.banner_ad_removed), Toast.LENGTH_LONG)
                         dismiss()
                     } else {
@@ -136,6 +136,15 @@ class RemoveBannerAdDialogFragment : DialogFragment() {
                 }
             }
             rewardedAd.show(requireActivity(), adCallback)
+        }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try {
+            listener = parentFragment as RemoveBannerAdCallBack
+        } catch (e: ClassCastException) {
+            throw ClassCastException("$context must implement RemoveBannerAdCallBack")
         }
     }
 

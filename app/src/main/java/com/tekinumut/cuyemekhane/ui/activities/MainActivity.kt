@@ -1,12 +1,10 @@
 package com.tekinumut.cuyemekhane.ui.activities
 
 import android.os.Bundle
-import android.view.ViewGroup
-import android.widget.Button
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -18,12 +16,12 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
-import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.databinding.ActivityMainBinding
 import com.tekinumut.cuyemekhane.library.MainPref
+import com.tekinumut.cuyemekhane.library.Utility
+import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import java.lang.RuntimeException
 
 
 class MainActivity : AppCompatActivity() {

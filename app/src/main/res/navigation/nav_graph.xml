@@ -98,6 +98,9 @@
         android:label="@string/watch_ad_title"
         tools:layout="@layout/dialog_update_monthly_list">
 
+        <action
+            android:id="@+id/action_updateMonthlyListDialog_to_nav_monthly_list"
+            app:destination="@id/nav_monthly_list" />
     </dialog>
 
 

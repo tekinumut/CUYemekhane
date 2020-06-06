@@ -2,19 +2,14 @@ package com.tekinumut.cuyemekhane.ui.draweritems.monthlylist
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.tekinumut.cuyemekhane.library.ConstantsOfWebSite
-import com.tekinumut.cuyemekhane.library.DataUtility
 import com.tekinumut.cuyemekhane.library.Resource
 import com.tekinumut.cuyemekhane.models.DateWithFoodDetailComp
 import com.tekinumut.cuyemekhane.models.FoodDate
-import com.tekinumut.cuyemekhane.models.ListOfAll
-import com.tekinumut.cuyemekhane.models.specificmodels.MonthlyDialogCallBackModel
 import com.tekinumut.cuyemekhane.room.MonthlyDAO
 import com.tekinumut.cuyemekhane.room.MonthlyDatabase
 import com.tekinumut.cuyemekhane.viewmodel.Repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.jsoup.Jsoup
 
 class MonthlyListViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -27,10 +22,6 @@ class MonthlyListViewModel(application: Application) : AndroidViewModel(applicat
     // Seçili güne ait menü boşsa uygun layoutu getir
     private val _isListEmpty = MutableLiveData(false)
 
-    // Reklam başarıyla izlendiğinde isSuccess true olarak döner
-    private val _isMonthlyListRewardEarned = MutableLiveData<MonthlyDialogCallBackModel>()
-
-    val isMonthlyListRewardEarned: LiveData<MonthlyDialogCallBackModel> = _isMonthlyListRewardEarned
     val isInfo: LiveData<Boolean> = _isInfo
     val isListEmpty: LiveData<Boolean> = _isListEmpty
 
@@ -48,7 +39,7 @@ class MonthlyListViewModel(application: Application) : AndroidViewModel(applicat
                 // Şimdilik dönüş değeri kullanılmıyor
                 emit(Resource.Success(apiCall.data.foodDate.size))
             }
-            is Resource.Error ->  emit(Resource.Error(apiCall.exception))
+            is Resource.Error -> emit(Resource.Error(apiCall.exception))
         }
     }
 
@@ -89,13 +80,6 @@ class MonthlyListViewModel(application: Application) : AndroidViewModel(applicat
      */
     fun updateIsListEmpty(isListEmpty: Boolean) {
         _isListEmpty.value = isListEmpty
-    }
-
-    /**
-     * Aylık listeyi yüklemek için izlenmesi gereken reklamın izlenme durumu
-     */
-    fun updateIsMonthlyListRewardEearned(model: MonthlyDialogCallBackModel) {
-        _isMonthlyListRewardEarned.value = model
     }
 
 }

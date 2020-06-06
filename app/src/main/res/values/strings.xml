@@ -29,8 +29,7 @@
     <string name="about_action_title">Hakkında</string>
 
     <string name="monthly_list_title">Aylık Liste Boş</string>
-    <string name="monthly_list_content">
-        • Aylık liste şuan boş gözüküyor. Aylık listeyi görebilmek için lütfen aşağıdaki butonu kullanın.
+    <string name="monthly_list_content">• Aylık liste şuan boş gözüküyor. Aylık listeyi görebilmek için lütfen aşağıdaki butonu kullanın.
         \n• Liste başarılı bir şekilde güncellendikten sonra yine bu sayfayı görüyorsanız henüz bir liste yayınlanmamıştır. Lütfen daha sonra tekrar deneyiniz.
         \n• Aylık liste bir çok resim(100\'den fazla olabilir) barındırmasından dolayı indirilen veri boyutu 30mb\'a kadar ulaşabilir ve
         verilerin yüklenmesi internet hızınıza bağlı olarak 1 dakikayı aşabilir.
@@ -41,16 +40,14 @@
     <string name="empty_reason_content">Verilerin alındığı <u>yemekhane.cu.edu.tr</u> adresine bağlanılamadı.
         Lütfen aşağıdaki çözüm önerilerini uygulamayı deneyin.</string>
     <string name="empty_solution_title"><u>Çözüm önerileri:</u></string>
-    <string name="empty_solution_content">
-        • Lütfen internet bağlantınızı kontrol edin.
+    <string name="empty_solution_content">• Lütfen internet bağlantınızı kontrol edin.
         \n• Ekranı yukarıdan aşağıya çekerek listeyi güncelleyebilirsiniz.
         \n• Aşağıda bulunan \'Web sitesine git\' butonuna tıklayarak listelerin yer aldığı web sitesini ziyaret edebilirsiniz.
         \n• Listeler web sitesinde de gözükmüyorsa, yayınlanana kadar beklemeniz gerekmektedir.</string>
 
     <!--    Kullanıcı henüz yemek seçimi yapmadığıysa onu bilgilendirecek metin verileri-->
     <string name="pick_solution_title"><u>Seçili Menü Bulunamadı</u></string>
-    <string name="pick_solution_content">
-        • Sol alt köşede bulunan buton ile görmek istediğiniz tarihe ait menüyü seçebilirsiniz.
+    <string name="pick_solution_content">• Sol alt köşede bulunan buton ile görmek istediğiniz tarihe ait menüyü seçebilirsiniz.
         \n• Sağ alt köşede bulunan butona tıklayarak seçili menüyü silebilir veya aylık listeyi yenileyebilirsiniz.
         \n• Bu sayfayı tekrar ziyaret ettiğinizde seçtiğiniz son menü size gösterilecektir.</string>
 
@@ -59,8 +56,7 @@
     <string name="watch_ad_content">Aylık yemek listesini indirebilmek için bir adet video reklam izlemeniz gerekmektedir.
         Daha sonra indirdiğiniz son listeye reklam izlemeden ulaşabilirsiniz.</string>
     <string name="watch_ad_content_running">Listeyi yenilerken bir hata ile karşılaşma olasılığından dolayı 1 saat boyunca aylık listeyi istediğiniz kadar yenileyebilirsiniz.</string>
-    <string name="dont_load_img_info">
-        • Çubuğu 0 değerine getirerek resim indirmeyi iptal edebilirsiniz.
+    <string name="dont_load_img_info">• Çubuğu 0 değerine getirerek resim indirmeyi iptal edebilirsiniz.
         \n• Yemeklere ait resimleri yüklemeyerek 30 mb\'a kadar ulaşabilen indirme boyutunu 100 KB boyutuna düşürebilirsiniz.</string>
     <string name="sb_img_quality">Resim Kalitesi: %%%d</string> <!-- %%->% yazar %d-> verilen int değerini Exp: %50-->
     <string name="sb_img_quality_zero">Resimler indirilmeyecek</string> <!-- %%->% yazar %d-> verilen int değerini Exp: %50-->
@@ -78,8 +74,7 @@
 
     <!-- Pricing -->
     <string name="empty_pricing_title">Ücretlendirme Verisi Bulunamadı</string>
-    <string name="empty_pricing_content">
-        \n• Ücretlendirme tablosu otomatik olarak güncellenecek şekilde ayarlanmadı.
+    <string name="empty_pricing_content">\n• Ücretlendirme tablosu otomatik olarak güncellenecek şekilde ayarlanmadı.
         \n\n• Sayfayı yukarıdan aşağı çekerek ücretlendirme tablosunu yenileyebilirsiniz.
     \n\n• Sayfanın her açılışında verilerini yenilemesini istiyorsanız bunu Ayarlar bölümünden yapabilirsiniz.</string>
     <string name="pricing_loaded">Ücretlendirme verisi başarıyla yenilendi</string>
@@ -103,19 +98,17 @@
     <string name="autoUpdatePrefKey">autoUpdatePrefKey</string>
     <string name="autoUpdateTitle">Otomatik Güncellenecek Sayfalar</string>
     <string name="autoUpdateSummary">Açtığınızda verilerin otomatik olarak güncellenmesini istediğiniz sayfaları belirtin</string>
-    <string name="auto_update_multi_list_dialog_message">
-      • Aşağıdaki seçili sayfaların verileri, sayfalar açıldığında otomatik olarak güncellenecek.
+    <string name="auto_update_multi_list_dialog_message">• Aşağıdaki seçili sayfaların verileri, sayfalar açıldığında otomatik olarak güncellenecek.
       \n• Sayfa bir kez güncellendikten sonra uygulamayı kapatana kadar otomatik güncellenmez.
       \n• Sayfayı yukarıdan aşağı çekerek kendiniz ayrıca güncelleştirebilirsiniz.</string>
 
     <string name="prog_kullanimi">Program Özellikleri</string>
-    <string name="kullanim_kilavuzu" tools:ignore="Typos">
-        • Uygulamadan daha fazla verim alabilmek için lütfen <u>Program Özellikleri</u> kısmını okuyunuz.
+    <string name="kullanim_kilavuzu" tools:ignore="Typos">• Uygulamadan daha fazla verim alabilmek için lütfen <u>Program Özellikleri</u> kısmını okuyunuz.
         \n• Bu uygulama ile Çukurova Üniversitesi Merkezi Kafeteryası\'nın günlük ve aylık listelerine erişebilirsiniz.
         \n• Ayarlar menüsünden uygulama açılışında görmek istediğiniz sayfayı, uygulama temasını, reklam gösterimini değiştirebilirsiniz.
         \n• Siz listeleri güncelledikçe bu listeler telefona kayıt edilir ve internetiniz olmadan güncellediğiniz son listeleri görüntüleyebilirsiniz.
-        \n• Listeler belirli sebeplerden dolayı boş olabilir. Bu sebepleri size açıklayan bir açıklama ekran gösterilir.
-        \n• Listeleri görüntülerken ekranı yukarıdan aşağı çekerek listeleri yenileyebilirsiniz.
+        \n• Listeler belirli sebeplerden dolayı boş olabilir. Bu sebepleri size açıklayan bir açıklama ekranı gösterilir.
+        \n• Listeleri ekranı yukarıdan aşağı çekerek yenileyebilirsiniz.
         \n• Bazı sayfaların açılışta verilerini otomatik olarak güncellediğini göreceksiniz. Ayarlar menüsünden bu özelliği istediğiniz sayfaya açıp kapatabilirsiniz.
         \n• Uygulama tamamen açık kaynaktır. Güncel proje kodlarına aşağıdaki Github linkinden erişebilirsiniz.
         \n• Uygulamada yaşadığınız hataları, düzeltilmesini istediğiniz yerleri mağaza sayfasında yorum yazarak veya bana geri bildirim sağlayarak bildirebilirsiniz.
@@ -134,6 +127,7 @@
 
     <string name="food_component_title">Yemek İçeriği</string>
     <string name="no_monthly_list_pls_refresh">Gösterilebilecek tarih bulunamadı. Listeyi yenilemeyi deneyin</string>
+    <string name="date_picker_already_added">Takvim ekranı zaten açık</string>
     <string name="already_no_data">Geçerli tarih zaten bir veri içermiyor</string>
     <string name="drawer_item_title_food_list">Yemek Listeleri</string>
     <string name="drawer_item_title_info">Bilgilendirme</string>

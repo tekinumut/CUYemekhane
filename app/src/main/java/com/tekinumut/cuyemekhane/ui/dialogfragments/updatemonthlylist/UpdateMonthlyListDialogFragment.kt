@@ -2,6 +2,7 @@ package com.tekinumut.cuyemekhane.ui.dialogfragments.updatemonthlylist
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
@@ -12,7 +13,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.rewarded.RewardItem
@@ -21,15 +21,22 @@ import com.google.android.gms.ads.rewarded.RewardedAdCallback
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.databinding.DialogUpdateMonthlyListBinding
+import com.tekinumut.cuyemekhane.interfaces.UpdateMonthlyListCallback
 import com.tekinumut.cuyemekhane.library.ConstantsGeneral
 import com.tekinumut.cuyemekhane.library.MainPref
 import com.tekinumut.cuyemekhane.library.Utility
 import com.tekinumut.cuyemekhane.models.specificmodels.MonthlyDialogCallBackModel
-import com.tekinumut.cuyemekhane.ui.draweritems.monthlylist.MonthlyListViewModel
 
 class UpdateMonthlyListDialogFragment : DialogFragment() {
 
-    private val monthlyVM: MonthlyListViewModel by activityViewModels()
+    companion object {
+        fun newInstance(isRefresh: Boolean) = UpdateMonthlyListDialogFragment().apply {
+            arguments = Bundle().apply { putBoolean("isRefresh", isRefresh) }
+        }
+    }
+
+    private lateinit var listener: UpdateMonthlyListCallback
+
     private val localViewMoel: UpdateMonthlyListViewModel by viewModels()
 
     //private lateinit var firebaseAnalytics: FirebaseAnalytics
@@ -147,8 +154,7 @@ class UpdateMonthlyListDialogFragment : DialogFragment() {
     private fun startRewardAd() {
         // Eğer sınırsız yenileme hala çalışıyorsa
         if (localViewMoel.isTimeRunning.value == true) {
-            val model = MonthlyDialogCallBackModel(true, isRefresh, currentImageQuality)
-            monthlyVM.updateIsMonthlyListRewardEearned(model)
+            listener.onAdWatched(MonthlyDialogCallBackModel(isRefresh, currentImageQuality))
             dismiss()
         } else {
             if (rewardedAd.isLoaded) {
@@ -166,8 +172,7 @@ class UpdateMonthlyListDialogFragment : DialogFragment() {
                         if (isEarned) {
                             val timeToAdd = Utility.addExtraTimeToCurrent(Utility.DelayTime.UpdateMonthylList)
                             mainPref.save(ConstantsGeneral.prefMonthlyCountDown, timeToAdd)
-                            val model = MonthlyDialogCallBackModel(true, isRefresh, currentImageQuality)
-                            monthlyVM.updateIsMonthlyListRewardEearned(model)
+                            listener.onAdWatched(MonthlyDialogCallBackModel(isRefresh, currentImageQuality))
                             dismiss()
                         } else {
                             createAndLoadRewardedAd()
@@ -196,6 +201,15 @@ class UpdateMonthlyListDialogFragment : DialogFragment() {
             }
         }
 
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try {
+            listener = parentFragment as UpdateMonthlyListCallback
+        } catch (e: ClassCastException) {
+            throw ClassCastException("$context must implement UpdateMonthlyListListener")
+        }
     }
 
     private fun showCurrentToast(text: String, length: Int) {

@@ -38,7 +38,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [
@@ -51,7 +50,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
@@ -65,8 +64,7 @@ android {
         dataBinding = true
     }
 
-
-        compileOptions {
+    compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }

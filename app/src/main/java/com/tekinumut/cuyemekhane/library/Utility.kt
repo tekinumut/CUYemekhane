@@ -2,6 +2,7 @@ package com.tekinumut.cuyemekhane.library
 
 import android.app.Activity
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -171,6 +172,17 @@ class Utility {
                 DelayTime.UpdateMonthylList -> ConstantsGeneral.defUpdateMonthlyListDelayTime
             }
             return ConstantsGeneral.currentTimeStamp() + extraTime * 1000
+        }
+
+        /**
+         * Koyu tema seçili mi
+         */
+        fun isDarkThemeSelected(context: Context): Boolean {
+            return when (context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+                Configuration.UI_MODE_NIGHT_NO -> false
+                Configuration.UI_MODE_NIGHT_YES -> true
+                else -> false
+            }
         }
     }
 

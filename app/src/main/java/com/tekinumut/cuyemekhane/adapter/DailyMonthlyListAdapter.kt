@@ -2,7 +2,9 @@ package com.tekinumut.cuyemekhane.adapter
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -54,7 +56,9 @@ class DailyMonthlyListAdapter(
                 bundle.putString(ConstantsGeneral.bundleFoodName, model.yemek.name)
                 bundle.putString(ConstantsGeneral.bundleImgKey, model.foodDetailAndComp.foodDetail.picBase64)
                 bundle.putStringArrayList(ConstantsGeneral.bundleComponentListKey, componentList)
-                navController.navigate(getActionKey(), bundle)
+
+                if (navController.currentDestination?.id == getCurrentFragmentID)
+                    navController.navigate(getActionKey, bundle)
             } ?: run {
                 showCurrentToast(holder.itemView.context)
 
@@ -62,11 +66,23 @@ class DailyMonthlyListAdapter(
         }
     }
 
-    private fun getActionKey(): Int = if (hostFragmentKey == ConstantsGeneral.dailyFragmentKey) {
+
+    /**
+     * Yemek içeriğinin açıldığı fragment'a göre ilgili destination'a git
+     */
+    private val getActionKey: Int = if (hostFragmentKey == ConstantsGeneral.dailyFragmentKey)
         R.id.action_nav_daily_list_to_componentFragment
-    } else {
+    else
         R.id.action_nav_monthly_list_to_componentFragment
-    }
+
+    /**
+     * Hangi fragment'tan yemek içerik penceresini açıyorum?
+     */
+    private val getCurrentFragmentID: Int = if (hostFragmentKey == ConstantsGeneral.dailyFragmentKey)
+        R.id.nav_daily_list
+    else
+        R.id.nav_monthly_list
+
 
     private fun showCurrentToast(context: Context) {
         currentToast?.cancel()

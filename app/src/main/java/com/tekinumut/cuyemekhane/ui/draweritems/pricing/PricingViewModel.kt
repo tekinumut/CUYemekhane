@@ -4,14 +4,12 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
-import com.tekinumut.cuyemekhane.library.ConstantsOfWebSite
 import com.tekinumut.cuyemekhane.library.Resource
 import com.tekinumut.cuyemekhane.models.Pricing
 import com.tekinumut.cuyemekhane.room.DailyDAO
 import com.tekinumut.cuyemekhane.room.DailyDatabase
 import com.tekinumut.cuyemekhane.viewmodel.Repository
 import kotlinx.coroutines.Dispatchers
-import org.jsoup.Jsoup
 
 class PricingViewModel(application: Application) : AndroidViewModel(application) {
 

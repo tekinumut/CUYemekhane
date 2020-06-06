@@ -2,7 +2,6 @@ package com.tekinumut.cuyemekhane.viewmodel
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.tekinumut.cuyemekhane.library.*
 import com.tekinumut.cuyemekhane.models.Duyurular

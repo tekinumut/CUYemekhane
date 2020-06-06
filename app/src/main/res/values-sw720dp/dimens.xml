@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="duyuru_img_height">100dp</dimen>
-    <dimen name="duyuru_title_size">36sp</dimen>
-    <dimen name="duyuru_content_size">26sp</dimen>
+    <dimen name="sp14">21sp</dimen>
+    <dimen name="sp16">24sp</dimen>
+    <dimen name="sp18">27sp</dimen>
     <dimen name="card_daily_img_height">200dp</dimen>
     <dimen name="card_daily_food_title">36sp</dimen>
     <dimen name="card_daily_category_title">18sp</dimen>
     <dimen name="card_daily_calorie_title">26sp</dimen>
+    <dimen name="default_icon_size">42dp</dimen>
 </resources>

@@ -11,25 +11,27 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.adapter.DailyMonthlyListAdapter
 import com.tekinumut.cuyemekhane.databinding.FragmentMonthlyListBinding
+import com.tekinumut.cuyemekhane.interfaces.UpdateMonthlyListCallback
 import com.tekinumut.cuyemekhane.library.ConstantsGeneral
 import com.tekinumut.cuyemekhane.library.Resource
+import com.tekinumut.cuyemekhane.library.SafeClickListener
 import com.tekinumut.cuyemekhane.library.Utility
 import com.tekinumut.cuyemekhane.models.specificmodels.MonthlyDialogCallBackModel
+import com.tekinumut.cuyemekhane.ui.dialogfragments.updatemonthlylist.UpdateMonthlyListDialogFragment
+import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import kotlinx.android.synthetic.main.fragment_monthly_list.*
 
-class MonthlyListFragment : Fragment() {
+class MonthlyListFragment : Fragment(), UpdateMonthlyListCallback {
 
     private val mainViewModel: MainViewModel by activityViewModels()
-    private val monthlyListViewModel: MonthlyListViewModel by activityViewModels()
+    private val monthlyListViewModel: MonthlyListViewModel by viewModels()
     private val loadingDialog by lazy { Utility.getLoadingDialog(requireActivity()) }
     private lateinit var binding: FragmentMonthlyListBinding
     private var datePickerDialog: DatePickerDialog? = null
@@ -57,12 +59,6 @@ class MonthlyListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         init()
 
-        monthlyListViewModel.isMonthlyListRewardEarned.observe(requireActivity(), Observer {
-            if (it.isSuccess) {
-                getMonthlyListData(it.isRefresh, it.imgQuality)
-                monthlyListViewModel.updateIsMonthlyListRewardEearned(MonthlyDialogCallBackModel(false))
-            }
-        })
     }
 
 
@@ -75,11 +71,11 @@ class MonthlyListFragment : Fragment() {
         rotateForward = AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_forward)
         rotateBackward = AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_backward)
 
-        btn_update_monthly_list.setOnClickListener(listener)
-        fabMain.setOnClickListener(listener)
-        fabRemove.setOnClickListener(listener)
-        fabRefresh.setOnClickListener(listener)
-        fabDate.setOnClickListener(listener)
+        btn_update_monthly_list.setOnSafeClickListener { loadAndShowListUpdateDialog(false) }
+        fabMain.setOnClickListener { animateFab() }
+        fabRemove.setOnSafeClickListener { onRemoveFoodClick() }
+        fabRefresh.setOnSafeClickListener { loadAndShowListUpdateDialog(true) }
+        fabDate.setOnClickListener { onDatePickerClick() }
 
         getSelectedDayOfMonth()
 
@@ -106,8 +102,10 @@ class MonthlyListFragment : Fragment() {
                         // Ex: 11.06.2020
                         val formattedDate = Utility.getCalendarSDF(dayOfMonth, monthOfYear, year)
                         monthlyListViewModel.updateSelectedDay(formattedDate)
-                    }, selectedCalendar) // Takvimde seçili olan günü belirle
+                    }, selectedCalendar
+                ) // Takvimde seçili olan günü belirle
                 // Takvimde gösterilecek günleri ayarla
+                datePickerDialog?.isThemeDark = Utility.isDarkThemeSelected(requireContext())
                 datePickerDialog?.selectableDays = avaibleDates
                 datePickerDialog?.autoDismiss(true)
                 monthlyListViewModel.updateIsInfo(false)
@@ -145,44 +143,37 @@ class MonthlyListFragment : Fragment() {
         })
     }
 
-    /**
-     * Button click listener tanımlaması
-     */
-    private val listener = View.OnClickListener { view: View ->
-        when (view) {
-            btn_update_monthly_list -> loadAndShowListUpdateDialog(false)
-            fabMain -> animateFab()
-            fabRemove -> {
-                // Eğer seçili bir liste yoksa
-                if (monthlyListViewModel.isListEmpty.value == true) {
-                    showCurrentToast(getString(R.string.already_no_data), false)
-                } else {
-                    // Seçile güne ait menüyü silinmesi hakkında bilgi içeren diyaloğun tanımı
-                    val removeDialog = Utility.getRemoveDayDialog(requireActivity())
-                    removeDialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.remove)) { dialog, _ ->
-                        closeFab()
-                        dialog.dismiss()
-                        monthlyListViewModel.removeSelectedDay()
-                        showCurrentToast(getString(R.string.food_removed_of_date, selectedDay), true)
-                    }
-                    // Diyaloğu göster
-                    removeDialog.show()
-                }
+    private fun onDatePickerClick() {
+        // Takvim zaten eklenmişse birdaha ekleme
+        if (datePickerDialog?.isAdded != true) {
+            if (datePickerDialog != null) {
+                datePickerDialog?.show(parentFragmentManager, "def tag")
+            } else {
+                openFab()
+                val rotateClockwise = AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_clockwise)
+                fabRefresh.startAnimation(rotateClockwise)
+                showCurrentToast(getString(R.string.no_monthly_list_pls_refresh), true)
+            }
+        } else {
+            showCurrentToast(getString(R.string.date_picker_already_added), true)
+        }
+    }
 
+    private fun onRemoveFoodClick() {
+        // Eğer seçili bir liste yoksa
+        if (monthlyListViewModel.isListEmpty.value == true) {
+            showCurrentToast(getString(R.string.already_no_data), false)
+        } else {
+            // Seçile güne ait menüyü silinmesi hakkında bilgi içeren diyaloğun tanımı
+            val removeDialog = Utility.getRemoveDayDialog(requireActivity())
+            removeDialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.remove)) { dialog, _ ->
+                closeFab()
+                dialog.dismiss()
+                monthlyListViewModel.removeSelectedDay()
+                showCurrentToast(getString(R.string.food_removed_of_date, selectedDay), true)
             }
-            fabRefresh -> loadAndShowListUpdateDialog(true)
-            fabDate -> {
-                if (datePickerDialog != null) {
-                    datePickerDialog?.show(parentFragmentManager, "def tag")
-                } else {
-                    openFab()
-                    val rotateClockwise = AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_clockwise)
-                    fabRefresh.startAnimation(rotateClockwise)
-                    showCurrentToast(getString(R.string.no_monthly_list_pls_refresh), true)
-                }
-            }
-            else -> {
-            }
+            // Diyaloğu göster
+            removeDialog.show()
         }
     }
 
@@ -192,7 +183,7 @@ class MonthlyListFragment : Fragment() {
      * @param imgQuality SeekBar ile seçilen resim kalitesi
      */
     private fun getMonthlyListData(isRefresh: Boolean, imgQuality: Int) {
-        monthlyListViewModel.getMonthlyFoodData(imgQuality).observe(requireActivity(), Observer {
+        monthlyListViewModel.getMonthlyFoodData(imgQuality).observe(viewLifecycleOwner, Observer {
             when (it) {
                 Resource.InProgress -> loadingDialog.show()
                 is Resource.Success -> onDateResult(getString(R.string.data_loaded), isRefresh)
@@ -216,12 +207,8 @@ class MonthlyListFragment : Fragment() {
         }
     }
 
-
     private fun loadAndShowListUpdateDialog(isRefresh: Boolean) {
-        val navController: NavController = Navigation.findNavController(requireView())
-        val bundle = Bundle()
-        bundle.putBoolean("isRefresh", isRefresh)
-        navController.navigate(R.id.action_nav_monthly_list_to_updateMonthlyListDialog, bundle)
+        UpdateMonthlyListDialogFragment.newInstance(isRefresh).show(childFragmentManager, "no tag")
     }
 
     /**
@@ -256,6 +243,20 @@ class MonthlyListFragment : Fragment() {
         currentToast?.cancel()
         currentToast = Toast.makeText(requireContext(), text, if (isLong) Toast.LENGTH_LONG else Toast.LENGTH_SHORT)
         currentToast?.show()
+    }
+
+    /**
+     * Alınan butonu 1 saniyeliğine disable eder.
+     * Butonlara çift tıklamanın önüne geçmek için kullanılır
+     */
+    private fun View.setOnSafeClickListener(onSafeClick: (View) -> Unit) {
+        val safeClickListener = SafeClickListener { onSafeClick(it) }
+        setOnClickListener(safeClickListener)
+    }
+
+    override fun onAdWatched(callback: MonthlyDialogCallBackModel) {
+        getMonthlyListData(callback.isRefresh, callback.imgQuality)
+
     }
 
 }
