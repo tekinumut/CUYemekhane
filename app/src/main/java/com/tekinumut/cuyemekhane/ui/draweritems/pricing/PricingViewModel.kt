@@ -9,26 +9,28 @@ import com.tekinumut.cuyemekhane.library.Resource
 import com.tekinumut.cuyemekhane.models.Pricing
 import com.tekinumut.cuyemekhane.room.DailyDAO
 import com.tekinumut.cuyemekhane.room.DailyDatabase
+import com.tekinumut.cuyemekhane.viewmodel.Repository
 import kotlinx.coroutines.Dispatchers
 import org.jsoup.Jsoup
 
 class PricingViewModel(application: Application) : AndroidViewModel(application) {
 
     private val dailyFoodDao: DailyDAO = DailyDatabase.getInstance(application).yemekDao()
+    private val repository: Repository = Repository(application)
 
     /**
      * Ücretlendirme verilerini indirir
      */
     fun getPricingData(): LiveData<Resource<String>> = liveData(Dispatchers.IO) {
         emit(Resource.InProgress)
-        try {
-            val doc = Jsoup.connect(ConstantsOfWebSite.PricingURL).timeout(10000).get()
-            val pricingSectionPart = doc.select("section#section4").outerHtml()
-
-            dailyFoodDao.addPricing(Pricing(1, pricingSectionPart))
-            emit(Resource.Success(pricingSectionPart))
-        } catch (e: Exception) {
-            emit(Resource.Error(e))
+        when (val apiCall = repository.getPricingData()) {
+            is Resource.Success -> {
+                // Ücretlendirme verisini veritabanına yaz
+                // Hep aynı id üzerine yaz
+                dailyFoodDao.addPricing(Pricing(1, apiCall.data))
+                emit(Resource.Success(apiCall.data))
+            }
+            is Resource.Error -> emit(Resource.Error(apiCall.exception))
         }
     }
 

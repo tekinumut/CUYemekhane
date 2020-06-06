@@ -15,7 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.tekinumut.cuyemekhane.MainViewModel
+import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.adapter.DailyMonthlyListAdapter
 import com.tekinumut.cuyemekhane.databinding.FragmentMonthlyListBinding

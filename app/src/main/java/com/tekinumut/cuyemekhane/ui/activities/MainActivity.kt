@@ -1,9 +1,12 @@
-package com.tekinumut.cuyemekhane
+package com.tekinumut.cuyemekhane.ui.activities
 
 import android.os.Bundle
+import android.view.ViewGroup
+import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -15,9 +18,12 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
+import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
+import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.databinding.ActivityMainBinding
 import com.tekinumut.cuyemekhane.library.MainPref
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.RuntimeException
 
 
 class MainActivity : AppCompatActivity() {
@@ -29,7 +35,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this,
+            R.layout.activity_main)
         binding.mainVM = mainViewModel
         binding.lifecycleOwner = this
 
@@ -46,7 +53,6 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navList(), drawer_layout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         nav_view.setupWithNavController(navController)
-
         // Update Action Bar Title
         mainViewModel.actionBarTitle.observe(this, Observer { supportActionBar?.title = it })
 
@@ -64,10 +70,14 @@ class MainActivity : AppCompatActivity() {
      * AdViewBanner'ın görünüm durumu
      */
     private fun initAdBanner() {
-        // Init ads
-        MobileAds.initialize(this) {}
-        val adRequest = AdRequest.Builder().build()
-        adViewBanner.loadAd(adRequest)
+        val mainPref = MainPref.getInstance(this)
+        val isBannerSwitchOpen = mainPref.getBoolean(getString(R.string.bannerAdKey),true)
+        if(isBannerSwitchOpen){
+            // Init ads
+            MobileAds.initialize(this) {}
+            val adRequest = AdRequest.Builder().build()
+            adViewBanner.loadAd(adRequest)
+        }
     }
 
     /**

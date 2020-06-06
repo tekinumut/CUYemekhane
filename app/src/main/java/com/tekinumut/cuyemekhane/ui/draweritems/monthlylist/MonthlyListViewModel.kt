@@ -11,6 +11,7 @@ import com.tekinumut.cuyemekhane.models.ListOfAll
 import com.tekinumut.cuyemekhane.models.specificmodels.MonthlyDialogCallBackModel
 import com.tekinumut.cuyemekhane.room.MonthlyDAO
 import com.tekinumut.cuyemekhane.room.MonthlyDatabase
+import com.tekinumut.cuyemekhane.viewmodel.Repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.jsoup.Jsoup
@@ -18,6 +19,7 @@ import org.jsoup.Jsoup
 class MonthlyListViewModel(application: Application) : AndroidViewModel(application) {
 
     private val monthlyFoodDao: MonthlyDAO = MonthlyDatabase.getInstance(application).yemekDao()
+    private val repository: Repository = Repository(application)
 
     // Gösterilecek ekran layoutunu belirler
     private val _isInfo = MutableLiveData(false)
@@ -39,18 +41,15 @@ class MonthlyListViewModel(application: Application) : AndroidViewModel(applicat
      */
     fun getMonthlyFoodData(imgQuality: Int): LiveData<Resource<Int>> = liveData(Dispatchers.IO) {
         emit(Resource.InProgress)
-        try {
-            // Web sitesinden html verilerini alıp doc'a yaz.
-            val doc = Jsoup.connect(ConstantsOfWebSite.MainPageURL).timeout(30000).get()
-            val listOfAll: ListOfAll = DataUtility.getMonthlyList(doc, imgQuality)
-            // Alınan verileri veritabanına yaz
-            monthlyFoodDao.addAllValues(listOfAll)
-            // Şu aşamada kullanılmıyor.
-            emit(Resource.Success(listOfAll.foodDate.size))
-        } catch (e: Exception) {
-            emit(Resource.Error(e))
+        when (val apiCall = repository.getMonthlyFoodData(imgQuality)) {
+            is Resource.Success -> {
+                // Listeyi veritabanına yaz
+                monthlyFoodDao.addAllValues(apiCall.data)
+                // Şimdilik dönüş değeri kullanılmıyor
+                emit(Resource.Success(apiCall.data.foodDate.size))
+            }
+            is Resource.Error ->  emit(Resource.Error(apiCall.exception))
         }
-
     }
 
     /**

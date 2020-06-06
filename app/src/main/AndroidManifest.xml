@@ -6,18 +6,22 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".MainApplication"
         android:allowBackup="false"
         android:fullBackupContent="false"
-        android:networkSecurityConfig="@xml/network_security_config"
         android:icon="@mipmap/ic_launcher"
-        android:name=".MainApplication"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="UnusedAttribute">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activities.MainActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".ui.activities.BeginActivity"
+            android:theme="@style/SplashTheme"
             android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

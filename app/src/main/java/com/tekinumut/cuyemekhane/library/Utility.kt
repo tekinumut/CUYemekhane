@@ -159,7 +159,7 @@ class Utility {
             calendar.set(Calendar.SECOND, diffSeconds.toInt())
             val formattedText = sdf.format(calendar.time)
             val type: String = if (diffMinutes == 0L) "saniye" else "dakika"
-            return " Reklam $formattedText $type sonra açılacak"
+            return " Video Reklam $formattedText $type sonra açılacak"
         }
 
         /**

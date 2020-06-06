@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.tekinumut.cuyemekhane.MainViewModel
+import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.adapter.ComponentListAdapter
 import com.tekinumut.cuyemekhane.library.ConstantsGeneral

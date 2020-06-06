@@ -80,6 +80,14 @@ class ConstantsGeneral {
         // Varsayılan RemoveBanner reklam silme süresi
         const val defRemoveBannerDelaytime: Long = 60 * 60 * 24 * 14
 
+        // Firebase Log Event Keys
+        const val firebaseConnError: String = "conn_errors"
+
+        const val connErrorDaily = "${firebaseConnError}_daily"
+        const val connErrorMonthly = "${firebaseConnError}_monthly"
+        const val connErrorPricing = "${firebaseConnError}_pricing"
+        const val connErrorDuyurular = "${firebaseConnError}_duyurular"
+
     }
 
 }
