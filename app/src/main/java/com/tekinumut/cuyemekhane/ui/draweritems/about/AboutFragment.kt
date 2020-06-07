@@ -21,7 +21,6 @@ class AboutFragment : Fragment() {
 
     private val aboutViewModel: AboutViewModel by viewModels()
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_about, container, false)
         binding.aboutVm = aboutViewModel

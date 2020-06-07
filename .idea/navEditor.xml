@@ -13,8 +13,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="385" />
-                            <option name="y" value="308" />
+                            <option name="x" value="243" />
+                            <option name="y" value="446" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -25,8 +25,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="500" />
-                            <option name="y" value="1080" />
+                            <option name="x" value="276" />
+                            <option name="y" value="1007" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -61,8 +61,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="12" />
-                            <option name="y" value="1122" />
+                            <option name="x" value="-61" />
+                            <option name="y" value="1124" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -105,11 +105,6 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_nav_monthly_list_to_updateMonthlyListDialog">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -132,8 +127,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="119" />
-                            <option name="y" value="420" />
+                            <option name="x" value="-65" />
+                            <option name="y" value="433" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -143,36 +138,7 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_nav_settings_to_removeBannerAdDialog">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
                           </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="removeBannerAdDialog">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="543" />
-                            <option name="y" value="525" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="updateMonthlyListDialog">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="290" />
-                            <option name="y" value="722" />
-                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>

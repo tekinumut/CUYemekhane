@@ -58,8 +58,7 @@ class ConstantsGeneral {
                 R.id.nav_monthly_list,
                 R.id.nav_duyurular,
                 R.id.nav_pricing,
-                R.id.nav_contact,
-                R.id.updateMonthlyListDialog
+                R.id.nav_contact
             )
         }
 

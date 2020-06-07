@@ -1,7 +1,6 @@
 package com.tekinumut.cuyemekhane.ui.activities
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -19,7 +18,6 @@ import com.google.android.gms.ads.MobileAds
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.databinding.ActivityMainBinding
 import com.tekinumut.cuyemekhane.library.MainPref
-import com.tekinumut.cuyemekhane.library.Utility
 import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -33,8 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this,
-            R.layout.activity_main)
+        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.mainVM = mainViewModel
         binding.lifecycleOwner = this
 
@@ -69,8 +66,8 @@ class MainActivity : AppCompatActivity() {
      */
     private fun initAdBanner() {
         val mainPref = MainPref.getInstance(this)
-        val isBannerSwitchOpen = mainPref.getBoolean(getString(R.string.bannerAdKey),true)
-        if(isBannerSwitchOpen){
+        val isBannerSwitchOpen = mainPref.getBoolean(getString(R.string.bannerAdKey), true)
+        if (isBannerSwitchOpen) {
             // Init ads
             MobileAds.initialize(this) {}
             val adRequest = AdRequest.Builder().build()
@@ -100,7 +97,8 @@ class MainActivity : AppCompatActivity() {
      * Navigation tarafından yüklenecek layout listesi
      */
     private fun navList(): Set<Int> {
-        return setOf(R.id.nav_daily_list,
+        return setOf(
+            R.id.nav_daily_list,
             R.id.nav_monthly_list,
             R.id.nav_duyurular,
             R.id.nav_pricing,

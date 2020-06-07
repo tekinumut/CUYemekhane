@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:padding="@dimen/dp10">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/card_daily_bg"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="@dimen/dp8"
         app:cardElevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,9 +32,9 @@
                 android:id="@+id/tv_food_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="@dimen/dp10"
+                android:layout_marginTop="@dimen/dp15"
+                android:layout_marginEnd="@dimen/dp10"
                 android:fontFamily="@font/candal"
                 android:textColor="@color/card_daily_title"
                 android:textSize="@dimen/card_daily_food_title"
@@ -47,7 +47,7 @@
                 android:id="@+id/tv_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/dp5"
                 android:background="@color/card_daily_category_bg"
                 android:padding="3dp"
                 android:textColor="@color/card_daily_category_title"
@@ -61,8 +61,8 @@
                 android:id="@+id/tv_calorie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="@dimen/dp10"
+                android:layout_marginBottom="@dimen/dp10"
                 android:fontFamily="sans-serif-medium"
                 android:textColor="@color/card_calorie_title"
                 android:textSize="@dimen/card_daily_calorie_title"

@@ -22,9 +22,9 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:paddingBottom="20dp">
+            android:layout_marginStart="@dimen/dp10"
+            android:layout_marginEnd="@dimen/dp10"
+            android:paddingBottom="@dimen/dp20">
 
             <TextView
                 android:id="@+id/tvWatchAdTitle"
@@ -32,10 +32,10 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="@dimen/dp8"
                 android:text="@string/watch_ad_title"
                 android:textColor="@color/primary_text"
-                android:textSize="22sp"
+                android:textSize="@dimen/sp22"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -44,14 +44,14 @@
                 android:id="@+id/tvWatchAdContent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/dp10"
                 android:gravity="@{viewmodel.isTimeRunning ? Gravity.CENTER : Gravity.START}"
                 android:lineSpacingMultiplier="1.1"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                android:paddingStart="@dimen/dp10"
+                android:paddingEnd="@dimen/dp10"
                 android:text="@{viewmodel.isTimeRunning ? @string/watch_ad_content_running : @string/watch_ad_content}"
                 android:textColor="@color/seconday_text"
-                android:textSize="16sp"
+                android:textSize="@dimen/sp16"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvWatchAdTitle"
@@ -61,10 +61,10 @@
                 android:id="@+id/tvImgQuality"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/dp15"
                 android:gravity="center"
                 android:textColor="@color/primary_text"
-                android:textSize="18sp"
+                android:textSize="@dimen/sp18"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvWatchAdContent"
@@ -84,26 +84,28 @@
                 android:id="@+id/tv_checkBox_info"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp5"
                 android:lineSpacingExtra="2dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                android:paddingStart="@dimen/dp10"
+                android:paddingEnd="@dimen/dp10"
                 android:text="@string/dont_load_img_info"
                 android:textColor="@color/seconday_text"
+                android:textSize="@dimen/sp14"
                 app:layout_constraintEnd_toEndOf="@id/tvWatchAdContent"
                 app:layout_constraintStart_toStartOf="@+id/sbImgQuality"
                 app:layout_constraintTop_toBottomOf="@+id/sbImgQuality" />
 
             <Button
                 android:id="@+id/btnRejectUpdateMonthly"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_width="@dimen/btn_dialog_cancel_size"
+                android:layout_height="@dimen/btn_wrap_height"
+                android:layout_marginTop="@dimen/dp30"
                 android:background="@drawable/rounded_btn_red"
                 android:fontFamily="@font/roboto_medium"
                 android:text="@string/iptal_et"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textSize="@dimen/sp16"
                 app:layout_constraintEnd_toStartOf="@+id/btnAcceptUpdateMonthly"
                 app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="@+id/tvWatchAdContent"
@@ -111,8 +113,8 @@
 
             <Button
                 android:id="@+id/btnAcceptUpdateMonthly"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/btn_dialog_cancel_size"
+                android:layout_height="@dimen/btn_wrap_height"
                 android:alpha="@{viewmodel.adStatus == 1  ? 1.0f : 0.5f}"
                 android:background="@drawable/rounded_btn_green"
                 android:enabled="@{viewmodel.adStatus == 1  ? true : false}"
@@ -120,7 +122,7 @@
                 android:text="@string/kabul_et"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textSize="@dimen/sp16"
                 app:layout_constraintBottom_toBottomOf="@+id/btnRejectUpdateMonthly"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/btnRejectUpdateMonthly"
@@ -130,7 +132,7 @@
                 android:id="@+id/llMonthlyListAdLoading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="@dimen/dp15"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:visibility="@{viewmodel.adStatus == 0 || viewmodel.isTimeRunning ? View.VISIBLE : View.GONE}"
@@ -140,18 +142,19 @@
                 tools:visibility="visible">
 
                 <ProgressBar
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="@dimen/dp24"
+                    android:layout_height="@dimen/dp24"
                     android:indeterminateTint="@color/button_blue"
                     tools:ignore="UnusedAttribute" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
+                    android:layout_marginStart="@dimen/dp5"
                     android:gravity="center"
                     android:text="@{viewmodel.isTimeRunning ? viewmodel.remainingTimeText : @string/reward_ad_loading}"
                     android:textColor="@color/primary_text"
+                    android:textSize="@dimen/sp14"
                     tools:text="@string/reward_ad_loading" />
             </LinearLayout>
 
@@ -159,7 +162,7 @@
                 android:id="@+id/llAdErrorRefreshMonthlyList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/dp10"
                 android:orientation="horizontal"
                 android:visibility="@{viewmodel.adStatus == 2 ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="@+id/btnAcceptUpdateMonthly"
@@ -172,7 +175,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/ad_load_fail_try_again"
-                    android:textColor="@color/red" />
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/sp14" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

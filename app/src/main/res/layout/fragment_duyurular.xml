@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp"
+            android:padding="@dimen/dp20"
             android:visibility="gone"
             tools:ignore="MissingConstraints"
             tools:visibility="visible">
@@ -26,15 +26,15 @@
                 android:gravity="center"
                 android:text="@string/empty_duyuru_title"
                 android:textColor="@color/primary_text"
-                android:textSize="22sp" />
+                android:textSize="@dimen/sp26" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/dp10"
                 android:lineSpacingMultiplier="1.1"
                 android:text="@string/empty_duyuru_content"
-                android:textSize="16sp" />
+                android:textSize="@dimen/sp18" />
 
         </LinearLayout>
 

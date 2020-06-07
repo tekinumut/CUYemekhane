@@ -49,7 +49,7 @@ class Repository(context: Context) {
      * Ücretlendirme verilerini al
      */
     suspend fun getPricingData(): Resource<String> = safeApiCall({
-        val doc = Jsoup.connect(ConstantsOfWebSite.PricingURL).timeout(30000).get()
+        val doc = Jsoup.connect(ConstantsOfWebSite.PricingURL).timeout(10000).get()
         doc.select("section#section4").outerHtml()
     }, ConstantsGeneral.connErrorPricing)
 
