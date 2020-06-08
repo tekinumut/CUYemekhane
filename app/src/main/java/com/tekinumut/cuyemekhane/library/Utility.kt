@@ -45,12 +45,12 @@ class Utility {
         /**
          * Aldığı URL'yi base64 formatına çevirir.
          */
-        fun imgURLToBase64(foodImg: String, imgQuality: Int): String {
+        fun imgURLToBase64(foodImg: String): String {
             val input = URL(foodImg).openStream()
             val bitmap = BitmapFactory.decodeStream(input)
             val baos = ByteArrayOutputStream()
             // CompressFormat PNG olursa quality'i dikkate almaz.
-            bitmap.compress(Bitmap.CompressFormat.WEBP, imgQuality, baos)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
             val b = baos.toByteArray()
             return Base64.encodeToString(b, Base64.DEFAULT)
         }

@@ -24,6 +24,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp10"
             android:layout_marginEnd="@dimen/dp10"
+            android:paddingStart="@dimen/dp10"
+            android:paddingEnd="@dimen/dp10"
             android:paddingBottom="@dimen/dp20">
 
             <TextView
@@ -32,7 +34,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
                 android:gravity="center"
-                android:padding="@dimen/dp8"
+                android:paddingTop="@dimen/dp10"
+                android:paddingBottom="@dimen/dp10"
                 android:text="@string/watch_ad_title"
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/sp22"
@@ -47,8 +50,6 @@
                 android:layout_marginTop="@dimen/dp10"
                 android:gravity="@{viewmodel.isTimeRunning ? Gravity.CENTER : Gravity.START}"
                 android:lineSpacingMultiplier="1.1"
-                android:paddingStart="@dimen/dp10"
-                android:paddingEnd="@dimen/dp10"
                 android:text="@{viewmodel.isTimeRunning ? @string/watch_ad_content_running : @string/watch_ad_content}"
                 android:textColor="@color/seconday_text"
                 android:textSize="@dimen/sp16"
@@ -57,28 +58,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvWatchAdTitle"
                 tools:text="@string/watch_ad_content" />
 
-            <TextView
-                android:id="@+id/tvImgQuality"
+            <CheckBox
+                android:id="@+id/cbDownloadPic"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp15"
-                android:gravity="center"
-                android:textColor="@color/primary_text"
-                android:textSize="@dimen/sp18"
+                android:layout_marginTop="@dimen/dp10"
+                android:checked="true"
+                android:text="@string/checkbox_text_dl_image"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvWatchAdContent"
-                tools:text="Resim kalitesi: %50" />
-
-            <SeekBar
-                android:id="@+id/sbImgQuality"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:max="100"
-                android:progress="50"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvImgQuality" />
+                app:layout_constraintTop_toBottomOf="@+id/tvWatchAdContent" />
 
             <TextView
                 android:id="@+id/tv_checkBox_info"
@@ -86,14 +76,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp5"
                 android:lineSpacingExtra="2dp"
-                android:paddingStart="@dimen/dp10"
-                android:paddingEnd="@dimen/dp10"
                 android:text="@string/dont_load_img_info"
                 android:textColor="@color/seconday_text"
                 android:textSize="@dimen/sp14"
                 app:layout_constraintEnd_toEndOf="@id/tvWatchAdContent"
-                app:layout_constraintStart_toStartOf="@+id/sbImgQuality"
-                app:layout_constraintTop_toBottomOf="@+id/sbImgQuality" />
+                app:layout_constraintStart_toStartOf="@+id/cbDownloadPic"
+                app:layout_constraintTop_toBottomOf="@+id/cbDownloadPic" />
 
             <Button
                 android:id="@+id/btnRejectUpdateMonthly"

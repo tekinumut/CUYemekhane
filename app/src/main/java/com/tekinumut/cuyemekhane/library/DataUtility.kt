@@ -1,16 +1,30 @@
 package com.tekinumut.cuyemekhane.library
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.util.Base64
+import com.tekinumut.cuyemekhane.RetroMainApi
 import com.tekinumut.cuyemekhane.models.*
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.runBlocking
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
-import java.net.URL
+import java.io.ByteArrayOutputStream
 
 class DataUtility {
 
     companion object {
-        fun getMonthlyList(doc: Document, imgQuality: Int): ListOfAll {
+
+        private var retroMainApi: RetroMainApi = RetroMainApi.builder()
+
+        /**
+         * Verilen dökümandan aylık yemek verilerini alır
+         */
+        fun getMonthlyList(doc: Document, isDlImage: Boolean): ListOfAll {
             // Tarih listesi -- Bir index örneği : 11.05.2020 Pazartesi
             val dates: Elements = doc.select(ConstantsOfWebSite.monthlyDates)
 
@@ -18,8 +32,7 @@ class DataUtility {
             val foodDateList: List<FoodDate> = dates.mapIndexed { i, it -> FoodDate(i + 1, it.text()) }
             // Yemkleri liste biçiminde tutar
             val foodList: List<Food> = getMonthlyFoodListOfDate(doc, foodDateList)
-
-            val detailAndComponentPair = getDetailAndCompOfFood(foodList, imgQuality)
+            val detailAndComponentPair = getDetailAndCompOfFood(foodList, isDlImage)
             // Her yemeğe ait detay bilgi
             val foodDetail: List<FoodDetail> = detailAndComponentPair.first
             // Yemeği oluşturan bileşenleri tutar.
@@ -28,14 +41,16 @@ class DataUtility {
             return ListOfAll(foodDateList, foodList, foodDetail, foodComponent)
         }
 
-        fun getDailyList(doc: Document, imgQuality: Int): ListOfAll {
+        /**
+         *  Verilen dökümandan günlük yemek verilerini alır
+         */
+        fun getDailyList(doc: Document, isDlImage: Boolean): ListOfAll {
             // Tarih listesi -- Bir index örneği : 11.05.2020 Pazartesi
             // Liste her zaman 1 boyutlu olacak
             val todayDate = doc.select(ConstantsOfWebSite.dailyDate).map { FoodDate(1, it.text()) }
             // Yemekleri liste biçiminde tut
             val todayFoodList: List<Food> = getDailyFoodListOfDate(doc)
-
-            val detailAndComponentPair = getDetailAndCompOfFood(todayFoodList, imgQuality)
+            val detailAndComponentPair = getDetailAndCompOfFood(todayFoodList, isDlImage)
             // Her yemeğe ait detay bilgi
             val foodDetail: List<FoodDetail> = detailAndComponentPair.first
             // Yemeği oluşturan bileşenleri tutar.
@@ -57,13 +72,9 @@ class DataUtility {
 
             for (i in 0 until foodGeneral.size) {
                 val foodDetailURL = foodGeneral[i].select("[href]").attr("abs:href")
-                foodList.add(Food(i + 1,
-                    foodCategory[i].text(),
-                    foodName[i].text(),
-                    foodCalorie[i].text(),
-                    foodDetailURL,
-                    1
-                ))
+                foodList.add(
+                    Food(i + 1, foodCategory[i].text(), foodName[i].text(), foodCalorie[i].text(), foodDetailURL, 1)
+                )
             }
             return foodList.toList()
         }
@@ -99,29 +110,52 @@ class DataUtility {
 
         /**
          * Yemek listesinden yemek detaylarını ve bileşenlerini dönderir
+         * Aylık-Günlük liste verilerini alırken her url'yi asenkron çalıştırmak için async kullanılıyor.
+         * Böylece 30 yemeğin verisi aynı anda çekiliyor.
          */
-        private fun getDetailAndCompOfFood(foodList: List<Food>, imgQuality: Int): Pair<List<FoodDetail>, List<FoodComponent>> {
-            val detailList = ArrayList<FoodDetail>()
-            val componentList = ArrayList<FoodComponent>()
-            foodList.forEach { yModel ->
-                yModel.detailURL?.let { url ->
-                    val docDetail = Jsoup.parse(URL(url).openStream(), "windows-1254", url)
-                    // Türkçe karakter sorununu giderir
-                    docDetail.outputSettings().charset("windows-1254")
-                    val foodImgURL: String? = docDetail.select("[src]").attr("abs:src")
-                    val details: List<String> = docDetail.select("td").map { it.text().toString() }
-                    details.forEach { componentList.add(FoodComponent(null, it, yModel.food_id)) }
-                    // Eğer aylık listeden gelip resim kalitesini belirlediysem
-                    detailList.add(
-                        FoodDetail(
-                            yModel.food_id, //Eğer imgQuality 0 ise resimleri indirme
-                            if (imgQuality == 0 || foodImgURL.isNullOrEmpty()) null
-                            else Utility.imgURLToBase64(foodImgURL, imgQuality)
+        private fun getDetailAndCompOfFood(foodList: List<Food>, isDlImage: Boolean): Pair<List<FoodDetail>, List<FoodComponent>> =
+            runBlocking {
+                val detailList = ArrayList<Deferred<FoodDetail>>()
+                val componentList = ArrayList<FoodComponent>()
+                foodList.forEach { yModel ->
+                    if (!yModel.detailURL.isNullOrEmpty()) {
+                        // Her isteğin asenkron çalışması için hepsini async içerisinde çalıştırıyoruz
+                        // Daha sonra tüm çalışan isteklerin bitmesini awaitAll ile beklicez
+                        detailList.add(async {
+                            // Adresin html bilgisini çek
+                            val htmlCode = retroMainApi.getStringOfURL(yModel.detailURL).body()
+                            // Jsoup ile parse edip Document dosyasına dönüştür
+                            val docDetail = Jsoup.parse(htmlCode, ConstantsOfWebSite.MainPageURL)
+                            // Yemek resim adresini çek
+                            val foodImgURL: String? = docDetail.select("[src]").attr("abs:src")
+                            // Yemeğin bileşenlerini çek
+                            val details: List<String> = docDetail.select("td").map { it.text().toString() }
+                            // Tüm bileşenleri tek tek listeye ekle
+                            details.forEach { componentList.add(FoodComponent(null, it, yModel.food_id)) }
+                            // Yemeğin resmini base64 olarak bağlanılan siteden çek
+                            FoodDetail(yModel.food_id, getImageOfUrl(isDlImage, foodImgURL))
+                        }
                         )
-                    )
+                    }
                 }
+                Pair(detailList.awaitAll(), componentList)
             }
-            return Pair(detailList, componentList)
+
+        /**
+         * İçerisinde resim bulunan URL'yi base64 formatına çevirir.
+         */
+        private suspend fun getImageOfUrl(isDlImage: Boolean, foodImgURL: String?): String? {
+            return if (!isDlImage || foodImgURL.isNullOrEmpty()) {
+                null
+            } else {
+                val input = retroMainApi.getImageByte(foodImgURL).body()?.byteStream()
+                val bitmap = BitmapFactory.decodeStream(input)
+                val baos = ByteArrayOutputStream()
+                // CompressFormat PNG olursa quality'i dikkate almaz.
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
+                val b = baos.toByteArray()
+                return Base64.encodeToString(b, Base64.DEFAULT)
+            }
         }
 
         /**
@@ -131,10 +165,13 @@ class DataUtility {
          */
         private fun getYemekWithCalorie(yemek: Element): Pair<String, String> {
             // br taglerini text'e çevirirken tutmak için $$$ ile değiştir.
+            // Elimizde Kıymalı Sandviç$$$600 Kalori biçiminde bir text oldu
             val replacedHtml = yemek.html().replace("<br>", "$$$")
-            // Elimizde Kıymalı Sandviç<br>600 Kalori biçiminde bir text oldu
+            // Şimdi Kıymalı Sandviç<br>600 Kalori olarka çevirdik
             val newHtml = Jsoup.parse(replacedHtml).text().replace("$$$", "<br>")
+            // <br> tag öncesini alıyoruz. - Kıymalı Sandviç
             val name = newHtml.substringBefore("<br>")
+            // <br> tag sonrası 600 Kalori
             val calorie = newHtml.substringAfter("<br>")
             return Pair(name, calorie)
         }

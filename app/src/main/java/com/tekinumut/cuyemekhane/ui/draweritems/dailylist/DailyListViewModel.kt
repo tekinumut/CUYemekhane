@@ -21,9 +21,9 @@ class DailyListViewModel(application: Application) : AndroidViewModel(applicatio
      * @return listenin dizi sayısını dönderir
      *
      */
-    fun getDailyListData(imgQuality: Int): LiveData<Resource<Int>> = liveData(Dispatchers.IO) {
+    fun getDailyListData(): LiveData<Resource<Int>> = liveData(Dispatchers.IO) {
         emit(Resource.InProgress)
-        when (val apiCall = repository.getDailyListData(imgQuality)) {
+        when (val apiCall = repository.getDailyListData(true)) {
             is Resource.Success -> {
                 // Listeyi veritabanına yaz
                 dailyFoodDao.addAllValues(apiCall.data)

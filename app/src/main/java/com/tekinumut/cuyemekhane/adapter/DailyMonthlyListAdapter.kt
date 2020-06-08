@@ -2,9 +2,7 @@ package com.tekinumut.cuyemekhane.adapter
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -18,8 +16,7 @@ import com.tekinumut.cuyemekhane.library.Utility
 import com.tekinumut.cuyemekhane.models.FoodWithDetailComp
 
 class DailyMonthlyListAdapter(
-    private val recyclerList: List<FoodWithDetailComp>,
-    private val hostFragmentKey: Int
+    private val recyclerList: List<FoodWithDetailComp>, hostFragmentKey: Int
 ) : RecyclerView.Adapter<DailyMonthlyListAdapter.DailyListViewHolder>() {
 
     private var currentToast: Toast? = null

@@ -180,10 +180,10 @@ class MonthlyListFragment : Fragment(), UpdateMonthlyListCallback {
     /**
      * Sunucuya bağlanarak güncel aylık listeyi indirir.
      * @param isRefresh Eğer mevcut menüleri güncelliyorsa -> true
-     * @param imgQuality SeekBar ile seçilen resim kalitesi
+     * @param isDlImage Checkbox seçili ise resimler indir
      */
-    private fun getMonthlyListData(isRefresh: Boolean, imgQuality: Int) {
-        monthlyListViewModel.getMonthlyFoodData(imgQuality).observe(viewLifecycleOwner, Observer {
+    private fun getMonthlyListData(isRefresh: Boolean, isDlImage: Boolean) {
+        monthlyListViewModel.getMonthlyFoodData(isDlImage).observe(viewLifecycleOwner, Observer {
             when (it) {
                 Resource.InProgress -> loadingDialog.show()
                 is Resource.Success -> onDateResult(getString(R.string.data_loaded), isRefresh)
@@ -255,7 +255,7 @@ class MonthlyListFragment : Fragment(), UpdateMonthlyListCallback {
     }
 
     override fun onAdWatched(callback: MonthlyDialogCallBackModel) {
-        getMonthlyListData(callback.isRefresh, callback.imgQuality)
+        getMonthlyListData(callback.isRefresh, callback.isDlImage)
 
     }
 

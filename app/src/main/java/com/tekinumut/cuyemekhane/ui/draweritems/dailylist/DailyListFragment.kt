@@ -11,12 +11,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.adapter.DailyMonthlyListAdapter
 import com.tekinumut.cuyemekhane.library.*
 import com.tekinumut.cuyemekhane.models.Food
 import com.tekinumut.cuyemekhane.models.FoodWithDetailComp
+import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_daily_list.*
 
 class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
@@ -95,7 +95,7 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
      */
     private fun getFoodData(isSwipeRefresh: Boolean) {
         if (shouldAutoRefreshData(isSwipeRefresh)) {
-            dailyListViewModel.getDailyListData(ConstantsGeneral.defMonthlyImgQuality).observe(viewLifecycleOwner, Observer {
+            dailyListViewModel.getDailyListData().observe(viewLifecycleOwner, Observer {
                 when (it) {
                     Resource.InProgress -> if (!isSwipeRefresh) loadingDialog.show()
                     is Resource.Success -> {

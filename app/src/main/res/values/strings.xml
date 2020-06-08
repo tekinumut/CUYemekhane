@@ -56,10 +56,9 @@
     <string name="watch_ad_content">Aylık yemek listesini indirebilmek için bir adet video reklam izlemeniz gerekmektedir.
         Daha sonra indirdiğiniz son listeye reklam izlemeden ulaşabilirsiniz.</string>
     <string name="watch_ad_content_running">Listeyi yenilerken bir hata ile karşılaşma olasılığından dolayı 1 saat boyunca aylık listeyi istediğiniz kadar yenileyebilirsiniz.</string>
-    <string name="dont_load_img_info">• Çubuğu 0 değerine getirerek resim indirmeyi iptal edebilirsiniz.
-        \n• Yemeklere ait resimleri yüklemeyerek 30 mb\'a kadar ulaşabilen indirme boyutunu 100 KB boyutuna düşürebilirsiniz.</string>
-    <string name="sb_img_quality">Resim Kalitesi: %%%d</string> <!-- %%->% yazar %d-> verilen int değerini Exp: %50-->
-    <string name="sb_img_quality_zero">Resimler indirilmeyecek</string> <!-- %%->% yazar %d-> verilen int değerini Exp: %50-->
+    <string name="dont_load_img_info">• Yemeklere ait resimleri yüklemeyerek, 30 mb\'a kadar ulaşabilen indirme boyutunu 100 KB boyutuna düşürebilirsiniz.</string>
+    <!-- %%->% yazar %d-> verilen int değerini Exp: %50-->
+    <!-- %%->% yazar %d-> verilen int değerini Exp: %50-->
 
     <string name="contact_title">İletişim</string>
     <string name="contact_address">Çukurova Üniversitesi Sarıçam \nAdana, pk01250</string>
@@ -107,7 +106,7 @@
         \n• Ayarlar menüsünden; uygulama açıldığında görüntülenecek sayfayı, uygulama temasını vb. değiştirebilirsiniz.
         \n• Siz listeleri güncelledikçe, bu listeler telefona kayıt edilir. Daha sonra bu listelere çevrimdışı olarak erişebilirsiniz.
         \n• Listeler belirli sebeplerden dolayı boş olabilir. Bu sebepleri size açıklayan bir açıklama ekranı gösterilecektir.
-        \n• Listeleri ekranı yukarıdan aşağı çekerek yenileyebilirsiniz.
+        \n• Listeleri, ekranı yukarıdan aşağı çekerek yenileyebilirsiniz.
         \n• Bazı sayfaların açılışta verilerini otomatik olarak güncellediğini göreceksiniz. Ayarlar menüsünden bu özelliği, istediğiniz sayfaya açıp kapatabilirsiniz.
         \n• Uygulama tamamen açık kaynaktır. Güncel proje kodlarına aşağıdaki Github linkinden erişebilirsiniz.
         \n• Uygulamada yaşadığınız hataları, düzeltilmesini istediğiniz yerleri, mağaza sayfasında yorum yazarak veya bm.umuttekin@gmail.com adresine mail göndererek bildirebilirsiniz.
@@ -140,5 +139,6 @@
     <string name="ad_failed_load">Reklam yüklenemedi! Lütfen tekrar deneyiniz.</string>
     <string name="reward_ad_loading">Reklam Yükleniyor</string>
     <string name="ad_load_fail_try_again">Reklam yenilemedi.\nTekrar yüklemek için tıkla!</string>
+    <string name="checkbox_text_dl_image">Resimleri indir</string>
 
 </resources>

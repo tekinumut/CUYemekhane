@@ -30,9 +30,9 @@ class MonthlyListViewModel(application: Application) : AndroidViewModel(applicat
      * @return listenin dizi sayısını dönderir
      *
      */
-    fun getMonthlyFoodData(imgQuality: Int): LiveData<Resource<Int>> = liveData(Dispatchers.IO) {
+    fun getMonthlyFoodData(isDlImage: Boolean): LiveData<Resource<Int>> = liveData(Dispatchers.IO) {
         emit(Resource.InProgress)
-        when (val apiCall = repository.getMonthlyFoodData(imgQuality)) {
+        when (val apiCall = repository.getMonthlyFoodData(isDlImage)) {
             is Resource.Success -> {
                 // Listeyi veritabanına yaz
                 monthlyFoodDao.addAllValues(apiCall.data)

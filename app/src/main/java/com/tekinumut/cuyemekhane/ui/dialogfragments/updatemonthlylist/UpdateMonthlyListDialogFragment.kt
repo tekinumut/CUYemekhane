@@ -8,7 +8,10 @@ import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
@@ -49,7 +52,7 @@ class UpdateMonthlyListDialogFragment : DialogFragment() {
     private var currentToast: Toast? = null
 
     private var isRefresh = false
-    private var currentImageQuality = ConstantsGeneral.defMonthlyImgQuality
+    private var isDlImage = true
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.dialog_update_monthly_list, container, false)
@@ -80,33 +83,12 @@ class UpdateMonthlyListDialogFragment : DialogFragment() {
         mainPref = MainPref.getInstance(it)
         btnAccept = binding.root.findViewById(R.id.btnAcceptUpdateMonthly)
         llAdErrorRefresh = binding.root.findViewById(R.id.llAdErrorRefreshMonthlyList)
-        initSeekBar()
+        initCheckBox()
         initRemainingTimeObserve()
         isRefresh = arguments?.getBoolean("isRefresh", false) ?: false
         //firebaseAnalytics = FirebaseAnalytics.getInstance(it)
     }
 
-    /**
-     * SeekBar'ı init et ve değerini currentImageQuality değişkenine ata
-     */
-    private fun initSeekBar() {
-        val tvImgQuality: TextView = binding.root.findViewById(R.id.tvImgQuality)
-        val sbImgQuality: SeekBar = binding.root.findViewById(R.id.sbImgQuality)
-        tvImgQuality.text = getString(R.string.sb_img_quality, currentImageQuality)
-        sbImgQuality.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                if (progress > 0) {
-                    tvImgQuality.text = getString(R.string.sb_img_quality, progress)
-                } else {
-                    tvImgQuality.text = getString(R.string.sb_img_quality_zero)
-                }
-                currentImageQuality = progress
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
-    }
 
     /**
      * Listeyi sınırsız yenileme hakkından kalan süreyi izle
@@ -127,6 +109,16 @@ class UpdateMonthlyListDialogFragment : DialogFragment() {
                     localViewMoel.updateRemainingTimeText(Utility.timeMillisToHourFormat(millisUntilFinished))
                 }
             }.start()
+        }
+    }
+
+    /**
+     * Resim indirip indirmeyeceği bilgisini güncelliyoruz
+     */
+    private fun initCheckBox() {
+        val checkBoxDlImage: CheckBox = binding.root.findViewById(R.id.cbDownloadPic)
+        checkBoxDlImage.setOnCheckedChangeListener { _, isChecked ->
+            isDlImage = isChecked
         }
     }
 
@@ -154,7 +146,7 @@ class UpdateMonthlyListDialogFragment : DialogFragment() {
     private fun startRewardAd() {
         // Eğer sınırsız yenileme hala çalışıyorsa
         if (localViewMoel.isTimeRunning.value == true) {
-            listener.onAdWatched(MonthlyDialogCallBackModel(isRefresh, currentImageQuality))
+            listener.onAdWatched(MonthlyDialogCallBackModel(isRefresh, isDlImage))
             dismiss()
         } else {
             if (rewardedAd.isLoaded) {
@@ -172,7 +164,7 @@ class UpdateMonthlyListDialogFragment : DialogFragment() {
                         if (isEarned) {
                             val timeToAdd = Utility.addExtraTimeToCurrent(Utility.DelayTime.UpdateMonthylList)
                             mainPref.save(ConstantsGeneral.prefMonthlyCountDown, timeToAdd)
-                            listener.onAdWatched(MonthlyDialogCallBackModel(isRefresh, currentImageQuality))
+                            listener.onAdWatched(MonthlyDialogCallBackModel(isRefresh, isDlImage))
                             dismiss()
                         } else {
                             createAndLoadRewardedAd()

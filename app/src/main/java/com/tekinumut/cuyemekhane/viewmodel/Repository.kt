@@ -32,17 +32,17 @@ class Repository(context: Context) {
     /**
      * Günlük liste verilerini al
      */
-    suspend fun getDailyListData(imgQuality: Int): Resource<ListOfAll> = safeApiCall({
+    suspend fun getDailyListData(isDlImage: Boolean): Resource<ListOfAll> = safeApiCall({
         val doc = Jsoup.connect(ConstantsOfWebSite.MainPageURL).timeout(10000).get()
-        DataUtility.getDailyList(doc, imgQuality)
+        DataUtility.getDailyList(doc, isDlImage)
     }, ConstantsGeneral.connErrorDaily)
 
     /**
      * Aylık liste verilerini al
      */
-    suspend fun getMonthlyFoodData(imgQuality: Int): Resource<ListOfAll> = safeApiCall({
+    suspend fun getMonthlyFoodData(isDlImage: Boolean): Resource<ListOfAll> = safeApiCall({
         val doc = Jsoup.connect(ConstantsOfWebSite.MainPageURL).timeout(30000).get()
-        DataUtility.getMonthlyList(doc, imgQuality)
+        DataUtility.getMonthlyList(doc, isDlImage)
     }, ConstantsGeneral.connErrorMonthly)
 
     /**
@@ -66,7 +66,7 @@ class Repository(context: Context) {
         duyuruClass.forEachIndexed { i, element ->
             val foodImgURL: String? = element.select("[src]").attr("abs:src")
             val imgBase64 = if (foodImgURL.isNullOrEmpty()) null
-            else Utility.imgURLToBase64(foodImgURL, ConstantsGeneral.defDailyImgQuality)
+            else Utility.imgURLToBase64(foodImgURL)
             duyurulist.add(Duyurular(i + 1, title[i].text(), content[i].text(), imgBase64))
         }
         duyurulist

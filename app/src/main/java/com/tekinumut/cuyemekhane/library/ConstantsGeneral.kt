@@ -38,12 +38,6 @@ class ConstantsGeneral {
         // Varsayılan zaman formatı
         val defaultSDF: SimpleDateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH)
 
-        // Aylık listenin varsayılan resim kalitesi, yüzde cinsinden
-        const val defMonthlyImgQuality: Int = 50
-
-        // Aylık listenin varsayılan resim kalitesi, yüzde cinsinden
-        const val defDailyImgQuality: Int = 100
-
         // Günlük listenin sharedPref'teki otomatik güncelleme varsayılanı
         const val defValDailyAutoUpdate = true
         const val defValDuyurularAutoUpdate = true

@@ -8,7 +8,7 @@
     <dimen name="dp20">30dp</dimen>
     <dimen name="dp24">32dp</dimen>
     <dimen name="dp30">45dp</dimen>
-    <dimen name="def_fab_size">60dp</dimen>
+    <dimen name="def_fab_size">75dp</dimen>
     <dimen name="btn_dialog_cancel_size">135dp</dimen>
     <dimen name="dp250">375dp</dimen>
 
@@ -21,7 +21,6 @@
     <dimen name="sp26">39sp</dimen>
 
     <dimen name="btn_wrap_height">75dp</dimen>
-    <dimen name="def_icon_size">32dp</dimen>
     <dimen name="dahili_padding">47dp</dimen>
     <dimen name="card_daily_img_height">200dp</dimen>
     <dimen name="card_daily_food_title">36sp</dimen>
