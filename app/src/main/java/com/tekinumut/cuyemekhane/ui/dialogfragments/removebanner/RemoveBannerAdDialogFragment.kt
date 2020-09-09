@@ -16,6 +16,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.rewarded.RewardItem
 import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdCallback
@@ -84,7 +85,7 @@ class RemoveBannerAdDialogFragment : DialogFragment() {
                 removeBannerVM.updateAdStatus(1)
             }
 
-            override fun onRewardedAdFailedToLoad(p0: Int) {
+            override fun onRewardedAdFailedToLoad(p0: LoadAdError?) {
                 super.onRewardedAdFailedToLoad(p0)
                 removeBannerVM.updateAdStatus(2)
             }

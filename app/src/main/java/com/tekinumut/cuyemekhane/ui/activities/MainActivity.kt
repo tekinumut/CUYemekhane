@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -49,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         nav_view.setupWithNavController(navController)
         // Update Action Bar Title
-        mainViewModel.actionBarTitle.observe(this, Observer { supportActionBar?.title = it })
+        mainViewModel.actionBarTitle.observe(this, { supportActionBar?.title = it })
 
         // Seçili item hakkında viewModel'ı bilgilendir
         navController.addOnDestinationChangedListener { _, destination, _ ->

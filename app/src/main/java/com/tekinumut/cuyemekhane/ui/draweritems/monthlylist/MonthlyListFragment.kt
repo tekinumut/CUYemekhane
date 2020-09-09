@@ -12,7 +12,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.adapter.DailyMonthlyListAdapter
@@ -87,7 +86,7 @@ class MonthlyListFragment : Fragment(), UpdateMonthlyListCallback {
      * Takvimi tanımla ve aylık listede var olan değişimleri takip et
      */
     private fun initCalendarAndObserveMonthlyList() {
-        monthlyListViewModel.getDaysOfMonth.observe(viewLifecycleOwner, Observer { foodList ->
+        monthlyListViewModel.getDaysOfMonth.observe(viewLifecycleOwner, { foodList ->
             // Takvimde gösterilecek günler
             val avaibleDates = Utility.getCalendarArray(foodList.map { it.name })
             // Güncel olarak seçilen gün
@@ -103,9 +102,9 @@ class MonthlyListFragment : Fragment(), UpdateMonthlyListCallback {
                         val formattedDate = Utility.getCalendarSDF(dayOfMonth, monthOfYear, year)
                         monthlyListViewModel.updateSelectedDay(formattedDate)
                     }, selectedCalendar
-                ) // Takvimde seçili olan günü belirle
-                // Takvimde gösterilecek günleri ayarla
+                )
                 datePickerDialog?.isThemeDark = Utility.isDarkThemeSelected(requireContext())
+                // Takvimde gösterilecek günleri ayarla
                 datePickerDialog?.selectableDays = avaibleDates
                 datePickerDialog?.autoDismiss(true)
                 monthlyListViewModel.updateIsInfo(false)
@@ -123,7 +122,7 @@ class MonthlyListFragment : Fragment(), UpdateMonthlyListCallback {
      * RecyclerView verisi burada güncellenir
      */
     private fun getSelectedDayOfMonth() {
-        monthlyListViewModel.getSelectedDayOfMonth().observe(viewLifecycleOwner, Observer { allList ->
+        monthlyListViewModel.getSelectedDayOfMonth().observe(viewLifecycleOwner, { allList ->
             // Seçilen gün verisini actionBar'a yükle
             // Başlangıçta hiçbir gün seçili olmayabilir
             allList?.foodDate?.name?.let { mainViewModel.updateActionTitle(it) }
@@ -183,7 +182,7 @@ class MonthlyListFragment : Fragment(), UpdateMonthlyListCallback {
      * @param isDlImage Checkbox seçili ise resimler indir
      */
     private fun getMonthlyListData(isRefresh: Boolean, isDlImage: Boolean) {
-        monthlyListViewModel.getMonthlyFoodData(isDlImage).observe(viewLifecycleOwner, Observer {
+        monthlyListViewModel.getMonthlyFoodData(isDlImage).observe(viewLifecycleOwner, {
             when (it) {
                 Resource.InProgress -> loadingDialog.show()
                 is Resource.Success -> onDateResult(getString(R.string.data_loaded), isRefresh)

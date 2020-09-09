@@ -35,7 +35,7 @@
                 android:layout_marginStart="@dimen/dp10"
                 android:layout_marginTop="@dimen/dp15"
                 android:layout_marginEnd="@dimen/dp10"
-                android:fontFamily="@font/candal"
+                android:fontFamily="@font/russo_one"
                 android:textColor="@color/card_daily_title"
                 android:textSize="@dimen/card_daily_food_title"
                 app:layout_constraintEnd_toEndOf="parent"

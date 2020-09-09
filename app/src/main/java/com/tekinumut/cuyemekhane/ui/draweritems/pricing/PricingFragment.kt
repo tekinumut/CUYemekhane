@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.library.ConstantsGeneral
@@ -41,7 +40,7 @@ class PricingFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     private fun observePricingTable() {
-        pricingViewModel.getPricing.observe(viewLifecycleOwner, Observer {
+        pricingViewModel.getPricing.observe(viewLifecycleOwner, {
             if (it.isNullOrEmpty()) {
                 activeLayout(true)
             } else {
@@ -55,7 +54,7 @@ class PricingFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private fun getPricingData(isSwipeRefresh: Boolean) {
         val mainPref = MainPref.getInstance(requireContext())
         if (shouldAutoRefreshData(isSwipeRefresh, mainPref)) {
-            pricingViewModel.getPricingData().observe(viewLifecycleOwner, Observer {
+            pricingViewModel.getPricingData().observe(viewLifecycleOwner, {
                 when (it) {
                     Resource.InProgress -> if (!isSwipeRefresh) loadingDialog.show()
                     is Resource.Success -> {

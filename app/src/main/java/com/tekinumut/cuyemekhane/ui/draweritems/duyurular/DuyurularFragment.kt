@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.tekinumut.cuyemekhane.R
@@ -46,7 +45,7 @@ class DuyurularFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
      * Duyurular veritabanını izle
      */
     private fun observeDuyurularDB() {
-        duyurularViewModel.getDuyurular.observe(viewLifecycleOwner, Observer {
+        duyurularViewModel.getDuyurular.observe(viewLifecycleOwner, {
             if (!it.isNullOrEmpty()) {
                 recyclerDuyurular.adapter = DuyurularAdapter(it)
                 activeLayout(false)
@@ -76,7 +75,7 @@ class DuyurularFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private fun getDuyurularData(isSwipeRefresh: Boolean) {
         val mainPref = MainPref.getInstance(requireContext())
         if (shouldAutoRefreshData(isSwipeRefresh, mainPref)) {
-            duyurularViewModel.getDuyurularData().observe(viewLifecycleOwner, Observer {
+            duyurularViewModel.getDuyurularData().observe(viewLifecycleOwner, {
                 when (it) {
                     Resource.InProgress -> if (!isSwipeRefresh) loadingDialog.show()
                     is Resource.Success -> {

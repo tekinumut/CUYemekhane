@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.tekinumut.cuyemekhane.R
@@ -54,7 +53,7 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
      *
      */
     private fun observeDailyList() {
-        dailyListViewModel.getDailyList.observe(viewLifecycleOwner, Observer { dateWithAll ->
+        dailyListViewModel.getDailyList.observe(viewLifecycleOwner, { dateWithAll ->
             dateWithAll?.let {
                 mainViewModel.updateActionTitle(it.foodDate.name)
                 if (it.yemekWithComponentComp.isNullOrEmpty()) {
@@ -95,7 +94,7 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
      */
     private fun getFoodData(isSwipeRefresh: Boolean) {
         if (shouldAutoRefreshData(isSwipeRefresh)) {
-            dailyListViewModel.getDailyListData().observe(viewLifecycleOwner, Observer {
+            dailyListViewModel.getDailyListData().observe(viewLifecycleOwner, {
                 when (it) {
                     Resource.InProgress -> if (!isSwipeRefresh) loadingDialog.show()
                     is Resource.Success -> {

@@ -23,7 +23,7 @@
     <dimen name="btn_wrap_height">50dp</dimen>
     <dimen name="dahili_padding">34dp</dimen>
     <dimen name="card_daily_img_height">125dp</dimen>
-    <dimen name="card_daily_food_title">22sp</dimen>
+    <dimen name="card_daily_food_title">24sp</dimen>
     <dimen name="card_daily_category_title">12sp</dimen>
     <dimen name="card_daily_calorie_title">16sp</dimen>
     <dimen name="about_logo_size">125dp</dimen>
