@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -85,9 +86,10 @@ class RemoveBannerAdDialogFragment : DialogFragment() {
                 removeBannerVM.updateAdStatus(1)
             }
 
-            override fun onRewardedAdFailedToLoad(p0: LoadAdError?) {
+            override fun onRewardedAdFailedToLoad(p0: LoadAdError) {
                 super.onRewardedAdFailedToLoad(p0)
                 removeBannerVM.updateAdStatus(2)
+                Log.e("failed", "faill $p0")
             }
         })
     }

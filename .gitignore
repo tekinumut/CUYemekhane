@@ -6,6 +6,7 @@
 # Covers files to be ignored for android development using Android Studio.
 
 # Custom
+/app/src/main/res/values/secrets.xml
 /keystore.properties
 
 # Built application files
