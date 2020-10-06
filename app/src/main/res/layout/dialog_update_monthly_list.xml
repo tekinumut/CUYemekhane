@@ -103,9 +103,9 @@
                 android:id="@+id/btnAcceptUpdateMonthly"
                 android:layout_width="@dimen/btn_dialog_cancel_size"
                 android:layout_height="@dimen/btn_wrap_height"
-                android:alpha="@{viewmodel.adStatus == 1  ? 1.0f : 0.5f}"
+                android:alpha="@{viewmodel.adStatus == 1 || viewmodel.adStatus == 3 ? 1.0f : 0.5f}"
                 android:background="@drawable/rounded_btn_green"
-                android:enabled="@{viewmodel.adStatus == 1  ? true : false}"
+                android:enabled="@{viewmodel.adStatus == 1 || viewmodel.adStatus == 3  ? true : false}"
                 android:fontFamily="@font/roboto_medium"
                 android:text="@string/kabul_et"
                 android:textAllCaps="false"
@@ -151,8 +151,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp10"
+                android:clickable="@{viewmodel.adStatus == 3 ? false : true}"
                 android:orientation="horizontal"
-                android:visibility="@{viewmodel.adStatus == 2 ? View.VISIBLE : View.GONE}"
+                android:visibility="@{viewmodel.adStatus == 2 || viewmodel.adStatus == 3 ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="@+id/btnAcceptUpdateMonthly"
                 app:layout_constraintStart_toStartOf="@+id/btnRejectUpdateMonthly"
                 app:layout_constraintTop_toBottomOf="@+id/btnRejectUpdateMonthly"
@@ -162,9 +163,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/ad_load_fail_try_again"
-                    android:textColor="@color/red"
-                    android:textSize="@dimen/sp14" />
+                    android:textSize="@dimen/sp14"
+                    app:customTextAndColor="@{viewmodel.adStatus}" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

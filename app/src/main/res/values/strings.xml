@@ -139,6 +139,7 @@
     <string name="ad_failed_load">Reklam yüklenemedi! Lütfen tekrar deneyiniz.</string>
     <string name="reward_ad_loading">Reklam Yükleniyor</string>
     <string name="ad_load_fail_try_again">Reklam yenilemedi.\nTekrar yüklemek için tıkla!</string>
+    <string name="ad_load_fail_error_no_ad">Reklam sunucudan alınamadı. Aylık listeyi indirmek için <u>Kabul Et</u> butonuna tıklayınız.</string>
     <string name="checkbox_text_dl_image">Resimleri indir</string>
 
 </resources>

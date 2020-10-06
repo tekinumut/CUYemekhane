@@ -10,6 +10,7 @@ import android.util.Base64
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import com.tekinumut.cuyemekhane.R
@@ -81,8 +82,13 @@ class Utility {
          * Listelerin alındığı web sayfasını açar
          */
         fun openWebSite(context: Context, url: String) {
+
             val builder: CustomTabsIntent.Builder = CustomTabsIntent.Builder()
-            builder.setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary))
+            val colorSchemeBuilder = CustomTabColorSchemeParams.Builder().run {
+                setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary))
+                    .build()
+            }
+            builder.setDefaultColorSchemeParams(colorSchemeBuilder)
             builder.setStartAnimations(context, R.anim.slide_in_right, R.anim.slide_out_left)
             builder.setExitAnimations(context, R.anim.slide_in_left, R.anim.slide_out_right)
 

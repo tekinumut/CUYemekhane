@@ -5,7 +5,6 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -139,8 +138,17 @@ class UpdateMonthlyListDialogFragment : DialogFragment() {
 
                 override fun onRewardedAdFailedToLoad(p0: LoadAdError) {
                     super.onRewardedAdFailedToLoad(p0)
-                    localViewMoel.updateAdStatus(2)
-                    Log.e("failed", "faill $p0")
+                    // Eğer sunucudan reklam gelmezse adErrorCount'u arttır.
+                    if (p0.code == 3) {
+                        localViewMoel.incAdErrorCount()
+                    }
+                    // Birden fazla sunucudan reklam gelmezse
+                    // kullanıcı reklamsız listeyi indirebilecek.
+                    if (localViewMoel.adErrorCount.value ?: 0 >= 2) {
+                        localViewMoel.updateAdStatus(3)
+                    } else {
+                        localViewMoel.updateAdStatus(2)
+                    }
                 }
             })
         }
@@ -193,6 +201,9 @@ class UpdateMonthlyListDialogFragment : DialogFragment() {
                         showCurrentToast(errorCause, Toast.LENGTH_LONG)
                     }
                 })
+            } else {
+                listener.onAdWatched(MonthlyDialogCallBackModel(isRefresh, isDlImage))
+                dismiss()
             }
         }
 

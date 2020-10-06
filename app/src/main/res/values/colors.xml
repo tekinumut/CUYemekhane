@@ -7,6 +7,7 @@
     <color name="default_bg_opposite">#121212</color>
     <color name="white">#ffffff</color>
     <color name="red">#ff0000</color>
+    <color name="green">#2ecc71</color>
     <color name="primary_text">#000000</color>
     <color name="seconday_text">#8A000000</color>
 
