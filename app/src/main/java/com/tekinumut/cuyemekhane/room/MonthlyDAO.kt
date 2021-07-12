@@ -23,6 +23,9 @@ interface MonthlyDAO {
     @Query("Update FoodDate set selectedDay = 1 where name LIKE '%' || :datePart || '%' or name = :datePart")
     suspend fun setSelectedDayOfMonth(datePart: String)
 
+    @Query("Update FoodDate set selectedDay = 1 where date_id = :id")
+    suspend fun setSelectedDayToFirstDay(id: Int)
+
     @Transaction
     suspend fun updateSelectedDayOfMonth(datePart: String) {
         resetSelectedDayOfMonth()

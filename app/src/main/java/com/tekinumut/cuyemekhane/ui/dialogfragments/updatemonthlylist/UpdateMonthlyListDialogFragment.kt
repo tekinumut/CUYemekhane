@@ -17,11 +17,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
+import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.rewarded.RewardItem
 import com.google.android.gms.ads.rewarded.RewardedAd
-import com.google.android.gms.ads.rewarded.RewardedAdCallback
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.databinding.DialogUpdateMonthlyListBinding
@@ -46,7 +46,7 @@ class UpdateMonthlyListDialogFragment : DialogFragment() {
     //private lateinit var firebaseAnalytics: FirebaseAnalytics
     private lateinit var binding: DialogUpdateMonthlyListBinding
     private lateinit var mainPref: MainPref
-    private lateinit var rewardedAd: RewardedAd
+    private var mRewardedAd: RewardedAd? = null
     private lateinit var btnAccept: Button
     private lateinit var llAdErrorRefresh: LinearLayout
     private var countDownTimer: CountDownTimer? = null
@@ -54,6 +54,7 @@ class UpdateMonthlyListDialogFragment : DialogFragment() {
 
     private var isRefresh = false
     private var isDlImage = true
+    private var isEarned = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.dialog_update_monthly_list, container, false)
@@ -64,10 +65,10 @@ class UpdateMonthlyListDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             init(it)
-            btnAccept.setOnClickListener { startRewardAd() }
-            llAdErrorRefresh.setOnClickListener { createAndLoadRewardedAd() }
+            btnAccept.setOnClickListener { showRewardedAd() }
+            llAdErrorRefresh.setOnClickListener { loadRewardedAd() }
             // Diyalog ilk açıldığında reklamı yüklemeye başla
-            createAndLoadRewardedAd()
+            loadRewardedAd()
 
             binding.root.findViewById<Button>(R.id.btnRejectUpdateMonthly).setOnClickListener { dismiss() }
             AlertDialog.Builder(it)
@@ -103,7 +104,7 @@ class UpdateMonthlyListDialogFragment : DialogFragment() {
             countDownTimer = object : CountDownTimer(remainingTime, 1000) {
                 override fun onFinish() {
                     localViewMoel.updateTimeRunningStatus(false)
-                    createAndLoadRewardedAd()
+                    loadRewardedAd()
                 }
 
                 override fun onTick(millisUntilFinished: Long) {
@@ -123,90 +124,87 @@ class UpdateMonthlyListDialogFragment : DialogFragment() {
         }
     }
 
-    /**
-     * Ödüllü reklamı init ediyoruz.
-     */
-    private fun createAndLoadRewardedAd() {
-        if (localViewMoel.isTimeRunning.value != true) {
+    private fun loadRewardedAd() {
+        if (mRewardedAd == null && localViewMoel.isTimeRunning.value != true) {
             localViewMoel.updateAdStatus(0)
-            rewardedAd = RewardedAd(binding.root.context, getString(R.string.watch_ad_monthly_list_unit_id))
-            rewardedAd.loadAd(AdRequest.Builder().build(), object : RewardedAdLoadCallback() {
-                override fun onRewardedAdLoaded() {
-                    super.onRewardedAdLoaded()
-                    localViewMoel.updateAdStatus(1)
-                }
+            val adRequest = AdRequest.Builder().build()
+            RewardedAd.load(
+                requireContext(),
+                getString(R.string.watch_ad_remove_banner_unit_id),
+                adRequest,
+                object : RewardedAdLoadCallback() {
+                    override fun onAdFailedToLoad(p0: LoadAdError) {
+                        // Eğer sunucudan reklam gelmezse adErrorCount'u arttır.
+                        if (p0.code == 3) {
+                            localViewMoel.incAdErrorCount()
+                        }
+                        // Birden fazla sunucudan reklam gelmezse
+                        // kullanıcı reklamsız listeyi indirebilecek.
+                        if (localViewMoel.adErrorCount.value ?: 0 >= 2) {
+                            localViewMoel.updateAdStatus(3)
+                        } else {
+                            onAdError()
+                        }
+                    }
 
-                override fun onRewardedAdFailedToLoad(p0: LoadAdError) {
-                    super.onRewardedAdFailedToLoad(p0)
-                    // Eğer sunucudan reklam gelmezse adErrorCount'u arttır.
-                    if (p0.code == 3) {
-                        localViewMoel.incAdErrorCount()
-                    }
-                    // Birden fazla sunucudan reklam gelmezse
-                    // kullanıcı reklamsız listeyi indirebilecek.
-                    if (localViewMoel.adErrorCount.value ?: 0 >= 2) {
-                        localViewMoel.updateAdStatus(3)
-                    } else {
-                        localViewMoel.updateAdStatus(2)
+                    override fun onAdLoaded(rewardedAd: RewardedAd) {
+                        mRewardedAd = rewardedAd
+                        localViewMoel.updateAdStatus(1)
                     }
                 }
-            })
+            )
         }
     }
 
-    private fun startRewardAd() {
-        // Eğer sınırsız yenileme hala çalışıyorsa
-        if (localViewMoel.isTimeRunning.value == true) {
+    private fun showRewardedAd() {
+        if (localViewMoel.isTimeRunning.value == true || localViewMoel.adErrorCount.value ?: 0 >= 2) {
             listener.onAdWatched(MonthlyDialogCallBackModel(isRefresh, isDlImage))
             dismiss()
         } else {
-            if (rewardedAd.isLoaded) {
-                // onRewardedAdClosed hep çalıştığı için kullanıyorum
-                var isEarned = false
-                rewardedAd.show(requireActivity(), object : RewardedAdCallback() {
-
-                    override fun onRewardedAdOpened() {
-                        // Ad opened.
-                        isEarned = false
-                    }
-
-                    override fun onRewardedAdClosed() {
-                        // Ad closed.
-                        if (isEarned) {
-                            val timeToAdd = Utility.addExtraTimeToCurrent(Utility.DelayTime.UpdateMonthylList)
-                            mainPref.save(ConstantsGeneral.prefMonthlyCountDown, timeToAdd)
-                            listener.onAdWatched(MonthlyDialogCallBackModel(isRefresh, isDlImage))
-                            dismiss()
-                        } else {
-                            createAndLoadRewardedAd()
-                            showCurrentToast(getString(R.string.ad_closed), Toast.LENGTH_SHORT)
-                        }
-                    }
-
-                    override fun onUserEarnedReward(p0: RewardItem) {
-                        isEarned = true
-//                    val bundle = Bundle()
-//                    bundle.putString("is_reward_watched", "reklam izlendi")
-//                    firebaseAnalytics.logEvent("reward_earned_count", bundle)
-                    }
-
-                    override fun onRewardedAdFailedToShow(errorCode: Int) {
-                        val errorCause = when (errorCode) {
-                            ERROR_CODE_INTERNAL_ERROR -> "Teknik bir hata meydana geldi. Lütfen tekrar deneyiniz."
-                            ERROR_CODE_AD_REUSED -> "Reklam zaten gösterimde."
-                            ERROR_CODE_NOT_READY -> getString(R.string.ad_failed_load)
-                            ERROR_CODE_APP_NOT_FOREGROUND -> "Reklam uygulama ön planda değilken oynatılamaz."
-                            else -> "Teknik bir hata meydana geldi. Lütfen tekrar deneyiniz."
-                        }
-                        showCurrentToast(errorCause, Toast.LENGTH_LONG)
-                    }
-                })
-            } else {
-                listener.onAdWatched(MonthlyDialogCallBackModel(isRefresh, isDlImage))
-                dismiss()
+            mRewardedAd?.let {
+                it.fullScreenContentCallback = fullScreenContentCallback
+                it.show(requireActivity()) {
+                    isEarned = true
+                }
+            } ?: kotlin.run {
+                onAdError()
             }
         }
+    }
 
+    private val fullScreenContentCallback = object : FullScreenContentCallback() {
+        override fun onAdShowedFullScreenContent() = Unit
+
+        override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+            val errorCause = when (adError?.code) {
+                ERROR_CODE_INTERNAL_ERROR -> "Teknik bir hata meydana geldi. Lütfen tekrar deneyiniz."
+                ERROR_CODE_AD_REUSED -> "Reklam zaten gösterimde."
+                ERROR_CODE_NOT_READY -> getString(R.string.ad_failed_load)
+                ERROR_CODE_APP_NOT_FOREGROUND -> "Reklam uygulama ön planda değilken oynatılamaz."
+                else -> "Teknik bir hata meydana geldi. Lütfen tekrar deneyiniz."
+            }
+            onAdError()
+            showCurrentToast(errorCause, Toast.LENGTH_LONG)
+        }
+
+        override fun onAdDismissedFullScreenContent() {
+            // Called when ad is dismissed before watch it.
+            if (isEarned) {
+                val timeToAdd = Utility.addExtraTimeToCurrent(Utility.DelayTime.UpdateMonthylList)
+                mainPref.save(ConstantsGeneral.prefMonthlyCountDown, timeToAdd)
+                listener.onAdWatched(MonthlyDialogCallBackModel(isRefresh, isDlImage))
+                dismiss()
+            } else {
+                onAdError()
+                showCurrentToast(getString(R.string.ad_closed), Toast.LENGTH_SHORT)
+            }
+
+        }
+    }
+
+    private fun onAdError() {
+        mRewardedAd = null
+        localViewMoel.updateAdStatus(2)
     }
 
     override fun onAttach(context: Context) {

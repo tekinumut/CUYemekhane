@@ -56,7 +56,7 @@ class ConstantsGeneral {
             )
         }
 
-        private val expireTimeSdf: SimpleDateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.ENGLISH)
+        private val expireTimeSdf: SimpleDateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale("tr"))
 
         // Varsayılan reklam bitim zamanı
         val defRewardExpireDate: Date = expireTimeSdf.parse("01-01-1970 00:00:00")!!
@@ -71,7 +71,7 @@ class ConstantsGeneral {
         const val defUpdateMonthlyListDelayTime: Long = 60 * 60
 
         // Varsayılan RemoveBanner reklam silme süresi
-        const val defRemoveBannerDelaytime: Long = 60 * 60 * 24 * 14
+        const val defRemoveBannerDelaytime: Long = 60 * 60 * 24 * 30
 
         // Firebase Log Event Keys
         const val firebaseConnError: String = "conn_errors"

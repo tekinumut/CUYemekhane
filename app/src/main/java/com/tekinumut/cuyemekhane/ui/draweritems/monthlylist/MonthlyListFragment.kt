@@ -91,6 +91,9 @@ class MonthlyListFragment : Fragment(), UpdateMonthlyListCallback {
             val avaibleDates = Utility.getCalendarArray(foodList.map { it.name })
             // Güncel olarak seçilen gün
             val selectedDay = foodList.filter { it.selectedDay == 1 }.map { it.name }
+            if (selectedDay.isEmpty() && foodList.isNotEmpty()) {
+                monthlyListViewModel.setSelectedDayToFirstDay(foodList[0].date_id)
+            }
             val selectedDayArray = Utility.getCalendarArray(selectedDay)
             // Eğer güncel olarak seçilmiş bir gün varsa onu takvimde seç
             // yoksa seçili günler arasındaki ilk tarihi seç

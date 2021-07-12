@@ -67,6 +67,10 @@ class MonthlyListViewModel(application: Application) : AndroidViewModel(applicat
         monthlyFoodDao.updateSelectedDayOfMonth(datePart)
     }
 
+    fun setSelectedDayToFirstDay(dateId:Int) = viewModelScope.launch(Dispatchers.IO) {
+        monthlyFoodDao.setSelectedDayToFirstDay(dateId)
+    }
+
     /**
      * Aylık liste verisinin boş olma durumuna göre layout düzenler
      * liste boş işe bilgilendirme layoutu açılır, dolu ise menülerin bulunduğu layout

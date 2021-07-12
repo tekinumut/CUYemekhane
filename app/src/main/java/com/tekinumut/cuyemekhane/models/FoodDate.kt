@@ -16,5 +16,5 @@ data class FoodDate(
     val name: String,
     // Aylık liste ekranında mevcut gösterilecek olan gün
     // Günlük listede kullanım alanı yok
-    val selectedDay: Int? = 0
+    var selectedDay: Int? = 0
 )

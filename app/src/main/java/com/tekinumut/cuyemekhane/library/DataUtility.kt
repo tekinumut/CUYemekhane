@@ -68,12 +68,12 @@ class DataUtility {
             val foodGeneral: Elements = doc.select(ConstantsOfWebSite.dailyFoodGeneral)
             val foodCategory: Elements = doc.select(ConstantsOfWebSite.dailyCategories)
             val foodName: Elements = doc.select(ConstantsOfWebSite.dailyFoodName)
-            val foodCalorie: Elements = doc.select(ConstantsOfWebSite.dailyFoodCalorie)
+            //val foodCalorie: Elements = "doc.select(ConstantsOfWebSite.dailyFoodCalorie)"
 
             for (i in 0 until foodGeneral.size) {
-                val foodDetailURL = foodGeneral[i].select("[href]").attr("abs:href")
+                val foodDetailURL = foodGeneral[i].select("img").first().absUrl("src")
                 foodList.add(
-                    Food(i + 1, foodCategory[i].text(), foodName[i].text(), foodCalorie[i].text(), foodDetailURL, 1)
+                    Food(i + 1, foodCategory.getOrNull(i)?.text() ?: "", foodName[i].ownText(), null, foodDetailURL, 1)
                 )
             }
             return foodList.toList()

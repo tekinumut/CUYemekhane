@@ -28,19 +28,19 @@ class ConstantsOfWebSite {
 
         // Günlük yemeklerin bulunduğu genel sınıf
         // Günlük yemeklerin sayısını almak için kullanılır
-        const val dailyFoodGeneral = "#gunluk_yemek .post-entry"
+        const val dailyFoodGeneral = "#gunluk_yemek ul li"
 
         // Günün yemek tarihi
-        const val dailyDate = "#gunluk_yemek div:not([class]):eq(1)"
+        const val dailyDate = "#gunluk_yemek h1"
 
         // Günün yemek kategorisi
-        const val dailyCategories = "#gunluk_yemek .post-entry-meta-category"
+        const val dailyCategories = "#gunluk_yemek ul li .tp-caption.FoodCarousel-Button.rev-btn>span"
 
         // Günün yemek başlığı
-        const val dailyFoodName = "#gunluk_yemek .post-entry-meta-title center:eq(0)"
+        const val dailyFoodName = "#gunluk_yemek ul li .tp-caption.FoodCarousel-Button.rev-btn"
 
         // Günün yemek kalorisi
-        const val dailyFoodCalorie = "#gunluk_yemek .post-entry-meta-title center:eq(1)"
+       // const val dailyFoodCalorie = "#gunluk_yemek .post-entry-meta-title center:eq(1)"
 
     }
 }

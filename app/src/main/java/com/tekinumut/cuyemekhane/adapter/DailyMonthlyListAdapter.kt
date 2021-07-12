@@ -10,13 +10,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.library.ConstantsGeneral
 import com.tekinumut.cuyemekhane.library.Utility
 import com.tekinumut.cuyemekhane.models.FoodWithDetailComp
 
 class DailyMonthlyListAdapter(
-    private val recyclerList: List<FoodWithDetailComp>, hostFragmentKey: Int
+    private val recyclerList: List<FoodWithDetailComp>, private val hostFragmentKey: Int
 ) : RecyclerView.Adapter<DailyMonthlyListAdapter.DailyListViewHolder>() {
 
     private var currentToast: Toast? = null
@@ -30,7 +31,11 @@ class DailyMonthlyListAdapter(
     override fun onBindViewHolder(holder: DailyListViewHolder, position: Int) {
         val model = recyclerList[position]
         // imageView nesnesini tanımla
-        Utility.setImageViewWithBase64(holder.image, model.foodDetailAndComp?.foodDetail?.picBase64)
+        if (hostFragmentKey == ConstantsGeneral.monthlyFragmentKey) {
+            Utility.setImageViewWithBase64(holder.image, model.foodDetailAndComp?.foodDetail?.picBase64)
+        } else {
+            Glide.with(holder.image).load(model.yemek.detailURL).into(holder.image)
+        }
 
         holder.title.text = model.yemek.name
 
