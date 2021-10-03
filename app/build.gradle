@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'com.google.firebase.firebase-perf'
 
 def keystorePropertiesFile = rootProject.file("Certificates/keystore.properties")
 def keystoreProperties = new Properties()
@@ -22,7 +23,7 @@ android {
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
             storePassword keystoreProperties['storePassword']
-            storeFile file('../Certificates/EruYemekhane.jks')
+            storeFile file('../Certificates/CuYemekhane.jks')
         }
     }
 
@@ -48,14 +49,16 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
+            resValue "string", "app_name", "CuTestYemek"
             resValue "string", "admob_app_id", "${secretProperties['admobAppIdTest']}"
             resValue "string", "adUnitIdMainBanner", "${secretProperties['adUnitIdBannerAdTest']}"
             resValue "string", "adUnitIdRemoveBanner", "${secretProperties['adUnitIdRewardedAdTest']}"
             resValue "string", "adUnitIdMonthlyList", "${secretProperties['adUnitIdRewardedAdTest']}"
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            applicationIdSuffix '.debug'
         }
         release {
             minifyEnabled true
+            resValue "string", "app_name", "Çukurova Üniversitesi Yemekhane"
             resValue "string", "admob_app_id", "${secretProperties['admobAppId']}"
             resValue "string", "adUnitIdMainBanner", "${secretProperties['adUnitIdMainBanner']}"
             resValue "string", "adUnitIdRemoveBanner", "${secretProperties['adUnitIdRemoveBanner']}"
@@ -112,7 +115,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-scalars:$retrofit_version"
 
     // OkHttp
-    implementation(platform("com.squareup.okhttp3:okhttp-bom:5.0.0-alpha.2"))
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.2"))
     implementation("com.squareup.okhttp3:logging-interceptor")
 
     // JSOUP - HTML PARSER

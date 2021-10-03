@@ -1,6 +1,4 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">Çukurova Üniversitesi Yemekhane</string>
-
     <!-- Navigation Drawer Values -->
     <string name="_m_please_wait">Lütfen Bekleyiniz</string>
     <string name="data_loaded">Veriler başarıyla yüklendi</string>

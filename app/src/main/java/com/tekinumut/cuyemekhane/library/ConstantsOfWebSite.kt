@@ -3,7 +3,7 @@ package com.tekinumut.cuyemekhane.library
 class ConstantsOfWebSite {
     companion object {
         // Kaynak URL
-        const val SourceURL = "http://yemekhane.cu.edu.tr"
+        const val SourceURL = "https://yemekhane.cu.edu.tr"
 
         // Ana Sayfa
         const val MainPageURL = "$SourceURL/default.asp"

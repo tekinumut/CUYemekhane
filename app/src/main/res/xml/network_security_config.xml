@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
-    <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">yemekhane.cu.edu.tr</domain>
+    <base-config>
         <trust-anchors>
-            <certificates src="system" />
+            <certificates src="@raw/cuyemek_car"/>
+            <certificates src="system"/>
         </trust-anchors>
-    </domain-config>
+    </base-config>
 </network-security-config>

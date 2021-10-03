@@ -29,8 +29,8 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         return inflater.inflate(R.layout.fragment_daily_list, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         init()
 
         observeDailyList()
@@ -39,7 +39,6 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         btn_open_web_page.setOnClickListener {
             Utility.openWebSite(requireContext(), ConstantsOfWebSite.MainPageURL)
         }
-
     }
 
     private fun init() {
