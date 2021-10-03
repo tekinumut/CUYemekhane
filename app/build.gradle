@@ -31,8 +31,8 @@ android {
         applicationId "com.tekinumut.cuyemekhane"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 103
-        versionName "1.03"
+        versionCode 104
+        versionName "1.0.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
