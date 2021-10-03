@@ -27,9 +27,8 @@ interface RetroMainApi {
 
     companion object {
         fun builder(): RetroMainApi {
-            val client = OkHttpClient().newBuilder().addInterceptor(EncodingInterceptor()).build()
+            //val client = OkHttpClient().newBuilder().addInterceptor(EncodingInterceptor()).build()
             return Retrofit.Builder().baseUrl(ConstantsOfWebSite.SourceURL)
-                .client(client)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build()
                 .create(RetroMainApi::class.java)
@@ -39,16 +38,16 @@ interface RetroMainApi {
          * Türkçe kelimeler yemek detayları bölümünde bozuk geliyor.
          * charset'i türkçe formata çevirerek bunu düzeltiyoruz.
          */
-        class EncodingInterceptor : Interceptor {
-            override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
-                val response = chain.proceed(chain.request())
-                val mediaType = MediaType.parse("text/html; charset=windows-1254")
-                return response.body()?.let {
-                    val modifiedBody = ResponseBody.create(mediaType, it.bytes())
-                    response.newBuilder().body(modifiedBody).build()
-                } ?: response.newBuilder().build()
-
-            }
-        }
+//        class EncodingInterceptor : Interceptor {
+//            override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
+//                val response = chain.proceed(chain.request())
+//                val mediaType = MediaType.parse("text/html; charset=windows-1254")
+//                return response.body()?.let {
+//                    val modifiedBody = ResponseBody.create(mediaType, it.bytes())
+//                    response.newBuilder().body(modifiedBody).build()
+//                } ?: response.newBuilder().build()
+//
+//            }
+//        }
     }
 }

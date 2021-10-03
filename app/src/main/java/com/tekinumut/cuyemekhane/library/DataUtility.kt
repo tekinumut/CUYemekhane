@@ -71,7 +71,7 @@ class DataUtility {
             //val foodCalorie: Elements = "doc.select(ConstantsOfWebSite.dailyFoodCalorie)"
 
             for (i in 0 until foodGeneral.size) {
-                val foodDetailURL = foodGeneral[i].select("img").first().absUrl("src")
+                val foodDetailURL = foodGeneral[i].select("img").first()?.absUrl("src")
                 foodList.add(
                     Food(i + 1, foodCategory.getOrNull(i)?.text() ?: "", foodName[i].ownText(), null, foodDetailURL, 1)
                 )

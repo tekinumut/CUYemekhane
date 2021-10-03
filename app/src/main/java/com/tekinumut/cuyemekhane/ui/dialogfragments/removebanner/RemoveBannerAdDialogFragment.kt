@@ -84,7 +84,7 @@ class RemoveBannerAdDialogFragment : DialogFragment() {
             val adRequest = AdRequest.Builder().build()
             RewardedAd.load(
                 requireContext(),
-                getString(R.string.watch_ad_remove_banner_unit_id),
+                getString(R.string.adUnitIdRemoveBanner),
                 adRequest,
                 object : RewardedAdLoadCallback() {
                     override fun onAdFailedToLoad(p0: LoadAdError) {

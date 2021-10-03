@@ -2,7 +2,6 @@ package com.tekinumut.cuyemekhane
 
 import android.app.Application
 import android.content.Context
-import androidx.multidex.MultiDex
 import com.tekinumut.cuyemekhane.library.ConstantsGeneral
 import com.tekinumut.cuyemekhane.library.MainPref
 import com.tekinumut.cuyemekhane.library.Utility
@@ -12,7 +11,6 @@ class MainApplication : Application() {
     private lateinit var mainPref: MainPref
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
-        MultiDex.install(base)
         mainPref = MainPref.getInstance(baseContext)
 
         clearIsAppOpenedBeforePref()
