@@ -31,8 +31,6 @@ class ContactFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btn_to_google_maps.setOnClickListener {
-val asd = "asdsa"
-            Toast.makeText(requireContext(),"${asd.toDouble()+5}",Toast.LENGTH_LONG).show()
             val gmmIntentUri = Uri.parse("geo:$latitude,$longitude?z=$zoomLevel&q=$searchingAddress")
             val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
             mapIntent.setPackage("com.google.android.apps.maps")
