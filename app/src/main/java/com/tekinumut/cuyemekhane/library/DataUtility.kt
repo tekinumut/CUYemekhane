@@ -32,7 +32,7 @@ class DataUtility {
             val foodDateList: List<FoodDate> = dates.mapIndexed { i, it -> FoodDate(i + 1, it.text()) }
             // Yemkleri liste biçiminde tutar
             val foodList: List<Food> = getMonthlyFoodListOfDate(doc, foodDateList)
-            val detailAndComponentPair = getDetailAndCompOfFood(foodList, isDlImage)
+            val detailAndComponentPair = getDetailAndCompOfFood(foodList, isDlImage, false)
             // Her yemeğe ait detay bilgi
             val foodDetail: List<FoodDetail> = detailAndComponentPair.first
             // Yemeği oluşturan bileşenleri tutar.
@@ -50,7 +50,7 @@ class DataUtility {
             val todayDate = doc.select(ConstantsOfWebSite.dailyDate).map { FoodDate(1, it.text()) }
             // Yemekleri liste biçiminde tut
             val todayFoodList: List<Food> = getDailyFoodListOfDate(doc)
-            val detailAndComponentPair = getDetailAndCompOfFood(todayFoodList, isDlImage)
+            val detailAndComponentPair = getDetailAndCompOfFood(todayFoodList, isDlImage, true)
             // Her yemeğe ait detay bilgi
             val foodDetail: List<FoodDetail> = detailAndComponentPair.first
             // Yemeği oluşturan bileşenleri tutar.
@@ -68,12 +68,22 @@ class DataUtility {
             val foodGeneral: Elements = doc.select(ConstantsOfWebSite.dailyFoodGeneral)
             val foodCategory: Elements = doc.select(ConstantsOfWebSite.dailyCategories)
             val foodName: Elements = doc.select(ConstantsOfWebSite.dailyFoodName)
-            //val foodCalorie: Elements = "doc.select(ConstantsOfWebSite.dailyFoodCalorie)"
+            val foodCalorie: Elements = doc.select(ConstantsOfWebSite.dailyFoodCalorie)
 
             for (i in 0 until foodGeneral.size) {
-                val foodDetailURL = foodGeneral[i].select("img").first()?.absUrl("src")
+                val foodDetailURL = ConstantsOfWebSite.SourceURL + "/" + foodGeneral[i].attr("data-thumb")
+                val foodDetailCalorie = if (!foodCalorie[i].ownText().isNullOrEmpty()) {
+                    foodCalorie[i].ownText() + " Kalori"
+                } else null
                 foodList.add(
-                    Food(i + 1, foodCategory.getOrNull(i)?.text() ?: "", foodName[i].ownText(), null, foodDetailURL, 1)
+                    Food(
+                        i + 1,
+                        foodCategory.getOrNull(i)?.text() ?: "",
+                        foodName[i].ownText(),
+                        foodDetailCalorie,
+                        foodDetailURL,
+                        1
+                    )
                 )
             }
             return foodList.toList()
@@ -113,7 +123,7 @@ class DataUtility {
          * Aylık-Günlük liste verilerini alırken her url'yi asenkron çalıştırmak için async kullanılıyor.
          * Böylece 30 yemeğin verisi aynı anda çekiliyor.
          */
-        private fun getDetailAndCompOfFood(foodList: List<Food>, isDlImage: Boolean): Pair<List<FoodDetail>, List<FoodComponent>> =
+        private fun getDetailAndCompOfFood(foodList: List<Food>, isDlImage: Boolean, isDailyFood: Boolean): Pair<List<FoodDetail>, List<FoodComponent>> =
             runBlocking {
                 val detailList = ArrayList<Deferred<FoodDetail>>()
                 val componentList = ArrayList<FoodComponent>()

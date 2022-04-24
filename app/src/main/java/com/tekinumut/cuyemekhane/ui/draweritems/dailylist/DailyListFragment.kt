@@ -1,33 +1,29 @@
 package com.tekinumut.cuyemekhane.ui.draweritems.dailylist
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.adapter.DailyMonthlyListAdapter
+import com.tekinumut.cuyemekhane.base.BaseFragmentVB
+import com.tekinumut.cuyemekhane.databinding.FragmentDailyListBinding
 import com.tekinumut.cuyemekhane.library.*
 import com.tekinumut.cuyemekhane.models.Food
 import com.tekinumut.cuyemekhane.models.FoodWithDetailComp
 import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
-import kotlinx.android.synthetic.main.fragment_daily_list.*
 
-class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
+class DailyListFragment : BaseFragmentVB<FragmentDailyListBinding>(
+    FragmentDailyListBinding::inflate
+), SwipeRefreshLayout.OnRefreshListener {
 
     private val mainViewModel: MainViewModel by activityViewModels()
     private val dailyListViewModel: DailyListViewModel by viewModels()
     private lateinit var mainPref: MainPref
     private val loadingDialog by lazy { Utility.getLoadingDialog(requireActivity()) }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_daily_list, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,32 +32,36 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         observeDailyList()
         getFoodData(false)
 
-        btn_open_web_page.setOnClickListener {
+        binding.btnOpenWebPage.setOnClickListener {
             Utility.openWebSite(requireContext(), ConstantsOfWebSite.MainPageURL)
         }
     }
 
     private fun init() {
         mainPref = MainPref.getInstance(requireContext())
-        refreshDailyList.setOnRefreshListener(this)
-        recyclerDailyList.layoutManager = LinearLayoutManager(context)
-        recyclerDailyList.setHasFixedSize(true)
+        binding.refreshDailyList.setOnRefreshListener(this)
+        binding.recyclerDailyList.layoutManager = LinearLayoutManager(context)
+        binding.recyclerDailyList.setHasFixedSize(true)
     }
 
     /**
      *
      */
     private fun observeDailyList() {
-        dailyListViewModel.getDailyList.observe(viewLifecycleOwner, { dateWithAll ->
+        dailyListViewModel.getDailyList.observe(viewLifecycleOwner) { dateWithAll ->
             dateWithAll?.let {
                 mainViewModel.updateActionTitle(it.foodDate.name)
                 if (it.yemekWithComponentComp.isNullOrEmpty()) {
                     // Eğer günün menüsü boş ise yemekhane tatil uyarısı yap
                     val model = manuelFoodDetailModel(getString(R.string.no_food_holiday))
-                    recyclerDailyList.adapter = DailyMonthlyListAdapter(model, ConstantsGeneral.dailyFragmentKey)
+                    binding.recyclerDailyList.adapter =
+                        DailyMonthlyListAdapter(model, ConstantsGeneral.dailyFragmentKey)
                 } else {
                     // Sorun yoksa
-                    recyclerDailyList.adapter = DailyMonthlyListAdapter(it.yemekWithComponentComp, ConstantsGeneral.dailyFragmentKey)
+                    binding.recyclerDailyList.adapter = DailyMonthlyListAdapter(
+                        it.yemekWithComponentComp,
+                        ConstantsGeneral.dailyFragmentKey
+                    )
                 }
                 switchView(true)
             } ?: run {
@@ -69,16 +69,16 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                 switchView(false)
             }
 
-        })
+        }
     }
 
     private fun switchView(isDaily: Boolean) {
         if (isDaily) {
-            recyclerDailyList.visibility = View.VISIBLE
-            svDailyInfo.visibility = View.GONE
+            binding.recyclerDailyList.visibility = View.VISIBLE
+            binding.svDailyInfo.visibility = View.GONE
         } else {
-            recyclerDailyList.visibility = View.GONE
-            svDailyInfo.visibility = View.VISIBLE
+            binding.recyclerDailyList.visibility = View.GONE
+            binding.svDailyInfo.visibility = View.VISIBLE
         }
     }
 
@@ -93,7 +93,7 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
      */
     private fun getFoodData(isSwipeRefresh: Boolean) {
         if (shouldAutoRefreshData(isSwipeRefresh)) {
-            dailyListViewModel.getDailyListData().observe(viewLifecycleOwner, {
+            dailyListViewModel.getDailyListData().observe(viewLifecycleOwner) {
                 when (it) {
                     Resource.InProgress -> if (!isSwipeRefresh) loadingDialog.show()
                     is Resource.Success -> {
@@ -101,11 +101,12 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                         onSuccessAndError(getString(R.string.data_loaded))
                     }
                     is Resource.Error -> {
-                        val message = "${getString(R.string.error_loading_data)} \nHata sebebi: ${it.exception.message}"
+                        val message =
+                            "${getString(R.string.error_loading_data)} \nHata sebebi: ${it.exception.message}"
                         onSuccessAndError(message)
                     }
                 }
-            })
+            }
         }
 
     }
@@ -115,7 +116,7 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
      */
     private fun onSuccessAndError(message: String) {
         loadingDialog.dismiss()
-        refreshDailyList.isRefreshing = false
+        binding.refreshDailyList.isRefreshing = false
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
@@ -132,8 +133,12 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
      * 6 -> True dön ve bitir.
      */
     private fun shouldAutoRefreshData(isSwipeRefresh: Boolean): Boolean {
-        val autoUpdateVal = mainPref.getBoolean(ConstantsGeneral.prefDailyAutoUpdateKey, ConstantsGeneral.defValDailyAutoUpdate)
-        val isWorkedBefore = mainPref.getBoolean(ConstantsGeneral.prefCheckDailyListWorkedBefore, false)
+        val autoUpdateVal = mainPref.getBoolean(
+            ConstantsGeneral.prefDailyAutoUpdateKey,
+            ConstantsGeneral.defValDailyAutoUpdate
+        )
+        val isWorkedBefore =
+            mainPref.getBoolean(ConstantsGeneral.prefCheckDailyListWorkedBefore, false)
         // Otomatik güncelleme olduğu durumda oluşacak sonucu değere ata
         var autoUpdateResult = if (autoUpdateVal) !isWorkedBefore else false
         // Eğer kullanıcı kendi yenilemek istediyse direk true yap
@@ -147,7 +152,7 @@ class DailyListFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     override fun onRefresh() {
-        refreshDailyList.post { getFoodData(true) }
+        binding.refreshDailyList.post { getFoodData(true) }
     }
 
 }

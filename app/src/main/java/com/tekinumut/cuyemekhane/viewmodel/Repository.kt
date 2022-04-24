@@ -7,9 +7,8 @@ import com.tekinumut.cuyemekhane.library.*
 import com.tekinumut.cuyemekhane.models.Duyurular
 import com.tekinumut.cuyemekhane.models.ListOfAll
 import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
 import org.jsoup.select.Elements
-
-@Suppress("BlockingMethodInNonBlockingContext")
 
 class Repository(context: Context) {
 
@@ -18,7 +17,10 @@ class Repository(context: Context) {
     /**
      * Error Handiling
      */
-    private suspend fun <T : Any> safeApiCall(apiCall: suspend () -> T, requestName: String): Resource<T> {
+    private suspend fun <T : Any> safeApiCall(
+        apiCall: suspend () -> T,
+        requestName: String
+    ): Resource<T> {
         return try {
             Resource.Success(apiCall.invoke())
         } catch (e: Exception) {
@@ -29,11 +31,18 @@ class Repository(context: Context) {
         }
     }
 
+    private fun String.baseDocument(timeOut: Int = 10000): Document =
+        Jsoup.connect(this)
+            .ignoreContentType(true)
+            .ignoreHttpErrors(true)
+            .timeout(timeOut)
+            .get()
+
     /**
      * Günlük liste verilerini al
      */
     suspend fun getDailyListData(isDlImage: Boolean): Resource<ListOfAll> = safeApiCall({
-        val doc = Jsoup.connect(ConstantsOfWebSite.MainPageURL).timeout(10000).get()
+        val doc = ConstantsOfWebSite.MainPageURL.baseDocument()
         DataUtility.getDailyList(doc, isDlImage)
     }, ConstantsGeneral.connErrorDaily)
 
@@ -41,7 +50,7 @@ class Repository(context: Context) {
      * Aylık liste verilerini al
      */
     suspend fun getMonthlyFoodData(isDlImage: Boolean): Resource<ListOfAll> = safeApiCall({
-        val doc = Jsoup.connect(ConstantsOfWebSite.MainPageURL).timeout(30000).get()
+        val doc = ConstantsOfWebSite.MainPageURL.baseDocument(30000)
         DataUtility.getMonthlyList(doc, isDlImage)
     }, ConstantsGeneral.connErrorMonthly)
 
@@ -49,7 +58,7 @@ class Repository(context: Context) {
      * Ücretlendirme verilerini al
      */
     suspend fun getPricingData(): Resource<String> = safeApiCall({
-        val doc = Jsoup.connect(ConstantsOfWebSite.PricingURL).timeout(10000).get()
+        val doc = ConstantsOfWebSite.PricingURL.baseDocument()
         doc.select("section#section4").outerHtml()
     }, ConstantsGeneral.connErrorPricing)
 
@@ -58,7 +67,7 @@ class Repository(context: Context) {
      */
     suspend fun getDuyurularData(): Resource<ArrayList<Duyurular>> = safeApiCall({
         val duyurulist = ArrayList<Duyurular>()
-        val doc = Jsoup.connect(ConstantsOfWebSite.MainPageURL).timeout(10000).get()
+        val doc = ConstantsOfWebSite.MainPageURL.baseDocument()
         val duyuruClass = doc.select(ConstantsOfWebSite.duyuruClass)
         val title: Elements = doc.select(ConstantsOfWebSite.duyuruTitle)
         val content: Elements = doc.select(ConstantsOfWebSite.duyuruContent)

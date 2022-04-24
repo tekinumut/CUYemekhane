@@ -40,7 +40,7 @@ class ConstantsOfWebSite {
         const val dailyFoodName = "#gunluk_yemek ul li .tp-caption.FoodCarousel-Button.rev-btn"
 
         // Günün yemek kalorisi
-       // const val dailyFoodCalorie = "#gunluk_yemek .post-entry-meta-title center:eq(1)"
+        const val dailyFoodCalorie = "#gunluk_yemek ul li font"
 
     }
 }

@@ -4,37 +4,25 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.tekinumut.cuyemekhane.R
+import com.tekinumut.cuyemekhane.base.BaseFragmentDB
 import com.tekinumut.cuyemekhane.databinding.FragmentAboutBinding
 import com.tekinumut.cuyemekhane.library.Utility
-import kotlinx.android.synthetic.main.fragment_about.*
 
-class AboutFragment : Fragment() {
-
-    private lateinit var binding: FragmentAboutBinding
+class AboutFragment : BaseFragmentDB<FragmentAboutBinding>(R.layout.fragment_about) {
 
     private val aboutViewModel: AboutViewModel by viewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_about, container, false)
-        binding.aboutVm = aboutViewModel
-        binding.lifecycleOwner = viewLifecycleOwner
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        send_feedback.setOnClickListener { sendFeedBack() }
-        rate_app.setOnClickListener { rateApp() }
-        github_source_code.setOnClickListener { openGithubPage() }
-
+        with(binding){
+            aboutVm = aboutViewModel
+            sendFeedback.setOnClickListener { sendFeedBack() }
+            rateApp.setOnClickListener { rateApp() }
+            githubSourceCode.setOnClickListener { openGithubPage() }
+        }
     }
 
     //Geri bildirim gönder. ( Mail yolu ile )

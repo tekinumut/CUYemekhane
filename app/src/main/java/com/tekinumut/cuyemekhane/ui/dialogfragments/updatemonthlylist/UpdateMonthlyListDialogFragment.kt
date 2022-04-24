@@ -1,6 +1,5 @@
 package com.tekinumut.cuyemekhane.ui.dialogfragments.updatemonthlylist
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
@@ -78,8 +77,7 @@ class UpdateMonthlyListDialogFragment : DialogFragment() {
     }
 
     private fun init(it: FragmentActivity) {
-        @SuppressLint("InflateParams")
-        binding = DataBindingUtil.inflate(LayoutInflater.from(it), R.layout.dialog_update_monthly_list, null, false)
+        binding = DataBindingUtil.inflate(layoutInflater, R.layout.dialog_update_monthly_list, null, false)
         binding.viewmodel = localViewMoel
         binding.lifecycleOwner = it
         mainPref = MainPref.getInstance(it)
@@ -175,8 +173,8 @@ class UpdateMonthlyListDialogFragment : DialogFragment() {
     private val fullScreenContentCallback = object : FullScreenContentCallback() {
         override fun onAdShowedFullScreenContent() = Unit
 
-        override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
-            val errorCause = when (adError?.code) {
+        override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+            val errorCause = when (adError.code) {
                 ERROR_CODE_INTERNAL_ERROR -> "Teknik bir hata meydana geldi. Lütfen tekrar deneyiniz."
                 ERROR_CODE_AD_REUSED -> "Reklam zaten gösterimde."
                 ERROR_CODE_NOT_READY -> getString(R.string.ad_failed_load)

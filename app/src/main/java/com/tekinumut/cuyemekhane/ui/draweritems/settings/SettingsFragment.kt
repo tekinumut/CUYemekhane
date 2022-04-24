@@ -41,8 +41,13 @@ class SettingsFragment : PreferenceFragmentCompat(), RemoveBannerAdCallBack {
             if (it.isChecked) getString(R.string.adSummaryActive)
             else {
                 val expireTimeStamp = preferenceManager.sharedPreferences
-                    .getLong(getString(R.string.isBannerExpire), ConstantsGeneral.defRewardExpireDate.time)
-                val dateOnly = ConstantsGeneral.timeStampToDateString(expireTimeStamp).run { substring(0, length - 9) }
+                    ?.getLong(
+                        getString(R.string.isBannerExpire),
+                        ConstantsGeneral.defRewardExpireDate.time
+                    )
+                val dateOnly = ConstantsGeneral.timeStampToDateString(
+                    expireTimeStamp ?: ConstantsGeneral.defRewardExpireDate.time
+                ).run { substring(0, length - 9) }
                 getString(R.string.adSummaryPassive, dateOnly)
             }
         }

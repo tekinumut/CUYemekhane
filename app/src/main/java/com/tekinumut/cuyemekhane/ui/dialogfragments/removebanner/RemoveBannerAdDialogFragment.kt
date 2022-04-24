@@ -1,10 +1,8 @@
 package com.tekinumut.cuyemekhane.ui.dialogfragments.removebanner
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +10,6 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
@@ -68,8 +65,7 @@ class RemoveBannerAdDialogFragment : DialogFragment() {
 
 
     private fun init(it: FragmentActivity) {
-        @SuppressLint("InflateParams")
-        binding = DataBindingUtil.inflate(LayoutInflater.from(it), R.layout.dialog_remove_banner_ad, null, false)
+        binding = DataBindingUtil.inflate(layoutInflater, R.layout.dialog_remove_banner_ad, null, false)
         binding.viewmodel = removeBannerVM
         binding.lifecycleOwner = it
         mainPref = MainPref.getInstance(it)
@@ -115,8 +111,8 @@ class RemoveBannerAdDialogFragment : DialogFragment() {
     private val fullScreenContentCallback = object : FullScreenContentCallback() {
         override fun onAdShowedFullScreenContent() = Unit
 
-        override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
-            val errorCause = when (adError?.code) {
+        override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+            val errorCause = when (adError.code) {
                 ERROR_CODE_INTERNAL_ERROR -> "Teknik bir hata meydana geldi. Lütfen tekrar deneyiniz."
                 ERROR_CODE_AD_REUSED -> "Reklam zaten gösterimde."
                 ERROR_CODE_NOT_READY -> getString(R.string.ad_failed_load)

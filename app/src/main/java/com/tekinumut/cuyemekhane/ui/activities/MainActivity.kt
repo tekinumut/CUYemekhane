@@ -18,7 +18,6 @@ import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.databinding.ActivityMainBinding
 import com.tekinumut.cuyemekhane.library.MainPref
 import com.tekinumut.cuyemekhane.viewmodel.MainViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,11 +25,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
 
+    private lateinit var binding: ActivityMainBinding
     private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.mainVM = mainViewModel
         binding.lifecycleOwner = this
 
@@ -44,16 +44,16 @@ class MainActivity : AppCompatActivity() {
         }
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        appBarConfiguration = AppBarConfiguration(navList(), drawer_layout)
+        appBarConfiguration = AppBarConfiguration(navList(), binding.drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
-        nav_view.setupWithNavController(navController)
+        binding.navView.setupWithNavController(navController)
         // Update Action Bar Title
-        mainViewModel.actionBarTitle.observe(this, { supportActionBar?.title = it })
+        mainViewModel.actionBarTitle.observe(this) { supportActionBar?.title = it }
 
         // Seçili item hakkında viewModel'ı bilgilendir
         navController.addOnDestinationChangedListener { _, destination, _ ->
             //nav_view.checkeditem başlangıçta nedense null dönüyor :)
-            if (nav_view.checkedItem == null) nav_view.setCheckedItem(destination.id)
+            if (binding.navView.checkedItem == null) binding.navView.setCheckedItem(destination.id)
             mainViewModel.updateCurrentDestination(destination.id)
         }
 
@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
             // Init ads
             MobileAds.initialize(this) {}
             val adRequest = AdRequest.Builder().build()
-            adViewBanner.loadAd(adRequest)
+            binding.adViewBanner.loadAd(adRequest)
         }
     }
 
@@ -79,16 +79,18 @@ class MainActivity : AppCompatActivity() {
      */
     private fun NavController.setNavStartDestionation() {
         val mainPref: MainPref = MainPref.getInstance(this@MainActivity)
-        val defPage: Int = mainPref.getString(getString(R.string.defPageListKey), "0")?.toIntOrNull() ?: 0
+        val defPage: Int =
+            mainPref.getString(getString(R.string.defPageListKey), "0")?.toIntOrNull() ?: 0
         val navGraph = this.navInflater.inflate(R.navigation.nav_graph)
 
-        navGraph.startDestination = when (defPage) {
-            0 -> R.id.nav_daily_list
-            1 -> R.id.nav_monthly_list
-            2 -> R.id.nav_duyurular
-            else -> R.id.nav_daily_list
-        }
-
+        navGraph.setStartDestination(
+            when (defPage) {
+                0 -> R.id.nav_daily_list
+                1 -> R.id.nav_monthly_list
+                2 -> R.id.nav_duyurular
+                else -> R.id.nav_daily_list
+            }
+        )
         this.graph = navGraph
     }
 
@@ -118,8 +120,8 @@ class MainActivity : AppCompatActivity() {
      * Eğer geri tuşuna bastığımda drawer açıksa önce onu kapat
      */
     override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
