@@ -1,27 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00421c</color>
-    <color name="colorPrimaryDark">#062d12</color>
-    <color name="colorAccent">#196F34</color>
-    <color name="default_bg">#f2f2f2</color>
-    <color name="default_bg_opposite">#121212</color>
-    <color name="white">#ffffff</color>
-    <color name="red">#ff0000</color>
-    <color name="green">#2ecc71</color>
-    <color name="primary_text">#000000</color>
-    <color name="seconday_text">#8A000000</color>
-
-    <color name="dialog_fr_title">#196F34</color>
-    <color name="toolbar_bg">#00421c</color>
-    <color name="button_blue">#1581ff</color>
-    <color name="alert_dialog_btn">#00a8ff</color>
-    <color name="accentPrimary">#005f1e</color>
-    <color name="card_daily_bg">#ffffff</color>
-    <color name="card_daily_title">#565656</color>
-    <color name="card_daily_category_bg">#ff0000</color>
-    <color name="card_daily_category_title">#f2f2f2</color>
-    <color name="card_calorie_title">#ff0000</color>
-    <color name="duyurular_title">#ff0000</color>
-
-    <color name="dialog_btn_accept">#27ae60</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
 </resources>
