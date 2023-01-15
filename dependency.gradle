@@ -1,0 +1,65 @@
+ext {
+    versions = [
+            // config
+            appId           : "com.tekinumut.cuyemekhane",
+            minSdk          : 21,
+            compileSdk      : 33,
+            versionCode     : 110,
+            versionName     : "1.10",
+
+            // Core
+            coreKtx         : "1.9.0",
+            appCompat       : "1.6.0",
+            material        : "1.7.0",
+
+            // View
+            constraintLayout: "2.1.4",
+            fragmentKtx     : "1.5.5",
+
+            // Dagger Hilt
+            daggerHilt      : "2.44.2",
+
+            // Lifecycle Components
+            lifecycle       : "2.5.1",
+
+            // Network
+            retrofit        : "2.9.0",
+            jsoup           : "1.15.3",
+            okhttpLogging   : "4.10.0",
+
+            // Test
+            junit           : "4.13.2",
+            testJunit       : "1.1.5",
+            espresso        : "3.5.1"
+    ]
+
+    libraries = [
+            // Core
+            coreKtx           : "androidx.core:core-ktx:$versions.coreKtx",
+            appCompat         : "androidx.appcompat:appcompat:$versions.appCompat",
+            material          : "com.google.android.material:material:$versions.material",
+
+            // View
+            constraintLayout  : "androidx.constraintlayout:constraintlayout:$versions.constraintLayout",
+            fragmentKtx       : "androidx.fragment:fragment-ktx:$versions.fragmentKtx",
+
+            // Lifecycle Components
+            lifecycleViewModel: "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle",
+            lifecycleRuntime  : "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycle",
+
+            // Dagger Hilt
+            daggerHilt        : "com.google.dagger:hilt-android:$versions.daggerHilt",
+            daggerHiltCompiler: "com.google.dagger:hilt-compiler:$versions.daggerHilt",
+
+            // Network
+            retrofit          : "com.squareup.retrofit2:retrofit:$versions.retrofit",
+            retrofitScalars   : "com.squareup.retrofit2:converter-scalars:$versions.retrofit",
+            okhttpLogging     : "com.squareup.okhttp3:logging-interceptor:$versions.okhttpLogging",
+            jsoup             : "org.jsoup:jsoup:$versions.jsoup",
+
+            // Test
+            junit             : "junit:junit:$versions.junit",
+            testJunit         : "androidx.test.ext:junit:$versions.testJunit",
+            espresso          : "androidx.test.espresso:espresso-core:$versions.espresso"
+    ]
+}

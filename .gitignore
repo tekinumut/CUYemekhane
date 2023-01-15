@@ -6,7 +6,6 @@
 # Covers files to be ignored for android development using Android Studio.
 
 # Custom
-Certificates/
 app/google-services.json
 
 # Built application files
