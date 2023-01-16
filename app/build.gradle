@@ -8,6 +8,9 @@ plugins {
     id 'com.google.dagger.hilt.android'
 }
 
+def keystoreProperty = new Properties()
+keystoreProperty.load(rootProject.file("app/keystore/keystore.properties").newDataInputStream())
+
 android {
     namespace versions.appId
     compileSdk versions.compileSdk
@@ -22,10 +25,24 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
+    signingConfigs {
         release {
+            keyAlias keystoreProperty['keyAlias']
+            keyPassword keystoreProperty['keyPassword']
+            storePassword keystoreProperty['storePassword']
+            storeFile file('../app/keystore/CuYemekhane.jks')
+        }
+    }
+
+    buildTypes {
+        debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {

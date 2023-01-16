@@ -42,9 +42,10 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(
+        charsetInterceptor: CharsetInterceptor,
         loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient = OkHttpClient.Builder()
-       // .addInterceptor(charsetInterceptor) // TODO check for later
+        .addInterceptor(charsetInterceptor)
         .addInterceptor(loggingInterceptor)
         .build()
 

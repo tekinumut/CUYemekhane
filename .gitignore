@@ -7,6 +7,7 @@
 
 # Custom
 app/google-services.json
+app/keystore
 
 # Built application files
 *.apk
