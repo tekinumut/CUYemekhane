@@ -3,8 +3,9 @@ package com.tekinumut.cuyemekhane.common.domain.model.mainpage
 import com.tekinumut.cuyemekhane.common.data.model.mappers.UIModel
 
 /**
- * Created by Umut Tekin on 15.01.2023.
+ * Created by Umut Tekin on 16.01.2023.
  */
-data class MainPageUIModel(
-    val dailyMenu: DailyMenuUIModel
+data class DailyMenuUIModel(
+    val date: String,
+    val foodList: List<FoodUIModel>
 ) : UIModel

@@ -31,7 +31,10 @@ class MainActivity : AppCompatActivity() {
                         Log.e("BaseApp", "Failure: ${mainPageEvent.exception.errorType}")
                     }
                     is MainPageEvent.Success -> {
-                        Log.e("BaseApp", "Success: ${mainPageEvent.mainPageUIModel.todayDate}")
+                        mainPageEvent.mainPageUIModel.dailyMenu.foodList.forEach {
+                            Log.e("BaseApp", "$it \n")
+                        }
+
                     }
                 }
             }

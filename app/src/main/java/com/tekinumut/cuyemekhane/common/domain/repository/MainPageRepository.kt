@@ -8,5 +8,5 @@ import com.tekinumut.cuyemekhane.common.data.model.response.Resource
  */
 interface MainPageRepository {
 
-    suspend fun getMainPage() : Resource<MainPageResponse>
+    suspend fun getMainPage(): Resource<MainPageResponse>
 }

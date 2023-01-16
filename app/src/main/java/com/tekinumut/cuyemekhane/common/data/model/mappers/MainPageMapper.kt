@@ -8,10 +8,11 @@ import javax.inject.Inject
  * Created by Umut Tekin on 15.01.2023.
  */
 class MainPageMapper @Inject constructor(
+    private val dailyMenuMapper: DailyMenuMapper
 ) : ApiMapper<MainPageResponse, MainPageUIModel> {
     override fun mapToUIModel(responseModel: MainPageResponse?): MainPageUIModel {
         return MainPageUIModel(
-            todayDate = responseModel?.todayDate.orEmpty()
+            dailyMenu = dailyMenuMapper.mapToUIModel(responseModel?.dailyMenu)
         )
     }
 }
