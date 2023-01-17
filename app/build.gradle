@@ -52,6 +52,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -64,6 +67,8 @@ dependencies {
     // View
     implementation libraries.constraintLayout
     implementation libraries.fragmentKtx
+    implementation libraries.navigationFragmentKtx
+    implementation libraries.navigationUiKtx
 
     // Lifecycle Components
     implementation libraries.lifecycleViewModel

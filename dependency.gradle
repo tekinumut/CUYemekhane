@@ -15,6 +15,7 @@ ext {
             // View
             constraintLayout: "2.1.4",
             fragmentKtx     : "1.5.5",
+            navigationKtx   : "2.5.3",
 
             // Dagger Hilt
             daggerHilt      : "2.44.2",
@@ -35,31 +36,33 @@ ext {
 
     libraries = [
             // Core
-            coreKtx           : "androidx.core:core-ktx:$versions.coreKtx",
-            appCompat         : "androidx.appcompat:appcompat:$versions.appCompat",
-            material          : "com.google.android.material:material:$versions.material",
+            coreKtx              : "androidx.core:core-ktx:$versions.coreKtx",
+            appCompat            : "androidx.appcompat:appcompat:$versions.appCompat",
+            material             : "com.google.android.material:material:$versions.material",
 
             // View
-            constraintLayout  : "androidx.constraintlayout:constraintlayout:$versions.constraintLayout",
-            fragmentKtx       : "androidx.fragment:fragment-ktx:$versions.fragmentKtx",
+            constraintLayout     : "androidx.constraintlayout:constraintlayout:$versions.constraintLayout",
+            fragmentKtx          : "androidx.fragment:fragment-ktx:$versions.fragmentKtx",
+            navigationFragmentKtx: "androidx.navigation:navigation-fragment-ktx:$versions.navigationKtx",
+            navigationUiKtx      : "androidx.navigation:navigation-ui-ktx:$versions.navigationKtx",
 
             // Lifecycle Components
-            lifecycleViewModel: "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle",
-            lifecycleRuntime  : "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycle",
+            lifecycleViewModel   : "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle",
+            lifecycleRuntime     : "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycle",
 
             // Dagger Hilt
-            daggerHilt        : "com.google.dagger:hilt-android:$versions.daggerHilt",
-            daggerHiltCompiler: "com.google.dagger:hilt-compiler:$versions.daggerHilt",
+            daggerHilt           : "com.google.dagger:hilt-android:$versions.daggerHilt",
+            daggerHiltCompiler   : "com.google.dagger:hilt-compiler:$versions.daggerHilt",
 
             // Network
-            retrofit          : "com.squareup.retrofit2:retrofit:$versions.retrofit",
-            retrofitScalars   : "com.squareup.retrofit2:converter-scalars:$versions.retrofit",
-            okhttpLogging     : "com.squareup.okhttp3:logging-interceptor:$versions.okhttpLogging",
-            jsoup             : "org.jsoup:jsoup:$versions.jsoup",
+            retrofit             : "com.squareup.retrofit2:retrofit:$versions.retrofit",
+            retrofitScalars      : "com.squareup.retrofit2:converter-scalars:$versions.retrofit",
+            okhttpLogging        : "com.squareup.okhttp3:logging-interceptor:$versions.okhttpLogging",
+            jsoup                : "org.jsoup:jsoup:$versions.jsoup",
 
             // Test
-            junit             : "junit:junit:$versions.junit",
-            testJunit         : "androidx.test.ext:junit:$versions.testJunit",
-            espresso          : "androidx.test.espresso:espresso-core:$versions.espresso"
+            junit                : "junit:junit:$versions.junit",
+            testJunit            : "androidx.test.ext:junit:$versions.testJunit",
+            espresso             : "androidx.test.espresso:espresso-core:$versions.espresso"
     ]
 }

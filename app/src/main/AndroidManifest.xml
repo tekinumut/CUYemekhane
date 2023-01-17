@@ -15,7 +15,7 @@
         android:theme="@style/Theme.CuYemekhane"
         tools:targetApi="31">
         <activity
-            android:name=".feature.MainActivity"
+            android:name=".main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

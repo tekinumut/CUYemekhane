@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Çukurova Üniversitesi Yemekhane</string>
+    <string name="page_home_title">Home</string>
+    <string name="page_monthly_menu_title">Monthly Menu</string>
 </resources>

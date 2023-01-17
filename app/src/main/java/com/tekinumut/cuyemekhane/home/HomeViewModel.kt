@@ -1,9 +1,10 @@
-package com.tekinumut.cuyemekhane.feature
+package com.tekinumut.cuyemekhane.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tekinumut.cuyemekhane.common.data.model.response.Resource
 import com.tekinumut.cuyemekhane.common.domain.usecase.MainPageUseCase
+import com.tekinumut.cuyemekhane.home.events.HomePageEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -11,26 +12,30 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
- * Created by Umut Tekin on 15.01.2023.
+ * Created by Umut Tekin on 16.01.2023.
  */
 @HiltViewModel
-class MainViewModel @Inject constructor(
+class HomeViewModel @Inject constructor(
     private val mainPageUseCase: MainPageUseCase
 ) : ViewModel() {
 
-    private val _mainPageEvent = MutableStateFlow<MainPageEvent>(MainPageEvent.Default)
-    val mainPageEvent: StateFlow<MainPageEvent> = _mainPageEvent
+    init {
+        fetchMainPage()
+    }
 
-    fun getMainPage() {
+    private val _homePageEvent = MutableStateFlow<HomePageEvent>(HomePageEvent.Default)
+    val homePageEvent: StateFlow<HomePageEvent> = _homePageEvent
+
+    private fun fetchMainPage() {
         viewModelScope.launch {
             mainPageUseCase(Unit).collect { resource ->
                 when (resource) {
-                    Resource.Loading -> _mainPageEvent.value = MainPageEvent.Loading
+                    Resource.Loading -> _homePageEvent.value = HomePageEvent.Loading
                     is Resource.Failure -> {
-                        _mainPageEvent.value = MainPageEvent.Failure(resource.cuError)
+                        _homePageEvent.value = HomePageEvent.Failure(resource.cuError)
                     }
                     is Resource.Success -> {
-                        _mainPageEvent.value = MainPageEvent.Success(resource.value)
+                        _homePageEvent.value = HomePageEvent.Success(resource.value)
                     }
                 }
             }

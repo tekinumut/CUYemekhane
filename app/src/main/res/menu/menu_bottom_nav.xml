@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@id/homeFragment"
+        android:icon="@drawable/ic_home"
+        android:title="@string/page_home_title" />
+
+    <item
+        android:id="@id/monthlyMenuFragment"
+        android:icon="@drawable/ic_calendar"
+        android:title="@string/page_monthly_menu_title" />
+</menu>
