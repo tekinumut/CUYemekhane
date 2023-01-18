@@ -1,5 +1,13 @@
 <resources>
-    <string name="app_name">Çukurova Üniversitesi Yemekhane</string>
+    <string name="app_name">Çukurova University Cafeteria</string>
     <string name="page_home_title">Home</string>
     <string name="page_monthly_menu_title">Monthly Menu</string>
+
+    <!-- common usages -->
+    <string name="loading_text_message">Loading…</string>
+    <string name="food_calorie_at_end">%d Calorie</string>
+
+    <!-- error messages -->
+    <string name="error_message_no_data">We\'re having a problem. Please try again later.</string>
+    <string name="open_website_text">Open website</string>
 </resources>

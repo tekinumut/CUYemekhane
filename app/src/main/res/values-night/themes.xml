@@ -8,7 +8,18 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Error brand color. -->
+        <item name="colorError">@color/red_error_40</item>
+        <item name="colorOnError">@color/white</item>
+        <item name="colorErrorContainer">@color/red_error_90</item>
+        <item name="colorOnErrorContainer">@color/red_error_10</item>
+
+        <!-- Background brand color. -->
+        <item name="android:colorBackground">@color/white_background_90</item>
+        <item name="colorOnBackground">@color/white_background_40</item>
+
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->

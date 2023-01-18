@@ -11,6 +11,7 @@ object Constants {
 
     object NETWORK {
         const val BASE_ENDPOINT = "https://yemekhane.cu.edu.tr/"
+        const val MAIN_PAGE = BASE_ENDPOINT + "default.asp"
     }
 
     object QUERY {

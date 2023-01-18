@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- TODO Migrate to Material 3-->
+    <!-- TODO Migrate to Material 3 color-->
     <color name="green_primary">#00421c</color>
     <color name="green_primary_dark">#062d12</color>
 
+    <color name="red_error_40">#ba1a1a</color>
+    <color name="red_error_90">#ffdad6</color>
+    <color name="red_error_10">#410002</color>
+
+    <color name="white_background_40">#f8fdff</color>
+    <color name="white_background_90">#001f25</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>

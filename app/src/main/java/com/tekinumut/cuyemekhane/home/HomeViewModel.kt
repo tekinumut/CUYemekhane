@@ -3,7 +3,7 @@ package com.tekinumut.cuyemekhane.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tekinumut.cuyemekhane.common.data.model.response.Resource
-import com.tekinumut.cuyemekhane.common.domain.usecase.MainPageUseCase
+import com.tekinumut.cuyemekhane.common.domain.usecase.DailyMenuUseCase
 import com.tekinumut.cuyemekhane.home.events.HomePageEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +16,7 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val mainPageUseCase: MainPageUseCase
+    private val dailyMenuUseCase: DailyMenuUseCase
 ) : ViewModel() {
 
     init {
@@ -26,9 +26,9 @@ class HomeViewModel @Inject constructor(
     private val _homePageEvent = MutableStateFlow<HomePageEvent>(HomePageEvent.Default)
     val homePageEvent: StateFlow<HomePageEvent> = _homePageEvent
 
-    private fun fetchMainPage() {
+    fun fetchMainPage() {
         viewModelScope.launch {
-            mainPageUseCase(Unit).collect { resource ->
+            dailyMenuUseCase(Unit).collect { resource ->
                 when (resource) {
                     Resource.Loading -> _homePageEvent.value = HomePageEvent.Loading
                     is Resource.Failure -> {
