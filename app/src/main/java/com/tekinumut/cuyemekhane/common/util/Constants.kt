@@ -16,13 +16,19 @@ object Constants {
 
     object QUERY {
         const val TODAY_DATE = "#gunluk_yemek h1"
-        const val TODAY_FOODS_BASE = "#gunluk_yemek ul li"
-        const val TODAY_FOOD_CATEGORY = "$TODAY_FOODS_BASE *>span.label.label-danger"
-        const val TODAY_FOOD_CALORIE = "$TODAY_FOODS_BASE font"
+        const val TODAY_FOODS = "#gunluk_yemek ul li"
+        const val TODAY_FOOD_CATEGORY = "$TODAY_FOODS *>span.label.label-danger"
+        const val TODAY_FOOD_CALORIE = "$TODAY_FOODS font"
+
+        const val MONTHLY_DATE = ".call-to-action font:eq(1)"
+        const val MONTHLY_FOODS = ".call-to-action ul"
+
+        const val DAILY_FOODS_SELECTOR = "li a"
     }
 
     object ATTRIBUTE {
         const val FOOD_NAME_ATTR = "data-title"
-        const val FOOD_IMAGE_ATTR = "data-thumb"
+        const val TODAY_FOOD_IMAGE_ATTR = "data-thumb"
+        const val HREF = "href"
     }
 }

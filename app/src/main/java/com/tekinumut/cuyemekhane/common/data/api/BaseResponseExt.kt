@@ -9,8 +9,7 @@ import com.tekinumut.cuyemekhane.common.data.model.response.Resource
 import retrofit2.Response
 import java.net.UnknownHostException
 
-private fun <T> Response<T>.handleResponse(
-): Resource<T> {
+private fun <T> Response<T>.handleResponse(): Resource<T> {
     return try {
         this.takeIf { it.isSuccessful }?.body()?.let {
             Resource.Success(it)

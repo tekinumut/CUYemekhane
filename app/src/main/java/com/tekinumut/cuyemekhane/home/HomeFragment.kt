@@ -67,7 +67,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                             binding.includeErrorLayout.root.hide()
                             binding.progressLoading.hide()
                             stopRefreshListener()
-                            homeDailyFoodsAdapter.submitList(mainPageEvent.dailyMenuUIModel.foodList)
+                            homeDailyFoodsAdapter.submitList(mainPageEvent.todayMenuUIModel.foodList)
                         }
                     }
                 }
