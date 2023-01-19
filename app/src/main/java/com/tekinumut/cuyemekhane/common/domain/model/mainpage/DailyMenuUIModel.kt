@@ -4,5 +4,5 @@ import com.tekinumut.cuyemekhane.common.data.model.mappers.UIModel
 
 data class DailyMenuUIModel(
     val date: String,
-    val foodList: List<FoodUIModel>
+    val foodList: List<DailyFoodUIModel>
 ):UIModel

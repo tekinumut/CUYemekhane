@@ -47,8 +47,8 @@ class MainPageRepositoryImpl @Inject constructor(
         val imageList: List<String> = todayFoodElements.map {
             it.attr(Constants.ATTRIBUTE.TODAY_FOOD_IMAGE_ATTR).withBaseUrl()
         }
-        val foodList: List<Food> = nameList.mapIndexed { index, name ->
-            Food(
+        val foods: List<TodayFood> = nameList.mapIndexed { index, name ->
+            TodayFood(
                 name = name,
                 category = categoryList.getOrNull(index),
                 calorie = calorieList.getOrNull(index),
@@ -57,7 +57,7 @@ class MainPageRepositoryImpl @Inject constructor(
         }
         return TodayMenu(
             date = date,
-            foodList = foodList
+            foods = foods
         )
     }
 
@@ -74,9 +74,8 @@ class MainPageRepositoryImpl @Inject constructor(
             val foodList = dailyFoodElements?.map { dailyFoodElement ->
                 val (name, calorie) = separateNameAndCalorie(dailyFoodElement)
                 val imageUrl = dailyFoodElement.attr(Constants.ATTRIBUTE.HREF).withBaseUrl()
-                Food(
+                DailyFood(
                     name = name,
-                    category = null,
                     calorie = calorie,
                     imageUrl = imageUrl
                 )

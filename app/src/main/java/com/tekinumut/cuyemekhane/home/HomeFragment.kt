@@ -27,7 +27,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private val viewModel by viewModels<HomeViewModel>()
 
-    private val homeDailyFoodsAdapter = HomeDailyFoodsAdapter()
+    private val homeTodayFoodsAdapter = HomeTodayFoodsAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,7 +38,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private fun init() {
         with(binding) {
             binding.swipeRefreshLayoutRoot.setOnRefreshListener(refreshListener)
-            recyclerFoods.adapter = homeDailyFoodsAdapter
+            recyclerFoods.adapter = homeTodayFoodsAdapter
             includeErrorLayout.buttonOpenWebsite.setOnClickListener {
                 Utility.openWebSiteWithCustomTabs(it.context, Constants.NETWORK.MAIN_PAGE)
             }
@@ -67,7 +67,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                             binding.includeErrorLayout.root.hide()
                             binding.progressLoading.hide()
                             stopRefreshListener()
-                            homeDailyFoodsAdapter.submitList(mainPageEvent.todayMenuUIModel.foodList)
+                            homeTodayFoodsAdapter.submitList(mainPageEvent.todayMenuUIModel.foods)
                         }
                     }
                 }

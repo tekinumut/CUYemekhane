@@ -8,13 +8,13 @@ import javax.inject.Inject
  * Created by Umut Tekin on 16.01.2023.
  */
 class TodayMenuMapper @Inject constructor(
-    private val foodMapper: FoodMapper
+    private val todayFoodMapper: TodayFoodMapper
 ) : ApiMapper<TodayMenu, TodayMenuUIModel> {
     override fun mapToUIModel(responseModel: TodayMenu?): TodayMenuUIModel {
         return TodayMenuUIModel(
             date = responseModel?.date.orEmpty(),
-            foodList = responseModel?.foodList?.map {
-                foodMapper.mapToUIModel(it)
+            foods = responseModel?.foods?.map {
+                todayFoodMapper.mapToUIModel(it)
             }.orEmpty()
         )
     }

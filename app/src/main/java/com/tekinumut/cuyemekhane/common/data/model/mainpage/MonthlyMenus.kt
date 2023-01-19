@@ -8,5 +8,5 @@ data class MonthlyMenu(
 
 data class DailyMenu(
     val date: String?,
-    val foodList: List<Food>?
+    val foodList: List<DailyFood>?
 ) : ResponseModel

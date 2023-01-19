@@ -5,7 +5,8 @@ import com.tekinumut.cuyemekhane.common.data.model.mappers.ResponseModel
 /**
  * Created by Umut Tekin on 16.01.2023.
  */
-data class TodayMenu(
-    val date: String?,
-    val foods: List<TodayFood>?
+data class DailyFood(
+    val name: String?,
+    val calorie: String?,
+    val imageUrl: String?
 ) : ResponseModel
