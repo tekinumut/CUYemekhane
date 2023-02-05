@@ -4,14 +4,14 @@ import android.content.Context
 import android.net.Uri
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
-import androidx.core.content.ContextCompat
 import com.tekinumut.cuyemekhane.R
+import com.tekinumut.cuyemekhane.common.extensions.resolveColorAttribute
 
 object Utility {
 
     fun openWebSiteWithCustomTabs(context: Context, url: String) {
         val colorSchemeBuilder = CustomTabColorSchemeParams.Builder().run {
-            setToolbarColor(ContextCompat.getColor(context, R.color.green_primary))
+            setToolbarColor(context.resolveColorAttribute(androidx.appcompat.R.attr.colorPrimary))
                 .build()
         }
         val builder: CustomTabsIntent.Builder = CustomTabsIntent.Builder().run {

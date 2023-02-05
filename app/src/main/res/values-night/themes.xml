@@ -1,27 +1,35 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.CuYemekhane" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.CuYemekhane" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/green_primary</item>
-        <item name="colorPrimaryVariant">@color/green_primary_dark</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/color_primary_10</item>
+        <item name="colorOnPrimary">@color/color_neutral_90</item>
+        <item name="colorPrimaryContainer">@color/color_primary_30</item>
+        <item name="colorOnPrimaryContainer">@color/color_neutral_90</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondary">@color/color_secondary_10</item>
+        <item name="colorOnSecondary">@color/color_neutral_90</item>
+        <item name="colorSecondaryContainer">@color/color_secondary_80</item>
+        <item name="colorOnSecondaryContainer">@color/color_secondary_10</item>
 
         <!-- Error brand color. -->
-        <item name="colorError">@color/red_error_40</item>
+        <item name="colorError">@color/color_error_40</item>
         <item name="colorOnError">@color/white</item>
-        <item name="colorErrorContainer">@color/red_error_90</item>
-        <item name="colorOnErrorContainer">@color/red_error_10</item>
+        <item name="colorErrorContainer">@color/color_error_90</item>
+        <item name="colorOnErrorContainer">@color/color_error_10</item>
 
         <!-- Background brand color. -->
-        <item name="android:colorBackground">@color/white_background_90</item>
-        <item name="colorOnBackground">@color/white_background_40</item>
+        <item name="android:colorBackground">@color/color_neutral_0</item>
+        <item name="colorOnBackground">@color/color_neutral_100</item>
+        <item name="colorSurface">@color/color_secondary_90</item>
+        <item name="colorOnSurface">@color/color_secondary_10</item>
+        <item name="colorOutline">@color/color_neutral_80</item>
 
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <item name="android:statusBarColor">@color/color_secondary_10</item>
+
+        <!-- Custom color -->
+        <item name="colorWhiteCustom">@color/white</item>
+        <item name="colorBlackCustom">@color/black</item>
     </style>
 </resources>

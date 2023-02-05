@@ -23,8 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="@string/error_message_no_data"
-        android:textColor="@color/black" />
+        android:text="@string/error_message_no_data" />
 
     <Button
         android:id="@+id/button_open_website"
