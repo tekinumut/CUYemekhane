@@ -63,6 +63,7 @@ dependencies {
     implementation libraries.coreKtx
     implementation libraries.appCompat
     implementation libraries.material
+    implementation libraries.splashScreen
 
     // View
     implementation libraries.constraintLayout

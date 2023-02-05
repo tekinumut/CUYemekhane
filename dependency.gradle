@@ -11,6 +11,7 @@ ext {
             coreKtx         : "1.9.0",
             appCompat       : "1.6.0",
             material        : "1.8.0",
+            splashScreen    : "1.0.0",
 
             // View
             constraintLayout: "2.1.4",
@@ -42,6 +43,7 @@ ext {
             coreKtx              : "androidx.core:core-ktx:$versions.coreKtx",
             appCompat            : "androidx.appcompat:appcompat:$versions.appCompat",
             material             : "com.google.android.material:material:$versions.material",
+            splashScreen         : "androidx.core:core-splashscreen:$versions.splashScreen",
 
             // View
             constraintLayout     : "androidx.constraintlayout:constraintlayout:$versions.constraintLayout",

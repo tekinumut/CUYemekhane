@@ -32,4 +32,10 @@
         <item name="colorWhiteCustom">@color/white</item>
         <item name="colorBlackCustom">@color/black</item>
     </style>
+
+    <style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/color_neutral_10</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.CuYemekhane</item>
+    </style>
 </resources>
