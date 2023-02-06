@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/todayMenuFragment">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.tekinumut.cuyemekhane.home.HomeFragment"
-        android:label="@string/page_home_title"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/todayMenuFragment"
+        android:name="com.tekinumut.cuyemekhane.todaymenu.TodayMenuFragment"
+        android:label="@string/page_today_menu_title"
+        tools:layout="@layout/fragment_today_menu" />
     <fragment
         android:id="@+id/monthlyMenuFragment"
         android:name="com.tekinumut.cuyemekhane.monthlymenu.MonthlyMenuFragment"

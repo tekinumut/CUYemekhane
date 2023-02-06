@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="page_home_title">Günlük Menü</string>
+    <string name="page_today_menu_title">Günlük Menü</string>
     <string name="page_monthly_menu_title">Aylık Menü</string>
 
     <!-- common usages -->

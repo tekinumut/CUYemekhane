@@ -1,5 +1,5 @@
 <resources>
-    <string name="page_home_title">Daily Menu</string>
+    <string name="page_today_menu_title">Daily Menu</string>
     <string name="page_monthly_menu_title">Monthly Menu</string>
 
     <!-- common usages -->

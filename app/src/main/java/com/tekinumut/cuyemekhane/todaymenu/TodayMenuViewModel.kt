@@ -1,10 +1,10 @@
-package com.tekinumut.cuyemekhane.home
+package com.tekinumut.cuyemekhane.todaymenu
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tekinumut.cuyemekhane.common.data.model.response.Resource
 import com.tekinumut.cuyemekhane.common.domain.usecase.TodayMenuUseCase
-import com.tekinumut.cuyemekhane.home.events.HomePageEvent
+import com.tekinumut.cuyemekhane.todaymenu.events.TodayMenuEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +15,7 @@ import javax.inject.Inject
  * Created by Umut Tekin on 16.01.2023.
  */
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class TodayMenuViewModel @Inject constructor(
     private val todayMenuUseCase: TodayMenuUseCase
 ) : ViewModel() {
 
@@ -23,19 +23,19 @@ class HomeViewModel @Inject constructor(
         fetchMainPage()
     }
 
-    private val _homePageEvent = MutableStateFlow<HomePageEvent>(HomePageEvent.Default)
-    val homePageEvent: StateFlow<HomePageEvent> = _homePageEvent
+    private val _todayMenuEvent = MutableStateFlow<TodayMenuEvent>(TodayMenuEvent.Default)
+    val todayMenuEvent: StateFlow<TodayMenuEvent> = _todayMenuEvent
 
     fun fetchMainPage() {
         viewModelScope.launch {
             todayMenuUseCase(Unit).collect { resource ->
                 when (resource) {
-                    Resource.Loading -> _homePageEvent.value = HomePageEvent.Loading
+                    Resource.Loading -> _todayMenuEvent.value = TodayMenuEvent.Loading
                     is Resource.Failure -> {
-                        _homePageEvent.value = HomePageEvent.Failure(resource.cuError)
+                        _todayMenuEvent.value = TodayMenuEvent.Failure(resource.cuError)
                     }
                     is Resource.Success -> {
-                        _homePageEvent.value = HomePageEvent.Success(resource.value)
+                        _todayMenuEvent.value = TodayMenuEvent.Success(resource.value)
                     }
                 }
             }

@@ -1,4 +1,4 @@
-package com.tekinumut.cuyemekhane.home
+package com.tekinumut.cuyemekhane.todaymenu
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -7,13 +7,13 @@ import com.tekinumut.cuyemekhane.common.domain.model.mainpage.TodayFoodUIModel
 import com.tekinumut.cuyemekhane.common.extensions.viewBinding
 import com.tekinumut.cuyemekhane.databinding.RowTodayFoodsBinding
 
-class HomeTodayFoodsAdapter : ListAdapter<TodayFoodUIModel, HomeTodayFoodsViewHolder>(DIFF_CALLBACK) {
+class TodayMenuAdapter : ListAdapter<TodayFoodUIModel, TodayMenuViewHolder>(DIFF_CALLBACK) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeTodayFoodsViewHolder {
-        return HomeTodayFoodsViewHolder(parent.viewBinding(RowTodayFoodsBinding::inflate))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodayMenuViewHolder {
+        return TodayMenuViewHolder(parent.viewBinding(RowTodayFoodsBinding::inflate))
     }
 
-    override fun onBindViewHolder(holder: HomeTodayFoodsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TodayMenuViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 

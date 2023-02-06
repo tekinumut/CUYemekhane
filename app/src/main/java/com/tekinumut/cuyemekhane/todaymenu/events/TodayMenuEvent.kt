@@ -1,4 +1,4 @@
-package com.tekinumut.cuyemekhane.home.events
+package com.tekinumut.cuyemekhane.todaymenu.events
 
 import com.tekinumut.cuyemekhane.common.data.model.response.CuError
 import com.tekinumut.cuyemekhane.common.domain.model.mainpage.TodayMenuUIModel
@@ -6,12 +6,12 @@ import com.tekinumut.cuyemekhane.common.domain.model.mainpage.TodayMenuUIModel
 /**
  * Created by Umut Tekin on 15.01.2023.
  */
-sealed class HomePageEvent {
+sealed class TodayMenuEvent {
     data class Success(
         val todayMenuUIModel: TodayMenuUIModel
-    ) : HomePageEvent()
+    ) : TodayMenuEvent()
 
-    class Failure(val exception: CuError) : HomePageEvent()
-    object Loading : HomePageEvent()
-    object Default : HomePageEvent()
+    class Failure(val exception: CuError) : TodayMenuEvent()
+    object Loading : TodayMenuEvent()
+    object Default : TodayMenuEvent()
 }

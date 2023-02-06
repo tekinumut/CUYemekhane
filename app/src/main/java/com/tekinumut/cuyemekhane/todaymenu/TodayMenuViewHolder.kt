@@ -1,4 +1,4 @@
-package com.tekinumut.cuyemekhane.home
+package com.tekinumut.cuyemekhane.todaymenu
 
 import androidx.recyclerview.widget.RecyclerView
 import com.tekinumut.cuyemekhane.R
@@ -6,7 +6,7 @@ import com.tekinumut.cuyemekhane.common.domain.model.mainpage.TodayFoodUIModel
 import com.tekinumut.cuyemekhane.common.extensions.setImageUrl
 import com.tekinumut.cuyemekhane.databinding.RowTodayFoodsBinding
 
-class HomeTodayFoodsViewHolder(
+class TodayMenuViewHolder(
     private val binding: RowTodayFoodsBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 

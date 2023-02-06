@@ -1,4 +1,4 @@
-package com.tekinumut.cuyemekhane.home
+package com.tekinumut.cuyemekhane.todaymenu
 
 import android.os.Bundle
 import android.view.View
@@ -13,8 +13,8 @@ import com.tekinumut.cuyemekhane.common.extensions.hide
 import com.tekinumut.cuyemekhane.common.extensions.show
 import com.tekinumut.cuyemekhane.common.util.Constants
 import com.tekinumut.cuyemekhane.common.util.Utility
-import com.tekinumut.cuyemekhane.databinding.FragmentHomeBinding
-import com.tekinumut.cuyemekhane.home.events.HomePageEvent
+import com.tekinumut.cuyemekhane.databinding.FragmentTodayMenuBinding
+import com.tekinumut.cuyemekhane.todaymenu.events.TodayMenuEvent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -22,11 +22,13 @@ import kotlinx.coroutines.launch
  * Created by Umut Tekin on 16.01.2023.
  */
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
+class TodayMenuFragment : BaseFragment<FragmentTodayMenuBinding>(
+    FragmentTodayMenuBinding::inflate
+) {
 
-    private val viewModel by viewModels<HomeViewModel>()
+    private val viewModel by viewModels<TodayMenuViewModel>()
 
-    private val homeTodayFoodsAdapter = HomeTodayFoodsAdapter()
+    private val todayMenuAdapter = TodayMenuAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,7 +39,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private fun init() {
         with(binding) {
             binding.swipeRefreshLayoutRoot.setOnRefreshListener(refreshListener)
-            recyclerFoods.adapter = homeTodayFoodsAdapter
+            recyclerFoods.adapter = todayMenuAdapter
             includeErrorLayout.buttonOpenWebsite.setOnClickListener {
                 Utility.openWebSiteWithCustomTabs(it.context, Constants.NETWORK.MAIN_PAGE)
             }
@@ -47,17 +49,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private fun initObservers() {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
-                viewModel.homePageEvent.collect { mainPageEvent ->
+                viewModel.todayMenuEvent.collect { mainPageEvent ->
                     when (mainPageEvent) {
-                        HomePageEvent.Default -> Unit
-                        HomePageEvent.Loading -> {
+                        TodayMenuEvent.Default -> Unit
+                        TodayMenuEvent.Loading -> {
                             with(binding) {
                                 includeErrorLayout.root.hide()
                                 recyclerFoods.hide()
                                 progressLoading.isGone = swipeRefreshLayoutRoot.isRefreshing
                             }
                         }
-                        is HomePageEvent.Failure -> {
+                        is TodayMenuEvent.Failure -> {
                             with(binding) {
                                 progressLoading.hide()
                                 recyclerFoods.hide()
@@ -65,14 +67,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                                 includeErrorLayout.root.show()
                             }
                         }
-                        is HomePageEvent.Success -> {
+                        is TodayMenuEvent.Success -> {
                             with(binding) {
                                 includeErrorLayout.root.hide()
                                 progressLoading.hide()
                                 recyclerFoods.show()
                             }
                             stopRefreshListener()
-                            homeTodayFoodsAdapter.submitList(mainPageEvent.todayMenuUIModel.foods)
+                            todayMenuAdapter.submitList(mainPageEvent.todayMenuUIModel.foods)
                         }
                     }
                 }
