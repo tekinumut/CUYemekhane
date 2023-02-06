@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="8dp"
     app:contentPadding="8dp"
+    app:cardBackgroundColor="?attr/colorSurfaceVariant"
     android:layout_marginTop="12dp"
     app:cardCornerRadius="12dp"
     app:cardElevation="2dp">
@@ -16,8 +17,8 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_food_icon"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:scaleType="fitXY"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -32,14 +33,12 @@
             android:layout_marginTop="4dp"
             android:fontFamily="@font/russo_one"
             android:maxLines="2"
-            android:textColor="?attr/colorOnSecondary"
-            android:textSize="16sp"
+            android:textColor="?attr/colorOnPrimaryContainer"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias=".0"
             app:layout_constraintStart_toEndOf="@id/image_food_icon"
             app:layout_constraintTop_toTopOf="@id/image_food_icon"
-            tools:layout_editor_absoluteX="12dp"
-            tools:layout_editor_absoluteY="12dp"
             tools:text="Mercimekli Köfte" />
 
         <TextView
@@ -48,7 +47,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_medium"
             android:textColor="?attr/colorError"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@id/text_title"
             app:layout_constraintTop_toBottomOf="@id/text_title"
             tools:text="Seçenek Yemek" />
@@ -59,7 +58,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_medium"
             android:textColor="?attr/colorError"
-            android:textSize="12sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="180 Calorie" />

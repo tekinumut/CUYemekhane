@@ -1,7 +1,6 @@
 package com.tekinumut.cuyemekhane.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
@@ -54,18 +53,24 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                         HomePageEvent.Loading -> {
                             with(binding) {
                                 includeErrorLayout.root.hide()
+                                recyclerFoods.hide()
                                 progressLoading.isGone = swipeRefreshLayoutRoot.isRefreshing
                             }
                         }
                         is HomePageEvent.Failure -> {
-                            binding.progressLoading.hide()
-                            binding.includeErrorLayout.root.show()
-                            stopRefreshListener()
-                            Log.e("BaseApp", "Failure: ${mainPageEvent.exception.errorType}")
+                            with(binding) {
+                                progressLoading.hide()
+                                recyclerFoods.hide()
+                                stopRefreshListener()
+                                includeErrorLayout.root.show()
+                            }
                         }
                         is HomePageEvent.Success -> {
-                            binding.includeErrorLayout.root.hide()
-                            binding.progressLoading.hide()
+                            with(binding) {
+                                includeErrorLayout.root.hide()
+                                progressLoading.hide()
+                                recyclerFoods.show()
+                            }
                             stopRefreshListener()
                             homeTodayFoodsAdapter.submitList(mainPageEvent.todayMenuUIModel.foods)
                         }

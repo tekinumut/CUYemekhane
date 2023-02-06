@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:theme="@style/Theme.CuYemekhane"
+        tools:ignore="MissingApplicationIcon"
+        tools:replace="android:theme" />
+</manifest>

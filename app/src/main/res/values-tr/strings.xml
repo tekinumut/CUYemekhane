@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="page_home_title">Ana Sayfa</string>
+    <string name="page_home_title">Günlük Menü</string>
     <string name="page_monthly_menu_title">Aylık Menü</string>
 
     <!-- common usages -->
@@ -8,6 +8,6 @@
     <string name="food_calorie_at_end">%d Kalori</string>
 
     <!-- error messages -->
-    <string name="error_message_no_data">Şu an bir problem yaşıyoruz. Lütfen daha sonra tekrar deneyiniz</string>
+    <string name="error_message_no_data">Şu an bir problem yaşıyoruz. Lütfen daha sonra tekrar deneyiniz.</string>
     <string name="open_website_text">Web sitesine git</string>
 </resources>

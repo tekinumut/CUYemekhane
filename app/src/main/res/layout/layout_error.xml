@@ -21,16 +21,17 @@
         android:id="@+id/text_error_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="@string/error_message_no_data" />
+        android:gravity="center"
+        android:text="@string/error_message_no_data"
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/button_open_website"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
         android:text="@string/open_website_text"
         android:textAllCaps="false" />
-
 </LinearLayout>

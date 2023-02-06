@@ -22,6 +22,8 @@
         android:id="@+id/bottom_navigation_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:itemIconTint="@drawable/selector_bottom_nav_bar"
+        app:itemTextColor="@drawable/selector_bottom_nav_bar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

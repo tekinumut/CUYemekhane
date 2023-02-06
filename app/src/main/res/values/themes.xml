@@ -5,7 +5,7 @@
         <item name="colorPrimary">@color/color_primary_10</item>
         <item name="colorOnPrimary">@color/color_neutral_100</item>
         <item name="colorPrimaryContainer">@color/color_primary_90</item>
-        <item name="colorOnPrimaryContainer">@color/color_primary_10</item>
+        <item name="colorOnPrimaryContainer">@color/color_neutral_10</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/color_secondary_10</item>
         <item name="colorOnSecondary">@color/color_neutral_90</item>
@@ -21,8 +21,10 @@
         <!-- Background brand color. -->
         <item name="android:colorBackground">@color/color_neutral_100</item>
         <item name="colorOnBackground">@color/color_neutral_0</item>
-        <item name="colorSurface">@color/color_neutral_20</item>
-        <item name="colorOnSurface">@color/color_neutral_80</item>
+        <item name="colorSurface">@color/color_secondary_10</item>
+        <item name="colorOnSurface">@color/color_neutral_90</item>
+        <item name="colorSurfaceVariant">@color/color_neutral_90</item>
+        <item name="colorOnSurfaceVariant">@color/color_neutral_0</item>
         <item name="colorOutline">@color/color_neutral_30</item>
 
         <!-- Status bar color. -->
