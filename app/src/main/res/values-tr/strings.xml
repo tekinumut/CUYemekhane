@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Çukurova Üniversitesi Yemekhane</string>
     <string name="page_home_title">Ana Sayfa</string>
     <string name="page_monthly_menu_title">Aylık Menü</string>
 
