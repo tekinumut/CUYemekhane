@@ -14,7 +14,6 @@ import com.tekinumut.cuyemekhane.common.extensions.show
 import com.tekinumut.cuyemekhane.common.util.Constants
 import com.tekinumut.cuyemekhane.common.util.Utility
 import com.tekinumut.cuyemekhane.databinding.FragmentTodayMenuBinding
-import com.tekinumut.cuyemekhane.todaymenu.events.TodayMenuEvent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -49,32 +48,39 @@ class TodayMenuFragment : BaseFragment<FragmentTodayMenuBinding>(
     private fun initObservers() {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
-                viewModel.todayMenuEvent.collect { mainPageEvent ->
-                    when (mainPageEvent) {
-                        TodayMenuEvent.Default -> Unit
-                        TodayMenuEvent.Loading -> {
-                            with(binding) {
-                                includeErrorLayout.root.hide()
-                                recyclerFoods.hide()
-                                progressLoading.isGone = swipeRefreshLayoutRoot.isRefreshing
+                launch {
+                    viewModel.todayMenuEvent.collect { uiState ->
+                        when (uiState.state) {
+                            TodayMenuViewModel.State.Initial -> Unit
+                            TodayMenuViewModel.State.MenuFetched -> {
+                                with(binding) {
+                                    includeErrorLayout.root.hide()
+                                    recyclerFoods.show()
+                                }
+                                todayMenuAdapter.submitList(uiState.menu?.foods)
+                            }
+                            TodayMenuViewModel.State.NoMenuFound -> {
+                                with(binding) {
+                                    recyclerFoods.hide()
+                                    includeErrorLayout.root.show()
+                                }
                             }
                         }
-                        is TodayMenuEvent.Failure -> {
-                            with(binding) {
-                                progressLoading.hide()
-                                recyclerFoods.hide()
+                    }
+                }
+                launch {
+                    viewModel.event.collect { event ->
+                        when (event) {
+                            TodayMenuViewModel.Event.ShowLoading -> {
+                                with(binding) {
+                                    progressLoading.isGone = swipeRefreshLayoutRoot.isRefreshing
+
+                                }
+                            }
+                            TodayMenuViewModel.Event.HideLoading -> {
+                                binding.progressLoading.hide()
                                 stopRefreshListener()
-                                includeErrorLayout.root.show()
                             }
-                        }
-                        is TodayMenuEvent.Success -> {
-                            with(binding) {
-                                includeErrorLayout.root.hide()
-                                progressLoading.hide()
-                                recyclerFoods.show()
-                            }
-                            stopRefreshListener()
-                            todayMenuAdapter.submitList(mainPageEvent.todayMenuUIModel.foods)
                         }
                     }
                 }

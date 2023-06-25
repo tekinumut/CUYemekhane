@@ -1,6 +1,5 @@
 package com.tekinumut.cuyemekhane.common.domain.usecase
 
-import com.tekinumut.cuyemekhane.common.data.model.mainpage.MainPageResponse
 import com.tekinumut.cuyemekhane.common.data.model.mappers.MainPageMapper
 import com.tekinumut.cuyemekhane.common.data.model.response.Resource
 import com.tekinumut.cuyemekhane.common.di.IODispatcher
@@ -23,20 +22,14 @@ class MonthlyMenuUseCase @Inject constructor(
 
     override suspend fun getExecutable(params: Unit): Flow<Resource<MonthlyMenuUIModel>> {
         return flow {
-            emit(Resource.Loading)
-            val response = mainPageRepository.getMainPage()
-            emit(getMappedResponse(response))
-        }
-    }
-
-    private fun getMappedResponse(resource: Resource<MainPageResponse>): Resource<MonthlyMenuUIModel> {
-        return when (resource) {
-            is Resource.Failure -> Resource.Failure(resource.cuError)
-            Resource.Loading -> Resource.Loading
-            is Resource.Success -> {
-                val mainPageUIModel = mainPageMapper.mapToUIModel(resource.value)
-                Resource.Success(mainPageUIModel.monthlyMenu)
+            val mappedResponse = when (val response = mainPageRepository.getMainPage()) {
+                is Resource.Success -> {
+                    val mainPageUIModel = mainPageMapper.mapToUIModel(response.value)
+                    Resource.Success(mainPageUIModel.monthlyMenu)
+                }
+                is Resource.Failure -> Resource.Failure(response.cuError)
             }
+            emit(mappedResponse)
         }
     }
 }

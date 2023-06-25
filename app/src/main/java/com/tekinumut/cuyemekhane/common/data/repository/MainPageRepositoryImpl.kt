@@ -2,7 +2,12 @@ package com.tekinumut.cuyemekhane.common.data.repository
 
 import com.tekinumut.cuyemekhane.common.data.api.ApiService
 import com.tekinumut.cuyemekhane.common.data.api.handleApiCall
-import com.tekinumut.cuyemekhane.common.data.model.mainpage.*
+import com.tekinumut.cuyemekhane.common.data.model.mainpage.DailyFood
+import com.tekinumut.cuyemekhane.common.data.model.mainpage.DailyMenu
+import com.tekinumut.cuyemekhane.common.data.model.mainpage.MainPageResponse
+import com.tekinumut.cuyemekhane.common.data.model.mainpage.MonthlyMenu
+import com.tekinumut.cuyemekhane.common.data.model.mainpage.TodayFood
+import com.tekinumut.cuyemekhane.common.data.model.mainpage.TodayMenu
 import com.tekinumut.cuyemekhane.common.data.model.response.Resource
 import com.tekinumut.cuyemekhane.common.domain.repository.MainPageRepository
 import com.tekinumut.cuyemekhane.common.extensions.withBaseUrl
@@ -22,7 +27,6 @@ class MainPageRepositoryImpl @Inject constructor(
 
     override suspend fun getMainPage(): Resource<MainPageResponse> {
         return when (val response = handleApiCall { apiService.getMainPage() }) {
-            is Resource.Loading -> response
             is Resource.Failure -> response
             is Resource.Success -> {
                 val responseHtml = Jsoup.parse(response.value)
