@@ -23,15 +23,15 @@ class TodayMenuViewModel @Inject constructor(
     private val todayMenuUseCase: TodayMenuUseCase
 ) : ViewModel() {
 
-    init {
-        fetchMainPage()
-    }
-
-    private val _todayMenuEvent = MutableStateFlow(UIState())
-    val todayMenuEvent: StateFlow<UIState> = _todayMenuEvent
+    private val _uiState = MutableStateFlow(UIState())
+    val uiState: StateFlow<UIState> = _uiState
 
     private val _event = Channel<Event>(capacity = Channel.UNLIMITED)
     val event: Flow<Event> = _event.receiveAsFlow()
+
+    init {
+        fetchMainPage()
+    }
 
     fun fetchMainPage() {
         showLoading()
@@ -39,17 +39,17 @@ class TodayMenuViewModel @Inject constructor(
             todayMenuUseCase(Unit).collect { resource ->
                 when (resource) {
                     is TodayMenuEvent.Success -> {
-                        _todayMenuEvent.update {
+                        _uiState.update {
                             it.copy(
                                 state = State.MenuFetched,
-                                menu = it.menu
+                                menu = resource.todayMenuUIModel
                             )
                         }
                         hideLoading()
                     }
                     TodayMenuEvent.EmptyList,
                     is TodayMenuEvent.Failure -> {
-                        _todayMenuEvent.update {
+                        _uiState.update {
                             it.copy(
                                 state = State.NoMenuFound
                             )
