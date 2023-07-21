@@ -5,11 +5,18 @@ import android.widget.ImageView
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
-fun ImageView.setImageUrl(url: String?, hideIfNull: Boolean = false) {
+fun ImageView.setImageUrl(
+    url: String?,
+    hideIfNull: Boolean = false,
+    requestOptions: RequestOptions? = null
+) {
     if (!url.isNullOrBlank()) {
         show()
-        Glide.with(context).load(url).into(this)
+        val glide = Glide.with(context).load(url)
+        requestOptions?.let { glide.apply(it) }
+        glide.into(this)
     } else if (hideIfNull) {
         hide()
     }

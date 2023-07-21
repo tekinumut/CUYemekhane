@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
-import com.tekinumut.cuyemekhane.common.extensions.BaseFragment
+import com.tekinumut.cuyemekhane.base.BaseFragment
 import com.tekinumut.cuyemekhane.common.extensions.collectWithLifecycle
 import com.tekinumut.cuyemekhane.common.extensions.hide
 import com.tekinumut.cuyemekhane.common.extensions.show
+import com.tekinumut.cuyemekhane.common.ui.FullScreenImageDialog
 import com.tekinumut.cuyemekhane.common.util.Constants
 import com.tekinumut.cuyemekhane.common.util.Utility
 import com.tekinumut.cuyemekhane.databinding.FragmentTodayMenuBinding
@@ -22,7 +23,11 @@ class TodayMenuFragment : BaseFragment<FragmentTodayMenuBinding>(
 ) {
     private val viewModel by viewModels<TodayMenuViewModel>()
 
-    private val todayMenuAdapter = TodayMenuAdapter()
+    private val todayMenuAdapter = TodayMenuAdapter { imageUrl ->
+        FullScreenImageDialog
+            .newInstance(imageUrl)
+            .show(childFragmentManager, FullScreenImageDialog.TAG)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

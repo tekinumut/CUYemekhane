@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 
+typealias InflateFragment<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
+
 inline fun <T : ViewBinding> ViewGroup.viewBinding(
     viewBindingFactory:
         (LayoutInflater, ViewGroup, Boolean) -> T

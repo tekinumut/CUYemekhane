@@ -9,6 +9,8 @@ object Constants {
     const val INT_ZERO = 0
     const val DOUBLE_ZERO = 0.0
 
+    const val STRING_EMPTY = ""
+
     object NETWORK {
         const val BASE_ENDPOINT = "https://yemekhane.cu.edu.tr/"
         const val MAIN_PAGE = BASE_ENDPOINT + "default.asp"

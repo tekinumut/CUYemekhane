@@ -19,7 +19,7 @@
         <item name="colorOnErrorContainer">@color/color_error_10</item>
 
         <!-- Background brand color. -->
-        <item name="android:colorBackground">@color/color_neutral_0</item>
+        <item name="colorBackground">@color/color_neutral_0</item>
         <item name="colorOnBackground">@color/color_neutral_100</item>
         <item name="colorSurface">@color/color_secondary_10</item>
         <item name="colorOnSurface">@color/color_neutral_90</item>
