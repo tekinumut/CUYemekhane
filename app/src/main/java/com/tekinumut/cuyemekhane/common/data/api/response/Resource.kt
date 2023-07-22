@@ -1,4 +1,4 @@
-package com.tekinumut.cuyemekhane.common.data.model.response
+package com.tekinumut.cuyemekhane.common.data.api.response
 
 sealed class Resource<out T> {
     data class Success<out T>(val value: T) : Resource<T>()

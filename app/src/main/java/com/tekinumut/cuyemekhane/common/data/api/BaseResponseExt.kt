@@ -1,13 +1,10 @@
 package com.tekinumut.cuyemekhane.common.data.api
 
-/**
- * Created by Umut Tekin on 15.01.2023.
- */
-import com.tekinumut.cuyemekhane.common.data.model.response.CuError
-import com.tekinumut.cuyemekhane.common.data.model.response.ErrorType
-import com.tekinumut.cuyemekhane.common.data.model.response.Resource
-import retrofit2.Response
+import com.tekinumut.cuyemekhane.common.data.api.response.CuError
+import com.tekinumut.cuyemekhane.common.data.api.response.ErrorType
+import com.tekinumut.cuyemekhane.common.data.api.response.Resource
 import java.net.UnknownHostException
+import retrofit2.Response
 
 private fun <T> Response<T>.handleResponse(): Resource<T> {
     return try {

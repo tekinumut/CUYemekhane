@@ -6,6 +6,7 @@ import com.tekinumut.cuyemekhane.common.domain.model.mainpage.TodayMenuUIModel
 import com.tekinumut.cuyemekhane.common.domain.usecase.TodayMenuUseCase
 import com.tekinumut.cuyemekhane.todaymenu.events.TodayMenuEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,11 +14,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-/**
- * Created by Umut Tekin on 16.01.2023.
- */
 @HiltViewModel
 class TodayMenuViewModel @Inject constructor(
     private val todayMenuUseCase: TodayMenuUseCase

@@ -2,67 +2,31 @@ package com.tekinumut.cuyemekhane.common.data.repository
 
 import com.tekinumut.cuyemekhane.common.data.api.ApiService
 import com.tekinumut.cuyemekhane.common.data.api.handleApiCall
-import com.tekinumut.cuyemekhane.common.data.model.mainpage.DailyFood
-import com.tekinumut.cuyemekhane.common.data.model.mainpage.DailyMenu
-import com.tekinumut.cuyemekhane.common.data.model.mainpage.MainPageResponse
-import com.tekinumut.cuyemekhane.common.data.model.mainpage.MonthlyMenu
-import com.tekinumut.cuyemekhane.common.data.model.mainpage.TodayFood
-import com.tekinumut.cuyemekhane.common.data.model.mainpage.TodayMenu
-import com.tekinumut.cuyemekhane.common.data.model.response.Resource
-import com.tekinumut.cuyemekhane.common.domain.repository.MainPageRepository
+import com.tekinumut.cuyemekhane.common.data.api.response.Resource
+import com.tekinumut.cuyemekhane.common.data.model.monthlyfood.DailyFood
+import com.tekinumut.cuyemekhane.common.data.model.monthlyfood.DailyMenu
+import com.tekinumut.cuyemekhane.common.data.model.monthlyfood.MonthlyMenu
+import com.tekinumut.cuyemekhane.common.domain.repository.MonthlyMenuRepository
 import com.tekinumut.cuyemekhane.common.extensions.withBaseUrl
 import com.tekinumut.cuyemekhane.common.util.Constants
+import javax.inject.Inject
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
-import javax.inject.Inject
 
-/**
- * Created by Umut Tekin on 15.01.2023.
- */
-class MainPageRepositoryImpl @Inject constructor(
+class MonthlyMenuRepositoryImpl @Inject constructor(
     private val apiService: ApiService
-) : MainPageRepository {
+) : MonthlyMenuRepository {
 
-    override suspend fun getMainPage(): Resource<MainPageResponse> {
+    override suspend fun getMonthlyMenu(): Resource<MonthlyMenu> {
         return when (val response = handleApiCall { apiService.getMainPage() }) {
             is Resource.Failure -> response
             is Resource.Success -> {
                 val responseHtml = Jsoup.parse(response.value)
-                val todayMenu = parseTodayMenu(responseHtml)
-                val monthlyMenu = parseMonthlyMenu(responseHtml)
-                Resource.Success(MainPageResponse(todayMenu, monthlyMenu))
+                Resource.Success(parseMonthlyMenu(responseHtml))
             }
         }
-    }
-
-    private fun parseTodayMenu(document: Document): TodayMenu {
-        val date: String = document.select(Constants.QUERY.TODAY_DATE).text()
-        val todayFoodElements: Elements = document.select(Constants.QUERY.TODAY_FOODS)
-        val categoryElements: Elements = document.select(Constants.QUERY.TODAY_FOOD_CATEGORY)
-        val calorieElements: Elements = document.select(Constants.QUERY.TODAY_FOOD_CALORIE)
-
-        val nameList: List<String> = todayFoodElements.map {
-            it.attr(Constants.ATTRIBUTE.FOOD_NAME_ATTR)
-        }
-        val calorieList: List<String> = calorieElements.map { it.ownText().orEmpty() }
-        val categoryList: List<String> = categoryElements.map { it.text().orEmpty() }
-        val imageList: List<String> = todayFoodElements.map {
-            it.attr(Constants.ATTRIBUTE.TODAY_FOOD_IMAGE_ATTR).withBaseUrl()
-        }
-        val foods: List<TodayFood> = nameList.mapIndexed { index, name ->
-            TodayFood(
-                name = name,
-                category = categoryList.getOrNull(index),
-                calorie = calorieList.getOrNull(index),
-                imageUrl = imageList.getOrNull(index)
-            )
-        }
-        return TodayMenu(
-            date = date,
-            foods = foods
-        )
     }
 
     private fun parseMonthlyMenu(document: Document): MonthlyMenu {
@@ -108,18 +72,3 @@ class MainPageRepositoryImpl @Inject constructor(
         return Pair(name, calorie)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

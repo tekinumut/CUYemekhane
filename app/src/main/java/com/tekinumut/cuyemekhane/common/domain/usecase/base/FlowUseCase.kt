@@ -4,9 +4,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
-/**
- * Created by Umut Tekin on 15.01.2023.
- */
 abstract class FlowUseCase<in Params, Type> constructor(
     private val dispatcher: CoroutineDispatcher
 ) {

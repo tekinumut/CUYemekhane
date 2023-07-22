@@ -1,12 +1,9 @@
-package com.tekinumut.cuyemekhane.common.data.model.mappers
+package com.tekinumut.cuyemekhane.common.data.mappers
 
-import com.tekinumut.cuyemekhane.common.data.model.mainpage.TodayMenu
+import com.tekinumut.cuyemekhane.common.data.model.todayfood.TodayMenu
 import com.tekinumut.cuyemekhane.common.domain.model.mainpage.TodayMenuUIModel
 import javax.inject.Inject
 
-/**
- * Created by Umut Tekin on 16.01.2023.
- */
 class TodayMenuMapper @Inject constructor(
     private val todayFoodMapper: TodayFoodMapper
 ) : ApiMapper<TodayMenu, TodayMenuUIModel> {

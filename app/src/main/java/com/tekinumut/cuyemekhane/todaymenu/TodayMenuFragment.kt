@@ -14,9 +14,6 @@ import com.tekinumut.cuyemekhane.common.util.Utility
 import com.tekinumut.cuyemekhane.databinding.FragmentTodayMenuBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-/**
- * Created by Umut Tekin on 16.01.2023.
- */
 @AndroidEntryPoint
 class TodayMenuFragment : BaseFragment<FragmentTodayMenuBinding>(
     FragmentTodayMenuBinding::inflate

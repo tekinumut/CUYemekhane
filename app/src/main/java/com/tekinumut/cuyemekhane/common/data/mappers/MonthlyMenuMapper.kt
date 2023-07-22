@@ -1,6 +1,6 @@
-package com.tekinumut.cuyemekhane.common.data.model.mappers
+package com.tekinumut.cuyemekhane.common.data.mappers
 
-import com.tekinumut.cuyemekhane.common.data.model.mainpage.MonthlyMenu
+import com.tekinumut.cuyemekhane.common.data.model.monthlyfood.MonthlyMenu
 import com.tekinumut.cuyemekhane.common.domain.model.mainpage.MonthlyMenuUIModel
 import javax.inject.Inject
 

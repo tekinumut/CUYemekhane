@@ -8,15 +8,12 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
-import javax.inject.Singleton
 
-/**
- * Created by Umut Tekin on 15.01.2023.
- */
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
