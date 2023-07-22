@@ -8,29 +8,29 @@ ext {
             versionName     : "1.10",
 
             // Core
-            coreKtx         : "1.9.0",
-            appCompat       : "1.6.0",
-            material        : "1.8.0",
-            splashScreen    : "1.0.0",
+            coreKtx         : "1.10.1",
+            appCompat       : "1.6.1",
+            material        : "1.9.0",
+            splashScreen    : "1.0.1",
 
             // View
             constraintLayout: "2.1.4",
-            fragmentKtx     : "1.5.5",
-            navigationKtx   : "2.5.3",
-            browser         : "1.4.0",
+            fragmentKtx     : "1.6.0",
+            navigationKtx   : "2.6.0",
+            browser         : "1.5.0",
             swipeRefresh    : "1.1.0",
 
             // Dagger Hilt
-            daggerHilt      : "2.44.2",
+            daggerHilt      : "2.47",
 
             // Lifecycle Components
-            lifecycle       : "2.5.1",
+            lifecycle       : "2.6.1",
 
             // Network
             retrofit        : "2.9.0",
             okhttpLogging   : "4.10.0",
-            jsoup           : "1.15.3",
-            glide           : "4.14.2",
+            jsoup           : "1.16.1",
+            glide           : "4.15.1",
 
             // Test
             junit           : "4.13.2",
@@ -50,7 +50,7 @@ ext {
             fragmentKtx          : "androidx.fragment:fragment-ktx:$versions.fragmentKtx",
             navigationFragmentKtx: "androidx.navigation:navigation-fragment-ktx:$versions.navigationKtx",
             navigationUiKtx      : "androidx.navigation:navigation-ui-ktx:$versions.navigationKtx",
-            browser              : "androidx.browser:browser:1.4.0",
+            browser              : "androidx.browser:browser:$versions.browser",
             swipeRefresh         : "androidx.swiperefreshlayout:swiperefreshlayout:$versions.swipeRefresh",
 
             // Lifecycle Components
