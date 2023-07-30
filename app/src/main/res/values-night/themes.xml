@@ -20,11 +20,13 @@
 
         <!-- Background brand color. -->
         <item name="colorBackground">@color/color_neutral_0</item>
-        <item name="colorOnBackground">@color/color_neutral_100</item>
+        <item name="colorOnBackground">@color/color_neutral_95</item>
         <item name="colorSurface">@color/color_secondary_10</item>
         <item name="colorOnSurface">@color/color_neutral_90</item>
         <item name="colorSurfaceVariant">@color/color_neutral_10</item>
         <item name="colorOnSurfaceVariant">@color/color_neutral_90</item>
+        <item name="colorSurfaceInverse">@color/color_neutral_5</item>
+        <item name="colorOnSurfaceInverse">@color/color_neutral_95</item>
         <item name="colorOutline">@color/color_neutral_80</item>
 
         <!-- Status bar color. -->

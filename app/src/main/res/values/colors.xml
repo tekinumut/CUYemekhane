@@ -26,6 +26,7 @@
     <color name="color_error_90">#f8d5d3</color>
 
     <color name="color_neutral_0">#121212</color>
+    <color name="color_neutral_5">#0d0d0d</color>
     <color name="color_neutral_10">#1a1a1a</color>
     <color name="color_neutral_20">#333333</color>
     <color name="color_neutral_30">#4d4d4d</color>
@@ -35,5 +36,6 @@
     <color name="color_neutral_70">#b3b3b3</color>
     <color name="color_neutral_80">#cccccc</color>
     <color name="color_neutral_90">#e6e6e6</color>
-    <color name="color_neutral_100">#f2f2f2</color>
+    <color name="color_neutral_95">#f2f2f2</color>
+    <color name="color_neutral_100">#ffffff</color>
 </resources>

@@ -27,10 +27,10 @@ class TodayMenuViewModel @Inject constructor(
     val event: Flow<Event> = _event.receiveAsFlow()
 
     init {
-        fetchMainPage()
+        fetchDailyMenu()
     }
 
-    fun fetchMainPage() {
+    fun fetchDailyMenu() {
         showLoading()
         viewModelScope.launch {
             todayMenuUseCase(Unit).collect { resource ->

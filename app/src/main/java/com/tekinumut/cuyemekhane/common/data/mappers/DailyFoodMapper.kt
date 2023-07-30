@@ -9,8 +9,9 @@ class DailyFoodMapper @Inject constructor() : ApiMapper<DailyFood, DailyFoodUIMo
     override fun mapToUIModel(responseModel: DailyFood?): DailyFoodUIModel {
         return DailyFoodUIModel(
             name = responseModel?.name.orEmpty(),
-            imageUrl = responseModel?.imageUrl.orEmpty(),
-            calorie = responseModel?.calorie?.toIntOrNull().toZeroIfNull()
+            calorie = responseModel?.calorie?.toIntOrNull().toZeroIfNull(),
+            detailUrl = responseModel?.detailUrl.orEmpty(),
+            imageUrl = responseModel?.imageUrl.orEmpty()
         )
     }
 }

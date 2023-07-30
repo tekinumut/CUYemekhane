@@ -4,8 +4,10 @@ import com.tekinumut.cuyemekhane.common.util.Constants
 
 fun Int?.toZeroIfNull(): Int = this ?: Constants.INT_ZERO
 
-fun Int?.isBiggerThanZero(func: Int.() -> Unit) {
-    if (this.toZeroIfNull() > 0) {
-        func.invoke(this!!)
+fun Int?.isBiggerThanZero(func: (Int) -> Unit) {
+    this?.let {
+        if (it > 0) {
+            func(it)
+        }
     }
 }

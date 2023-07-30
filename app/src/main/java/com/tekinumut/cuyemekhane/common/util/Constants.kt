@@ -28,6 +28,5 @@ object Constants {
     object ATTRIBUTE {
         const val FOOD_NAME_ATTR = "data-title"
         const val TODAY_FOOD_IMAGE_ATTR = "data-thumb"
-        const val HREF = "href"
     }
 }

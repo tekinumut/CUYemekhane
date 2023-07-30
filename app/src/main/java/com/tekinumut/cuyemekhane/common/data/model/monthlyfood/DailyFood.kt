@@ -5,5 +5,6 @@ import com.tekinumut.cuyemekhane.common.data.mappers.ResponseModel
 data class DailyFood(
     val name: String?,
     val calorie: String?,
+    val detailUrl: String?,
     val imageUrl: String?
 ) : ResponseModel

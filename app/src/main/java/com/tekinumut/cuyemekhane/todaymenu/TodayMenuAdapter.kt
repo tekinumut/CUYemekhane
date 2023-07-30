@@ -40,7 +40,7 @@ class TodayMenuAdapter(
                 textTitle.text = food.name
                 textCategory.text = food.category
                 food.calorie.isBiggerThanZero {
-                    textCalorie.text = context.getString(R.string.food_calorie_at_end, food.calorie)
+                    textCalorie.text = context.getString(R.string.food_calorie_at_end, it)
                 }
                 root.setOnClickListener { onItemClickListener(food.imageUrl) }
             }

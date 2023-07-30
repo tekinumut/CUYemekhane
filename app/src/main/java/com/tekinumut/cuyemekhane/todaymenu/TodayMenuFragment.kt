@@ -35,7 +35,7 @@ class TodayMenuFragment : BaseFragment<FragmentTodayMenuBinding>(
     private fun init() {
         with(binding) {
             swipeRefreshLayoutRoot.setOnRefreshListener {
-                viewModel.fetchMainPage()
+                viewModel.fetchDailyMenu()
             }
             recyclerFoods.adapter = todayMenuAdapter
             includeErrorLayout.buttonOpenWebsite.setOnClickListener {
