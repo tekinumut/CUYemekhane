@@ -1,10 +1,10 @@
-package com.tekinumut.cuyemekhane.todaymenu
+package com.tekinumut.cuyemekhane.feature.monthlymenu
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tekinumut.cuyemekhane.common.domain.model.mainpage.TodayMenuUIModel
-import com.tekinumut.cuyemekhane.common.domain.usecase.TodayMenuUseCase
-import com.tekinumut.cuyemekhane.todaymenu.events.TodayMenuEvent
+import com.tekinumut.cuyemekhane.common.domain.model.mainpage.MonthlyMenuUIModel
+import com.tekinumut.cuyemekhane.common.domain.usecase.MonthlyMenuUseCase
+import com.tekinumut.cuyemekhane.feature.monthlymenu.events.MonthlyMenuEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.channels.Channel
@@ -16,8 +16,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-class TodayMenuViewModel @Inject constructor(
-    private val todayMenuUseCase: TodayMenuUseCase
+class MonthlyMenuViewModel @Inject constructor(
+    private val monthlyMenuUseCase: MonthlyMenuUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(UIState())
@@ -26,26 +26,22 @@ class TodayMenuViewModel @Inject constructor(
     private val _event = Channel<Event>(capacity = Channel.UNLIMITED)
     val event: Flow<Event> = _event.receiveAsFlow()
 
-    init {
-        fetchDailyMenu()
-    }
-
-    fun fetchDailyMenu() {
+    fun fetchMonthlyMenu() {
         showLoading()
         viewModelScope.launch {
-            todayMenuUseCase(Unit).collect { resource ->
+            monthlyMenuUseCase(Unit).collect { resource ->
                 when (resource) {
-                    is TodayMenuEvent.Success -> {
+                    is MonthlyMenuEvent.Success -> {
                         _uiState.update {
                             it.copy(
                                 state = State.MenuFetched,
-                                menu = resource.todayMenuUIModel
+                                menu = resource.monthlyMenuUIModel
                             )
                         }
                         hideLoading()
                     }
-                    TodayMenuEvent.EmptyList,
-                    is TodayMenuEvent.Failure -> {
+                    MonthlyMenuEvent.EmptyList,
+                    is MonthlyMenuEvent.Failure -> {
                         _uiState.update {
                             it.copy(
                                 state = State.NoMenuFound
@@ -71,13 +67,13 @@ class TodayMenuViewModel @Inject constructor(
     }
 
     sealed interface Event {
-        object ShowLoading : Event
-        object HideLoading : Event
+        data object ShowLoading : Event
+        data object HideLoading : Event
     }
 
     data class UIState(
         val state: State = State.Initial,
-        val menu: TodayMenuUIModel? = null
+        val menu: MonthlyMenuUIModel? = null
     )
 
     enum class State {

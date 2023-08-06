@@ -7,12 +7,28 @@
 
     <fragment
         android:id="@+id/todayMenuFragment"
-        android:name="com.tekinumut.cuyemekhane.todaymenu.TodayMenuFragment"
+        android:name="com.tekinumut.cuyemekhane.feature.todaymenu.TodayMenuFragment"
         android:label="@string/page_today_menu_title"
         tools:layout="@layout/fragment_today_menu" />
     <fragment
         android:id="@+id/monthlyMenuFragment"
-        android:name="com.tekinumut.cuyemekhane.monthlymenu.MonthlyMenuFragment"
+        android:name="com.tekinumut.cuyemekhane.feature.monthlymenu.MonthlyMenuFragment"
         android:label="@string/page_monthly_menu_title"
-        tools:layout="@layout/fragment_monthly_menu" />
+        tools:layout="@layout/fragment_monthly_menu">
+        <action
+            android:id="@+id/action_to_monthlyMenuDetailBottomSheet"
+            app:destination="@id/monthlyMenuDetailBottomSheet" />
+    </fragment>
+    <dialog
+        android:id="@+id/monthlyMenuDetailBottomSheet"
+        android:name="com.tekinumut.cuyemekhane.feature.monthlymenudetail.MonthlyMenuDetailBottomSheet"
+        android:label="Monthly Menu Detail"
+        tools:layout="@layout/bottom_sheet_monthly_menu_detail">
+
+        <argument
+            android:name="dailyMenu"
+            android:defaultValue="@null"
+            app:argType="com.tekinumut.cuyemekhane.common.domain.model.mainpage.DailyMenuUIModel"
+            app:nullable="true" />
+    </dialog>
 </navigation>

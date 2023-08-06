@@ -1,4 +1,4 @@
-package com.tekinumut.cuyemekhane.monthlymenu
+package com.tekinumut.cuyemekhane.feature.monthlymenu
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil

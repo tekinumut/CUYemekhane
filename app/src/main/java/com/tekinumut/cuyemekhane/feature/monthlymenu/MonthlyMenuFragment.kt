@@ -1,10 +1,12 @@
-package com.tekinumut.cuyemekhane.monthlymenu
+package com.tekinumut.cuyemekhane.feature.monthlymenu
 
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import com.tekinumut.cuyemekhane.base.BaseFragment
+import com.tekinumut.cuyemekhane.common.domain.model.mainpage.DailyMenuUIModel
 import com.tekinumut.cuyemekhane.common.extensions.collectWithLifecycle
 import com.tekinumut.cuyemekhane.common.extensions.hide
 import com.tekinumut.cuyemekhane.common.extensions.show
@@ -18,16 +20,16 @@ class MonthlyMenuFragment : BaseFragment<FragmentMonthlyMenuBinding>(
     private val viewModel by viewModels<MonthlyMenuViewModel>()
 
     private val monthlyMenuAdapter = MonthlyMenuAdapter { dailyMenu ->
-
+        navigateToMonthlyMenuDetail(dailyMenu)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init()
+        initUI()
         initObservers()
     }
 
-    private fun init() {
+    private fun initUI() {
         with(binding) {
             swipeRefreshLayoutRoot.setOnRefreshListener {
                 viewModel.fetchMonthlyMenu()
@@ -69,5 +71,12 @@ class MonthlyMenuFragment : BaseFragment<FragmentMonthlyMenuBinding>(
                 }
             }
         }
+    }
+
+    private fun navigateToMonthlyMenuDetail(dailyMenuUIModel: DailyMenuUIModel) {
+        val action = MonthlyMenuFragmentDirections.actionToMonthlyMenuDetailBottomSheet(
+            dailyMenuUIModel
+        )
+        view?.findNavController()?.navigate(action)
     }
 }

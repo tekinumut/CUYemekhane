@@ -1,4 +1,4 @@
-package com.tekinumut.cuyemekhane.todaymenu
+package com.tekinumut.cuyemekhane.feature.todaymenu
 
 import android.os.Bundle
 import android.view.View

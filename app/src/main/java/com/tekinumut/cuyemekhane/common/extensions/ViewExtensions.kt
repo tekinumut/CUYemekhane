@@ -2,6 +2,7 @@ package com.tekinumut.cuyemekhane.common.extensions
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
@@ -20,6 +21,11 @@ fun ImageView.setImageUrl(
     } else if (hideIfNull) {
         hide()
     }
+}
+
+fun TextView.setTextOrHide(newText: String?) {
+    isGone = newText.isNullOrBlank()
+    text = newText
 }
 
 fun View.show() {

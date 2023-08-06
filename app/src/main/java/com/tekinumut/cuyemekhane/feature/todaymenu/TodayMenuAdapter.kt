@@ -1,4 +1,4 @@
-package com.tekinumut.cuyemekhane.todaymenu
+package com.tekinumut.cuyemekhane.feature.todaymenu
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil

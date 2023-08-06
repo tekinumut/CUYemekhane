@@ -5,7 +5,7 @@ import com.tekinumut.cuyemekhane.common.data.mappers.MonthlyMenuMapper
 import com.tekinumut.cuyemekhane.common.di.IODispatcher
 import com.tekinumut.cuyemekhane.common.domain.repository.MenuRepository
 import com.tekinumut.cuyemekhane.common.domain.usecase.base.FlowUseCase
-import com.tekinumut.cuyemekhane.monthlymenu.events.MonthlyMenuEvent
+import com.tekinumut.cuyemekhane.feature.monthlymenu.events.MonthlyMenuEvent
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.flow
 
 class MonthlyMenuUseCase @Inject constructor(
     private val menuRepository: MenuRepository,
-    private val menuDetailUseCase: MenuDetailUseCase,
     private val monthlyMenuMapper: MonthlyMenuMapper,
     @IODispatcher private val dispatcher: CoroutineDispatcher
 ) : FlowUseCase<Unit, MonthlyMenuEvent>(dispatcher) {
