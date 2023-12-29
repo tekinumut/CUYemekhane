@@ -1,32 +1,29 @@
 import java.io.FileInputStream
 import java.util.Properties
 
-buildscript {
-    apply(from = "../dependency.gradle.kts")
-}
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.daggerHiltAndroid)
+    alias(libs.plugins.navigationSafeArgs)
+    kotlin("kapt")
     id("kotlin-parcelize")
-    id("com.google.dagger.hilt.android")
-    id("androidx.navigation.safeargs.kotlin")
 }
 
-val keystorePropertiesFile = rootProject.file("app/keystore/keystore.properties")
+val keystorePropertiesFile: File = rootProject.file("app/keystore/keystore.properties")
 val keystoreProperties = Properties()
 keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
 android {
-    namespace = versions.appId
-    compileSdk = versions.compileSdk
+    namespace = "com.tekinumut.cuyemekhane"
+    compileSdk = 34
 
     defaultConfig {
-        applicationId = versions.appId
-        minSdk = versions.minSdk
-        targetSdk = versions.compileSdk
-        versionCode = versions.versionCode
-        versionName = versions.versionName
+        applicationId = "com.tekinumut.cuyemekhane"
+        minSdk = 21
+        targetSdk = 34
+        versionCode = 110
+        versionName = "1.10"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -71,39 +68,36 @@ android {
 
 dependencies {
     // Core
-    implementation(libraries.coreKtx)
-    implementation(libraries.appCompat)
-    implementation(libraries.material)
-    implementation(libraries.splashScreen)
+    implementation(libs.core.ktx)
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.splashscreen)
 
     // View
-    implementation(libraries.constraintLayout)
-    implementation(libraries.fragmentKtx)
-    implementation(libraries.navigationFragmentKtx)
-    implementation(libraries.navigationUiKtx)
-    implementation(libraries.browser)
-    implementation(libraries.swipeRefresh)
+    implementation(libs.constraintlayout)
+    implementation(libs.fragment.ktx)
+    implementation(libs.navigation.fragment.ktx)
+    implementation(libs.navigation.ui.ktx)
+    implementation(libs.browser)
+    implementation(libs.swiperefreshlayout)
 
     // Lifecycle Components
-    implementation(libraries.lifecycleViewModel)
-    implementation(libraries.lifecycleRuntime)
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.lifecycle.runtime.ktx)
 
     // Dagger Hilt
-    implementation(libraries.daggerHilt)
-    kapt(libraries.daggerHiltCompiler)
+    implementation(libs.dagger.hilt)
+    kapt(libs.dagger.hilt.compiler)
 
     // Network
-    implementation(libraries.retrofit)
-    implementation(libraries.retrofitScalars)
-    implementation(libraries.okhttpLogging)
-    implementation(libraries.jsoup)
-    implementation(libraries.glide)
-    kapt(libraries.glideCompiler)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.scalars)
+    implementation(libs.okhttp.logging)
+    implementation(libs.jsoup)
+    implementation(libs.glide)
 
     //Test
-    testImplementation(libraries.junit)
-    androidTestImplementation(libraries.testJunit)
-    androidTestImplementation(libraries.espresso)
+    testImplementation(libs.bundles.base.test)
 }
 
 // Allow references to generated code
