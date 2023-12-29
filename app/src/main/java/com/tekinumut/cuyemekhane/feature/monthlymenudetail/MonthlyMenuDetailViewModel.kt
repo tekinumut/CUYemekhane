@@ -20,16 +20,11 @@ class MonthlyMenuDetailViewModel @Inject constructor() : ViewModel() {
     )
 
     fun updateDailyMenuList(dailyFoods: List<DailyFoodUIModel>) {
-        _uiState.update {
-            it.copy(
-                state = State.MenuFetched,
-                menu = dailyFoods
-            )
-        }
+        _uiState.update { it.copy(state = State.MenuFetched(dailyFoods)) }
     }
 
-    enum class State {
-        Initial,
-        MenuFetched
+    sealed interface State {
+        data object Initial : State
+        data class MenuFetched(val dailyFoods: List<DailyFoodUIModel>) : State
     }
 }

@@ -39,7 +39,7 @@ class MonthlyMenuDetailBottomSheet : BaseBottomSheetFragment<BottomSheetMonthlyM
             with(binding) {
                 when (uiState.state) {
                     MonthlyMenuDetailViewModel.State.Initial -> Unit
-                    MonthlyMenuDetailViewModel.State.MenuFetched -> {
+                    is MonthlyMenuDetailViewModel.State.MenuFetched -> {
                         menuDetailAdapter.submitList(uiState.menu)
                         recyclerFoods.show()
                     }

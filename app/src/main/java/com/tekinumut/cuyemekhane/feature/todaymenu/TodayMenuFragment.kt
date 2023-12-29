@@ -48,14 +48,14 @@ class TodayMenuFragment : BaseFragment<FragmentTodayMenuBinding>(
         collectWithLifecycle(viewModel.uiState) { uiState ->
             when (uiState.state) {
                 TodayMenuViewModel.State.Initial -> Unit
-                TodayMenuViewModel.State.MenuFetched -> {
+                is TodayMenuViewModel.State.MenuFetched -> {
                     with(binding) {
                         includeErrorLayout.root.hide()
                         recyclerFoods.show()
                     }
-                    todayMenuAdapter.submitList(uiState.menu?.foods)
+                    todayMenuAdapter.submitList(uiState.state.menu.foods)
                 }
-                TodayMenuViewModel.State.NoMenuFound -> {
+                is TodayMenuViewModel.State.NoMenuFound -> {
                     with(binding) {
                         recyclerFoods.hide()
                         includeErrorLayout.root.show()

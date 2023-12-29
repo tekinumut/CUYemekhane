@@ -33,20 +33,13 @@ class MonthlyMenuViewModel @Inject constructor(
                 when (resource) {
                     is MonthlyMenuEvent.Success -> {
                         _uiState.update {
-                            it.copy(
-                                state = State.MenuFetched,
-                                menu = resource.monthlyMenuUIModel
-                            )
+                            it.copy(state = State.MenuFetched(resource.monthlyMenuUIModel))
                         }
                         hideLoading()
                     }
                     MonthlyMenuEvent.EmptyList,
                     is MonthlyMenuEvent.Failure -> {
-                        _uiState.update {
-                            it.copy(
-                                state = State.NoMenuFound
-                            )
-                        }
+                        _uiState.update { it.copy(state = State.NoMenuFound) }
                         hideLoading()
                     }
                 }
@@ -72,13 +65,12 @@ class MonthlyMenuViewModel @Inject constructor(
     }
 
     data class UIState(
-        val state: State = State.Initial,
-        val menu: MonthlyMenuUIModel? = null
+        val state: State = State.Initial
     )
 
-    enum class State {
-        Initial,
-        MenuFetched,
-        NoMenuFound
+    sealed interface State {
+        data object Initial : State
+        data class MenuFetched(val menu: MonthlyMenuUIModel) : State
+        data object NoMenuFound : State
     }
 }

@@ -42,12 +42,12 @@ class MonthlyMenuFragment : BaseFragment<FragmentMonthlyMenuBinding>(
         collectWithLifecycle(viewModel.uiState) { uiState ->
             when (uiState.state) {
                 MonthlyMenuViewModel.State.Initial -> Unit
-                MonthlyMenuViewModel.State.MenuFetched -> {
+                is MonthlyMenuViewModel.State.MenuFetched -> {
                     with(binding) {
                         //   includeErrorLayout.root.hide()
                         recyclerFoods.show()
                     }
-                    monthlyMenuAdapter.submitList(uiState.menu?.dailyMenuList)
+                    monthlyMenuAdapter.submitList(uiState.state.menu.dailyMenuList)
                 }
                 MonthlyMenuViewModel.State.NoMenuFound -> {
                     with(binding) {
@@ -62,7 +62,6 @@ class MonthlyMenuFragment : BaseFragment<FragmentMonthlyMenuBinding>(
                 MonthlyMenuViewModel.Event.ShowLoading -> {
                     with(binding) {
                         progressLoading.isGone = swipeRefreshLayoutRoot.isRefreshing
-
                     }
                 }
                 MonthlyMenuViewModel.Event.HideLoading -> {

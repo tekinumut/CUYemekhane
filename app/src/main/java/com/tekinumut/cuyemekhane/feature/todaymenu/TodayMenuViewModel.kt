@@ -37,20 +37,13 @@ class TodayMenuViewModel @Inject constructor(
                 when (resource) {
                     is TodayMenuEvent.Success -> {
                         _uiState.update {
-                            it.copy(
-                                state = State.MenuFetched,
-                                menu = resource.todayMenuUIModel
-                            )
+                            it.copy(state = State.MenuFetched(resource.todayMenuUIModel))
                         }
                         hideLoading()
                     }
                     TodayMenuEvent.EmptyList,
                     is TodayMenuEvent.Failure -> {
-                        _uiState.update {
-                            it.copy(
-                                state = State.NoMenuFound
-                            )
-                        }
+                        _uiState.update { it.copy(state = State.NoMenuFound) }
                         hideLoading()
                     }
                 }
@@ -76,13 +69,12 @@ class TodayMenuViewModel @Inject constructor(
     }
 
     data class UIState(
-        val state: State = State.Initial,
-        val menu: TodayMenuUIModel? = null
+        val state: State = State.Initial
     )
 
-    enum class State {
-        Initial,
-        MenuFetched,
-        NoMenuFound
+    sealed interface State {
+        data object Initial : State
+        data class MenuFetched(val menu: TodayMenuUIModel) : State
+        data object NoMenuFound : State
     }
 }
