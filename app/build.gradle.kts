@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.daggerHiltAndroid)
     alias(libs.plugins.navigationSafeArgs)
-    kotlin("kapt")
+    alias(libs.plugins.googleKsp)
     id("kotlin-parcelize")
 }
 
@@ -87,7 +87,7 @@ dependencies {
 
     // Dagger Hilt
     implementation(libs.dagger.hilt)
-    kapt(libs.dagger.hilt.compiler)
+    ksp(libs.dagger.hilt.compiler)
 
     // Network
     implementation(libs.retrofit)
@@ -98,9 +98,4 @@ dependencies {
 
     //Test
     testImplementation(libs.bundles.base.test)
-}
-
-// Allow references to generated code
-kapt {
-    correctErrorTypes = true
 }
