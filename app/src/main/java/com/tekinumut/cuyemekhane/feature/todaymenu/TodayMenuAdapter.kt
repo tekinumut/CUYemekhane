@@ -11,6 +11,7 @@ import com.tekinumut.cuyemekhane.common.domain.model.mainpage.TodayFoodUIModel
 import com.tekinumut.cuyemekhane.common.extensions.isBiggerThanZero
 import com.tekinumut.cuyemekhane.common.extensions.setImageUrl
 import com.tekinumut.cuyemekhane.common.extensions.viewBinding
+import com.tekinumut.cuyemekhane.common.util.Constants
 import com.tekinumut.cuyemekhane.databinding.RowTodayFoodsBinding
 
 class TodayMenuAdapter(
@@ -35,7 +36,8 @@ class TodayMenuAdapter(
             with(binding) {
                 imageFoodIcon.setImageUrl(
                     url = food.imageUrl,
-                    requestOptions = RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL)
+                    requestOptions = RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL),
+                    hideIfNull = itemCount == Constants.INT_ONE
                 )
                 textTitle.text = food.name
                 textCategory.text = food.category

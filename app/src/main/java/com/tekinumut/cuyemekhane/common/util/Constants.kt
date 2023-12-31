@@ -5,6 +5,7 @@ object Constants {
     const val DEFAULT_INT = -1
     const val INT_ZERO = 0
     const val DOUBLE_ZERO = 0.0
+    const val INT_ONE = 1
 
     const val STRING_EMPTY = ""
 
@@ -15,6 +16,7 @@ object Constants {
 
     object QUERY {
         const val TODAY_DATE = "#gunluk_yemek h1"
+        const val TODAY_FOODS_INFO = "#gunluk_yemek ul"
         const val TODAY_FOODS = "#gunluk_yemek ul li"
         const val TODAY_FOOD_CATEGORY = "$TODAY_FOODS *>span.label.label-danger"
         const val TODAY_FOOD_CALORIE = "$TODAY_FOODS font"

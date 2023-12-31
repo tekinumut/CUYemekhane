@@ -70,12 +70,15 @@ class MenuRepositoryImpl @Inject constructor(
 
     private fun parseTodayMenu(document: Document): TodayMenu {
         val date: String = document.select(Constants.QUERY.TODAY_DATE).text()
+        val todayFoodInfoElements: Elements = document.select(Constants.QUERY.TODAY_FOODS_INFO)
         val todayFoodElements: Elements = document.select(Constants.QUERY.TODAY_FOODS)
         val categoryElements: Elements = document.select(Constants.QUERY.TODAY_FOOD_CATEGORY)
         val calorieElements: Elements = document.select(Constants.QUERY.TODAY_FOOD_CALORIE)
 
         val nameList: List<String> = todayFoodElements.map {
             it.attr(Constants.ATTRIBUTE.FOOD_NAME_ATTR)
+        }.ifEmpty {
+            todayFoodInfoElements.mapNotNull { it.text().ifEmpty { null } }
         }
         val calorieList: List<String> = calorieElements.map { it.ownText().orEmpty() }
         val categoryList: List<String> = categoryElements.map { it.text().orEmpty() }
