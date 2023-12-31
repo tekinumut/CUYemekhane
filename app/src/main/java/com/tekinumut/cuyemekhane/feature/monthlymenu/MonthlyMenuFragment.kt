@@ -3,6 +3,7 @@ package com.tekinumut.cuyemekhane.feature.monthlymenu
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.tekinumut.cuyemekhane.base.BaseFragment
@@ -35,6 +36,10 @@ class MonthlyMenuFragment : BaseFragment<FragmentMonthlyMenuBinding>(
                 viewModel.fetchMonthlyMenu()
             }
             recyclerFoods.adapter = monthlyMenuAdapter
+            viewCommonError.setData(viewModel.emptyListErrorData)
+            viewCommonError.setPositiveListener {
+                viewModel.fetchMonthlyMenu()
+            }
         }
     }
 
@@ -44,7 +49,7 @@ class MonthlyMenuFragment : BaseFragment<FragmentMonthlyMenuBinding>(
                 MonthlyMenuViewModel.State.Initial -> Unit
                 is MonthlyMenuViewModel.State.MenuFetched -> {
                     with(binding) {
-                        //   includeErrorLayout.root.hide()
+                        viewCommonError.hide()
                         recyclerFoods.show()
                     }
                     monthlyMenuAdapter.submitList(uiState.state.menu.dailyMenuList)
@@ -52,7 +57,7 @@ class MonthlyMenuFragment : BaseFragment<FragmentMonthlyMenuBinding>(
                 MonthlyMenuViewModel.State.NoMenuFound -> {
                     with(binding) {
                         recyclerFoods.hide()
-                        //  includeErrorLayout.root.show()
+                        viewCommonError.show()
                     }
                 }
             }
@@ -62,6 +67,9 @@ class MonthlyMenuFragment : BaseFragment<FragmentMonthlyMenuBinding>(
                 MonthlyMenuViewModel.Event.ShowLoading -> {
                     with(binding) {
                         progressLoading.isGone = swipeRefreshLayoutRoot.isRefreshing
+                        if (viewCommonError.isVisible) {
+                            viewCommonError.hide()
+                        }
                     }
                 }
                 MonthlyMenuViewModel.Event.HideLoading -> {

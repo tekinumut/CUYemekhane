@@ -6,6 +6,8 @@
     <!-- common usages -->
     <string name="loading_text_message">Yükleniyor…</string>
     <string name="food_calorie_at_end">%d Kalori</string>
+    <string name="monthly_list_empty_description">Aylık yemek listesi boş!</string>
+    <string name="update_list">Listeyi Güncelle</string>
 
     <!-- error messages -->
     <string name="error_message_no_data">Şu an bir problem yaşıyoruz. Lütfen daha sonra tekrar deneyiniz.</string>

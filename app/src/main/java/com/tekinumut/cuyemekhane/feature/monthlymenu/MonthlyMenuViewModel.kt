@@ -2,8 +2,10 @@ package com.tekinumut.cuyemekhane.feature.monthlymenu
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.common.domain.model.mainpage.MonthlyMenuUIModel
 import com.tekinumut.cuyemekhane.common.domain.usecase.MonthlyMenuUseCase
+import com.tekinumut.cuyemekhane.common.ui.CommonErrorModel
 import com.tekinumut.cuyemekhane.feature.monthlymenu.events.MonthlyMenuEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -46,6 +48,12 @@ class MonthlyMenuViewModel @Inject constructor(
             }
         }
     }
+
+    val emptyListErrorData = CommonErrorModel(
+        drawableId = R.drawable.ic_error_info,
+        description = R.string.monthly_list_empty_description,
+        positiveButtonText = R.string.update_list
+    )
 
     private fun hideLoading() {
         viewModelScope.launch {

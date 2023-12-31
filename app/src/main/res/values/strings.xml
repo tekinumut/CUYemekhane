@@ -5,6 +5,8 @@
     <!-- common usages -->
     <string name="loading_text_message">Loading…</string>
     <string name="food_calorie_at_end">%d Calorie</string>
+    <string name="monthly_list_empty_description">Monthly Menu is empty!</string>
+    <string name="update_list">Refresh list</string>
 
     <!-- error messages -->
     <string name="error_message_no_data">We\'re having a problem. Please try again later.</string>
