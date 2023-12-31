@@ -37,9 +37,8 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:visibility="visible" />
 
-        <include
-            android:id="@+id/include_error_layout"
-            layout="@layout/layout_error"
+        <com.tekinumut.cuyemekhane.common.ui.CommonErrorView
+            android:id="@+id/view_common_error"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:visibility="gone"

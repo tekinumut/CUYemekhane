@@ -8,6 +8,7 @@ import com.tekinumut.cuyemekhane.base.BaseFragment
 import com.tekinumut.cuyemekhane.common.extensions.collectWithLifecycle
 import com.tekinumut.cuyemekhane.common.extensions.hide
 import com.tekinumut.cuyemekhane.common.extensions.show
+import com.tekinumut.cuyemekhane.common.ui.CommonErrorModel
 import com.tekinumut.cuyemekhane.common.ui.FullScreenImageDialog
 import com.tekinumut.cuyemekhane.common.util.Constants
 import com.tekinumut.cuyemekhane.common.util.Utility
@@ -38,7 +39,8 @@ class TodayMenuFragment : BaseFragment<FragmentTodayMenuBinding>(
                 viewModel.fetchDailyMenu()
             }
             recyclerFoods.adapter = todayMenuAdapter
-            includeErrorLayout.buttonOpenWebsite.setOnClickListener {
+            viewCommonError.setData(CommonErrorModel.menuNotFoundError)
+            viewCommonError.setPositiveListener {
                 Utility.openWebSiteWithCustomTabs(it.context, Constants.NETWORK.MAIN_PAGE)
             }
         }
@@ -50,7 +52,7 @@ class TodayMenuFragment : BaseFragment<FragmentTodayMenuBinding>(
                 TodayMenuViewModel.State.Initial -> Unit
                 is TodayMenuViewModel.State.MenuFetched -> {
                     with(binding) {
-                        includeErrorLayout.root.hide()
+                        viewCommonError.hide()
                         recyclerFoods.show()
                     }
                     todayMenuAdapter.submitList(uiState.state.menu.foods)
@@ -58,7 +60,7 @@ class TodayMenuFragment : BaseFragment<FragmentTodayMenuBinding>(
                 is TodayMenuViewModel.State.NoMenuFound -> {
                     with(binding) {
                         recyclerFoods.hide()
-                        includeErrorLayout.root.show()
+                        viewCommonError.show()
                     }
                 }
             }
