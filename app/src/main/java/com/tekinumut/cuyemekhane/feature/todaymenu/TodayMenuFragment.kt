@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import com.tekinumut.cuyemekhane.base.BaseFragment
 import com.tekinumut.cuyemekhane.common.extensions.collectWithLifecycle
 import com.tekinumut.cuyemekhane.common.extensions.hide
+import com.tekinumut.cuyemekhane.common.extensions.setupToolbar
 import com.tekinumut.cuyemekhane.common.extensions.show
 import com.tekinumut.cuyemekhane.common.ui.CommonErrorModel
 import com.tekinumut.cuyemekhane.common.ui.FullScreenImageDialog
@@ -35,6 +36,7 @@ class TodayMenuFragment : BaseFragment<FragmentTodayMenuBinding>(
 
     private fun init() {
         with(binding) {
+            setupToolbar(toolbar = toolbar)
             swipeRefreshLayoutRoot.setOnRefreshListener {
                 viewModel.fetchDailyMenu()
             }

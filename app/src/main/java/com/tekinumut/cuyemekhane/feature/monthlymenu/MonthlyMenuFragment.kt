@@ -6,11 +6,14 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.base.BaseFragment
 import com.tekinumut.cuyemekhane.common.domain.model.mainpage.DailyMenuUIModel
 import com.tekinumut.cuyemekhane.common.extensions.collectWithLifecycle
 import com.tekinumut.cuyemekhane.common.extensions.hide
+import com.tekinumut.cuyemekhane.common.extensions.setupToolbar
 import com.tekinumut.cuyemekhane.common.extensions.show
+import com.tekinumut.cuyemekhane.common.ui.CuToolbar
 import com.tekinumut.cuyemekhane.databinding.FragmentMonthlyMenuBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,6 +35,15 @@ class MonthlyMenuFragment : BaseFragment<FragmentMonthlyMenuBinding>(
 
     private fun initUI() {
         with(binding) {
+            setupToolbar(
+                toolbar = toolbar,
+                config = CuToolbar.ConfigModel(
+                    actionIcon = R.drawable.ic_refresh,
+                    actionButtonListener = {
+                        viewModel.fetchMonthlyMenu()
+                    }
+                )
+            )
             swipeRefreshLayoutRoot.setOnRefreshListener {
                 viewModel.fetchMonthlyMenu()
             }
