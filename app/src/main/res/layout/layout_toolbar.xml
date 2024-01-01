@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraint_root"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="?attr/colorSecondary"
@@ -11,7 +10,7 @@
     tools:ignore="ContentDescription">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/cu_toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,9 +37,9 @@
         android:padding="4dp"
         android:src="@drawable/ic_refresh"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="@id/cu_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/toolbar"
+        app:layout_constraintTop_toTopOf="@id/cu_toolbar"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

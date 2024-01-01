@@ -18,7 +18,9 @@ class CuToolbar(context: Context, attr: AttributeSet) : ConstraintLayout(context
         LayoutInflater.from(context), this, true
     )
 
-    fun getBar() = binding.toolbar
+    val getBar get() = binding.cuToolbar
+
+    val getActionButton get() = binding.buttonAction
 
     fun build(config: ConfigModel) {
         with(binding) {
@@ -29,7 +31,7 @@ class CuToolbar(context: Context, attr: AttributeSet) : ConstraintLayout(context
     }
 
     private fun setNavIcon(config: ConfigModel) {
-        with(binding.toolbar) {
+        with(binding.cuToolbar) {
             if (config.navIcon != NO_ICON) {
                 setNavigationIcon(config.navIcon)
             }

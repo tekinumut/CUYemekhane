@@ -13,6 +13,7 @@ import com.tekinumut.cuyemekhane.common.extensions.collectWithLifecycle
 import com.tekinumut.cuyemekhane.common.extensions.hide
 import com.tekinumut.cuyemekhane.common.extensions.setupToolbar
 import com.tekinumut.cuyemekhane.common.extensions.show
+import com.tekinumut.cuyemekhane.common.helpers.CuAnimationHelper.rotateClockWise
 import com.tekinumut.cuyemekhane.common.ui.CuToolbar
 import com.tekinumut.cuyemekhane.databinding.FragmentMonthlyMenuBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,6 +41,7 @@ class MonthlyMenuFragment : BaseFragment<FragmentMonthlyMenuBinding>(
                 config = CuToolbar.ConfigModel(
                     actionIcon = R.drawable.ic_refresh,
                     actionButtonListener = {
+                        it.rotateClockWise()
                         viewModel.fetchMonthlyMenu()
                     }
                 )
@@ -85,8 +87,11 @@ class MonthlyMenuFragment : BaseFragment<FragmentMonthlyMenuBinding>(
                     }
                 }
                 MonthlyMenuViewModel.Event.HideLoading -> {
-                    binding.progressLoading.hide()
-                    binding.swipeRefreshLayoutRoot.isRefreshing = false
+                    with(binding) {
+                        toolbar.getActionButton.clearAnimation()
+                        progressLoading.hide()
+                        swipeRefreshLayoutRoot.isRefreshing = false
+                    }
                 }
             }
         }

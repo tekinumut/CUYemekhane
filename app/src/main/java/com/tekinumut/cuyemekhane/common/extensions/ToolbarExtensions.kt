@@ -8,7 +8,7 @@ fun AppCompatActivity.setupToolbar(
     toolbar: CuToolbar,
     config: CuToolbar.ConfigModel = CuToolbar.ConfigModel()
 ) {
-    setSupportActionBar(toolbar.getBar())
+    setSupportActionBar(toolbar.getBar)
     supportActionBar?.run {
         setDisplayHomeAsUpEnabled(config.displayNavIcon)
         setDisplayShowTitleEnabled(false)
