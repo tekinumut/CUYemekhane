@@ -35,6 +35,10 @@
         <!-- Custom color -->
         <item name="colorWhiteCustom">@color/white</item>
         <item name="colorBlackCustom">@color/black</item>
+
+        <!-- Widgets -->
+        <item name="circularProgressIndicatorStyle">@style/Widget.App.CircularProgressIndicator
+        </item>
     </style>
 
     <style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
@@ -42,4 +46,16 @@
         <item name="windowSplashScreenAnimatedIcon">@drawable/app_icon</item>
         <item name="postSplashScreenTheme">@style/Theme.CuYemekhane</item>
     </style>
+
+    <!-- ProgressBar -->
+    <style name="Widget.App.CircularProgressIndicator" parent="Widget.Material3.CircularProgressIndicator">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.CircularProgressIndicator</item>
+        <item name="trackThickness">20dp</item>
+    </style>
+
+    <style name="ThemeOverlay.App.CircularProgressIndicator" parent="">
+        <item name="android:indeterminate">true</item>
+        <item name="colorPrimary">@color/color_secondary_40</item>
+    </style>
+
 </resources>
