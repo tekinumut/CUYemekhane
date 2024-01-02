@@ -3,12 +3,13 @@ package com.tekinumut.cuyemekhane.feature.monthlymenudetail
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.tekinumut.cuyemekhane.base.BaseBottomSheetFragment
 import com.tekinumut.cuyemekhane.common.extensions.collectWithLifecycle
+import com.tekinumut.cuyemekhane.common.extensions.navigateToFullScreenImage
 import com.tekinumut.cuyemekhane.common.extensions.setTextOrHide
 import com.tekinumut.cuyemekhane.common.extensions.show
-import com.tekinumut.cuyemekhane.common.ui.FullScreenImageDialog
 import com.tekinumut.cuyemekhane.databinding.BottomSheetMonthlyMenuDetailBinding
 import com.tekinumut.cuyemekhane.feature.todaymenu.TodayMenuAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,9 +22,7 @@ class MonthlyMenuDetailBottomSheet : BaseBottomSheetFragment<BottomSheetMonthlyM
     private val viewModel by viewModels<MonthlyMenuDetailViewModel>()
 
     private val todayMenuAdapter = TodayMenuAdapter { imageUrl ->
-        FullScreenImageDialog
-            .newInstance(imageUrl)
-            .show(childFragmentManager, FullScreenImageDialog.TAG)
+        findNavController().navigateToFullScreenImage(imageUrl)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

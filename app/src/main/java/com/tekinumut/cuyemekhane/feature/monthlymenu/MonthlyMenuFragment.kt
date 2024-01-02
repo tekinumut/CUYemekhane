@@ -5,12 +5,12 @@ import android.view.View
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.base.BaseFragment
-import com.tekinumut.cuyemekhane.common.domain.model.mainpage.DailyMenuUIModel
 import com.tekinumut.cuyemekhane.common.extensions.collectWithLifecycle
 import com.tekinumut.cuyemekhane.common.extensions.hide
+import com.tekinumut.cuyemekhane.common.extensions.navigateToMonthlyMenuDetail
 import com.tekinumut.cuyemekhane.common.extensions.setupToolbar
 import com.tekinumut.cuyemekhane.common.extensions.show
 import com.tekinumut.cuyemekhane.common.helpers.CuAnimationHelper.rotateClockWise
@@ -25,7 +25,7 @@ class MonthlyMenuFragment : BaseFragment<FragmentMonthlyMenuBinding>(
     private val viewModel by viewModels<MonthlyMenuViewModel>()
 
     private val monthlyMenuAdapter = MonthlyMenuAdapter { dailyMenu ->
-        navigateToMonthlyMenuDetail(dailyMenu)
+        findNavController().navigateToMonthlyMenuDetail(dailyMenu)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -95,12 +95,5 @@ class MonthlyMenuFragment : BaseFragment<FragmentMonthlyMenuBinding>(
                 }
             }
         }
-    }
-
-    private fun navigateToMonthlyMenuDetail(dailyMenuUIModel: DailyMenuUIModel) {
-        val action = MonthlyMenuFragmentDirections.actionToMonthlyMenuDetailBottomSheet(
-            dailyMenuUIModel
-        )
-        view?.findNavController()?.navigate(action)
     }
 }
