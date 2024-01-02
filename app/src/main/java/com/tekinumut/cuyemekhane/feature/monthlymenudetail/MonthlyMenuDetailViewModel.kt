@@ -2,6 +2,8 @@ package com.tekinumut.cuyemekhane.feature.monthlymenudetail
 
 import androidx.lifecycle.ViewModel
 import com.tekinumut.cuyemekhane.common.domain.model.mainpage.DailyFoodUIModel
+import com.tekinumut.cuyemekhane.common.domain.model.mainpage.DailyFoodUIModel.Companion.convertToTodayFoodUIModel
+import com.tekinumut.cuyemekhane.common.domain.model.mainpage.TodayFoodUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,16 +17,16 @@ class MonthlyMenuDetailViewModel @Inject constructor() : ViewModel() {
     val uiState: StateFlow<UIState> = _uiState
 
     data class UIState(
-        val state: State = State.Initial,
-        val menu: List<DailyFoodUIModel> = emptyList()
+        val state: State = State.Initial
     )
 
     fun updateDailyMenuList(dailyFoods: List<DailyFoodUIModel>) {
-        _uiState.update { it.copy(state = State.MenuFetched(dailyFoods)) }
+        val todayFoodMenuList = dailyFoods.map { it.convertToTodayFoodUIModel() }
+        _uiState.update { it.copy(state = State.MenuFetched(todayFoodMenuList)) }
     }
 
     sealed interface State {
         data object Initial : State
-        data class MenuFetched(val dailyFoods: List<DailyFoodUIModel>) : State
+        data class MenuFetched(val todayFoods: List<TodayFoodUIModel>) : State
     }
 }

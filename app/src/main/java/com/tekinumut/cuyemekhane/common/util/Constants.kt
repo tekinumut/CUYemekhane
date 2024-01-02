@@ -25,9 +25,11 @@ object Constants {
         const val MONTHLY_FOODS = ".call-to-action ul"
 
         const val DAILY_FOODS_SELECTOR = "li a"
+        const val SELECTOR_HREF = "a[href]"
     }
 
     object ATTRIBUTE {
+        const val HREF = "href"
         const val FOOD_NAME_ATTR = "data-title"
         const val TODAY_FOOD_IMAGE_ATTR = "data-thumb"
     }

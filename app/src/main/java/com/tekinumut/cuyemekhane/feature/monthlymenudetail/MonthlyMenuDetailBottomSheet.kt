@@ -8,7 +8,9 @@ import com.tekinumut.cuyemekhane.base.BaseBottomSheetFragment
 import com.tekinumut.cuyemekhane.common.extensions.collectWithLifecycle
 import com.tekinumut.cuyemekhane.common.extensions.setTextOrHide
 import com.tekinumut.cuyemekhane.common.extensions.show
+import com.tekinumut.cuyemekhane.common.ui.FullScreenImageDialog
 import com.tekinumut.cuyemekhane.databinding.BottomSheetMonthlyMenuDetailBinding
+import com.tekinumut.cuyemekhane.feature.todaymenu.TodayMenuAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,7 +20,11 @@ class MonthlyMenuDetailBottomSheet : BaseBottomSheetFragment<BottomSheetMonthlyM
     private val args: MonthlyMenuDetailBottomSheetArgs by navArgs()
     private val viewModel by viewModels<MonthlyMenuDetailViewModel>()
 
-    private val menuDetailAdapter = MonthlyMenuDetailAdapter()
+    private val todayMenuAdapter = TodayMenuAdapter { imageUrl ->
+        FullScreenImageDialog
+            .newInstance(imageUrl)
+            .show(childFragmentManager, FullScreenImageDialog.TAG)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,7 +36,7 @@ class MonthlyMenuDetailBottomSheet : BaseBottomSheetFragment<BottomSheetMonthlyM
     private fun initUI() {
         with(binding) {
             textDate.setTextOrHide(args.dailyMenu?.date)
-            recyclerFoods.adapter = menuDetailAdapter
+            recyclerFoods.adapter = todayMenuAdapter
         }
     }
 
@@ -40,7 +46,7 @@ class MonthlyMenuDetailBottomSheet : BaseBottomSheetFragment<BottomSheetMonthlyM
                 when (uiState.state) {
                     MonthlyMenuDetailViewModel.State.Initial -> Unit
                     is MonthlyMenuDetailViewModel.State.MenuFetched -> {
-                        menuDetailAdapter.submitList(uiState.menu)
+                        todayMenuAdapter.submitList(uiState.state.todayFoods)
                         recyclerFoods.show()
                     }
                 }

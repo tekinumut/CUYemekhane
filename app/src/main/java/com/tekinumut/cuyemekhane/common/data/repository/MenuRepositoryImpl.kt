@@ -102,25 +102,31 @@ class MenuRepositoryImpl @Inject constructor(
     private suspend fun parseMonthlyMenu(document: Document): MonthlyMenu {
         val dateElements: Elements = document.select(Constants.QUERY.MONTHLY_DATE)
         val monthlyFoodsElements: Elements = document.select(Constants.QUERY.MONTHLY_FOODS)
+        val mainFoodImages: List<String?> = getImageUrlList(monthlyFoodsElements)
 
-        val dateList = dateElements.map { it.text().orEmpty() }
-        val imageUrlList = getImageUrlList(monthlyFoodsElements)
-        val dailyMenuList: List<DailyMenu> = dateList.mapIndexed { index, date ->
-            val dailyFoodElements = monthlyFoodsElements.getOrNull(index)?.select(
+        val dailyMenuList: List<DailyMenu> = dateElements.mapIndexed { indexDate, dateElement ->
+            val detailUrl = dateElement
+                .select(Constants.QUERY.SELECTOR_HREF)
+                .attr(Constants.ATTRIBUTE.HREF)
+            val foodElements = monthlyFoodsElements.getOrNull(indexDate)?.select(
                 Constants.QUERY.DAILY_FOODS_SELECTOR
             )
-            val foodList = dailyFoodElements?.map { dailyFoodElement ->
+            val foodList = foodElements?.mapIndexedNotNull { indexFood, dailyFoodElement ->
+                val firstFoodImage = if (indexFood == Constants.INT_ZERO) {
+                    mainFoodImages.getOrNull(indexDate)
+                } else null
                 val (name, calorie) = separateNameAndCalorie(dailyFoodElement)
-                val detailUrl = dailyFoodElement.attr("href")
-                DailyFood(
-                    name = name,
-                    calorie = calorie,
-                    detailUrl = detailUrl,
-                    imageUrl = imageUrlList.getOrNull(index)
-                )
+                if (name.isNotEmpty()) {
+                    DailyFood(
+                        name = name,
+                        calorie = calorie,
+                        detailUrl = detailUrl,
+                        imageUrl = firstFoodImage
+                    )
+                } else null
             }
             DailyMenu(
-                date = date,
+                date = dateElement.text().orEmpty(),
                 totalCalorie = foodList?.sumOf { it.calorie.toZeroOrNull() },
                 foodList = foodList
             )
@@ -136,7 +142,7 @@ class MenuRepositoryImpl @Inject constructor(
         }
         dailyFoodElements.map {
             async {
-                val menuDetail = getMenuDetail(href = it.attr("href"))
+                val menuDetail = getMenuDetail(href = it.attr(Constants.ATTRIBUTE.HREF))
                 (menuDetail as? Resource.Success)?.value?.imageUrl
             }
         }.awaitAll()
