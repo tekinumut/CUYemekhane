@@ -1,6 +1,7 @@
 <resources>
     <!-- Base application theme. -->
     <style name="Theme.CuYemekhane" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@color/color_secondary_10</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/color_primary_10</item>
         <item name="colorOnPrimary">@color/color_neutral_90</item>
@@ -24,13 +25,10 @@
         <item name="colorSurface">@color/color_secondary_10</item>
         <item name="colorOnSurface">@color/color_neutral_90</item>
         <item name="colorSurfaceVariant">@color/color_neutral_10</item>
-        <item name="colorOnSurfaceVariant">@color/color_neutral_90</item>
+        <item name="colorOnSurfaceVariant">@color/color_neutral_15</item>
         <item name="colorSurfaceInverse">@color/color_neutral_5</item>
         <item name="colorOnSurfaceInverse">@color/color_neutral_95</item>
         <item name="colorOutline">@color/color_neutral_80</item>
-
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/color_secondary_10</item>
 
         <!-- Custom color -->
         <item name="colorWhiteCustom">@color/white</item>
@@ -45,17 +43,6 @@
         <item name="windowSplashScreenBackground">@color/color_neutral_10</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/app_icon</item>
         <item name="postSplashScreenTheme">@style/Theme.CuYemekhane</item>
-    </style>
-
-    <!-- ProgressBar -->
-    <style name="Widget.App.CircularProgressIndicator" parent="Widget.Material3.CircularProgressIndicator">
-        <item name="materialThemeOverlay">@style/ThemeOverlay.App.CircularProgressIndicator</item>
-        <item name="trackThickness">20dp</item>
-    </style>
-
-    <style name="ThemeOverlay.App.CircularProgressIndicator" parent="">
-        <item name="android:indeterminate">true</item>
-        <item name="colorPrimary">@color/color_secondary_40</item>
     </style>
 
 </resources>

@@ -5,6 +5,15 @@
     <string name="page_monthly_menu_detail_title">Aylık Menü İçeriği</string>
     <string name="page_profile_menu_title">Profil</string>
 
+    <!-- Profile -->
+    <string name="profile_title_information">Bilgilendirme</string>
+    <string name="profile_tab_announcements">Duyurular</string>
+    <string name="profile_tab_pricing">Ücretlendirme</string>
+    <string name="profile_tab_contact">İletişim Bilgileri</string>
+    <string name="profile_title_helpers">Yardımcılar</string>
+    <string name="profile_tab_settings">Ayarlar</string>
+    <string name="profile_tab_about">Hakkında</string>
+
     <!-- common usages -->
     <string name="loading_text_message">Yükleniyor…</string>
     <string name="food_calorie_at_end">%d Kalori</string>
