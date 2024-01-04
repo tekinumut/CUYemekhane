@@ -2,6 +2,8 @@
 <resources>
     <string name="page_today_menu_title">Günlük Menü</string>
     <string name="page_monthly_menu_title">Aylık Menü</string>
+    <string name="page_monthly_menu_detail_title">Aylık Menü İçeriği</string>
+    <string name="page_profile_menu_title">Profil</string>
 
     <!-- common usages -->
     <string name="loading_text_message">Yükleniyor…</string>

@@ -1,6 +1,8 @@
 <resources>
     <string name="page_today_menu_title">Daily Menu</string>
     <string name="page_monthly_menu_title">Monthly Menu</string>
+    <string name="page_monthly_menu_detail_title">Monthly Menu Content</string>
+    <string name="page_profile_menu_title">Profile</string>
 
     <!-- common usages -->
     <string name="loading_text_message">Loading…</string>

@@ -29,7 +29,7 @@ android {
     }
 
     signingConfigs {
-        create("config") {
+        create("release") {
             keyAlias = keystoreProperties["keyAlias"] as String
             keyPassword = keystoreProperties["keyPassword"] as String
             storePassword = keystoreProperties["storePassword"] as String
@@ -43,14 +43,14 @@ android {
             resValue("string", "app_name", "Cu-dev")
             applicationIdSuffix = ".debug"
         }
-        getByName("release") {
+        release {
             isMinifyEnabled = true
             resValue("string", "app_name", "CU Yemekhane")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName("config")
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {

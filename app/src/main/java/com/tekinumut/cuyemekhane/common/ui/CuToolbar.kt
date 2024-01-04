@@ -24,9 +24,23 @@ class CuToolbar(context: Context, attr: AttributeSet) : ConstraintLayout(context
 
     fun build(config: ConfigModel) {
         with(binding) {
-            imageLogo.setImageResource(config.mainLogo)
             setNavIcon(config)
+            setLogoAndTitle(config)
             setActionButton(config)
+        }
+    }
+
+    private fun setLogoAndTitle(config: ConfigModel) {
+        with(binding) {
+            if (config.mainTitle.isNotBlank()) {
+                textTitle.text = config.mainTitle
+                imageLogo.hide()
+                textTitle.show()
+            } else {
+                imageLogo.setImageResource(config.mainLogo)
+                imageLogo.show()
+                textTitle.hide()
+            }
         }
     }
 
@@ -57,7 +71,8 @@ class CuToolbar(context: Context, attr: AttributeSet) : ConstraintLayout(context
         val navIconListener: OnClickListener? = null,
         @DrawableRes val actionIcon: Int = NO_ICON,
         val actionButtonListener: OnClickListener? = null,
-        @DrawableRes val mainLogo: Int = R.drawable.logo
+        @DrawableRes val mainLogo: Int = R.drawable.logo,
+        val mainTitle: String = Constants.STRING_EMPTY
     )
 
     companion object {

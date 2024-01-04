@@ -19,10 +19,16 @@
             android:id="@+id/action_to_monthlyMenuDetailBottomSheet"
             app:destination="@id/monthlyMenuDetailBottomSheet" />
     </fragment>
+    <fragment
+        android:id="@+id/profileMenuFragment"
+        android:name="com.tekinumut.cuyemekhane.feature.profile.ProfileFragment"
+        android:label="@string/page_profile_menu_title"
+        tools:layout="@layout/fragment_profile" />
+
     <dialog
         android:id="@+id/monthlyMenuDetailBottomSheet"
         android:name="com.tekinumut.cuyemekhane.feature.monthlymenudetail.MonthlyMenuDetailBottomSheet"
-        android:label="Monthly Menu Detail"
+        android:label="@string/page_monthly_menu_detail_title"
         tools:layout="@layout/bottom_sheet_monthly_menu_detail">
 
         <argument
