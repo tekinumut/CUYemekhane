@@ -10,7 +10,6 @@ import com.tekinumut.cuyemekhane.R
 import com.tekinumut.cuyemekhane.base.BaseFragment
 import com.tekinumut.cuyemekhane.common.extensions.collectWithLifecycle
 import com.tekinumut.cuyemekhane.common.extensions.hide
-import com.tekinumut.cuyemekhane.common.extensions.navigateToMonthlyMenuDetail
 import com.tekinumut.cuyemekhane.common.extensions.setupToolbar
 import com.tekinumut.cuyemekhane.common.extensions.show
 import com.tekinumut.cuyemekhane.common.helpers.CuAnimationHelper.rotateClockWise
@@ -25,7 +24,8 @@ class MonthlyMenuFragment : BaseFragment<FragmentMonthlyMenuBinding>(
     private val viewModel by viewModels<MonthlyMenuViewModel>()
 
     private val monthlyMenuAdapter = MonthlyMenuAdapter { dailyMenu ->
-        findNavController().navigateToMonthlyMenuDetail(dailyMenu)
+        val action = MonthlyMenuFragmentDirections.actionToMonthlyMenuDetailBottomSheet(dailyMenu)
+        findNavController().navigate(action)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

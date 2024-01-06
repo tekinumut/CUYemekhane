@@ -2,6 +2,7 @@ package com.tekinumut.cuyemekhane.feature.profile
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.tekinumut.cuyemekhane.base.BaseFragment
 import com.tekinumut.cuyemekhane.common.extensions.orEmptyString
@@ -24,6 +25,15 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                     mainTitle = findNavController().currentDestination?.label.orEmptyString()
                 )
             )
+            textTabAnnouncements.setOnClickListener {
+                navigateToDirections(
+                    action = ProfileFragmentDirections.actionProfileMenuFragmentToAnnouncementsFragment()
+                )
+            }
         }
+    }
+
+    private fun navigateToDirections(action: NavDirections) {
+        findNavController().navigate(action)
     }
 }

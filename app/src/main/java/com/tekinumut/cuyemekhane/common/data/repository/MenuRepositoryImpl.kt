@@ -3,6 +3,7 @@ package com.tekinumut.cuyemekhane.common.data.repository
 import com.tekinumut.cuyemekhane.common.data.api.ApiService
 import com.tekinumut.cuyemekhane.common.data.api.handleApiCall
 import com.tekinumut.cuyemekhane.common.data.api.response.Resource
+import com.tekinumut.cuyemekhane.common.data.model.announcements.Announcements
 import com.tekinumut.cuyemekhane.common.data.model.detail.MenuDetail
 import com.tekinumut.cuyemekhane.common.data.model.monthlyfood.DailyFood
 import com.tekinumut.cuyemekhane.common.data.model.monthlyfood.DailyMenu
@@ -52,6 +53,16 @@ class MenuRepositoryImpl @Inject constructor(
             is Resource.Success -> {
                 val responseHtml = Jsoup.parse(response.value)
                 Resource.Success(parseMenuDetail(responseHtml))
+            }
+        }
+    }
+
+    override suspend fun getAnnouncements(): Resource<List<Announcements>> {
+        return when (val response = handleApiCall { apiService.getMainPage() }) {
+            is Resource.Failure -> response
+            is Resource.Success -> {
+                val responseHtml = Jsoup.parse(response.value)
+                Resource.Success(parseAnnouncements(responseHtml))
             }
         }
     }
@@ -159,5 +170,27 @@ class MenuRepositoryImpl @Inject constructor(
         val name = html.substringBefore("<br>")
         val calorie = html.substringAfter("<br>").filter { it.isDigit() }
         return Pair(name, calorie)
+    }
+
+    private fun parseAnnouncements(document: Document): List<Announcements> {
+        val announcements = document.select(Constants.QUERY.ANNOUNCEMENTS)
+        val titleList: Elements = announcements.select(Constants.QUERY.ANNOUNCEMENT_TITLE)
+        val descriptionList: Elements = announcements.select(
+            Constants.QUERY.ANNOUNCEMENT_DESCRIPTION
+        )
+        val announcementList = titleList.mapIndexed { index, title ->
+            val description: Element? = descriptionList.getOrNull(index)
+            Announcements(
+                title = title.text(),
+                description = description?.text(),
+                descriptionUrl = description?.select(
+                    Constants.QUERY.SELECTOR_HREF
+                )?.attr(Constants.ATTRIBUTE.HREF),
+                logoImageUrl = announcements.getOrNull(index)?.select(
+                    Constants.QUERY.SELECTOR_IMG
+                )?.attr(Constants.ATTRIBUTE.SRC)?.withBaseUrl()
+            )
+        }
+        return announcementList
     }
 }

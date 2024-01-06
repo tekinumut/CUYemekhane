@@ -23,4 +23,5 @@
     <!-- error messages -->
     <string name="error_message_no_data">Şu an bir problem yaşıyoruz. Lütfen daha sonra tekrar deneyiniz.</string>
     <string name="open_website_text">Web sitesine git</string>
+    <string name="no_announcements_found">Herhangi bir duyuru bulunamamıştır</string>
 </resources>

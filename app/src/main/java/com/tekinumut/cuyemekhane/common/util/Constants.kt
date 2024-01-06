@@ -26,11 +26,21 @@ object Constants {
 
         const val DAILY_FOODS_SELECTOR = "li a"
         const val SELECTOR_HREF = "a[href]"
+        const val SELECTOR_IMG = "img"
+
+        const val ANNOUNCEMENTS = "section#duyurular .testimonial-item"
+        const val ANNOUNCEMENT_TITLE = "p"
+        const val ANNOUNCEMENT_DESCRIPTION = ">span"
     }
 
     object ATTRIBUTE {
         const val HREF = "href"
+        const val SRC = "src"
         const val FOOD_NAME_ATTR = "data-title"
         const val TODAY_FOOD_IMAGE_ATTR = "data-thumb"
+    }
+
+    object URL {
+        const val DEFAULT_ANNOUNCEMENT_LOGO = "${NETWORK.BASE_ENDPOINT}images/simge2.png"
     }
 }

@@ -8,6 +8,6 @@ sealed interface TodayMenuEvent {
         val todayMenuUIModel: TodayMenuUIModel
     ) : TodayMenuEvent
 
-    class Failure(val exception: CuError) : TodayMenuEvent
+    data class Failure(val exception: CuError) : TodayMenuEvent
     data object EmptyList : TodayMenuEvent
 }
