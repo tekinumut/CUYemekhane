@@ -10,6 +10,7 @@ import com.tekinumut.cuyemekhane.common.extensions.resolveColorAttribute
 object Utility {
 
     fun openWebSiteWithCustomTabs(context: Context, url: String) {
+        if (url.isBlank()) return
         val colorSchemeBuilder = CustomTabColorSchemeParams.Builder().run {
             setToolbarColor(context.resolveColorAttribute(androidx.appcompat.R.attr.colorPrimary))
                 .build()

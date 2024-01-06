@@ -12,6 +12,7 @@ import com.tekinumut.cuyemekhane.common.extensions.orEmptyString
 import com.tekinumut.cuyemekhane.common.extensions.setupToolbar
 import com.tekinumut.cuyemekhane.common.helpers.CuAnimationHelper.rotateClockWise
 import com.tekinumut.cuyemekhane.common.ui.CuToolbar
+import com.tekinumut.cuyemekhane.common.util.Utility
 import com.tekinumut.cuyemekhane.databinding.FragmentAnnouncementsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,8 +20,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class AnnouncementsFragment : BaseFragment<FragmentAnnouncementsBinding>(
     FragmentAnnouncementsBinding::inflate
 ) {
-
     private val viewModel by viewModels<AnnouncementsViewModel>()
+
+    private val announcementsAdapter = AnnouncementsAdapter { descriptionUrl ->
+        Utility.openWebSiteWithCustomTabs(binding.root.context, descriptionUrl)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,6 +47,7 @@ class AnnouncementsFragment : BaseFragment<FragmentAnnouncementsBinding>(
                     mainTitle = findNavController().currentDestination?.label.orEmptyString()
                 )
             )
+            recyclerAnnouncements.adapter = announcementsAdapter
             swipeRefreshLayout.setOnRefreshListener {
                 viewModel.getAnnouncements()
             }
@@ -54,10 +59,10 @@ class AnnouncementsFragment : BaseFragment<FragmentAnnouncementsBinding>(
             when (uiState.state) {
                 AnnouncementsViewModel.State.Initial -> Unit
                 is AnnouncementsViewModel.State.AnnouncementsFetched -> {
-
+                    announcementsAdapter.submitList(uiState.state.announcements)
                 }
                 is AnnouncementsViewModel.State.NoAnnouncement -> {
-
+                    announcementsAdapter.submitList(uiState.state.announcements)
                 }
             }
         }
