@@ -41,10 +41,9 @@ class AnnouncementsViewModel @Inject constructor(
                         }
                         hideLoading()
                     }
-                    is AnnouncementsEvent.Failure,
-                    AnnouncementsEvent.NoAnnouncement -> {
+                    is AnnouncementsEvent.NoAnnouncement -> {
                         _uiState.update {
-                            UIState(state = State.NoAnnouncements)
+                            UIState(state = State.NoAnnouncement(event.announcements))
                         }
                         hideLoading()
                     }
@@ -77,6 +76,6 @@ class AnnouncementsViewModel @Inject constructor(
     sealed interface State {
         data object Initial : State
         data class AnnouncementsFetched(val announcements: List<AnnouncementsUIModel>) : State
-        data object NoAnnouncements : State
+        data class NoAnnouncement(val announcements: List<AnnouncementsUIModel>) : State
     }
 }

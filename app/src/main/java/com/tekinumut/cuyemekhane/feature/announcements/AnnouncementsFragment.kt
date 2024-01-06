@@ -56,7 +56,7 @@ class AnnouncementsFragment : BaseFragment<FragmentAnnouncementsBinding>(
                 is AnnouncementsViewModel.State.AnnouncementsFetched -> {
 
                 }
-                AnnouncementsViewModel.State.NoAnnouncements -> {
+                is AnnouncementsViewModel.State.NoAnnouncement -> {
 
                 }
             }

@@ -22,5 +22,6 @@
     <!-- Error messages -->
     <string name="error_message_no_data">We\'re having a problem. Please try again later.</string>
     <string name="open_website_text">Open website</string>
-    <string name="no_announcements_found">No announcements found</string>
+    <string name="no_announcements_found_title">No announcements</string>
+    <string name="no_announcements_found_description">There is no announcement at the moment.</string>
 </resources>
