@@ -1,7 +1,7 @@
 package com.tekinumut.cuyemekhane.common.data.mappers
 
 import com.tekinumut.cuyemekhane.common.data.model.monthlyfood.DailyFood
-import com.tekinumut.cuyemekhane.common.domain.model.mainpage.DailyFoodUIModel
+import com.tekinumut.cuyemekhane.common.domain.model.monthlyfood.DailyFoodUIModel
 import com.tekinumut.cuyemekhane.common.extensions.toZeroIfNull
 import javax.inject.Inject
 

@@ -1,7 +1,7 @@
-package com.tekinumut.cuyemekhane.feature.todaymenu.events
+package com.tekinumut.cuyemekhane.common.domain.usecase.events
 
 import com.tekinumut.cuyemekhane.common.data.api.response.CuError
-import com.tekinumut.cuyemekhane.common.domain.model.mainpage.TodayMenuUIModel
+import com.tekinumut.cuyemekhane.common.domain.model.todayfood.TodayMenuUIModel
 
 sealed interface TodayMenuEvent {
     data class Success(

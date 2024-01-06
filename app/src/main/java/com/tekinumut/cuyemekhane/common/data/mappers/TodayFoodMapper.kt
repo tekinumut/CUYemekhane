@@ -1,7 +1,7 @@
 package com.tekinumut.cuyemekhane.common.data.mappers
 
 import com.tekinumut.cuyemekhane.common.data.model.todayfood.TodayFood
-import com.tekinumut.cuyemekhane.common.domain.model.mainpage.TodayFoodUIModel
+import com.tekinumut.cuyemekhane.common.domain.model.todayfood.TodayFoodUIModel
 import com.tekinumut.cuyemekhane.common.extensions.toZeroIfNull
 import javax.inject.Inject
 

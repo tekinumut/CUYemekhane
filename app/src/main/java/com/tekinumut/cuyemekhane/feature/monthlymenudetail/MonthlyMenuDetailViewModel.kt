@@ -1,9 +1,9 @@
 package com.tekinumut.cuyemekhane.feature.monthlymenudetail
 
 import androidx.lifecycle.ViewModel
-import com.tekinumut.cuyemekhane.common.domain.model.mainpage.DailyFoodUIModel
-import com.tekinumut.cuyemekhane.common.domain.model.mainpage.DailyFoodUIModel.Companion.convertToTodayFoodUIModel
-import com.tekinumut.cuyemekhane.common.domain.model.mainpage.TodayFoodUIModel
+import com.tekinumut.cuyemekhane.common.domain.model.monthlyfood.DailyFoodUIModel
+import com.tekinumut.cuyemekhane.common.domain.model.monthlyfood.DailyFoodUIModel.Companion.convertToTodayFoodUIModel
+import com.tekinumut.cuyemekhane.common.domain.model.todayfood.TodayFoodUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow

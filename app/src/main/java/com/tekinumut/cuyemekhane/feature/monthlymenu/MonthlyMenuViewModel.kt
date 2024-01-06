@@ -3,10 +3,10 @@ package com.tekinumut.cuyemekhane.feature.monthlymenu
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tekinumut.cuyemekhane.R
-import com.tekinumut.cuyemekhane.common.domain.model.mainpage.MonthlyMenuUIModel
+import com.tekinumut.cuyemekhane.common.domain.model.monthlyfood.MonthlyMenuUIModel
 import com.tekinumut.cuyemekhane.common.domain.usecase.MonthlyMenuUseCase
+import com.tekinumut.cuyemekhane.common.domain.usecase.events.MonthlyMenuEvent
 import com.tekinumut.cuyemekhane.common.ui.CommonErrorModel
-import com.tekinumut.cuyemekhane.feature.monthlymenu.events.MonthlyMenuEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.channels.Channel

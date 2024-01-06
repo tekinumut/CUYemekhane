@@ -1,7 +1,7 @@
 package com.tekinumut.cuyemekhane.common.data.mappers
 
 import com.tekinumut.cuyemekhane.common.data.model.todayfood.TodayMenu
-import com.tekinumut.cuyemekhane.common.domain.model.mainpage.TodayMenuUIModel
+import com.tekinumut.cuyemekhane.common.domain.model.todayfood.TodayMenuUIModel
 import javax.inject.Inject
 
 class TodayMenuMapper @Inject constructor(

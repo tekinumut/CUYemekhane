@@ -2,9 +2,9 @@ package com.tekinumut.cuyemekhane.feature.todaymenu
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tekinumut.cuyemekhane.common.domain.model.mainpage.TodayMenuUIModel
+import com.tekinumut.cuyemekhane.common.domain.model.todayfood.TodayMenuUIModel
 import com.tekinumut.cuyemekhane.common.domain.usecase.TodayMenuUseCase
-import com.tekinumut.cuyemekhane.feature.todaymenu.events.TodayMenuEvent
+import com.tekinumut.cuyemekhane.common.domain.usecase.events.TodayMenuEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.channels.Channel

@@ -1,7 +1,7 @@
 package com.tekinumut.cuyemekhane.common.data.mappers
 
 import com.tekinumut.cuyemekhane.common.data.model.monthlyfood.MonthlyMenu
-import com.tekinumut.cuyemekhane.common.domain.model.mainpage.MonthlyMenuUIModel
+import com.tekinumut.cuyemekhane.common.domain.model.monthlyfood.MonthlyMenuUIModel
 import javax.inject.Inject
 
 class MonthlyMenuMapper @Inject constructor(

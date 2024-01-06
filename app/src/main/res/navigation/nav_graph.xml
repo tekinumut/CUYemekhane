@@ -34,7 +34,7 @@
         <argument
             android:name="dailyMenu"
             android:defaultValue="@null"
-            app:argType="com.tekinumut.cuyemekhane.common.domain.model.mainpage.DailyMenuUIModel"
+            app:argType="com.tekinumut.cuyemekhane.common.domain.model.monthlyfood.DailyMenuUIModel"
             app:nullable="true" />
     </dialog>
 

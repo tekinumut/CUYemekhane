@@ -3,7 +3,7 @@ package com.tekinumut.cuyemekhane.common.domain.usecase
 import com.tekinumut.cuyemekhane.common.data.api.response.Resource
 import com.tekinumut.cuyemekhane.common.data.mappers.MenuDetailMapper
 import com.tekinumut.cuyemekhane.common.di.IODispatcher
-import com.tekinumut.cuyemekhane.common.domain.model.mainpage.detail.MenuDetailUIModel
+import com.tekinumut.cuyemekhane.common.domain.model.monthlydetail.MenuDetailUIModel
 import com.tekinumut.cuyemekhane.common.domain.repository.MenuRepository
 import com.tekinumut.cuyemekhane.common.domain.usecase.base.SingleUseCase
 import javax.inject.Inject

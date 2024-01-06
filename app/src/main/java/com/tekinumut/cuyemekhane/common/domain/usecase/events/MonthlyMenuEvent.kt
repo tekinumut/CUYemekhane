@@ -1,7 +1,7 @@
-package com.tekinumut.cuyemekhane.feature.monthlymenu.events
+package com.tekinumut.cuyemekhane.common.domain.usecase.events
 
 import com.tekinumut.cuyemekhane.common.data.api.response.CuError
-import com.tekinumut.cuyemekhane.common.domain.model.mainpage.MonthlyMenuUIModel
+import com.tekinumut.cuyemekhane.common.domain.model.monthlyfood.MonthlyMenuUIModel
 
 sealed interface MonthlyMenuEvent {
 

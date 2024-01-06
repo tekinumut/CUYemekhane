@@ -1,4 +1,4 @@
-package com.tekinumut.cuyemekhane.common.domain.model.mainpage.detail
+package com.tekinumut.cuyemekhane.common.domain.model.monthlydetail
 
 import com.tekinumut.cuyemekhane.common.data.mappers.UIModel
 

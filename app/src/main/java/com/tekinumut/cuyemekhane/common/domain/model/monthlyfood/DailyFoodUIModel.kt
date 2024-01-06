@@ -1,7 +1,8 @@
-package com.tekinumut.cuyemekhane.common.domain.model.mainpage
+package com.tekinumut.cuyemekhane.common.domain.model.monthlyfood
 
 import android.os.Parcelable
 import com.tekinumut.cuyemekhane.common.data.mappers.UIModel
+import com.tekinumut.cuyemekhane.common.domain.model.todayfood.TodayFoodUIModel
 import com.tekinumut.cuyemekhane.common.util.Constants
 import kotlinx.parcelize.Parcelize
 

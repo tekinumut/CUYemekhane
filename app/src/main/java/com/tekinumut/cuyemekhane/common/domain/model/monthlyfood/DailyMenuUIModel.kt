@@ -1,4 +1,4 @@
-package com.tekinumut.cuyemekhane.common.domain.model.mainpage
+package com.tekinumut.cuyemekhane.common.domain.model.monthlyfood
 
 import android.os.Parcelable
 import com.tekinumut.cuyemekhane.common.data.mappers.UIModel

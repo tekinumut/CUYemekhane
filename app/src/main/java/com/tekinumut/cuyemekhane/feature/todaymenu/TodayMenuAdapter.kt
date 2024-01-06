@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.tekinumut.cuyemekhane.R
-import com.tekinumut.cuyemekhane.common.domain.model.mainpage.TodayFoodUIModel
+import com.tekinumut.cuyemekhane.common.domain.model.todayfood.TodayFoodUIModel
 import com.tekinumut.cuyemekhane.common.extensions.isBiggerThanZero
 import com.tekinumut.cuyemekhane.common.extensions.setImageUrl
 import com.tekinumut.cuyemekhane.common.extensions.viewBinding

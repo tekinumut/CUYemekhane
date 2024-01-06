@@ -5,7 +5,7 @@ import com.tekinumut.cuyemekhane.common.data.mappers.TodayMenuMapper
 import com.tekinumut.cuyemekhane.common.di.IODispatcher
 import com.tekinumut.cuyemekhane.common.domain.repository.MenuRepository
 import com.tekinumut.cuyemekhane.common.domain.usecase.base.FlowUseCase
-import com.tekinumut.cuyemekhane.feature.todaymenu.events.TodayMenuEvent
+import com.tekinumut.cuyemekhane.common.domain.usecase.events.TodayMenuEvent
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
