@@ -27,7 +27,22 @@
         <action
             android:id="@+id/action_profileMenuFragment_to_announcementsFragment"
             app:destination="@id/announcementsFragment" />
+        <action
+            android:id="@+id/action_profileMenuFragment_to_pricingFragment"
+            app:destination="@id/pricingFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/announcementsFragment"
+        android:name="com.tekinumut.cuyemekhane.feature.announcements.AnnouncementsFragment"
+        android:label="@string/profile_tab_announcements"
+        tools:layout="@layout/fragment_announcements" />
+
+    <fragment
+        android:id="@+id/pricingFragment"
+        android:name="com.tekinumut.cuyemekhane.feature.pricing.PricingFragment"
+        android:label="@string/profile_tab_pricing"
+        tools:layout="@layout/pricing_fragment" />
 
     <dialog
         android:id="@+id/monthlyMenuDetailBottomSheet"
@@ -54,11 +69,5 @@
     <action
         android:id="@+id/action_global_fullScreenImageDialog"
         app:destination="@id/fullScreenImageDialog" />
-
-    <fragment
-        android:id="@+id/announcementsFragment"
-        android:name="com.tekinumut.cuyemekhane.feature.announcements.AnnouncementsFragment"
-        android:label="@string/profile_tab_announcements"
-        tools:layout="@layout/fragment_announcements" />
 
 </navigation>

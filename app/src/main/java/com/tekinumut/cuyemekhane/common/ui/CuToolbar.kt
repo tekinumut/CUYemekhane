@@ -23,11 +23,9 @@ class CuToolbar(context: Context, attr: AttributeSet) : ConstraintLayout(context
     val getActionButton get() = binding.buttonAction
 
     fun build(config: ConfigModel) {
-        with(binding) {
-            setNavIcon(config)
-            setLogoAndTitle(config)
-            setActionButton(config)
-        }
+        setNavIcon(config)
+        setLogoAndTitle(config)
+        setActionButton(config)
     }
 
     private fun setLogoAndTitle(config: ConfigModel) {

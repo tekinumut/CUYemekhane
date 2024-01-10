@@ -17,6 +17,7 @@
     <string name="loading_text_message">Loading…</string>
     <string name="food_calorie_at_end">%d Calorie</string>
     <string name="monthly_list_empty_description">Monthly Menu is empty!</string>
+    <string name="pricing_html_data_no_found">Pricing data not found</string>
     <string name="update_list">Refresh list</string>
 
     <!-- Error messages -->

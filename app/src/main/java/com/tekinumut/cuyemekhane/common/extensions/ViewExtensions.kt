@@ -1,6 +1,7 @@
 package com.tekinumut.cuyemekhane.common.extensions
 
 import android.view.View
+import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isGone
@@ -34,4 +35,8 @@ fun View.show() {
 
 fun View.hide() {
     isGone = true
+}
+
+fun WebView.loadBase64Data(data: String) {
+    loadData(data, "text/html", "base64")
 }

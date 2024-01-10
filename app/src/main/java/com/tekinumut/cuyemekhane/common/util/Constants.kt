@@ -6,12 +6,12 @@ object Constants {
     const val INT_ZERO = 0
     const val DOUBLE_ZERO = 0.0
     const val INT_ONE = 1
-
     const val STRING_EMPTY = ""
 
     object NETWORK {
         const val BASE_ENDPOINT = "https://yemekhane.cu.edu.tr/"
-        const val MAIN_PAGE = BASE_ENDPOINT + "default.asp"
+        const val MAIN_PAGE = "default.asp"
+        const val PRICING = "ucretlendirme.asp"
     }
 
     object QUERY {
@@ -31,6 +31,8 @@ object Constants {
         const val ANNOUNCEMENTS = "section#duyurular .testimonial-item"
         const val ANNOUNCEMENT_TITLE = "p"
         const val ANNOUNCEMENT_DESCRIPTION = ">span"
+
+        const val PRICING_BASE_SECTION = "section#section4"
     }
 
     object ATTRIBUTE {

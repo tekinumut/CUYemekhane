@@ -18,6 +18,7 @@
     <string name="loading_text_message">Yükleniyor…</string>
     <string name="food_calorie_at_end">%d Kalori</string>
     <string name="monthly_list_empty_description">Aylık yemek listesi boş!</string>
+    <string name="pricing_html_data_no_found">Ücretlendirme verisine erişilemedi</string>
     <string name="update_list">Listeyi Güncelle</string>
 
     <!-- error messages -->

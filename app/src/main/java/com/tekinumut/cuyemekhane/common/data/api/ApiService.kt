@@ -12,4 +12,7 @@ interface ApiService {
 
     @GET
     suspend fun getImageOfMenu(@Url href: String): Response<String>
+
+    @GET(Constants.NETWORK.PRICING)
+    suspend fun getPricing(): Response<String>
 }
