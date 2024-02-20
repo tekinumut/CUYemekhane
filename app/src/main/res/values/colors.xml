@@ -3,6 +3,7 @@
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="blue_google">#1581ff</color>
 
     <color name="color_primary_10">#00421c</color> <!-- main -->
     <color name="color_primary_20">#00662a</color>

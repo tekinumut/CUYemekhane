@@ -35,6 +35,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                     action = ProfileFragmentDirections.actionProfileMenuFragmentToPricingFragment()
                 )
             }
+            textTabContact.setOnClickListener {
+                navigateToDirections(
+                    action = ProfileFragmentDirections.actionProfileMenuFragmentToContactFragment()
+                )
+            }
         }
     }
 

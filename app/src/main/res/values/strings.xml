@@ -3,6 +3,7 @@
     <string name="page_monthly_menu_title">Monthly Menu</string>
     <string name="page_monthly_menu_detail_title">Monthly Menu Content</string>
     <string name="page_profile_menu_title">Profile</string>
+    <string name="page_contact_title">Contact</string>
 
     <!-- Profile -->
     <string name="profile_title_information">Information</string>
@@ -12,6 +13,13 @@
     <string name="profile_title_helpers">Helpers</string>
     <string name="profile_tab_settings">Settings</string>
     <string name="profile_tab_about">About</string>
+
+    <!-- Contact -->
+    <string name="contact_address" translatable="false">Çukurova University\nSarıçam / Adana, pk01250</string>
+    <string name="contact_phone" translatable="false">0 322 338 64 14 / 0 322 338 61 29</string>
+    <string name="contact_phone_external">External / 2384</string>
+    <string name="contact_working_hours">Monday – Friday: 08:00 – 17:00\nSaturday, Sunday: Closed</string>
+    <string name="contact_navigate_address_button">Show On Map</string>
 
     <!-- Common usages -->
     <string name="loading_text_message">Loading…</string>

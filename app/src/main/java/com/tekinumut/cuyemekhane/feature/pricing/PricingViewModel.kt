@@ -27,7 +27,7 @@ class PricingViewModel @Inject constructor(
 
     fun getPricingInfo() {
         viewModelScope.launch {
-            setLoading(true)
+            _uiState.update { it.copy(isLoading = true) }
             when (val response = pricingUseCase(Unit)) {
                 is Resource.Failure -> {
                     _uiState.update {
@@ -47,10 +47,6 @@ class PricingViewModel @Inject constructor(
                 }
             }
         }
-    }
-
-    fun setLoading(isLoading: Boolean) {
-        _uiState.update { it.copy(isLoading = isLoading) }
     }
 
     val noPricingDataErrorModel = CommonErrorModel(

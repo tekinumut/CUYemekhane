@@ -4,6 +4,7 @@
     <string name="page_monthly_menu_title">Aylık Menü</string>
     <string name="page_monthly_menu_detail_title">Aylık Menü İçeriği</string>
     <string name="page_profile_menu_title">Profil</string>
+    <string name="page_contact_title">İletişim</string>
 
     <!-- Profile -->
     <string name="profile_title_information">Bilgilendirme</string>
@@ -13,6 +14,11 @@
     <string name="profile_title_helpers">Yardımcılar</string>
     <string name="profile_tab_settings">Ayarlar</string>
     <string name="profile_tab_about">Hakkında</string>
+
+    <!-- Contact -->
+    <string name="contact_phone_external">Dahili / 2384</string>
+    <string name="contact_working_hours">Pazartesi – Cuma: 08:00 – 17:00\nCumartesi, Pazar: Kapalı</string>
+    <string name="contact_navigate_address_button">Haritada Göster</string>
 
     <!-- common usages -->
     <string name="loading_text_message">Yükleniyor…</string>

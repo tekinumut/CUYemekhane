@@ -57,7 +57,6 @@ class PricingFragment : BaseFragment<PricingFragmentBinding>(PricingFragmentBind
                 PricingViewModel.State.Initial -> Unit
                 is PricingViewModel.State.PricingDataFetched -> {
                     with(binding) {
-                        viewCommonError.hide()
                         webViewPricing.show()
                         webViewPricing.loadBase64Data(uiState.state.htmlSource)
                     }

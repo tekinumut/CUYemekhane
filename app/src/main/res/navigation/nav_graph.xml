@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_profileMenuFragment_to_pricingFragment"
             app:destination="@id/pricingFragment" />
+        <action
+            android:id="@+id/action_profileMenuFragment_to_contactFragment"
+            app:destination="@id/contactFragment" />
     </fragment>
 
     <fragment
@@ -43,6 +46,12 @@
         android:name="com.tekinumut.cuyemekhane.feature.pricing.PricingFragment"
         android:label="@string/profile_tab_pricing"
         tools:layout="@layout/pricing_fragment" />
+
+    <fragment
+        android:id="@+id/contactFragment"
+        android:name="com.tekinumut.cuyemekhane.feature.contact.ContactFragment"
+        android:label="ContactFragment"
+        tools:layout="@layout/fragment_contact" />
 
     <dialog
         android:id="@+id/monthlyMenuDetailBottomSheet"
@@ -69,5 +78,4 @@
     <action
         android:id="@+id/action_global_fullScreenImageDialog"
         app:destination="@id/fullScreenImageDialog" />
-
 </navigation>

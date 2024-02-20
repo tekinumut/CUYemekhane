@@ -33,6 +33,7 @@
         <!-- Custom color -->
         <item name="colorWhiteCustom">@color/white</item>
         <item name="colorBlackCustom">@color/black</item>
+        <item name="colorBlueGoogleCustom">@color/blue_google</item>
 
         <!-- Widgets -->
         <item name="circularProgressIndicatorStyle">@style/Widget.App.CircularProgressIndicator
