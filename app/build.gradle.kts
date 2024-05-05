@@ -7,6 +7,8 @@ plugins {
     alias(libs.plugins.daggerHiltAndroid)
     alias(libs.plugins.navigationSafeArgs)
     alias(libs.plugins.googleKsp)
+    id(libs.plugins.playServices.get().pluginId)
+    id(libs.plugins.crashlytics.get().pluginId)
     id(libs.plugins.parcelize.get().pluginId)
 }
 
@@ -109,6 +111,8 @@ dependencies {
 
     // Play Services
     implementation(libs.playservice.ads)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.analytics)
 
     //Test
     testImplementation(libs.bundles.base.test)

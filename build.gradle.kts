@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.androidLibrary) apply false
     alias(libs.plugins.kotlinAndroid) apply false
     alias(libs.plugins.googleKsp) apply false
+    alias(libs.plugins.playServices) apply false
+    alias(libs.plugins.crashlytics) apply false
     alias(libs.plugins.daggerHiltAndroid) apply false
     alias(libs.plugins.navigationSafeArgs) apply false
 }

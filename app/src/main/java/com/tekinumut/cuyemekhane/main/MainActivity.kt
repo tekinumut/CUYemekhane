@@ -1,7 +1,6 @@
 package com.tekinumut.cuyemekhane.main
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -44,10 +43,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun initObservers() {
         collectWithLifecycle(viewModel.userPreferences) { preferences ->
-            Log.e(
-                "BaseApp",
-                "hello dude: ${preferences.hideBannerAds} ${binding.adView.adUnitId} ${getString(R.string.admob_app_id)}"
-            );
             if (preferences.hideBannerAds) {
                 binding.adView.hide()
             } else {
