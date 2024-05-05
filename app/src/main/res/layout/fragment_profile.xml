@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.tekinumut.cuyemekhane.common.ui.CuToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_title_information"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/profile_title_information"
+        android:textColor="?attr/colorOnSurface"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <View
+        android:id="@+id/view_separator_title_information"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:background="?attr/colorSurfaceVariant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/text_title_information"
+        app:layout_constraintTop_toBottomOf="@id/text_title_information" />
+
+    <TextView
+        android:id="@+id/text_tab_announcements"
+        style="@style/ProfileTabTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_tab_announcements"
+        app:drawableStartCompat="@drawable/ic_profile_announcement"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/text_title_information"
+        app:layout_constraintTop_toBottomOf="@id/view_separator_title_information" />
+
+    <TextView
+        android:id="@+id/text_tab_pricing"
+        style="@style/ProfileTabTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_tab_pricing"
+        app:drawableStartCompat="@drawable/ic_profile_pricing"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/text_title_information"
+        app:layout_constraintTop_toBottomOf="@id/text_tab_announcements" />
+
+    <TextView
+        android:id="@+id/text_tab_contact"
+        style="@style/ProfileTabTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_tab_contact"
+        app:drawableStartCompat="@drawable/ic_profile_contact"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/text_title_information"
+        app:layout_constraintTop_toBottomOf="@id/text_tab_pricing" />
+
+    <TextView
+        android:id="@+id/text_title_helpers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/profile_title_helpers"
+        android:textColor="?attr/colorOnSurface"
+        app:layout_constraintStart_toStartOf="@id/text_title_information"
+        app:layout_constraintTop_toBottomOf="@id/text_tab_contact" />
+
+    <View
+        android:id="@+id/view_separator_helpers_information"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:background="?attr/colorSurfaceVariant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/text_title_information"
+        app:layout_constraintTop_toBottomOf="@id/text_title_helpers" />
+
+    <TextView
+        android:id="@+id/text_tab_settings"
+        style="@style/ProfileTabTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_tab_settings"
+        app:drawableStartCompat="@drawable/ic_profile_settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/text_title_information"
+        app:layout_constraintTop_toBottomOf="@id/view_separator_helpers_information" />
+
+    <TextView
+        android:id="@+id/text_tab_about"
+        style="@style/ProfileTabTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_tab_about"
+        android:visibility="gone"
+        app:drawableStartCompat="@drawable/ic_profile_about"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/text_title_information"
+        app:layout_constraintTop_toBottomOf="@id/text_tab_settings" />
+</androidx.constraintlayout.widget.ConstraintLayout>

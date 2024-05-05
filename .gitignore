@@ -6,8 +6,8 @@
 # Covers files to be ignored for android development using Android Studio.
 
 # Custom
-Certificates/
 app/google-services.json
+app/keystore
 
 # Built application files
 *.apk

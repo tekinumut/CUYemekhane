@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@id/todayMenuFragment"
+        android:icon="@drawable/ic_menu_book"
+        android:title="@string/page_today_menu_title" />
+    <item
+        android:id="@id/monthlyMenuFragment"
+        android:icon="@drawable/ic_calendar"
+        android:title="@string/page_monthly_menu_title" />
+    <item
+        android:id="@id/profileMenuFragment"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/page_profile_menu_title" />
+</menu>

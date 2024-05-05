@@ -1,27 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00421c</color>
-    <color name="colorPrimaryDark">#062d12</color>
-    <color name="colorAccent">#196F34</color>
-    <color name="default_bg">#f2f2f2</color>
-    <color name="default_bg_opposite">#121212</color>
-    <color name="white">#ffffff</color>
-    <color name="red">#ff0000</color>
-    <color name="green">#2ecc71</color>
-    <color name="primary_text">#000000</color>
-    <color name="seconday_text">#8A000000</color>
 
-    <color name="dialog_fr_title">#196F34</color>
-    <color name="toolbar_bg">#00421c</color>
-    <color name="button_blue">#1581ff</color>
-    <color name="alert_dialog_btn">#00a8ff</color>
-    <color name="accentPrimary">#005f1e</color>
-    <color name="card_daily_bg">#ffffff</color>
-    <color name="card_daily_title">#565656</color>
-    <color name="card_daily_category_bg">#ff0000</color>
-    <color name="card_daily_category_title">#f2f2f2</color>
-    <color name="card_calorie_title">#ff0000</color>
-    <color name="duyurular_title">#ff0000</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue_google">#1581ff</color>
 
-    <color name="dialog_btn_accept">#27ae60</color>
+    <color name="color_primary_10">#00421c</color> <!-- main -->
+    <color name="color_primary_20">#00662a</color>
+    <color name="color_primary_30">#009940</color>
+    <color name="color_primary_40">#00cc55</color>
+    <color name="color_primary_80">#99ffc3</color>
+    <color name="color_primary_90">#ccffe1</color>
+
+    <color name="color_secondary_10">#062d12</color> <!-- main secondary -->
+    <color name="color_secondary_20">#0c5a23</color>
+    <color name="color_secondary_30">#128735</color>
+    <color name="color_secondary_40">#18b447</color>
+    <color name="color_secondary_80">#a5f3bc</color>
+    <color name="color_secondary_90">#d2f9de</color>
+
+    <color name="color_error_10">#2c0907</color>
+    <color name="color_error_20">#57120f</color>
+    <color name="color_error_30">#831c16</color>
+    <color name="color_error_40">#b3261e</color>
+    <color name="color_error_80">#f0aba8</color>
+    <color name="color_error_90">#f8d5d3</color>
+
+    <color name="color_neutral_0">#121212</color>
+    <color name="color_neutral_5">#0d0d0d</color>
+    <color name="color_neutral_10">#1a1a1a</color>
+    <color name="color_neutral_15">#262626</color>
+    <color name="color_neutral_20">#333333</color>
+    <color name="color_neutral_30">#4d4d4d</color>
+    <color name="color_neutral_40">#666666</color>
+    <color name="color_neutral_50">#808080</color>
+    <color name="color_neutral_60">#999999</color>
+    <color name="color_neutral_70">#b3b3b3</color>
+    <color name="color_neutral_80">#cccccc</color>
+    <color name="color_neutral_85">#d9d9d9</color>
+    <color name="color_neutral_90">#e6e6e6</color>
+    <color name="color_neutral_95">#f2f2f2</color>
+    <color name="color_neutral_100">#ffffff</color>
 </resources>

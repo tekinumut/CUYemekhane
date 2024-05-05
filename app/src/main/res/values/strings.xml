@@ -1,143 +1,45 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Navigation Drawer Values -->
-    <string name="_m_please_wait">Lütfen Bekleyiniz</string>
-    <string name="data_loaded">Veriler başarıyla yüklendi</string>
-    <string name="error_loading_data">Veriler yüklenemedi.</string>
-    <string name="error_cause">\Hata Sebebi: %s</string>
-    <string name="iptal_et">İptal Et</string>
-    <string name="close">Pencereyi Kapat</string>
-    <string name="remove">Sil</string>
-    <string name="kabul_et">Kabul Et</string>
-    <string name="btn_update_monthly_list">Aylık listeyi güncelle</string>
-    <string name="food_removed_of_date">%s tarihli menü silindi</string>
-    <string name="no_component_found">Yemek içeriği bulunamadı</string>
-    <string name="no_food_holiday">Tatil günlerinde Üniversite Merkezi Kafeterya\'sı hizmet vermemektedir.</string>
-    <string name="open_web_site">Web Sitesine Git</string>
-    <string name="system_default">Cihaz temasını kullan</string>
-    <string name="light">Açık</string>
-    <string name="dark">Koyu</string>
+<resources>
+    <string name="page_today_menu_title">Daily Menu</string>
+    <string name="page_monthly_menu_title">Monthly Menu</string>
+    <string name="page_monthly_menu_detail_title">Monthly Menu Content</string>
+    <string name="page_profile_menu_title">Profile</string>
+    <string name="page_contact_title">Contact</string>
 
-    <!-- Action Bar Başlık metinleri -->
-    <string name="daily_action_title">Günlük Liste</string>
-    <string name="monthly_action_title">Aylık Liste</string>
-    <string name="duyurular_action_title">Duyurular</string>
-    <string name="settings_action_title">Ayarlar</string>
-    <string name="pricing_action_title">Ücretlendirme</string>
-    <string name="contact_action_title">İletişim</string>
-    <string name="about_action_title">Hakkında</string>
+    <!-- Profile -->
+    <string name="profile_title_information">Information</string>
+    <string name="profile_tab_announcements">Announcements</string>
+    <string name="profile_tab_pricing">Pricing</string>
+    <string name="profile_tab_contact">Contact Information</string>
+    <string name="profile_title_helpers">Helpers</string>
+    <string name="profile_tab_settings">Settings</string>
+    <string name="profile_tab_about">About</string>
 
-    <string name="monthly_list_title">Aylık Liste Boş</string>
-    <string name="monthly_list_content">• Aylık liste şuan boş gözüküyor. Aylık listeyi görebilmek için lütfen aşağıdaki butonu kullanın.
-        \n• Liste başarılı bir şekilde güncellendikten sonra yine bu sayfayı görüyorsanız henüz bir liste yayınlanmamıştır. Lütfen daha sonra tekrar deneyiniz.
-        \n• Aylık liste bir çok resim(100\'den fazla olabilir) barındırmasından dolayı indirilen veri boyutu 30mb\'a kadar ulaşabilir ve
-        verilerin yüklenmesi internet hızınıza bağlı olarak 1 dakikayı aşabilir.
-        \n• Butona tıkladıktan sonra açılacak olan pencerede gerekli ayarlamaları yaparak bu boyutu minimize edebilirsiniz.</string>
+    <!-- Contact -->
+    <string name="contact_address" translatable="false">Çukurova University\nSarıçam / Adana, pk01250</string>
+    <string name="contact_phone" translatable="false">0 322 338 64 14 / 0 322 338 61 29</string>
+    <string name="contact_phone_external">External / 2384</string>
+    <string name="contact_working_hours">Monday – Friday: 08:00 – 17:00\nSaturday, Sunday: Closed</string>
+    <string name="contact_navigate_address_button">Show On Map</string>
 
-    <!--    Yemek listesinin bulunamadığı durumda kullanıcıyı bilgilendirecek metin verileri-->
-    <string name="empty_title">Veriler yüklenemedi</string>
-    <string name="empty_reason_content">Verilerin alındığı <u>yemekhane.cu.edu.tr</u> adresine bağlanılamadı.
-        Lütfen aşağıdaki çözüm önerilerini uygulamayı deneyin.</string>
-    <string name="empty_solution_title"><u>Çözüm önerileri:</u></string>
-    <string name="empty_solution_content">• Lütfen internet bağlantınızı kontrol edin.
-        \n• Ekranı yukarıdan aşağıya çekerek listeyi güncelleyebilirsiniz.
-        \n• Aşağıda bulunan \'Web sitesine git\' butonuna tıklayarak listelerin yer aldığı web sitesini ziyaret edebilirsiniz.
-        \n• Listeler web sitesinde de gözükmüyorsa, yayınlanana kadar beklemeniz gerekmektedir.</string>
+    <!-- Settings -->
+    <string name="hide_banner_ad">Hide Banner Ads</string>
+    <string name="settings_change_theme_text_title">Appearance</string>
+    <string name="settings_change_theme_text_description">Choose your light or dark theme preference</string>
+    <string name="settings_change_theme_text_default">Use device theme</string>
+    <string name="settings_change_theme_text_light">Light theme</string>
+    <string name="settings_change_theme_text_dark">Dark theme</string>
 
-    <!--    Kullanıcı henüz yemek seçimi yapmadığıysa onu bilgilendirecek metin verileri-->
-    <string name="pick_solution_title"><u>Seçili Menü Bulunamadı</u></string>
-    <string name="pick_solution_content">• Sol alt köşede bulunan buton ile görmek istediğiniz tarihe ait menüyü seçebilirsiniz.
-        \n• Sağ alt köşede bulunan butona tıklayarak seçili menüyü silebilir veya aylık listeyi yenileyebilirsiniz.
-        \n• Bu sayfayı tekrar ziyaret ettiğinizde seçtiğiniz son menü size gösterilecektir.</string>
+    <!-- Common usages -->
+    <string name="loading_text_message">Loading…</string>
+    <string name="food_calorie_at_end">%d Calories</string>
+    <string name="monthly_list_empty_description">Monthly Menu is empty!</string>
+    <string name="pricing_html_data_no_found">Pricing data not found</string>
+    <string name="update_list">Refresh list</string>
+    <string name="cancel">Cancel</string>
 
-    <!--    Kullanıcı aylık listeyi indirirken karşılaşacağı diyalog penceresinin metin verileri-->
-    <string name="watch_ad_title">Aylık Listeyi Güncelle</string>
-    <string name="watch_ad_content">Aylık yemek listesini indirebilmek için bir adet video reklam izlemeniz gerekmektedir.
-        Daha sonra indirdiğiniz son listeye reklam izlemeden ulaşabilirsiniz.</string>
-    <string name="watch_ad_content_running">Listeyi yenilerken bir hata ile karşılaşma olasılığından dolayı 1 saat boyunca aylık listeyi istediğiniz kadar yenileyebilirsiniz.</string>
-    <string name="dont_load_img_info">• Yemeklere ait resimleri yüklemeyerek, 30 mb\'a kadar ulaşabilen indirme boyutunu 100 KB boyutuna düşürebilirsiniz.</string>
-    <!-- %%->% yazar %d-> verilen int değerini Exp: %50-->
-    <!-- %%->% yazar %d-> verilen int değerini Exp: %50-->
-
-    <string name="contact_title">İletişim</string>
-    <string name="contact_address">Çukurova Üniversitesi Sarıçam \nAdana, pk01250</string>
-    <string name="contact_phone">0 322 338 64 14 / 0 322 338 61 29</string>
-    <string name="contact_phone_dahili">Dahili / 2384</string>
-    <string name="contact_work_date_1">Pazartesi – Cuma: 08:00 – 17:00\nCumartesi, Pazar: Kapalı</string>
-
-    <!-- Duyurular -->
-    <string name="empty_duyuru_title">Duyuru Bulunamadı</string>
-    <string name="empty_duyuru_content">Sayfayı yukarıdan aşağı çekerek duyuruları yenileyebilirsiniz.</string>
-    <string name="duyurular_loaded">Duyurular başarıyla yenilendi</string>
-
-    <!-- Pricing -->
-    <string name="empty_pricing_title">Ücretlendirme Verisi Bulunamadı</string>
-    <string name="empty_pricing_content">• Ücretlendirme tablosu otomatik olarak güncellenecek şekilde ayarlanmadı.
-        \n\n• Sayfayı yukarıdan aşağı çekerek ücretlendirme tablosunu yenileyebilirsiniz.
-    \n\n• Sayfanın her açılışında verilerini yenilemesini istiyorsanız bunu Ayarlar bölümünden yapabilirsiniz.</string>
-    <string name="pricing_loaded">Ücretlendirme verisi başarıyla yenilendi</string>
-
-    <!-- Settings Keys -->
-
-    <string name="defPageListKey">defPageListKey</string>
-    <string name="defPageTitle">Başlangıç Sayfası</string>
-    <string name="defPageSummary">Başlangıçta açılacak olan sayfayı belirtin</string>
-
-    <string name="nightModeListKey">nightModeListKey</string>
-    <string name="nightModeTitle">Görünüm</string>
-    <string name="nightModeSummary">Açık/Koyu tema tercihinizi belirtin </string>
-
-    <string name="bannerAdKey">bannerAdKey</string>
-    <string name="adActivityTitle">Reklam Görünümü</string>
-    <string name="adSummaryActive">Banner reklam etkin</string>
-    <string name="adSummaryPassive">Banner reklam %s tarihinden sonra tekrar aktif olacak.</string>
-    <string name="isBannerExpire">isBannerExpire</string>
-
-    <string name="autoUpdatePrefKey">autoUpdatePrefKey</string>
-    <string name="autoUpdateTitle">Otomatik Güncellenecek Sayfalar</string>
-    <string name="autoUpdateSummary">Açtığınızda verilerin otomatik olarak güncellenmesini istediğiniz sayfaları belirtin</string>
-    <string name="auto_update_multi_list_dialog_message">• Aşağıdaki seçili sayfaların verileri, sayfalar açıldığında otomatik olarak güncellenecek.
-      \n• Sayfa bir kez güncellendikten sonra uygulamayı kapatana kadar otomatik güncellenmez.
-      \n• Sayfayı yukarıdan aşağı çekerek kendiniz ayrıca güncelleştirebilirsiniz.</string>
-
-    <string name="prog_kullanimi">Program Özellikleri</string>
-    <string name="kullanim_kilavuzu" tools:ignore="Typos">• Çukurova Üniversitesi Merkezi Kafeteryası\'nın günlük ve aylık listelerine erişmenizi sağlar.
-        \n• Ayarlar menüsünden; uygulama açıldığında görüntülenecek sayfayı, uygulama temasını vb. değiştirebilirsiniz.
-        \n• Siz listeleri güncelledikçe, bu listeler telefona kayıt edilir. Daha sonra bu listelere çevrimdışı olarak erişebilirsiniz.
-        \n• Listeler belirli sebeplerden dolayı boş olabilir. Bu sebepleri size açıklayan bir açıklama ekranı gösterilecektir.
-        \n• Listeleri, ekranı yukarıdan aşağı çekerek yenileyebilirsiniz.
-        \n• Bazı sayfaların açılışta verilerini otomatik olarak güncellediğini göreceksiniz. Ayarlar menüsünden bu özelliği, istediğiniz sayfaya açıp kapatabilirsiniz.
-        \n• Uygulama tamamen açık kaynaktır. Güncel proje kodlarına aşağıdaki Github linkinden erişebilirsiniz.
-        \n• Uygulamada yaşadığınız hataları, düzeltilmesini istediğiniz yerleri, mağaza sayfasında yorum yazarak veya bm.umuttekin@gmail.com adresine mail göndererek bildirebilirsiniz.
-        \n• Uygulamayı kullandığınız için teşekkürler.
-    </string>
-
-    <string name="send_mail">Mail Gönder</string>
-    <string name="rate_app">Uygulamayı Değerlendir</string>
-    <string name="send_feedback">Geri Bildirim Gönder</string>
-    <string name="github_source_code">Uygulama Kaynak Kodları</string>
-    <string name="expand_more">Genişletmek için tıkla</string>
-    <string name="expand_less">Daraltmak için tıkla</string>
-    <string name="github_address">https://github.com/tekinumut/CUYemekhane</string>
-    <string name="myGmailAddress">bm.umuttekin@gmail.com</string>
-
-
-    <string name="food_component_title">Yemek İçeriği</string>
-    <string name="no_monthly_list_pls_refresh">Gösterilebilecek tarih bulunamadı. Listeyi yenilemeyi deneyin</string>
-    <string name="date_picker_already_added">Takvim ekranı zaten açık</string>
-    <string name="already_no_data">Geçerli tarih zaten bir veri içermiyor</string>
-    <string name="drawer_item_title_food_list">Yemek Listeleri</string>
-    <string name="drawer_item_title_info">Bilgilendirme</string>
-    <string name="drawer_item_title_special_app">Uygulamaya Özel</string>
-    <string name="show_google_maps">Google Maps\'te Göster</string>
-    <string name="cant_open_google_maps">Google Maps Açılamadı</string>
-    <string name="disable_banner_title">Banner Reklamı Sil</string>
-    <string name="disable_banner_content">Ekranın alt tarafında çıkan banner reklamı 1 ay boyunca gizlemek için bir adet video reklam izlemeniz gerekmektedir.</string>
-    <string name="ad_closed">Video reklam kapatıldı!</string>
-    <string name="banner_ad_removed">Reklamlar 1 ay boyunca kaldırıldı.</string>
-    <string name="ad_failed_load">Reklam yüklenemedi! Lütfen tekrar deneyiniz.</string>
-    <string name="reward_ad_loading">Reklam Yükleniyor</string>
-    <string name="ad_load_fail_try_again">Reklam yenilemedi.\nTekrar yüklemek için tıkla!</string>
-    <string name="ad_load_fail_error_no_ad">Reklam sunucudan alınamadı. Aylık listeyi indirmek için <u>Kabul Et</u> butonuna tıklayınız.</string>
-    <string name="checkbox_text_dl_image">Resimleri indir</string>
-
+    <!-- Error messages -->
+    <string name="error_message_no_data">We\'re having a problem. Please try again later.</string>
+    <string name="open_website_text">Open website</string>
+    <string name="no_announcements_found_title">No announcements</string>
+    <string name="no_announcements_found_description">There is no announcement at the moment.</string>
 </resources>

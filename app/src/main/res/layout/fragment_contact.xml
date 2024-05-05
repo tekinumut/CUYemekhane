@@ -1,98 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <com.tekinumut.cuyemekhane.common.ui.CuToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="@dimen/dp20">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/contact_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/contact_title"
-            android:textColor="@color/primary_text"
-            android:textSize="@dimen/sp26"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/text_title_contact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/profile_tab_contact"
+        android:textColor="?attr/colorOnSurface"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-        <TextView
-            android:id="@+id/contact_address"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp15"
-            android:drawableStart="@drawable/ic_marker"
-            android:drawablePadding="@dimen/dp10"
-            android:lineSpacingMultiplier="1.1"
-            android:text="@string/contact_address"
-            android:textSize="@dimen/sp16"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contact_title" />
+    <View
+        android:id="@+id/view_separator_title_contact"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:background="?attr/colorSurfaceVariant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/text_title_contact"
+        app:layout_constraintTop_toBottomOf="@id/text_title_contact" />
 
-        <TextView
-            android:id="@+id/contact_phone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp15"
-            android:drawableStart="@drawable/ic_call_24"
-            android:drawablePadding="@dimen/dp10"
-            android:text="@string/contact_phone"
-            android:textSize="@dimen/sp16"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/contact_address"
-            app:layout_constraintTop_toBottomOf="@+id/contact_address" />
+    <TextView
+        android:id="@+id/text_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:drawablePadding="8dp"
+        android:text="@string/contact_address"
+        app:drawableStartCompat="@drawable/ic_home_address"
+        app:layout_constraintStart_toStartOf="@id/text_title_contact"
+        app:layout_constraintTop_toBottomOf="@id/view_separator_title_contact" />
 
-        <TextView
-            android:id="@+id/contact_dahili"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dahili_padding"
-            android:layout_marginTop="2dp"
-            android:text="@string/contact_phone_dahili"
-            android:textSize="@dimen/sp16"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/contact_phone"
-            app:layout_constraintTop_toBottomOf="@+id/contact_phone" />
+    <TextView
+        android:id="@+id/text_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:drawablePadding="8dp"
+        android:text="@string/contact_phone"
+        app:drawableStartCompat="@drawable/ic_phone"
+        app:layout_constraintStart_toStartOf="@id/text_title_contact"
+        app:layout_constraintTop_toBottomOf="@id/text_address" />
 
-        <TextView
-            android:id="@+id/contact_work_time"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp15"
-            android:drawableStart="@drawable/ic_clock"
-            android:drawablePadding="@dimen/dp10"
-            android:lineSpacingMultiplier="1.1"
-            android:text="@string/contact_work_date_1"
-            android:textSize="@dimen/sp16"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/contact_address"
-            app:layout_constraintTop_toBottomOf="@+id/contact_dahili" />
+    <TextView
+        android:id="@+id/text_phone_extension"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:drawablePadding="8dp"
+        android:text="@string/contact_phone_external"
+        app:drawableStartCompat="@drawable/ic_phone"
+        app:layout_constraintStart_toStartOf="@id/text_title_contact"
+        app:layout_constraintTop_toBottomOf="@id/text_phone" />
 
-        <Button
-            android:id="@+id/btn_to_google_maps"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/btn_wrap_height"
-            android:layout_marginTop="@dimen/dp30"
-            android:background="@color/button_blue"
-            android:drawableStart="@drawable/ic_directions"
-            android:gravity="center"
-            android:paddingStart="@dimen/dp10"
-            android:paddingEnd="@dimen/dp20"
-            android:text="@string/show_google_maps"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp16"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/contact_work_time"
-            app:layout_constraintTop_toBottomOf="@id/contact_work_time" />
+    <TextView
+        android:id="@+id/text_working_hours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:drawablePadding="8dp"
+        android:text="@string/contact_working_hours"
+        app:drawableStartCompat="@drawable/ic_access_time"
+        app:layout_constraintStart_toStartOf="@id/text_title_contact"
+        app:layout_constraintTop_toBottomOf="@id/text_phone_extension" />
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+    <Button
+        android:id="@+id/button_create_navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="?attr/colorBlueGoogleCustom"
+        android:text="@string/contact_navigate_address_button"
+        app:icon="@drawable/ic_direction_map"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_working_hours" />
+</androidx.constraintlayout.widget.ConstraintLayout>

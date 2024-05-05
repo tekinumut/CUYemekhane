@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorBackground" format="reference|color" />
+    <!-- Custom color attributes-->
+    <attr name="colorWhiteCustom" format="reference|color"/>
+    <attr name="colorBlackCustom" format="reference|color"/>
+    <attr name="colorBlueGoogleCustom" format="reference|color" />
+</resources>
