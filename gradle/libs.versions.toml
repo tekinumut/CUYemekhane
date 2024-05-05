@@ -1,4 +1,11 @@
 [versions]
+# App
+appId = "com.tekinumut.cuyemekhane"
+targetSdk = "34"
+minSdk = "23"
+versionCode = "110"
+versionName = "1.1.0"
+
 # Plugins
 agp = "8.2.2"
 kotlin = "1.9.22"

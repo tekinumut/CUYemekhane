@@ -19,15 +19,15 @@ val secretProperties = Properties()
 secretProperties.load(FileInputStream(secretsFile))
 
 android {
-    namespace = "com.tekinumut.cuyemekhane"
-    compileSdk = 34
+    namespace = libs.versions.appId.get()
+    compileSdk = libs.versions.targetSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.tekinumut.cuyemekhane"
-        minSdk = 23
-        targetSdk = 34
-        versionCode = 110
-        versionName = "1.10"
+        applicationId = libs.versions.appId.get()
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
+        versionCode = libs.versions.versionCode.get().toInt()
+        versionName = libs.versions.versionName.get()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
