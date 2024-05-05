@@ -31,6 +31,11 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
-        binding.bottomNavigationBar.setupWithNavController(navController)
+        with(binding) {
+            bottomNavigationBar.setupWithNavController(navController)
+            bottomNavigationBar.setOnItemReselectedListener {
+                navController.popBackStack(bottomNavigationBar.selectedItemId, false)
+            }
+        }
     }
 }

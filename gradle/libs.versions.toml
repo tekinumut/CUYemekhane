@@ -86,3 +86,4 @@ kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 googleKsp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 daggerHiltAndroid = { id = "com.google.dagger.hilt.android", version.ref = "daggerHilt" }
 navigationSafeArgs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigationKtx" }
+parcelize = { id = "kotlin-parcelize" }

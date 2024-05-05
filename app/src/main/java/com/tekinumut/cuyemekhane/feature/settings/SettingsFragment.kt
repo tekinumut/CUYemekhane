@@ -2,9 +2,11 @@ package com.tekinumut.cuyemekhane.feature.settings
 
 import android.app.UiModeManager
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.CompoundButton
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.tekinumut.cuyemekhane.R
@@ -67,7 +69,11 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
             context = view.context,
             currentOption = currentOption,
             onOptionChanged = {
-                uiModeManager.setApplicationNightMode(it.mode)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    uiModeManager.setApplicationNightMode(it.mode)
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(it.mode)
+                }
                 viewModel.updateChangeTheme(it)
             }
         )

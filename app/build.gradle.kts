@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.daggerHiltAndroid)
     alias(libs.plugins.navigationSafeArgs)
     alias(libs.plugins.googleKsp)
-    id("kotlin-parcelize")
+    id(libs.plugins.parcelize.get().pluginId)
 }
 
 val keystorePropertiesFile: File = rootProject.file("app/keystore/keystore.properties")
@@ -20,7 +20,7 @@ android {
 
     defaultConfig {
         applicationId = "com.tekinumut.cuyemekhane"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 34
         versionCode = 110
         versionName = "1.10"

@@ -4,7 +4,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
-abstract class FlowUseCase<in Params, Type> constructor(
+abstract class FlowUseCase<in Params, Type>(
     private val dispatcher: CoroutineDispatcher
 ) {
     abstract suspend fun getExecutable(params: Params): Flow<Type>
