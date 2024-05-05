@@ -1,5 +1,7 @@
 package com.tekinumut.cuyemekhane.feature.settings
 
+import android.app.UiModeManager
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.CompoundButton
@@ -10,6 +12,8 @@ import com.tekinumut.cuyemekhane.base.BaseFragment
 import com.tekinumut.cuyemekhane.common.extensions.collectWithLifecycle
 import com.tekinumut.cuyemekhane.common.extensions.setupToolbar
 import com.tekinumut.cuyemekhane.common.ui.CuToolbar
+import com.tekinumut.cuyemekhane.common.ui.CustomAlertDialogs
+import com.tekinumut.cuyemekhane.common.util.ThemeMode
 import com.tekinumut.cuyemekhane.databinding.FragmentSettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,8 +21,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsBinding::inflate) {
 
     private val viewModel by viewModels<SettingsViewModel>()
-
-    private var isUserPreferencesCalledBefore = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,10 +45,10 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
         collectWithLifecycle(viewModel.userPreferences) { preferences ->
             with(binding) {
                 switchHideBannerAds.isChecked = preferences.hideBannerAds
-                if (!isUserPreferencesCalledBefore) {
-                    isUserPreferencesCalledBefore = true
-                    binding.switchHideBannerAds.setOnCheckedChangeListener(switchChangeListeners)
-                }
+                switchHideBannerAds.setOnCheckedChangeListener(switchChangeListeners)
+                linearChangeTheme.setOnClickListener(
+                    onChangeThemeChanged(preferences.selectedTheme)
+                )
             }
         }
     }
@@ -57,5 +59,17 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(FragmentSettingsB
                 switchHideBannerAds.id -> viewModel.updateHideBannerAds(isChecked)
             }
         }
+    }
+
+    private fun onChangeThemeChanged(currentOption: ThemeMode) = View.OnClickListener { view ->
+        val uiModeManager = view.context.getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
+        CustomAlertDialogs.showChangeThemeDialog(
+            context = view.context,
+            currentOption = currentOption,
+            onOptionChanged = {
+                uiModeManager.setApplicationNightMode(it.mode)
+                viewModel.updateChangeTheme(it)
+            }
+        )
     }
 }

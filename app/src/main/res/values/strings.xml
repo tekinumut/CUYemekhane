@@ -23,6 +23,11 @@
 
     <!-- Settings -->
     <string name="hide_banner_ad">Hide Banner Ads</string>
+    <string name="settings_change_theme_text_title">Appearance</string>
+    <string name="settings_change_theme_text_description">Choose your light or dark theme preference</string>
+    <string name="settings_change_theme_text_default">Use device theme</string>
+    <string name="settings_change_theme_text_light">Light theme</string>
+    <string name="settings_change_theme_text_dark">Dark theme</string>
 
     <!-- Common usages -->
     <string name="loading_text_message">Loading…</string>
@@ -30,6 +35,7 @@
     <string name="monthly_list_empty_description">Monthly Menu is empty!</string>
     <string name="pricing_html_data_no_found">Pricing data not found</string>
     <string name="update_list">Refresh list</string>
+    <string name="cancel">Cancel</string>
 
     <!-- Error messages -->
     <string name="error_message_no_data">We\'re having a problem. Please try again later.</string>

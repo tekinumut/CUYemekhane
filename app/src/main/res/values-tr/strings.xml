@@ -22,6 +22,11 @@
 
     <!-- Settings -->
     <string name="hide_banner_ad">Banner Reklamları Gizle</string>
+    <string name="settings_change_theme_text_title">Görünüm</string>
+    <string name="settings_change_theme_text_description">Gündüz ve gece temaları arasında seçim yap</string>
+    <string name="settings_change_theme_text_default">Cihaz Varsayılanı</string>
+    <string name="settings_change_theme_text_light">Gündüz modu</string>
+    <string name="settings_change_theme_text_dark">Gece modu</string>
 
     <!-- common usages -->
     <string name="loading_text_message">Yükleniyor…</string>
@@ -29,6 +34,7 @@
     <string name="monthly_list_empty_description">Aylık yemek listesi boş!</string>
     <string name="pricing_html_data_no_found">Ücretlendirme verisine erişilemedi</string>
     <string name="update_list">Listeyi Güncelle</string>
+    <string name="cancel">İptal</string>
 
     <!-- error messages -->
     <string name="error_message_no_data">Şu an bir problem yaşıyoruz. Lütfen daha sonra tekrar deneyiniz.</string>

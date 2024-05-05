@@ -4,6 +4,8 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
+import com.tekinumut.cuyemekhane.common.util.ThemeMode
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -14,8 +16,10 @@ class DataStoreRepository @Inject constructor(
 
     val userPreferencesFlow: Flow<UserPreferences> = dataStore.data.map { preferences ->
         val hideBannerAds = preferences[PreferencesKeys.HIDE_BANNER_ADS] ?: false
+        val selectedTheme = preferences[PreferencesKeys.SELECTED_THEME]
         UserPreferences(
-            hideBannerAds = hideBannerAds
+            hideBannerAds = hideBannerAds,
+            selectedTheme = ThemeMode.getEntry(selectedTheme)
         )
     }
 
@@ -25,7 +29,14 @@ class DataStoreRepository @Inject constructor(
         }
     }
 
+    suspend fun updateSelectedTheme(selectedTheme: ThemeMode) {
+        dataStore.edit { preferences ->
+            preferences[PreferencesKeys.SELECTED_THEME] = selectedTheme.mode
+        }
+    }
+
     private object PreferencesKeys {
         val HIDE_BANNER_ADS = booleanPreferencesKey("hide_banner_ads")
+        val SELECTED_THEME = intPreferencesKey("selected_theme")
     }
 }
