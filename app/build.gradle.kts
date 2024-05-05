@@ -89,6 +89,9 @@ dependencies {
     implementation(libs.dagger.hilt)
     ksp(libs.dagger.hilt.compiler)
 
+    // Cache
+    implementation(libs.datastore.preferences)
+
     // Network
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.scalars)

@@ -1,25 +1,26 @@
 [versions]
 # Plugins
-agp = "8.2.0"
-kotlin = "1.9.21"
+agp = "8.2.2"
+kotlin = "1.9.22"
 ksp = "1.9.22-1.0.16"
-daggerHilt = "2.50"
+daggerHilt = "2.51"
 
 # Core
-coreKtx = "1.12.0"
+coreKtx = "1.13.1"
 appCompat = "1.6.1"
-material = "1.11.0"
+material = "1.12.0"
 splashScreen = "1.0.1"
+datastore = "1.1.1"
 
 # View
 constraintLayout = "2.1.4"
-fragmentKtx = "1.6.2"
-navigationKtx = "2.7.6"
-browser = "1.7.0"
+fragmentKtx = "1.7.0"
+navigationKtx = "2.7.7"
+browser = "1.8.0"
 swipeRefreshLayout = "1.1.0"
 
 # Lifecycle Components
-lifecycle = "2.6.2"
+lifecycle = "2.7.0"
 
 # Network
 retrofit = "2.9.0"
@@ -55,6 +56,9 @@ lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", v
 # Dagger Hilt
 dagger-hilt = { module = "com.google.dagger:hilt-android", version.ref = "daggerHilt" }
 dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "daggerHilt" }
+
+# Cache
+datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 
 # Network
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
