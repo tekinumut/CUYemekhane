@@ -42,7 +42,8 @@ class TodayMenuFragment : BaseFragment<FragmentTodayMenuBinding>(
             recyclerFoods.adapter = todayMenuAdapter
             viewCommonError.setData(CommonErrorModel.menuNotFoundError)
             viewCommonError.setPositiveListener {
-                Utility.openWebSiteWithCustomTabs(it.context, Constants.NETWORK.MAIN_PAGE)
+                val webSiteUrl = Constants.NETWORK.BASE_ENDPOINT + Constants.NETWORK.MAIN_PAGE
+                Utility.openWebSiteWithCustomTabs(it.context, webSiteUrl)
             }
         }
     }

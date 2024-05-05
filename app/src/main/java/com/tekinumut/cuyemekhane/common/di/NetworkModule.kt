@@ -2,14 +2,16 @@ package com.tekinumut.cuyemekhane.common.di
 
 import com.tekinumut.cuyemekhane.BuildConfig
 import com.tekinumut.cuyemekhane.common.data.api.ApiService
-import com.tekinumut.cuyemekhane.common.data.api.interceptors.CharsetInterceptor
 import com.tekinumut.cuyemekhane.common.util.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
+import okhttp3.Interceptor
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
+import okhttp3.ResponseBody.Companion.toResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -39,16 +41,26 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(
-        charsetInterceptor: CharsetInterceptor,
         loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient = OkHttpClient.Builder()
-        .addInterceptor(charsetInterceptor)
+        .addInterceptor(headers)
+        .addInterceptor(encodingInterceptor)
         .addInterceptor(loggingInterceptor)
         .build()
 
-    @Provides
-    @Singleton
-    fun provideCharsetInterceptor(): CharsetInterceptor = CharsetInterceptor()
+    private val headers = Interceptor { chain ->
+        val newRequest = chain.request().newBuilder().apply {
+            header("Content-Type", "text/plain;charset=UTF-8")
+        }
+        chain.proceed(newRequest.build())
+    }
+
+    private val encodingInterceptor = Interceptor { chain ->
+        val response = chain.proceed(chain.request())
+        val mediaType = "text/html; charset=windows-1254".toMediaType()
+        val requestBody = response.body?.bytes()?.toResponseBody(mediaType)
+        response.newBuilder().body(requestBody).build()
+    }
 
     @Provides
     @Singleton
