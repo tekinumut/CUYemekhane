@@ -14,6 +14,10 @@ val keystorePropertiesFile: File = rootProject.file("app/keystore/keystore.prope
 val keystoreProperties = Properties()
 keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
+val secretsFile: File = rootProject.file("app/keystore/secrets.properties")
+val secretProperties = Properties()
+secretProperties.load(FileInputStream(secretsFile))
+
 android {
     namespace = "com.tekinumut.cuyemekhane"
     compileSdk = 34
@@ -41,11 +45,15 @@ android {
         debug {
             isMinifyEnabled = false
             resValue("string", "app_name", "Cu-dev")
+            resValue("string", "admob_app_id", secretProperties["appIdTest"] as String)
+            resValue("string", "admob_banner_id", secretProperties["bannerIdTest"] as String)
             applicationIdSuffix = ".debug"
         }
         release {
             isMinifyEnabled = true
             resValue("string", "app_name", "CU Yemekhane")
+            resValue("string", "admob_app_id", secretProperties["appId"] as String)
+            resValue("string", "admob_banner_id", secretProperties["bannerId"] as String)
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -98,6 +106,9 @@ dependencies {
     implementation(libs.okhttp.logging)
     implementation(libs.jsoup)
     implementation(libs.glide)
+
+    // Play Services
+    implementation(libs.playservice.ads)
 
     //Test
     testImplementation(libs.bundles.base.test)
