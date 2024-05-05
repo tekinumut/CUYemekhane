@@ -20,6 +20,9 @@
     <string name="contact_working_hours">Pazartesi – Cuma: 08:00 – 17:00\nCumartesi, Pazar: Kapalı</string>
     <string name="contact_navigate_address_button">Haritada Göster</string>
 
+    <!-- Settings -->
+    <string name="hide_banner_ad">Banner Reklamları Gizle</string>
+
     <!-- common usages -->
     <string name="loading_text_message">Yükleniyor…</string>
     <string name="food_calorie_at_end">%d Kalori</string>

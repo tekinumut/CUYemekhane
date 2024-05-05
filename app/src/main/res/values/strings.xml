@@ -21,6 +21,9 @@
     <string name="contact_working_hours">Monday – Friday: 08:00 – 17:00\nSaturday, Sunday: Closed</string>
     <string name="contact_navigate_address_button">Show On Map</string>
 
+    <!-- Settings -->
+    <string name="hide_banner_ad">Hide Banner Ads</string>
+
     <!-- Common usages -->
     <string name="loading_text_message">Loading…</string>
     <string name="food_calorie_at_end">%d Calorie</string>

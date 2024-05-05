@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 inline fun <T> AppCompatActivity.collectWithLifecycle(
     flow: Flow<T>,
-    state: Lifecycle.State = Lifecycle.State.STARTED,
+    state: Lifecycle.State = Lifecycle.State.CREATED,
     crossinline onError: (Throwable) -> Unit = {},
     crossinline block: (T) -> Unit
 ) {
@@ -29,7 +29,7 @@ inline fun <T> AppCompatActivity.collectWithLifecycle(
 
 inline fun <T> Fragment.collectWithLifecycle(
     flow: Flow<T>,
-    state: Lifecycle.State = Lifecycle.State.STARTED,
+    state: Lifecycle.State = Lifecycle.State.CREATED,
     crossinline onError: (Throwable) -> Unit = {},
     crossinline block: (T) -> Unit
 ) {

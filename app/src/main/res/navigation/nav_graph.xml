@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_profileMenuFragment_to_contactFragment"
             app:destination="@id/contactFragment" />
+        <action
+            android:id="@+id/action_profileMenuFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
 
     <fragment
@@ -50,8 +53,14 @@
     <fragment
         android:id="@+id/contactFragment"
         android:name="com.tekinumut.cuyemekhane.feature.contact.ContactFragment"
-        android:label="ContactFragment"
+        android:label="@string/profile_tab_contact"
         tools:layout="@layout/fragment_contact" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.tekinumut.cuyemekhane.feature.settings.SettingsFragment"
+        android:label="@string/profile_tab_settings"
+        tools:layout="@layout/fragment_settings" />
 
     <dialog
         android:id="@+id/monthlyMenuDetailBottomSheet"
